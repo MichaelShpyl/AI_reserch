@@ -1,0 +1,44 @@
+# Requirements for the explainable AI academic-integrity pipeline.
+#
+# Two install notes (see README, setup step):
+#  1. PyTorch with CUDA is installed separately from the PyTorch index so the
+#     GPU build is used on Windows. Install torch first, then run
+#     `pip install -r requirements.txt` (the matching pin below is then a no-op).
+#  2. After install, fetch the spaCy English model:
+#         python -m spacy download en_core_web_sm
+#
+# Versions are pinned for reproducibility. They are a known-compatible baseline
+# verified against real releases. If pip cannot resolve one, we relax that single
+# pin rather than the whole set.
+
+# ---- Core deep learning ----
+torch==2.5.1            # install the CUDA build first, see note 1 above
+transformers==4.46.3
+datasets==3.2.0
+accelerate==1.2.1
+
+# ---- Parameter-efficient fine-tuning and quantisation ----
+peft==0.14.0
+bitsandbytes==0.45.0    # QLoRA 4-bit; Windows wheels ship from 0.43 onward
+
+# ---- Classical ML and stylometric features ----
+scikit-learn==1.6.0
+spacy==3.8.3            # POS distribution; model fetched separately, see note 2
+
+# ---- Sentence embeddings ----
+sentence-transformers==3.3.1
+
+# ---- Explainability ----
+captum==0.7.0
+shap==0.46.0
+
+# ---- Data handling and IO ----
+pandas==2.2.3
+numpy==1.26.4           # 1.x for broad compatibility across the whole stack
+openpyxl==3.1.5         # read the BAWE metadata spreadsheet (added, not in your list)
+
+# ---- Visualisation ----
+matplotlib==3.9.3
+
+# ---- Utilities ----
+tqdm==4.67.1

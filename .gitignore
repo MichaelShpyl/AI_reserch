@@ -1,0 +1,63 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Virtual environments ----
+.venv/
+venv/
+env/
+ENV/
+
+# ---- Secrets and local config ----
+.env
+*.local
+config/secrets.yaml
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+
+# ---- Data: keep the folders, ignore their contents ----
+data/raw/*
+data/interim/*
+data/processed/*
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+
+# ---- Model artefacts and checkpoints ----
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+*.onnx
+*.gguf
+checkpoints/
+models/
+wandb/
+runs/
+mlruns/
+.cache/
+
+# ---- Outputs: keep the folder, ignore generated artefacts ----
+outputs/*
+!outputs/.gitkeep
+
+# ---- Logs ----
+*.log
+logs/
+
+# ---- OS and editors ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
