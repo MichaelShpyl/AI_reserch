@@ -54,6 +54,9 @@ mlruns/
 outputs/*
 !outputs/.gitkeep
 
+# ---- Generated slide decks (regenerate with make_deck.py) ----
+dissertation/presentation/*.pptx
+
 # ---- Logs ----
 *.log
 logs/

@@ -63,5 +63,26 @@ supervisor notes. Newest entries at the bottom.
   vs pinned 1.26.4, plus transformers/spaCy/matplotlib) and there is no `.venv`. No
   problem for data work now. Reconcile before the detection phase and before HPC by
   making a dedicated env and re-pinning to the actual working versions.
-- Next: architecture diagram and slide deck for the supervisor meeting (Step 3), then
-  start the Introduction chapter (Step 4). Generation pipeline is next week, HPC-gated.
+- Built the supervisor-meeting materials (Step 3). Architecture diagram drawn with
+  matplotlib (`dissertation/presentation/make_architecture.py` -> `architecture.png`):
+  a clean left-to-right flow of the six components, showing the hybrid detector
+  (transformer plus stylometric) and the two question-generation backends, with a note
+  that steps 2 to 6 run only on flagged (AI) work. Reflects the two-class scope.
+- Built an 8-slide plain deck with `python-pptx` (`make_deck.py` -> the .pptx, gitignored
+  as it will be hand-edited): title, problem and verification gap, architecture, a
+  step-by-step walkthrough, dataset approach, the Verification Interview Guide output,
+  evaluation (one slide, discrimination simulation primary and LLM-as-judge supplementary
+  with cross-model agreement and objective-proxy validation, to answer the coordinator's
+  flag), and status and next steps. Speaker notes written per slide and exported to
+  `talk_track.md` to rehearse from.
+- QA: verified slide text, order and notes; bullet glyph correct; zero em dashes; no
+  placeholders; diagram fits the slide. Could not auto-render slide images (no LibreOffice
+  installed), so layout was checked by geometry, not pixels.
+- Read the Meeting 1 record. Confirmed next meeting Tuesday 9 June 12:00, and that the
+  two-class change must show in the architecture and the Introduction (it does in the
+  deck). Open items from Vini: HPC access and assessment format (viva vs recorded
+  presentation); both are noted as asks on the status slide.
+- Foundation phase is effectively complete (environment, data, sample, architecture),
+  slightly ahead of the week 1 to 2 plan.
+- Next: start the Introduction chapter (Step 4), rough first-person draft to rewrite in
+  my own words. Generation pipeline and detector come after, HPC-gated.
