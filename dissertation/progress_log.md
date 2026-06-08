@@ -91,5 +91,14 @@ supervisor notes. Newest entries at the bottom.
   drafting. Full prose comes after Meeting 2, in my own voice.
 - Started a LibreOffice install (winget) so slide decks can be auto-rendered for visual QA
   in future sessions.
+- Set up authoring and dev tooling (requested). Installed Pandoc (markdown to Word and
+  PDF, verified by exporting `sample_design.md` to .docx), Graphviz (`dot` for diagrams),
+  `markitdown` and `python-pptx`, and a curated set of VS Code extensions (Jupyter, Ruff,
+  Markdown All in One, markdownlint, Code Spell Checker, GitLens, Rainbow CSV, LaTeX
+  Workshop). LibreOffice (installed earlier) is now used to render decks to images for
+  visual QA, which caught and fixed a crowded box on the architecture slide. MiKTeX
+  (LaTeX), ruff and jupyter were already present. Recorded the Python dev packages in
+  `requirements-dev.txt` and the toolchain in the README. Pandoc and `dot` need a
+  terminal restart to be on PATH.
 - Next: after Meeting 2, draft the Introduction section by section; then the generation
   pipeline and detector (HPC-gated).

@@ -1,0 +1,12 @@
+# Development and authoring tools (NOT pipeline runtime dependencies).
+#
+# The reproducible runtime is pinned in requirements.txt. The packages here are
+# used to build slides, render diagrams, and read documents while writing the
+# dissertation. Install with:  pip install -r requirements-dev.txt
+#
+# System tools (install separately, see README "Tooling"):
+#   Pandoc, Graphviz, LibreOffice, MiKTeX (LaTeX), VS Code.
+# Already present and used here: ruff (lint and format), jupyter.
+
+python-pptx==1.0.2        # build the supervision slide deck
+markitdown[pptx]==0.1.6   # read office and PDF documents as markdown
