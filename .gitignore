@@ -32,6 +32,8 @@ data/processed/*
 !data/raw/.gitkeep
 !data/interim/.gitkeep
 !data/processed/.gitkeep
+# Track only the sample manifest (essay ids + split), not the corpus text.
+!data/processed/bawe_human_sample_manifest.csv
 
 # ---- Model artefacts and checkpoints ----
 *.pt

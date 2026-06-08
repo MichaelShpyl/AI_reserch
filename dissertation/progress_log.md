@@ -42,5 +42,26 @@ supervisor notes. Newest entries at the bottom.
   `Other`/`OTHER` are split by case; one label carries an HTML entity
   (`Cybernetics &amp; Electronic Engineering`); one missing discipline/group and nine
   missing levels. These need light cleaning before we sample.
-- Next: decide the sampling strategy (disciplines, counts, balance) from these real
-  numbers, then document it in `dissertation/`.
+- Cleaned the metadata into a sampling frame (`src/data/clean_bawe.py`): fixed HTML
+  entities in discipline labels, merged the case-split `OTHER` into `Other`, and dropped
+  one row missing group and word count, leaving 2,760 usable essays. The cleaning report
+  prints the group x L1/L2 availability table and the per-student clustering.
+- Key constraints found: non-native essays are unevenly spread (AH 114, LS 185, PS 169,
+  SS 340), and the corpus is heavily clustered by author (627 students, up to 20 essays
+  each, 86% with more than one). AH non-native is the scarce stratum (114 essays from
+  just 29 students).
+- Agreed the sampling design: stratify on disciplinary group x first-language status
+  (8 cells), 80 per cell, 640 human essays, 50/50 native/non-native (oversampling
+  non-native from the natural 29% for a detector-bias analysis), per-student cap of 4,
+  and a 70/15/15 train/val/test split assigned at the student level so no writer spans
+  splits. Built it in `src/data/build_sample.py` with a fixed seed (42).
+- Sample checks passed: exactly 80 per cell, 320/320 native/non-native, zero students in
+  more than one split, healthy discipline spread within each group, and native vs
+  non-native length close (mean 2,368 vs 2,471 words). Saved a versioned manifest for
+  reproducibility and wrote the design to `dissertation/sample_design.md`.
+- Flagged (not fixed, by request): installed packages drift from the pins (numpy 2.3.4
+  vs pinned 1.26.4, plus transformers/spaCy/matplotlib) and there is no `.venv`. No
+  problem for data work now. Reconcile before the detection phase and before HPC by
+  making a dedicated env and re-pinning to the actual working versions.
+- Next: architecture diagram and slide deck for the supervisor meeting (Step 3), then
+  start the Introduction chapter (Step 4). Generation pipeline is next week, HPC-gated.
