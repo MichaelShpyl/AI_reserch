@@ -35,7 +35,8 @@ shap==0.46.0
 # ---- Data handling and IO ----
 pandas==2.2.3
 numpy==1.26.4           # 1.x for broad compatibility across the whole stack
-openpyxl==3.1.5         # read the BAWE metadata spreadsheet (added, not in your list)
+openpyxl==3.1.5         # read .xlsx spreadsheets
+xlrd==2.0.1             # read the legacy .xls format; BAWE ships metadata as BAWE.xls (openpyxl cannot read .xls)
 
 # ---- Visualisation ----
 matplotlib==3.9.3
