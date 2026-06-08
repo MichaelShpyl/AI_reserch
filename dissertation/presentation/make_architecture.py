@@ -27,10 +27,10 @@ SUB_FILL = "#f3f5f6"
 SUB_EDGE = "#9bb3bb"
 ARROW = "#4a5a63"
 
-W, H = 16.5, 6.8
+W, H = 17.5, 6.8
 
 
-def box(ax, cx, cy, w, h, title, *, fill, edge, tcolor, fs=11, bold=True, sub=None):
+def box(ax, cx, cy, w, h, title, *, fill, edge, tcolor, fs=10.5, bold=True, sub=None):
     p = FancyBboxPatch(
         (cx - w / 2, cy - h / 2), w, h,
         boxstyle="round,pad=0.02,rounding_size=0.10",
@@ -108,12 +108,12 @@ def main() -> None:
 
     # Detector is hybrid: transformer + stylometric features.
     sub_pair(xs[1], "DeBERTa-v3\ntransformer", "Stylometric\nfeatures")
-    ax.text(xs[1], ysub + sbh / 2 + 0.42, "hybrid", ha="center", va="center",
+    ax.text(xs[1], ysub + sbh / 2 + 0.15, "hybrid", ha="center", va="center",
             fontsize=7.5, color="#7a8a92")
 
     # Question generation: two backends, compared (a core contribution).
     sub_pair(xs[4], "A: commercial\nLLM (API)", "B: Llama 3 8B\n(QLoRA)")
-    ax.text(xs[4], ysub + sbh / 2 + 0.42, "two backends, compared", ha="center",
+    ax.text(xs[4], ysub + sbh / 2 + 0.15, "two backends", ha="center",
             va="center", fontsize=7.5, color="#7a8a92")
 
     # Headline and caption.
