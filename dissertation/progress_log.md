@@ -84,5 +84,12 @@ supervisor notes. Newest entries at the bottom.
   presentation); both are noted as asks on the status slide.
 - Foundation phase is effectively complete (environment, data, sample, architecture),
   slightly ahead of the week 1 to 2 plan.
-- Next: start the Introduction chapter (Step 4), rough first-person draft to rewrite in
-  my own words. Generation pipeline and detector come after, HPC-gated.
+- Proposed the Introduction chapter section structure
+  (`dissertation/introduction_outline.md`): background, problem statement, motivation,
+  verification gap, research question and objectives, scope (including the two-class
+  decision), contributions, and dissertation outline. Headings only, to show Vini before
+  drafting. Full prose comes after Meeting 2, in my own voice.
+- Started a LibreOffice install (winget) so slide decks can be auto-rendered for visual QA
+  in future sessions.
+- Next: after Meeting 2, draft the Introduction section by section; then the generation
+  pipeline and detector (HPC-gated).
