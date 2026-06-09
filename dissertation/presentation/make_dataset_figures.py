@@ -63,7 +63,7 @@ def fig_group_balance(clean):
                   color=[GCOLOR[g] for g in GROUPS], zorder=3, width=0.6)
     total = counts.sum()
     for b, v in zip(bars, counts.values):
-        ax.text(b.get_x() + b.get_width() / 2, v + 6, f"{v}\n({100*v/total:.0f}%)",
+        ax.text(b.get_x() + b.get_width() / 2, v + 6, f"{v}\n({100*v/total:.1f}%)",
                 ha="center", va="bottom", fontsize=9.5, color=INK)
     style(ax)
     ax.set_ylabel("Essays in corpus")

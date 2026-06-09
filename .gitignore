@@ -57,6 +57,9 @@ outputs/*
 # ---- Generated slide decks (regenerate with make_deck.py) ----
 dissertation/presentation/*.pptx
 
+# ---- Generated meeting records (regenerate with pandoc from the .md) ----
+dissertation/meetings/*.docx
+
 # ---- Logs ----
 *.log
 logs/
