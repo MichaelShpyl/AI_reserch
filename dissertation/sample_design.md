@@ -104,6 +104,21 @@ of the human writing and is reported, not removed.
   which is a minor inconsistency in the source. With 627 students it has no
   material effect.
 
+## Supervisor feedback (Meeting 2): avoid over-structuring
+
+Dr. Vijayan advised not to over-invest in manual balancing. An AI system should be
+able to learn from less curated data, and heavy hand-structuring risks a result that
+does not hold on realistic, messy input. The balanced 640 sample stands as the
+phase-one supervised training set, and the next step is training rather than further
+balancing.
+
+To test whether the balancing helps at all, a later experiment will draw a second,
+natural (unbalanced) sample from the same cleaned corpus and train a separate detector
+on it, then compare the two. Per the supervisor, this must be two models trained in
+parallel, not one reused, because a model already trained on the balanced set cannot be
+fairly evaluated on the natural one. This comparison is recorded in the evaluation plan
+in `CLAUDE.md`.
+
 ## Reproducibility
 
 - `src/data/explore_bawe.py` loads `BAWE.xls`, summarises the corpus and saves

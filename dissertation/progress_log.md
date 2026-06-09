@@ -138,5 +138,16 @@ supervisor notes. Newest entries at the bottom.
 - To confirm with Mykhailo before changing locked scope or evaluation: whether to record
   the possible 3-class extension as future work, and whether to add the structured-versus
   -natural two-model comparison to the methodology. Not edited yet.
-- Next: draft the Introduction at a high level while awaiting compute; test the detector
-  locally on the balanced sample once the AI essays exist.
+- Meeting 2 record finalised (Mykhailo confirmed the format) and uploaded. Applied the
+  agreed changes to the source of truth: added the structured-versus-natural two-model
+  comparison to the evaluation in `CLAUDE.md`, recorded the possible 3-class extension as
+  future work (core scope stays two-class), and noted the over-structuring guidance in
+  `sample_design.md`.
+- Drafted a 230-word conference abstract (`dissertation/conference_abstract_draft.md`) and
+  shortlisted venues: AICS (Irish Conference on AI and Cognitive Science, December, best
+  fit) plus AIES and academic-integrity venues to verify. BEA 2026 already closed (23
+  March). The abstract is a draft to rewrite in my own voice; all deadlines to be verified
+  on official CFP pages.
+- Next: draft the Introduction at a high level while awaiting compute; then begin the
+  detection phase (download M4 / SemEval-2024 Task 8, set up the detector, get a first
+  local result), and generate the AI essays once HPC is confirmed.
