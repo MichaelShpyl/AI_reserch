@@ -151,3 +151,18 @@ supervisor notes. Newest entries at the bottom.
 - Next: draft the Introduction at a high level while awaiting compute; then begin the
   detection phase (download M4 / SemEval-2024 Task 8, set up the detector, get a first
   local result), and generate the AI essays once HPC is confirmed.
+
+## 2026-06-14
+
+- Prepared the repository for a clean handoff to a new session (switching to a fresh
+  context window). Wrote `HANDOFF.md` as the entry point: current state, the active task
+  (local AI-essay generation), the publication task, the working norms, a repository map
+  labelling each path as supervisor-facing, private/local-only, or published, and a
+  command cheat sheet. Pointed `CLAUDE.md` and `README.md` to it.
+- Confirmed local generation is viable without HPC: Ollama 0.22 is installed with
+  `llama3.1:8b` pulled, on the RTX 4060 (8 GB). Plan for the next session: build
+  `src/generation/generate_ai_essays.py`, test on a few essays, then run the full 640 in
+  the background (resumable, length-matched), checking in periodically to save tokens.
+- Decision since HPC keeps slipping: generate the AI essays locally now rather than wait.
+- Next: generate the AI essays locally and supervise the run; verify a conference and
+  finish the abstract; then begin detection (download M4 / SemEval-2024 Task 8).

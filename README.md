@@ -89,4 +89,6 @@ VS Code so `pandoc` and `dot` are on PATH:
 
 ## Status
 
-Phase 1: foundation (data and environment).
+Foundation (data and environment) is complete. Current work: generating the AI half
+of the detection corpus locally, then the detector. New contributors and new AI
+sessions should start with `HANDOFF.md`.
