@@ -38,10 +38,16 @@ Do not trust these dates. Check each official page before relying on it, the sam
 we use for paper citations.
 
 - **AICS, the Irish Conference on Artificial Intelligence and Cognitive Science.** Best
-  fit: it is in Ireland, runs in December, and takes shorter papers. AICS 2025 was at DCU
-  in early December 2025, so AICS 2026 should fall in late 2026 with a paper deadline
-  around the autumn. Verify the 2026 call at https://aicsconf.org/ and on WikiCFP
-  (http://www.wikicfp.com/cfp/program?id=100).
+  fit and confirmed as the right kind of venue: Ireland's main AI and cognitive science
+  conference since 1988, held in December, with Springer proceedings. The 33rd edition
+  (AICS 2025) was hosted by DCU at the Hyatt Centric Liberties, Dublin, on 1 to 2 December
+  2025. AICS 2026 (the 34th) should fall in December 2026, but as of mid-June 2026 the
+  2026 call for papers and its deadline are not yet announced (and the official site
+  blocks automated checks). Action: watch https://aicsconf.org/, the AI Association of
+  Ireland at https://aiai.ucd.ie/conferences.html, and WikiCFP
+  (http://www.wikicfp.com/cfp/program?id=100) for the 2026 call. By the usual pattern a
+  paper deadline around September or October 2026 is likely, but do not rely on that until
+  the official call confirms it.
 - **AIES, the AAAI/ACM Conference on AI, Ethics and Society.** Relevant to the fairness
   and academic-integrity angle. Check the 2026 dates at
   https://www.aies-conference.com/2026/call-for-papers/ (these often close in spring, so
