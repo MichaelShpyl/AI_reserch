@@ -184,6 +184,14 @@ supervisor notes. Newest entries at the bottom.
   section structure mapped to the pipeline, what each section must cover, and search
   targets, with no citations yet. Every reference will be found and verified (2021 to 2026)
   before it goes in.
-- Next: when generation finishes, run the human-vs-AI length cross-check and report the
-  distribution; finalise the abstract once AICS opens; then begin detection (download
-  M4 / SemEval-2024 Task 8).
+- Started the detection-phase groundwork (non-GPU, so generation keeps running). Installed
+  the missing `datasets` package and wrote `src/data/download_m4.py`, which pulls the M4 /
+  SemEval-2024 Task 8 Subtask A monolingual set (English, binary human vs machine) from the
+  d0rj Hugging Face mirror and saves train/dev/test to `data/raw/m4/` (gitignored).
+  Provenance check passed: train is exactly 119,757 rows as documented. Dev is 5,000
+  (50/50), test 34,272 across generators (GPT4, davinci, chatGPT, cohere, dolly, bloomz).
+  Columns: text, label (0 human / 1 machine), model, source, domain. This is the detector
+  pre-training corpus.
+- Next: when generation finishes, run the human-vs-AI length cross-check on the AI essays;
+  then build the detector (stylometric feature extractor, then fine-tune a transformer,
+  pre-trained on M4). Finalise the abstract once the AICS 2026 call opens.
