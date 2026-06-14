@@ -197,6 +197,15 @@ supervisor notes. Newest entries at the bottom.
   disabled sleep on AC power (`powercfg /change standby-timeout-ac 0`), and resumed the
   run, which skipped the 32 finished essays and continued from 33. Confirmed it is
   generating again.
-- Next: when generation finishes, run the human-vs-AI length cross-check on the AI essays;
-  then build the detector (stylometric feature extractor, then fine-tune a transformer,
-  pre-trained on M4). Finalise the abstract once the AICS 2026 call opens.
+- Built the stylometric feature extractor `src/detection/stylometric.py` (CPU, spaCy):
+  sentence-length burstiness and variance, type-token ratio and root TTR, hapax ratio,
+  mean word length, punctuation and POS-tag proportions, plus a GPT-2 perplexity function
+  to wire up when the GPU is free. Validated on 35 human/AI pairs with a clear early signal
+  in the expected direction: human text varies sentence length more (std 12.2 vs 8.6) and
+  has higher vocabulary diversity (root TTR 15.2 vs 9.9, hapax 0.21 vs 0.10), while AI uses
+  longer words and more nouns. Lengths are matched (~1.0), so these are style differences,
+  not length artifacts. Encouraging for the hybrid detector and a good check that the
+  generated essays have a distinct AI profile.
+- Next: when generation finishes, run the human-vs-AI length cross-check on the full set;
+  then finish the detector (wire up GPT-2 perplexity, then fine-tune a transformer
+  pre-trained on M4, combined with these features). Finalise the abstract once AICS opens.
