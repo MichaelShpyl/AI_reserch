@@ -164,5 +164,19 @@ supervisor notes. Newest entries at the bottom.
   `src/generation/generate_ai_essays.py`, test on a few essays, then run the full 640 in
   the background (resumable, length-matched), checking in periodically to save tokens.
 - Decision since HPC keeps slipping: generate the AI essays locally now rather than wait.
-- Next: generate the AI essays locally and supervise the run; verify a conference and
-  finish the abstract; then begin detection (download M4 / SemEval-2024 Task 8).
+- Fable 5 was unavailable, so continued directly. Built the local AI-essay generator
+  `src/generation/generate_ai_essays.py` (Ollama, llama3.1:8b). It matches each human
+  essay on topic, keywords, and length: keywords are extracted from the human text to
+  anchor the topic (this caught and fixed an off-topic case where a vague Dickens title
+  produced an essay about compilers), and a continuation loop tops the essay up to the
+  target length (ratio about 1.0). Resumable, with per-essay metadata.
+- Validated on short and medium essays, then launched the full 640-essay run in the
+  background. It is slow on the laptop GPU (tens of seconds to a few minutes per essay,
+  so several hours, likely overnight), and resumable if interrupted. Outputs go to
+  `data/processed/ai_essays/` (gitignored, BAWE-derived).
+- Started the dissertation document. Drafted Chapter 1 Introduction at outline level
+  (`dissertation/chapters/01_introduction.md`), as a rough first-person draft to rewrite
+  in my own voice, per Vini's guidance to keep methods out until the model is built.
+- Next: when generation finishes, run the human-vs-AI length cross-check and report the
+  distribution; verify a conference and finish the abstract; then begin detection
+  (download M4 / SemEval-2024 Task 8).
