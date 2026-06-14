@@ -177,6 +177,13 @@ supervisor notes. Newest entries at the bottom.
 - Started the dissertation document. Drafted Chapter 1 Introduction at outline level
   (`dissertation/chapters/01_introduction.md`), as a rough first-person draft to rewrite
   in my own voice, per Vini's guidance to keep methods out until the model is built.
+- Verified AICS as the lead conference venue (Irish AI conference, December, Springer
+  proceedings; 2025 at DCU). The 2026 call is not yet announced, so recorded the pages to
+  watch rather than inventing a deadline (`dissertation/conference_abstract_draft.md`).
+- Drafted the literature review skeleton (`dissertation/chapters/02_literature_review.md`):
+  section structure mapped to the pipeline, what each section must cover, and search
+  targets, with no citations yet. Every reference will be found and verified (2021 to 2026)
+  before it goes in.
 - Next: when generation finishes, run the human-vs-AI length cross-check and report the
-  distribution; verify a conference and finish the abstract; then begin detection
-  (download M4 / SemEval-2024 Task 8).
+  distribution; finalise the abstract once AICS opens; then begin detection (download
+  M4 / SemEval-2024 Task 8).
