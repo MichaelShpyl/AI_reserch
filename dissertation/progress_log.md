@@ -192,6 +192,11 @@ supervisor notes. Newest entries at the bottom.
   (50/50), test 34,272 across generators (GPT4, davinci, chatGPT, cohere, dolly, bloomz).
   Columns: text, label (0 human / 1 machine), model, source, domain. This is the detector
   pre-training corpus.
+- Generation interrupted at 32/640 (both Ollama and the generator process had stopped,
+  most likely the machine slept). Recovered with no loss: restarted `ollama serve`,
+  disabled sleep on AC power (`powercfg /change standby-timeout-ac 0`), and resumed the
+  run, which skipped the 32 finished essays and continued from 33. Confirmed it is
+  generating again.
 - Next: when generation finishes, run the human-vs-AI length cross-check on the AI essays;
   then build the detector (stylometric feature extractor, then fine-tune a transformer,
   pre-trained on M4). Finalise the abstract once the AICS 2026 call opens.
