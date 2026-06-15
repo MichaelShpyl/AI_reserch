@@ -206,6 +206,13 @@ supervisor notes. Newest entries at the bottom.
   longer words and more nouns. Lengths are matched (~1.0), so these are style differences,
   not length artifacts. Encouraging for the hybrid detector and a good check that the
   generated essays have a distinct AI profile.
+- Generation stalled a second time at 98/640 (same mode: Ollama and the generator both
+  gone), so the cause is likely the machine sleeping, and possibly harness background-task
+  teardown. Hardened it: added a keep-awake call to the generator (Windows
+  SetThreadExecutionState, so the system will not idle-sleep while it runs), disabled sleep
+  and hibernate on both AC and DC, restarted Ollama, and resumed (skips the 98 done). A
+  periodic monitor restarts it if it dies again. (A detached Start-Process launch was
+  tried and exited instantly, so the proven Bash background launch is used.)
 - Next: when generation finishes, run the human-vs-AI length cross-check on the full set;
   then finish the detector (wire up GPT-2 perplexity, then fine-tune a transformer
   pre-trained on M4, combined with these features). Finalise the abstract once AICS opens.

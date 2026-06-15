@@ -168,7 +168,18 @@ def find_corpus_txt(root: Path) -> Path | None:
     return None
 
 
+def keep_awake() -> None:
+    """On Windows, stop the system sleeping while this long run is active."""
+    try:
+        import ctypes
+        # ES_CONTINUOUS | ES_SYSTEM_REQUIRED
+        ctypes.windll.kernel32.SetThreadExecutionState(0x80000000 | 0x00000001)
+    except Exception:
+        pass
+
+
 def main() -> int:
+    keep_awake()
     ap = argparse.ArgumentParser(description="Generate length-matched AI essays via Ollama.")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--sample", type=Path, default=SAMPLE)
