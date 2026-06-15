@@ -278,3 +278,19 @@ supervisor notes. Newest entries at the bottom.
 - Next: a RoBERTa comparison run, the stylometric fusion, the M4 cross-generator
   robustness test (the honest harder case), and the explainability layer. Ready the
   abstract for GenAIDetect/AICS.
+
+## 2026-06-16
+
+- Ran the RoBERTa-base comparison detector (same corpus, same student-level splits,
+  same training settings) as a second transformer baseline alongside DeBERTa-v3-base.
+  Both land at test F1 = 1.00 with a clean 100/0/0/100 confusion matrix and a 0.0
+  human false-positive rate for native and non-native writers alike. On validation
+  DeBERTa is marginally ahead (val F1 0.9951, eval loss 0.025) of RoBERTa (val F1
+  0.9903, eval loss 0.083). Metrics saved separately: `outputs/detector_metrics_deberta.json`
+  and `outputs/detector_metrics_roberta.json`.
+- Reading: two independent architectures agreeing at ceiling is further evidence that
+  in-domain single-generator detection is genuinely easy on this corpus, not a quirk of
+  one model. It is not new headroom to chase. DeBERTa stays the primary detector on the
+  slightly better validation result; RoBERTa is the documented comparison. The defensible
+  contribution remains robustness (M4 cross-generator, paraphrase) and explainability,
+  which is where effort goes next once the design choices are agreed.
