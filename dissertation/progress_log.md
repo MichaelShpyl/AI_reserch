@@ -230,6 +230,16 @@ supervisor notes. Newest entries at the bottom.
   Springer; call not yet out). Immediate step: an arXiv preprint. Journals (slower):
   International Journal for Educational Integrity and Computers and Education: AI.
 - Generation healthy and unattended at 257/640 (detached), ratio ~1.05, ETA ~7.9h.
+- Meeting-3 readiness pass. Built a 5-slide progress-update deck for tomorrow
+  (`dissertation/presentation/Meeting3_progress_update.pptx`, source `make_meeting3_deck.py`,
+  notes in `talk_track_meeting3.md`): what is done since Meeting 2, the dataset with the
+  length-match point and the sample-composition figure, the early stylometric result
+  (human vs AI separation with lengths matched), and next steps plus publication and asks.
+  Rendered and visually QA'd. Gitignored the private recordings folder.
+- Readiness summary: dataset generating (around 295/640, on track), M4 ready, stylometric
+  extractor done, scope updates applied, dataset figures done and the chart fixed,
+  publication options researched, Introduction drafted and literature review structured.
+  Carryover for the student: upload the Meeting 2 record to OneDrive and email Vini.
 - Next: when generation finishes, run the human-vs-AI length cross-check on the full set;
   then finish the detector (wire up GPT-2 perplexity, then fine-tune a transformer
   pre-trained on M4, combined with these features). Ready the abstract for GenAIDetect/AICS.
