@@ -240,6 +240,17 @@ supervisor notes. Newest entries at the bottom.
   extractor done, scope updates applied, dataset figures done and the chart fixed,
   publication options researched, Introduction drafted and literature review structured.
   Carryover for the student: upload the Meeting 2 record to OneDrive and email Vini.
-- Next: when generation finishes, run the human-vs-AI length cross-check on the full set;
-  then finish the detector (wire up GPT-2 perplexity, then fine-tune a transformer
-  pre-trained on M4, combined with these features). Ready the abstract for GenAIDetect/AICS.
+- DATASET COMPLETE. All 640 matched AI essays generated locally (0 failures), so the
+  detection corpus is 1,280 essays (640 human + 640 AI, two classes). Validated with
+  `src/generation/check_ai_corpus.py`:
+  - Length matched: Pearson r = 0.978 between AI and human source lengths, mean ratio 1.047,
+    99.2% of AI essays within +/-20% of their source, length-distribution overlap 91.4%
+    (figure `dissertation/figures/fig7_ai_vs_human_length.png`).
+  - Topic matched: keyword spot-check shows the shared terms are the topic-defining ones
+    (for example Merkel/Schroeder, phonological-loop/memory, china/tribute), so each AI
+    essay tackled the same question without copying.
+  - Combined with the earlier stylometric check (human more varied with lengths matched),
+    the corpus is valid: human and AI differ in style, not length or topic.
+- Next: build the labelled detection corpus (human + AI + the student-level splits), then
+  fine-tune a transformer detector on it (DeBERTa, fused with the stylometric features),
+  with M4 as optional pre-training. Ready the abstract for GenAIDetect/AICS.
