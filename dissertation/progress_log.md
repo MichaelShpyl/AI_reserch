@@ -213,6 +213,15 @@ supervisor notes. Newest entries at the bottom.
   and hibernate on both AC and DC, restarted Ollama, and resumed (skips the 98 done). A
   periodic monitor restarts it if it dies again. (A detached Start-Process launch was
   tried and exited instantly, so the proven Bash background launch is used.)
+- Generation hardening confirmed: launching the generator as a detached process
+  (Start-Process, not a Bash background run) survives the harness teardown that was killing
+  it. It ran unattended from 142 to 227 and is logging to `outputs/gen_out.log`. ETA ~8.6h.
+- Ran a literature-review research workflow (8 sections, gather then adversarial verify) to
+  find 2021 to 2026 sources. It hit a session limit mid-run, so verification did not finish:
+  15 candidate titles were gathered (detection, explainability, evaluation) and saved as
+  UNVERIFIED leads in `dissertation/litreview_sources.md`; five sections returned nothing.
+  Re-run the verified workflow after the limit resets. Lesson: the heavy multi-agent
+  workflow can exhaust the session limit, so keep research runs smaller.
 - Next: when generation finishes, run the human-vs-AI length cross-check on the full set;
   then finish the detector (wire up GPT-2 perplexity, then fine-tune a transformer
   pre-trained on M4, combined with these features). Finalise the abstract once AICS opens.
