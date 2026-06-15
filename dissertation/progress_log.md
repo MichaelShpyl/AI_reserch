@@ -251,6 +251,14 @@ supervisor notes. Newest entries at the bottom.
     essay tackled the same question without copying.
   - Combined with the earlier stylometric check (human more varied with lengths matched),
     the corpus is valid: human and AI differ in style, not length or topic.
-- Next: build the labelled detection corpus (human + AI + the student-level splits), then
-  fine-tune a transformer detector on it (DeBERTa, fused with the stylometric features),
-  with M4 as optional pre-training. Ready the abstract for GenAIDetect/AICS.
+- Built the labelled detection corpus (`src/detection/build_detection_corpus.py`):
+  `data/processed/detection_corpus.parquet`, 1,280 rows, balanced (train 438/438, val
+  102/102, test 100/100) on the student-level splits, zero missing pairs.
+- Launched the first detector training (`src/detection/train_detector.py`): DeBERTa-v3-base
+  fine-tune as the transformer baseline, reporting accuracy/precision/recall/F1, the
+  confusion matrix, and a native-vs-non-native human false-positive-rate breakdown (the
+  fairness seed). Running detached on the now-free GPU (Ollama stopped to free VRAM);
+  result pending in `outputs/detector_metrics.json`.
+- Next: read off the detector test F1 and fairness numbers; then add the stylometric
+  fusion and M4 pre-training, and a RoBERTa comparison run. Ready the abstract for
+  GenAIDetect/AICS.
