@@ -222,6 +222,14 @@ supervisor notes. Newest entries at the bottom.
   UNVERIFIED leads in `dissertation/litreview_sources.md`; five sections returned nothing.
   Re-run the verified workflow after the limit resets. Lesson: the heavy multi-agent
   workflow can exhaust the session limit, so keep research runs smaller.
+- Researched publication and application options for the next meeting (verified via web),
+  compiled in `dissertation/publication_options.md`. Key finding: several ideal venues have
+  closed for 2026 (ENAI/ECEIA abstract 9 Feb, BEA 23 Mar, ICNLSP 30 May). Live targets:
+  the GenAIDetect workshop (machine-generated-text-detection shared task, likely with
+  EMNLP 2026 Budapest or AACL 2026 Zhuhai, both hybrid) and AICS 2026 (Ireland, December,
+  Springer; call not yet out). Immediate step: an arXiv preprint. Journals (slower):
+  International Journal for Educational Integrity and Computers and Education: AI.
+- Generation healthy and unattended at 257/640 (detached), ratio ~1.05, ETA ~7.9h.
 - Next: when generation finishes, run the human-vs-AI length cross-check on the full set;
   then finish the detector (wire up GPT-2 perplexity, then fine-tune a transformer
-  pre-trained on M4, combined with these features). Finalise the abstract once AICS opens.
+  pre-trained on M4, combined with these features). Ready the abstract for GenAIDetect/AICS.
