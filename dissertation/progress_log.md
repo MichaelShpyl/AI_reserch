@@ -259,6 +259,22 @@ supervisor notes. Newest entries at the bottom.
   confusion matrix, and a native-vs-non-native human false-positive-rate breakdown (the
   fairness seed). Running detached on the now-free GPU (Ollama stopped to free VRAM);
   result pending in `outputs/detector_metrics.json`.
-- Next: read off the detector test F1 and fairness numbers; then add the stylometric
-  fusion and M4 pre-training, and a RoBERTa comparison run. Ready the abstract for
-  GenAIDetect/AICS.
+- First detector trained: DeBERTa-v3-base on the 1,280-essay corpus. Test F1 = 1.00
+  (confusion matrix 100/0/0/100), val F1 0.995, and the human false-positive rate is 0.0
+  for both native and non-native writers. Metrics in `outputs/detector_metrics.json`.
+- Treated the perfect score critically, not as a win. Checked for a trivial artifact:
+  lengths are matched (so not length), and a citation count showed the AI essays actually
+  have MORE in-text citations than human (mean 21.6 vs 13.0), so citation density is not
+  the giveaway either. Conclusion: near-perfect is the expected result for in-domain,
+  single-generator detection (a known-easy setting in the literature). The real, defensible
+  work is robustness (M4 cross-generator, paraphrase) and the explainability layer, not the
+  raw score. The deck frames the 100% honestly.
+- Built a visual-first Meeting 3 deck for a quick presentation
+  (`dissertation/presentation/Meeting3_visual.pptx`, source `make_meeting3_visual_deck.py`,
+  notes `talk_track_meeting3_visual.md`): one graph per slide (architecture, balanced
+  dataset, AI-vs-human length match, human-vs-AI writing style, detector confusion matrix,
+  summary). New result figures via `make_result_figures.py` (stylometry comparison,
+  confusion matrix).
+- Next: a RoBERTa comparison run, the stylometric fusion, the M4 cross-generator
+  robustness test (the honest harder case), and the explainability layer. Ready the
+  abstract for GenAIDetect/AICS.
