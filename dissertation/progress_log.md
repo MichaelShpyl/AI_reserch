@@ -362,3 +362,37 @@ supervisor notes. Newest entries at the bottom.
 - Process note: this is exactly the kind of result that must be stress-tested before a viva.
   Finding the markup leak now (and being able to show the audit that caught it) is stronger
   evidence of rigour than a clean-looking 100% would have been.
+
+### Why the cleaned score is still ~99% (the explainable answer)
+
+- Pushed past "it is style" to a concrete, defensible explanation
+  (`src/detection/why_high.py`, report `outputs/why_high.json`). The cleaned score stays
+  high because the task as built is the easy end of the problem and several independent
+  tells stack up:
+  - **Single generator, single domain.** The "AI" class is really "Llama 3.1 with my
+    prompt", so it is stylistically uniform. In function-word style space the AI essays are
+    more self-similar (mean pairwise cosine 0.596) than the human essays (0.558), i.e. a
+    tighter cluster, which is easy to separate from a varied class of different students.
+    Detecting one known model in one subject area is the easy case in the literature.
+  - **Lexical register.** AI overuses "in conclusion", "nuanced", "essential", "highlights",
+    "insights"; humans use blunter connectives ("therefore", "because", "so").
+  - **Locale spelling (a real but shallow tell).** Humans lean British (2.25 per 1k words),
+    Llama leans American (2.35 per 1k); humans 0.77 American, AI 1.38 British. So it is not
+    absolute, and it would shrink if the generator were prompted to write British English.
+    Worth noting as both a contributor and a limitation.
+  - **Formality.** Humans use about three times more contractions (0.83 vs 0.28 per 1k).
+  - When this many signals all point the same way, ~99% is the expected result, not a bug.
+- Visual: `dissertation/figures/fig_why_style_clusters.png` projects every essay into 2D
+  function-word style space (no topic words) and shows two cleanly separated clouds. This is
+  the most intuitive "why it is easy" picture and went into the deck as a new slide.
+- Error sense-check: the human test essay the style model rates most AI-like is 3012c
+  (non-native) at P(AI) 0.43, still correctly classified human; the next few are a small mix
+  of native and non-native. No systematic bias against non-native writers in the closest calls.
+- Honest framing for the meeting and the write-up: the in-domain number is high because the
+  problem is easy by construction. The contribution is the explanation behind each decision
+  plus robustness to the harder settings where the score will drop: other generators (M4),
+  paraphrased and "humanised" AI text, mixed human/AI documents, and British-English-prompted
+  AI (which removes the locale tell).
+- Deck finalised to a single file: regenerated the canonical
+  `dissertation/presentation/Meeting3_visual.pptx` (10 visual slides) and deleted the
+  temporary `Meeting3_visual_audited.pptx`.

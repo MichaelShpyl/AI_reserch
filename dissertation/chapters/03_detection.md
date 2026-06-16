@@ -111,7 +111,38 @@ matter in practice, which are other generators, paraphrased AI text, and submiss
 human and AI writing. I expect the score to drop there, and that drop is where the real
 research is.
 
-## 3.7 What this means for the next steps
+## 3.7 Why the score is still high after cleaning
+
+A fair question is why a cleaned score of 0.99 is not itself suspicious. I dug into this
+(`src/detection/why_high.py`) so I can answer it rather than wave it away. The score is high
+because the task as I have built it is the easy version of the problem, and several separate
+signals reinforce each other.
+
+The biggest reason is that all of my AI text comes from one model with one prompt. The AI
+class is really "Llama 3.1 writing the way I asked it to", so it has a consistent style. When
+I measure how similar essays are to each other in style space, the AI essays are more alike
+(average similarity 0.60) than the human essays (0.56), because the humans are a crowd of
+different people and the AI is one voice repeated 640 times. Separating one consistent voice
+from a varied crowd is not hard, and the detection literature treats single-generator,
+in-domain detection as close to solved.
+
+On top of that sit several smaller tells that all point the same way. The vocabulary differs
+(the AI register I described above). The spelling differs: my students write British English
+(about 2.3 British spellings per thousand words) and Llama defaults to American (about 2.4
+American spellings per thousand words). This one is real but shallow, and I am honest that it
+is a generator-locale artefact rather than deep evidence of AI authorship; it would shrink if
+I prompted the model to write British English, which is a fix I will try. Formality differs
+too: the human essays use about three times as many contractions. None of these on its own is
+decisive, but they stack, and a 2D picture of the essays in pure style space (Figure, function
+words only) shows two clouds that barely touch. So 0.99 is the expected result for an easy
+setting, not a hidden error.
+
+The closest call is reassuring rather than worrying. The human essay the model rates most
+AI-like scores 0.43 on the AI scale, so it is still correctly called human, and the borderline
+cases are a small mix of native and non-native writers rather than a pile of non-native essays,
+which is the bias I was watching for.
+
+## 3.8 What this means for the next steps
 
 The audit also seeds the explainability layer. The system can already point at the words that
 drove a decision, which is the first concrete version of the defensible evidence the whole
