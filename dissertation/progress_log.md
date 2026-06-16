@@ -426,9 +426,13 @@ supervisor notes. Newest entries at the bottom.
 ### Dissertation document assembled (progress draft to send the supervisor)
 
 - Built a single ATU-style dissertation document so the chapters can be sent to the supervisor
-  for review: `dissertation/Dissertation_Shpyl_progress_draft.docx`. It uses last year's final
-  year project (in OneDrive) as the format reference: ATU title pages with the logo, a
-  declaration, acknowledgements, an abstract, an updatable table of contents, then the chapters.
+  for review: `dissertation/Dissertation_Shpyl_progress_draft.docx`. After first drafting it from
+  last year's final year project, the official `Dissertation Template 2026.docx` was provided, so
+  the document was rebuilt to conform to it: the official two title pages, the official ATU Donegal
+  Declaration text (award confirmed as "Master of Science in Artificial Intelligence and Big Data
+  Analytics"), Acknowledgements, Abstract, an Acronyms table, the Table of Contents, a Table of
+  Figures, then the chapters. Body is 12pt, 1.5 line spacing, justified, with page numbers at the
+  bottom right, per the template's stated rules.
 - Generator lives in `dissertation/docgen/` (`build_dissertation.js`, Node + the docx library),
   so it is reproducible: it parses the markdown chapters, joins the hard-wrapped lines into
   proper paragraphs, applies heading styles, and embeds the detection figures with captions.

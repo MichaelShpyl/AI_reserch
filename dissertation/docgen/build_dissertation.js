@@ -11,6 +11,7 @@ const path = require("path");
 const {
   Document, Packer, Paragraph, TextRun, ImageRun, AlignmentType, HeadingLevel,
   LevelFormat, TableOfContents, Header, Footer, PageNumber, PageBreak, BorderStyle,
+  Table, TableRow, TableCell, WidthType, ShadingType, VerticalAlign,
 } = require("docx");
 
 const REPO = path.resolve(__dirname, "..", "..");
@@ -86,7 +87,7 @@ function parseChapter(md) {
       out.push(new Paragraph({ numbering: { reference: "nums", level: 0 },
         spacing: { after: 80 }, children: inlineRuns(text) }));
     } else {
-      out.push(new Paragraph({ spacing: { after: 160, line: 312 },
+      out.push(new Paragraph({ spacing: { after: 160, line: 360 },
         alignment: AlignmentType.JUSTIFIED, children: inlineRuns(text) }));
     }
     mode = null;
@@ -140,7 +141,7 @@ const center = (children, opts = {}) =>
 const t = (text, o = {}) => new TextRun({ text, font: ARIAL, size: o.size || 24,
   bold: o.bold, italics: o.italics, color: o.color || INK });
 const body = (text) => new Paragraph({ alignment: AlignmentType.JUSTIFIED,
-  spacing: { after: 160, line: 312 }, children: inlineRuns(text) });
+  spacing: { after: 160, line: 360 }, children: inlineRuns(text) });
 const h1 = (text) => new Paragraph({ heading: HeadingLevel.HEADING_1, pageBreakBefore: true,
   spacing: { before: 240, after: 200 }, children: [t(text, { bold: true, size: 36, color: TEAL })] });
 
@@ -151,41 +152,93 @@ const logo = new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 
 
 const TITLE = "An Explainable AI Pipeline for Academic Integrity Verification";
 const SUBTITLE = "Transparent AI-Text Detection with Argument-Aware Question Generation";
+const AWARD = "Master of Science in Artificial Intelligence and Big Data Analytics";
 
 const titlePage1 = [
-  logo,
-  center([t(TITLE, { bold: true, size: 36, color: INK })], { spacing: { after: 200 } }),
-  center([t(SUBTITLE, { italics: true, size: 28, color: "52616B" })], { spacing: { after: 600 } }),
+  center([t(TITLE, { bold: true, size: 36, color: INK })], { spacing: { before: 600, after: 200 } }),
+  center([t(SUBTITLE, { italics: true, size: 28, color: "52616B" })], { spacing: { after: 500 } }),
   center([t("Mykhailo Shpyl", { size: 28 })]),
-  center([t("MSc in Artificial Intelligence and Big Data Analytics", { size: 26 })]),
-  center([t("2025 / 2026", { size: 26 })], { spacing: { after: 400 } }),
+  center([t("M.Sc. in Artificial Intelligence and Big Data Analytics, 2026", { size: 24 })], { spacing: { after: 400 } }),
+  logo,
+  center([t("Department of Computing, ATU Donegal, Port Road, Letterkenny, Co. Donegal, Ireland.", { size: 22, color: "52616B" })], { spacing: { after: 300 } }),
   center([t("Working draft for supervisor review, June 2026", { italics: true, size: 22, color: "52616B" })]),
 ];
 
 const titlePage2 = [
-  new Paragraph({ pageBreakBefore: true, alignment: AlignmentType.CENTER, spacing: { before: 400, after: 200 },
+  new Paragraph({ pageBreakBefore: true, alignment: AlignmentType.CENTER, spacing: { before: 600, after: 200 },
     children: [t(TITLE, { bold: true, size: 32, color: INK })] }),
   center([t(SUBTITLE, { italics: true, size: 26, color: "52616B" })], { spacing: { after: 500 } }),
   center([t("Author: Mykhailo Shpyl", { size: 26 })]),
   center([t("Supervised by: Dr. Vini Vijayan", { size: 26 })], { spacing: { after: 400 } }),
-  center([t("A dissertation submitted in partial fulfilment of the requirements for the degree of", { size: 24 })]),
-  center([t("MSc in Artificial Intelligence and Big Data Analytics", { bold: true, size: 24 })], { spacing: { after: 300 } }),
+  center([t("A thesis submitted in partial fulfilment of the requirements for the", { size: 24 })]),
+  center([t(AWARD, { bold: true, size: 24 })], { spacing: { after: 300 } }),
   center([t("Submitted to Atlantic Technological University", { size: 24 })]),
-  center([t("Arna chur isteach chuig Ollscoil Teicneolaiochta an Atlantaigh", { italics: true, size: 22, color: "52616B" })], { spacing: { after: 300 } }),
+  center([t("Arna chur isteach chuig Ollscoil Teicneolaiochta an Atlantaigh", { italics: true, size: 22, color: "52616B" })]),
   center([t("August 2026", { size: 24 })]),
 ];
 
 const declaration = [
   h1("Declaration"),
-  body("I hereby certify that the material, which I now submit for assessment on the programme of study leading to the award of MSc in Artificial Intelligence and Big Data Analytics, is entirely my own work and has not been taken from the work of others except to the extent that such work has been cited and acknowledged within the text of my own work. No portion of the work contained in this dissertation has been submitted in support of an application for another degree or qualification to this or any other institution. I understand that it is my responsibility to ensure that I have adhered to ATU's rules and regulations."),
-  body("I hereby certify that the material on which I have relied for the purpose of my assessment is not deemed as personal data under the GDPR Regulations. All datasets used in this work are publicly available and openly licensed, and no human participants were involved in the study."),
-  new Paragraph({ spacing: { before: 300, after: 80 }, children: [t("Signature of Candidate: Mykhailo Shpyl", { size: 24 })] }),
-  new Paragraph({ children: [t("Date: __________________", { size: 24 })] }),
+  body("I hereby certify that the material, which I now submit for assessment on the programmes of study leading to the award of " + AWARD + ", is entirely my own work and has not been taken from the work of others except to the extent that such work has been cited and acknowledged within the text of my own work. No portion of the work contained in this thesis has been submitted in support of an application for another degree or qualification to this or any other institution. I understand that it is my responsibility to ensure that I have adhered to ATU's rules and regulations."),
+  body("I hereby certify that the material on which I have relied on for the purpose of my assessment is not deemed as personal data under the GDPR Regulations. Personal data is any data from living people that can be identified. Any personal data used for the purpose of my assessment has been pseudonymised and the data set and identifiers are not held by ATU. Alternatively, personal data has been anonymised in line with the Data Protection Commissioner's Guidelines on Anonymisation. All datasets used in this work are publicly available and openly licensed, and no human participants were involved in the study."),
+  body("I consent that my work will be held for the purposes of education assistance to future students and will be shared on the ATU Donegal (Computing) website (atucomputingdonegal.com) and Research THEA website (https://research.thea.ie/). I understand that documents once uploaded onto the website can be viewed throughout the world and not just in Ireland. Consent can be withdrawn for the publishing of material online by emailing Jade Lyons, Head of Department, at Jade.Lyons@atu.ie to remove items from the ATU Donegal Computing website, and by emailing Denise McCaul, Systems Librarian, at denise.mccaul@atu.ie to remove items from the Research THEA website. Material will continue to appear in printed formats once published, and as websites are a public medium, ATU cannot guarantee that the material has not been saved or downloaded."),
+  new Paragraph({ spacing: { before: 400, after: 80 },
+    children: [t("Signature of Candidate: Mykhailo Shpyl", { size: 24 }),
+      t("\t\tDate: __________________", { size: 24 })] }),
 ];
 
 const acknowledgements = [
   h1("Acknowledgements"),
   body("I would like to thank my supervisor, Dr. Vini Vijayan, for her guidance and feedback throughout this project, and the staff of the MSc in Artificial Intelligence and Big Data Analytics at Atlantic Technological University for their support."),
+];
+
+// ---- Acronyms table ----
+const ACRONYMS = [
+  ["AI", "Artificial Intelligence"],
+  ["NLP", "Natural Language Processing"],
+  ["LLM", "Large Language Model"],
+  ["GenAI", "Generative Artificial Intelligence"],
+  ["BAWE", "British Academic Written English (corpus)"],
+  ["TTR", "Type-Token Ratio"],
+  ["POS", "Part of Speech"],
+  ["BIO", "Begin-Inside-Outside (sequence labelling scheme)"],
+  ["QLoRA", "Quantised Low-Rank Adaptation"],
+  ["SHAP", "SHapley Additive exPlanations"],
+  ["IG", "Integrated Gradients"],
+  ["FPR", "False-Positive Rate"],
+  ["HPC", "High-Performance Computing"],
+];
+const cellBorder = { style: BorderStyle.SINGLE, size: 1, color: "CCCCCC" };
+const cellBorders = { top: cellBorder, bottom: cellBorder, left: cellBorder, right: cellBorder };
+function acroCell(text, opts = {}) {
+  return new TableCell({
+    borders: cellBorders, width: { size: opts.w, type: WidthType.DXA },
+    shading: opts.head ? { fill: "D5E8F0", type: ShadingType.CLEAR } : undefined,
+    verticalAlign: VerticalAlign.CENTER,
+    margins: { top: 60, bottom: 60, left: 120, right: 120 },
+    children: [new Paragraph({ children: [t(text, { bold: opts.head, size: 22 })] })],
+  });
+}
+const acronymsTable = new Table({
+  width: { size: 9026, type: WidthType.DXA }, columnWidths: [2200, 6826],
+  rows: [
+    new TableRow({ tableHeader: true, children: [acroCell("Acronym", { w: 2200, head: true }), acroCell("Definition", { w: 6826, head: true })] }),
+    ...ACRONYMS.map(([a, d]) => new TableRow({ children: [acroCell(a, { w: 2200 }), acroCell(d, { w: 6826 })] })),
+  ],
+});
+const acronyms = [h1("Acronyms"), acronymsTable, new Paragraph({ spacing: { after: 100 }, children: [] })];
+
+// ---- Table of Figures (manual list; the detector chapter figures) ----
+const FIGURE_LIST = [
+  ["Figure 3.1", "What each detection signal achieves on its own"],
+  ["Figure 3.2", "The words the cleaned-text model keys on (style, not topic)"],
+  ["Figure 3.3", "DeBERTa on the held-out test set after markup removal"],
+  ["Figure 3.4", "Essays in function-word style space: two clusters"],
+];
+const tableOfFigures = [
+  h1("Table of Figures"),
+  ...FIGURE_LIST.map(([n, c]) => new Paragraph({ spacing: { after: 80 },
+    children: [t(n + "   ", { bold: true, size: 22 }), t(c, { size: 22 })] })),
 ];
 
 const abstract = [
@@ -247,11 +300,12 @@ const doc = new Document({
     },
     footers: {
       first: new Footer({ children: [new Paragraph({ children: [] })] }),
-      default: new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER,
-        children: [new TextRun({ font: ARIAL, size: 20, color: "52616B", children: ["Page ", PageNumber.CURRENT] })] })] }),
+      default: new Footer({ children: [new Paragraph({ alignment: AlignmentType.RIGHT,
+        children: [new TextRun({ font: ARIAL, size: 20, color: "52616B", children: [PageNumber.CURRENT] })] })] }),
     },
     children: [
-      ...titlePage1, ...titlePage2, ...declaration, ...acknowledgements, ...abstract, ...toc,
+      ...titlePage1, ...titlePage2, ...declaration, ...acknowledgements, ...abstract,
+      ...acronyms, ...toc, ...tableOfFigures,
       ...ch1, ...ch2, ...ch3,
     ],
   }],
