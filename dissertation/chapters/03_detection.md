@@ -78,12 +78,16 @@ only function words (the, and, because, therefore, and the like, which carry no 
 information at all) still reaches 99.5 percent. Topic cannot explain that. The thing that
 remains after the markup is gone is writing style.
 
+![Figure 3.1: What each signal achieves on its own. A markup-only rule already scores 92.5 percent on the raw text, which is the size of the artefact. After cleaning, a simple model still separates the classes, and a function-words-only model still reaches 99.5 percent, so the residual signal is writing style.](../figures/fig_audit_separability.png)
+
 **What is the model keying on?** The cleaned linear model is interpretable, so I can read off
 the words that push each way. The AI-leaning terms are the familiar large-model register: "in
 conclusion", "nuanced", "essential", "highlights", "insights", "complex", "significant". The
 human-leaning terms are blunter connectives: "therefore", "because", "so", "thus", "very".
 That matches what the stylometric features already showed, that human writing here varies more
 and the AI writing is smoother and more uniform.
+
+![Figure 3.2: The words the cleaned-text model keys on. The AI side is the familiar large-model register; the human side is blunter argument connectives. These are the seeds of the explainability layer.](../figures/fig_audit_top_features.png)
 
 ## 3.6 The honest headline
 
@@ -94,6 +98,8 @@ no AI essay is missed. The native-writer false-positive rate is 0.04 and the non
 is 0.00 on this small test set. The full-document linear probe still scores 1.00 on the same
 cleaned text, while DeBERTa makes two mistakes, which fits the fact that the transformer only
 reads the opening 512 tokens while the linear model sees the whole essay.
+
+![Figure 3.3: DeBERTa on the held-out test set after the markup was removed. Two human essays are flagged as AI and no AI essay is missed (F1 0.990).](../figures/fig_detector_confusion.png)
 
 RoBERTa, trained the same way on the cleaned corpus, lands in the same place: F1 0.995, a
 confusion matrix of [[99, 1], [0, 100]], native false-positive rate 0.02. Both models fall off
@@ -133,9 +139,11 @@ American spellings per thousand words). This one is real but shallow, and I am h
 is a generator-locale artefact rather than deep evidence of AI authorship; it would shrink if
 I prompted the model to write British English, which is a fix I will try. Formality differs
 too: the human essays use about three times as many contractions. None of these on its own is
-decisive, but they stack, and a 2D picture of the essays in pure style space (Figure, function
-words only) shows two clouds that barely touch. So 0.99 is the expected result for an easy
-setting, not a hidden error.
+decisive, but they stack, and a 2D picture of the essays in pure style space (Figure 3.4,
+function words only) shows two clouds that barely touch. So 0.99 is the expected result for an
+easy setting, not a hidden error.
+
+![Figure 3.4: Every essay placed by its function-word style alone, with all topic words removed. Human and AI fall into two separate clouds, which is why a single generator in one domain is easy to separate.](../figures/fig_why_style_clusters.png)
 
 The closest call is reassuring rather than worrying. The human essay the model rates most
 AI-like scores 0.43 on the AI scale, so it is still correctly called human, and the borderline

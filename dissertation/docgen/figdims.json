@@ -1,0 +1,18 @@
+{
+  "fig_audit_separability": {
+    "w": 1680,
+    "h": 919
+  },
+  "fig_audit_top_features": {
+    "w": 2200,
+    "h": 1040
+  },
+  "fig_detector_confusion": {
+    "w": 1080,
+    "h": 1000
+  },
+  "fig_why_style_clusters": {
+    "w": 1520,
+    "h": 1200
+  }
+}

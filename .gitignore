@@ -60,6 +60,10 @@ dissertation/presentation/*.pptx
 # ---- Generated meeting records (regenerate with pandoc from the .md) ----
 dissertation/meetings/*.docx
 
+# ---- Generated dissertation document (regenerate with dissertation/docgen) ----
+dissertation/Dissertation_*.docx
+dissertation/docgen/node_modules/
+
 # ---- Private meeting recordings (audio/video, never commit) ----
 Supervisor meetings recordings/
 

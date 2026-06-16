@@ -422,3 +422,26 @@ supervisor notes. Newest entries at the bottom.
   research the AICS application/proposal; improve multi-generator detection and dataset
   consistency; then start the explainability work as the next main component.
 - Next meeting: Tuesday 23 June 2026 (online).
+
+### Dissertation document assembled (progress draft to send the supervisor)
+
+- Built a single ATU-style dissertation document so the chapters can be sent to the supervisor
+  for review: `dissertation/Dissertation_Shpyl_progress_draft.docx`. It uses last year's final
+  year project (in OneDrive) as the format reference: ATU title pages with the logo, a
+  declaration, acknowledgements, an abstract, an updatable table of contents, then the chapters.
+- Generator lives in `dissertation/docgen/` (`build_dissertation.js`, Node + the docx library),
+  so it is reproducible: it parses the markdown chapters, joins the hard-wrapped lines into
+  proper paragraphs, applies heading styles, and embeds the detection figures with captions.
+  The output `.docx` and `node_modules` are gitignored; the markdown chapters and the script are
+  the source of truth. To regenerate: `cd dissertation/docgen && npm install && node build_dissertation.js`.
+- Content included: Chapter 1 (Introduction, full prose), Chapter 2 (Literature Review, included
+  honestly as a planned structure and reading plan with a visible note, since it has no verified
+  citations yet), Chapter 3 (AI Text Detection, full prose with Figures 3.1 to 3.4: the
+  separability bars, the top-feature words, the cleaned confusion matrix, and the style clusters).
+  Added the four figure callouts into `chapters/03_detection.md` itself.
+- The document is marked as a working draft for supervisor review. The chapter prose is the rough
+  first-person draft and must still be rewritten in the author's own words before final
+  assessment submission, per the project writing rules. The TOC is a Word field; open in Word and
+  press F9 to populate page numbers.
+- To regenerate `figdims.json` if the figures change:
+  `python -c "import json;from pathlib import Path;from PIL import Image;figs=['fig_audit_separability','fig_audit_top_features','fig_detector_confusion','fig_why_style_clusters'];Path('dissertation/docgen/figdims.json').write_text(json.dumps({f:{'w':Image.open(Path('dissertation/figures')/(f+'.png')).size[0],'h':Image.open(Path('dissertation/figures')/(f+'.png')).size[1]} for f in figs},indent=2))"`
