@@ -447,5 +447,27 @@ supervisor notes. Newest entries at the bottom.
   first-person draft and must still be rewritten in the author's own words before final
   assessment submission, per the project writing rules. The TOC is a Word field; open in Word and
   press F9 to populate page numbers.
+- Matched the document to the official template's typography after confirming it: the template
+  uses Calibri body and Office-blue headings at 12pt with 1.5 line spacing and justified text,
+  not Arial/teal. Changed the generator's fonts and heading colour to match. Committed the
+  official `Dissertation Template 2026.docx` to the repo as the format reference.
+
+### Compute decision: laptop only, no HPC (Meeting 3 follow-up)
+
+- The supervisor confirmed ATU HPC / cloud will NOT be available. The whole project now runs on
+  the laptop only (RTX 4060, 8 GB VRAM). There is no "scale up on HPC later" step, so every GPU
+  component must fit 8 GB. Updated CLAUDE.md (Compute situation), HANDOFF.md, and the memory files.
+- Feasibility on 8 GB: detector fine-tuning (DeBERTa/RoBERTa base) already runs there; AI essay
+  generation is done locally via Ollama; multi-generator data (GPT, Claude, DeepSeek) is API-based
+  so needs API access and budget, not local GPU; explainability, argument mining, the Bloom's
+  BERT-base classifier, and evaluation all fit.
+- Risk flagged: the locked-scope Backend B is "Llama 3 8B fine-tuned with QLoRA". QLoRA of a full
+  8B model on 8 GB is possible but very tight and slow (4-bit, batch 1, short sequences, gradient
+  checkpointing, paged optimiser). Likely practical fallback: fine-tune a smaller open model
+  (Llama 3.2 3B, Qwen2.5 3B, or Phi-3-mini) so it fits comfortably, keeping the commercial-vs-local
+  comparison. This changes part of the locked scope, so it needs supervisor sign-off before any
+  switch. Also, `bitsandbytes` on Windows is now on the critical path (QLoRA runs locally), not
+  deferred.
+
 - To regenerate `figdims.json` if the figures change:
   `python -c "import json;from pathlib import Path;from PIL import Image;figs=['fig_audit_separability','fig_audit_top_features','fig_detector_confusion','fig_why_style_clusters'];Path('dissertation/docgen/figdims.json').write_text(json.dumps({f:{'w':Image.open(Path('dissertation/figures')/(f+'.png')).size[0],'h':Image.open(Path('dissertation/figures')/(f+'.png')).size[1]} for f in figs},indent=2))"`

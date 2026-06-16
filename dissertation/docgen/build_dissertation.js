@@ -20,8 +20,9 @@ const FIGS = path.join(REPO, "dissertation", "figures");
 const OUT = path.join(REPO, "dissertation", "Dissertation_Shpyl_progress_draft.docx");
 const figdims = JSON.parse(fs.readFileSync(path.join(__dirname, "figdims.json"), "utf8"));
 
-const ARIAL = "Arial";
-const TEAL = "2B6777";
+// Match the official 2026 template: Calibri body, Office-blue headings, 12pt 1.5 justified.
+const ARIAL = "Calibri";       // body font (template theme minor font)
+const TEAL = "2F5496";         // heading colour (Word default Office blue)
 const INK = "222831";
 
 // ---- inline parsing: **bold** and `code` ----
