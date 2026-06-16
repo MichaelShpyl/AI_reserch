@@ -91,7 +91,10 @@ What I think this project adds:
 
 The rest of the document is laid out as follows. Chapter 2 reviews the recent literature
 on AI text detection, explainability, argument mining, and question generation. Chapter 3
-sets out the methodology, including the dataset and how the AI essays were built. Chapter
-4 covers the implementation of each component. Chapter 5 reports the evaluation. Chapter 6
-discusses what the results mean and where the limits are. Chapter 7 concludes and points
-at future work.
+sets out the detection methodology and the first results, including the dataset, how the AI
+essays were built, and the audit that found and removed a corpus artefact. Chapter 4 covers
+the implementation of the parts built so far. Chapter 5 explains the detector's decisions and
+tests whether those explanations are faithful. The later chapters cover the remaining
+components (argument mining, question generation, the Bloom's check, and the output guide),
+the evaluation, a discussion of what the results mean and where the limits are, and the
+conclusion with future work.
