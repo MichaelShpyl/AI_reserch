@@ -396,3 +396,29 @@ supervisor notes. Newest entries at the bottom.
 - Deck finalised to a single file: regenerated the canonical
   `dissertation/presentation/Meeting3_visual.pptx` (10 visual slides) and deleted the
   temporary `Meeting3_visual_audited.pptx`.
+
+### Meeting 3 held (16 June 2026): outcome and decisions
+
+- Presented the visual deck and the detector audit. The supervisor was satisfied with the
+  approach of stress-testing the perfect score and the honest framing. Formal record in
+  `dissertation/meetings/Meeting_Record_3_Mykhailo_Shpyl.md` (and `.docx`).
+- Confirmed points and decisions from the meeting:
+  - **AICS is running this year and is in September** (supervisor received the email the day
+    before), so the proposal window is near. Corrected `publication_options.md` from the
+    earlier "December" guess. GenAIDetect stays a second target.
+  - The American-vs-British English locale tell I found is recognised as something to fix:
+    the generation should match the expected submission language (British English for ATU),
+    so the detector does not learn locale instead of style.
+  - Paraphrased / partially human-edited AI text (AI written, human tweaked) is the
+    partial-AI category from before and stays later-phase work, but the dataset will need to
+    account for it because it would otherwise distort predictions. Multi-generator data
+    (GPT, Claude, DeepSeek) is the other dataset priority; with one generator the task is
+    easy by construction.
+  - Useful context raised: many universities and journals now accept AI-assisted
+    modifications, which supports the project framing (verify understanding, not ban AI use).
+  - Timeline reassurance: about two and a half months left, keep submitting work as drafted.
+- Next-week plan agreed: submit the drafted chapters now plus the presentation as a separate
+  file; write the implementation chapters (dataset build and generation, detector, audit);
+  research the AICS application/proposal; improve multi-generator detection and dataset
+  consistency; then start the explainability work as the next main component.
+- Next meeting: Tuesday 23 June 2026 (online).

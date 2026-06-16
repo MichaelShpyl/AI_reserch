@@ -25,9 +25,11 @@ the 13-week timeline) still holds.
   6 to 10 November, hybrid). The main-conference deadlines are likely mid-2026 (check), but
   the **co-located workshops** (including GenAIDetect and educational-NLP workshops) take
   submissions later, around August. Hybrid means no travel is required.
-- **AICS 2026, the Irish Conference on AI and Cognitive Science** (December, Springer
-  proceedings). Best location fit and takes short papers. The 2026 call is not announced
-  yet; by the usual pattern the deadline lands in autumn. Action: watch aicsconf.org.
+- **AICS 2026, the Irish Conference on AI and Cognitive Science** (September 2026, Springer
+  proceedings). Best location fit and takes short papers. Confirmed by the supervisor at
+  Meeting 3 (16 June 2026) to be running this year, with an email received the day before, so
+  the event is in September and the proposal window is near. Action: find the call and proposal
+  form on aicsconf.org and draft a short paper / abstract soon.
 
 ## Immediate step
 
@@ -61,7 +63,7 @@ the 13-week timeline) still holds.
 1. Finish the 200 to 250 word abstract now (draft is in `conference_abstract_draft.md`) so
    it is ready the moment a window opens.
 2. Primary targets: the **GenAIDetect workshop** (most on-topic, hybrid) and **AICS 2026**
-   (Ireland, December). Watch both calls.
+   (Ireland, September, confirmed running per Meeting 3). Find the AICS call now.
 3. Post an **arXiv preprint** as soon as there is a presentable write-up.
 4. Line up the **International Journal for Educational Integrity** for the fuller paper
    after submission.
