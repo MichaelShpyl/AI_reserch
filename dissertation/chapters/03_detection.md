@@ -95,6 +95,13 @@ is 0.00 on this small test set. The full-document linear probe still scores 1.00
 cleaned text, while DeBERTa makes two mistakes, which fits the fact that the transformer only
 reads the opening 512 tokens while the linear model sees the whole essay.
 
+RoBERTa, trained the same way on the cleaned corpus, lands in the same place: F1 0.995, a
+confusion matrix of [[99, 1], [0, 100]], native false-positive rate 0.02. Both models fall off
+the perfect ceiling once the markup is gone, and both make their few mistakes the same way, by
+flagging a small number of human essays as AI rather than missing AI. Two different
+architectures agreeing is a sign that the residual signal is a real style difference and not a
+quirk of one model.
+
 So the cleaned F1 of 0.990 is the number I report, and the raw 1.000 is kept only to show how
 large the artefact was. Either way the in-domain task is easy, which is consistent with the
 literature: separating one known generator from human writing in one domain is close to a

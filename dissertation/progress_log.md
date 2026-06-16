@@ -351,6 +351,14 @@ supervisor notes. Newest entries at the bottom.
   audit slides ("I stress-tested the perfect score", "What it actually keys on"). The deck
   was open in PowerPoint, so the rebuilt version is saved as `Meeting3_visual_audited.pptx`
   (close the old one and present this).
+- Re-ran the RoBERTa comparison on the cleaned corpus too, so both architectures are
+  reported post-fix. RoBERTa clean: test accuracy 0.995, F1 0.995, confusion [[99, 1],
+  [0, 100]], native false-positive rate 0.02, non-native 0.00 (`detector_metrics_clean_roberta.json`).
+  So on cleaned text DeBERTa is F1 0.990 and RoBERTa F1 0.995; both fall off the 1.000 ceiling
+  once the markup shortcut is gone, and both make their few errors the same way (a handful of
+  human essays flagged as AI, no AI essay missed). The cross-model agreement is reassuring:
+  the residual signal is a real, architecture-independent style difference, not a quirk of one
+  model. DeBERTa stays the primary detector (marginally better validation F1, 0.9855 vs 0.9808).
 - Process note: this is exactly the kind of result that must be stress-tested before a viva.
   Finding the markup leak now (and being able to show the audit that caught it) is stronger
   evidence of rigour than a clean-looking 100% would have been.
