@@ -21,11 +21,13 @@ import pandas as pd
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "src" / "detection"))
 from stylometric import load_nlp, stylometric_features  # noqa: E402
+from text_normalize import normalize_text  # noqa: E402
 
 AI = REPO / "data" / "processed" / "ai_essays"
 CORPUS = REPO / "data" / "raw" / "bawe" / "download" / "CORPUS_TXT"
 FIGS = REPO / "dissertation" / "figures"
-METRICS = REPO / "outputs" / "detector_metrics.json"
+# Honest headline detector: DeBERTa on the cleaned (markup-stripped) corpus.
+METRICS = REPO / "outputs" / "detector_metrics_clean.json"
 
 HUMAN_C, AI_C, INK = "#2b6777", "#d98e3b", "#222831"
 N_PAIRS = 200
@@ -39,8 +41,8 @@ def stylometry_figure():
         hp = CORPUS / f"{rid}.txt"
         if not hp.exists():
             continue
-        h = stylometric_features(hp.read_text(encoding="utf-8", errors="ignore"), nlp); h["who"] = "human"
-        a = stylometric_features((AI / f"{rid}.txt").read_text(encoding="utf-8", errors="ignore"), nlp); a["who"] = "AI"
+        h = stylometric_features(normalize_text(hp.read_text(encoding="utf-8", errors="ignore")), nlp); h["who"] = "human"
+        a = stylometric_features(normalize_text((AI / f"{rid}.txt").read_text(encoding="utf-8", errors="ignore")), nlp); a["who"] = "AI"
         rows += [h, a]
     df = pd.DataFrame(rows)
     feats = [("std_sent_len", "Sentence-length\nvariation"),
@@ -82,8 +84,8 @@ def confusion_figure():
         for j in range(2):
             ax.text(j, i, str(cm[i, j]), ha="center", va="center", fontsize=22,
                     color="white" if cm[i, j] > cm.max() / 2 else INK, fontweight="bold")
-    ax.set_title(f"Detector on the held-out test set\nDeBERTa-v3, F1 = {f1:.2f} (200 essays)",
-                 fontsize=12.5, fontweight="bold", color=INK)
+    ax.set_title(f"Held-out test, markup removed\nDeBERTa-v3 cleaned, F1 = {f1:.2f}, n = 200",
+                 fontsize=12, fontweight="bold", color=INK)
     fig.tight_layout()
     fig.savefig(FIGS / "fig_detector_confusion.png", dpi=200, facecolor="white")
     plt.close(fig)

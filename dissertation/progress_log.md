@@ -294,3 +294,63 @@ supervisor notes. Newest entries at the bottom.
   slightly better validation result; RoBERTa is the documented comparison. The defensible
   contribution remains robustness (M4 cross-generator, paraphrase) and explainability,
   which is where effort goes next once the design choices are agreed.
+
+### Detector audit: why the score is perfect, and the artifact we found and fixed
+
+- Ran a full adversarial audit of the 100% result rather than trusting it
+  (`src/detection/audit_detector.py`, report in `outputs/audit_report.json`). The goal
+  was to rule out a bug or a trivial shortcut before showing the result to anyone. Four
+  checks:
+  1. **Split integrity (clean).** 394 students, none in more than one split, every
+     human/AI pair in the same split, and zero exact-duplicate texts crossing train and
+     test. So the perfect test score is not train/test contamination.
+  2. **Markup artifact (found, and it was large).** The human BAWE plain-text export keeps
+     structural tags (`<heading>`, `<fnote>`, `<list>`, `<figure>`, `<quote>`, `<table>`).
+     88.3% of the sampled human essays carry at least one; only 3.0% of the AI essays do
+     (a few stray angle brackets). A brain-dead rule, "has a tag therefore human", scores
+     **92.5%** on the test set by itself. Mirror problem on the AI side: Llama sometimes
+     emits markdown (`**bold**`, `## headings`, `* bullets`, numbered lists) that human
+     plain text never has. Both are corpus/format artifacts, not writing style, and they
+     sit at the start of the text inside the model's 512-token window.
+  3. **The real signal survives cleaning, and it is style not topic.** Built a normaliser
+     (`src/detection/text_normalize.py`) that strips the BAWE tags from the human side and
+     the markdown from the AI side and flattens layout, then a cleaned corpus
+     (`detection_corpus_clean.parquet`, `build_detection_corpus.py --clean`). On the
+     cleaned text a simple TF-IDF + logistic-regression model still reaches **100%** on
+     the test set, and a model restricted to **function words only** (the, and, therefore,
+     because; no content words, so no topic information) still reaches **99.5%**. That can
+     only be writing style.
+  4. **Interpretable fingerprint.** The cleaned linear model's top AI-leaning terms are the
+     familiar LLM register ("in conclusion", "nuanced", "essential", "highlights",
+     "insights", "complex", "significant"); the top human-leaning terms are blunter
+     connectives ("therefore", "because", "so", "thus", "very"). Figures
+     `dissertation/figures/fig_audit_separability.png` (what each signal alone achieves)
+     and `fig_audit_top_features.png` (the words the cleaned detector keys on).
+- Conclusion for the write-up and the meeting: the raw 100% was inflated by a corpus-markup
+  artifact, which we identified, measured (a tag-only rule gets 92.5%), and removed. After
+  removing it the classes remain almost perfectly separable on style alone, which is the
+  expected, literature-consistent result for one-generator, one-domain detection. The honest
+  headline detector is therefore reported on the **cleaned** corpus, with the raw number kept
+  as the "before" to show the artifact's size. This does not weaken the project: the research
+  contribution was never the in-domain score, it is explainability and robustness to harder
+  settings (other generators, paraphrase, mixed human/AI), where the score will and should
+  drop. Retrained DeBERTa on the cleaned corpus for the honest headline
+  (`outputs/detector_metrics_clean.json`).
+- Cleaned-corpus DeBERTa result (the number to present): test accuracy 0.99, precision
+  0.980, recall 1.00, **F1 0.990**, confusion matrix [[98, 2], [0, 100]] (2 human essays
+  flagged as AI, no AI missed). Native-writer false-positive rate 0.04, non-native 0.00.
+  So removing the markup artifact moved the detector off the ceiling (1.000 -> 0.990), which
+  is the honest picture: a real, slightly imperfect classifier with a genuine confusion
+  matrix and a first fairness signal to discuss. The full-document linear probe still scores
+  1.00 on clean text, while DeBERTa (which only reads the first 512 tokens) makes 2 errors,
+  so the transformer is working from the essay openings while the signal is spread through
+  the whole document.
+- Updated the figures and the visual deck to this audited story:
+  `fig_audit_separability.png` and `fig_audit_top_features.png` are new; the confusion figure
+  and the stylometry figure now use cleaned text and the cleaned metrics; the deck gained two
+  audit slides ("I stress-tested the perfect score", "What it actually keys on"). The deck
+  was open in PowerPoint, so the rebuilt version is saved as `Meeting3_visual_audited.pptx`
+  (close the old one and present this).
+- Process note: this is exactly the kind of result that must be stress-tested before a viva.
+  Finding the markup leak now (and being able to show the audit that caught it) is stronger
+  evidence of rigour than a clean-looking 100% would have been.

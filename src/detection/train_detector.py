@@ -30,6 +30,10 @@ METRICS = REPO / "outputs" / "detector_metrics.json"
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="microsoft/deberta-v3-base")
+    ap.add_argument("--corpus", default=str(CORPUS),
+                    help="parquet corpus to train on (raw or cleaned)")
+    ap.add_argument("--out", default=str(METRICS),
+                    help="where to write the metrics JSON")
     ap.add_argument("--max-len", type=int, default=512)
     ap.add_argument("--epochs", type=float, default=3)
     ap.add_argument("--lr", type=float, default=2e-5)
@@ -37,6 +41,7 @@ def main() -> int:
     ap.add_argument("--accum", type=int, default=4)
     ap.add_argument("--seed", type=int, default=42)
     args = ap.parse_args()
+    metrics_path = Path(args.out)
 
     import torch
     from datasets import Dataset
@@ -45,7 +50,7 @@ def main() -> int:
                               set_seed)
     set_seed(args.seed)
 
-    df = pd.read_parquet(CORPUS)
+    df = pd.read_parquet(args.corpus)
     tok = AutoTokenizer.from_pretrained(args.model)
 
     def make(split):
@@ -109,12 +114,12 @@ def main() -> int:
               "test": {k: (round(v, 4) if isinstance(v, float) else v)
                        for k, v in test_m.items()},
               "fairness_human_FPR_by_L1": fairness}
-    METRICS.parent.mkdir(parents=True, exist_ok=True)
-    METRICS.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    metrics_path.parent.mkdir(parents=True, exist_ok=True)
+    metrics_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
     print("\n=== TEST RESULTS ===", flush=True)
     print(json.dumps(result["test"], indent=2), flush=True)
     print("fairness (human false-positive rate by L1):", json.dumps(fairness), flush=True)
-    print(f"\nSaved {METRICS.relative_to(REPO)}", flush=True)
+    print(f"\nSaved {metrics_path}", flush=True)
     return 0
 
 
