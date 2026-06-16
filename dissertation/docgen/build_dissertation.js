@@ -235,6 +235,8 @@ const FIGURE_LIST = [
   ["Figure 3.2", "The words the cleaned-text model keys on (style, not topic)"],
   ["Figure 3.3", "DeBERTa on the held-out test set after markup removal"],
   ["Figure 3.4", "Essays in function-word style space: two clusters"],
+  ["Figure 5.1", "Integrated Gradients token attributions for a matched essay pair"],
+  ["Figure 5.2", "Faithfulness by ablation: the signal is diffuse"],
 ];
 const tableOfFigures = [
   h1("Table of Figures"),
@@ -267,6 +269,8 @@ const ch1 = readChapter("01_introduction.md");
 let ch2 = readChapter("02_literature_review.md");
 ch2 = [ch2[0], ch2note, ...ch2.slice(1)];  // insert the note right after the H1
 const ch3 = readChapter("03_detection.md");
+const ch4 = readChapter("04_implementation.md");
+const ch5 = readChapter("05_explainability.md");
 
 const doc = new Document({
   creator: "Mykhailo Shpyl",
@@ -307,7 +311,7 @@ const doc = new Document({
     children: [
       ...titlePage1, ...titlePage2, ...declaration, ...acknowledgements, ...abstract,
       ...acronyms, ...toc, ...tableOfFigures,
-      ...ch1, ...ch2, ...ch3,
+      ...ch1, ...ch2, ...ch3, ...ch4, ...ch5,
     ],
   }],
 });

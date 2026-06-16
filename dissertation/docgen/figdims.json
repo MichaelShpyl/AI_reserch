@@ -14,5 +14,13 @@
   "fig_why_style_clusters": {
     "w": 1520,
     "h": 1200
+  },
+  "fig_explain_ig_tokens": {
+    "w": 2200,
+    "h": 1240
+  },
+  "fig_explain_faithfulness": {
+    "w": 1639,
+    "h": 960
   }
 }

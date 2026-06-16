@@ -471,3 +471,33 @@ supervisor notes. Newest entries at the bottom.
 
 - To regenerate `figdims.json` if the figures change:
   `python -c "import json;from pathlib import Path;from PIL import Image;figs=['fig_audit_separability','fig_audit_top_features','fig_detector_confusion','fig_why_style_clusters'];Path('dissertation/docgen/figdims.json').write_text(json.dumps({f:{'w':Image.open(Path('dissertation/figures')/(f+'.png')).size[0],'h':Image.open(Path('dissertation/figures')/(f+'.png')).size[1]} for f in figs},indent=2))"`
+
+### Autonomous session (16 June 2026): Implementation chapter and the explainability layer
+
+Worked while the student was away, on safe in-scope tasks only (no scope changes, nothing that
+needs supervisor sign-off, no heavy multi-agent workflows, laptop only).
+
+- **Chapter 4 (Implementation)** drafted (`chapters/04_implementation.md`): the engineering story
+  of what is built, environment and reproducibility on the 8 GB laptop, the BAWE data pipeline,
+  the matched AI generation, the labelled corpus, the detector, and the audit tooling.
+- **Explainability layer (locked-scope component 2)** implemented as a first pass
+  (`src/explainability/integrated_gradients.py`, Captum). Retrained and saved the cleaned-corpus
+  DeBERTa detector (F1 0.990) so the model was available, then:
+  - Integrated Gradients token attributions, attributed to the AI class for a consistent sign
+    (`fig_explain_ig_tokens.png`). The strongest tokens are punctuation and common words and
+    fragments, not topic words, which agrees with the audit: the model reads style, not content.
+  - A faithfulness test by ablation, swept over k (`fig_explain_faithfulness.png`, report
+    `outputs/explainability.json`). Honest finding: removing the top attributed tokens lowers
+    confidence only slightly more than removing random tokens (comprehensiveness ratio about 1.44
+    at k=34), and keeping only the top tokens collapses the prediction to chance (sufficiency at
+    ~0.50). So the signal is **diffuse**, spread across the whole essay, and a per-word heatmap is a
+    weak standalone explanation for this detector. The faithful, lecturer-facing explanation is the
+    feature-level / lexical-fingerprint view from the audit (Figures 3.2 and 3.4), plus SHAP on the
+    stylometric features once the hybrid model exists.
+- **Chapter 5 (Explainability)** drafted (`chapters/05_explainability.md`) reporting the above,
+  including the negative faithfulness result, which is a genuine contribution: it tells us which
+  explanation to trust.
+- Wired Chapters 4 and 5 (with figures) into the dissertation document; it is now 28 pages and
+  validates. Regenerated `dissertation/Dissertation_Shpyl_progress_draft.docx`.
+- Note for the student: this is rough first-person draft prose to rewrite in your own words before
+  any assessed submission. Nothing here changes the locked scope.
