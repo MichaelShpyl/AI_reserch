@@ -63,6 +63,8 @@ dissertation/meetings/*.docx
 # ---- Generated dissertation document (regenerate with dissertation/docgen) ----
 dissertation/Dissertation_*.docx
 dissertation/docgen/node_modules/
+# Generated paper draft (source is dissertation/aics_paper_draft.md)
+dissertation/aics_paper_draft.docx
 
 # ---- Private meeting recordings (audio/video, never commit) ----
 Supervisor meetings recordings/
