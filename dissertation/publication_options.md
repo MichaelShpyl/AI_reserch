@@ -25,11 +25,30 @@ the 13-week timeline) still holds.
   6 to 10 November, hybrid). The main-conference deadlines are likely mid-2026 (check), but
   the **co-located workshops** (including GenAIDetect and educational-NLP workshops) take
   submissions later, around August. Hybrid means no travel is required.
-- **AICS 2026, the Irish Conference on AI and Cognitive Science** (September 2026, Springer
-  proceedings). Best location fit and takes short papers. Confirmed by the supervisor at
-  Meeting 3 (16 June 2026) to be running this year, with an email received the day before, so
-  the event is in September and the proposal window is near. Action: find the call and proposal
-  form on aicsconf.org and draft a short paper / abstract soon.
+- **AICS, the Irish Conference on Artificial Intelligence and Cognitive Science** (researched
+  and verified 16 June 2026). This is the primary target and the best fit for the timeline.
+  - What it is: Ireland's main AI conference, running since 1988, organised under the
+    Artificial Intelligence Association of Ireland (AIAI). Editions: AICS 2023 was the 31st
+    and was **hosted by ATU** (with Ulster University), AICS 2024 the 32nd (UCD, 9 to 10 Dec
+    2024), AICS 2025 the 33rd (DCU, Dublin, 1 to 2 Dec 2025). So AICS 2026 would be the 34th.
+  - Identity check: do not confuse it with the unrelated "AICS" conferences that share the
+    acronym (AI and Cyber Security; AI and Computer Science at aicsconf.cn; the Allen Institute
+    Lake Conference). The right one's recent sites are aics.ie (2023), aics2024.ucd.ie (2024),
+    and aicsconf.org (2025).
+  - When: historically held in **early December**, with the **submission deadline in late
+    September to mid-October** (AICS 2024 deadline was 8 October 2024; the 2018 edition was
+    30 September). The supervisor's "September" almost certainly means the submission deadline,
+    not the conference date. The 2026 host and exact dates were not yet published when checked.
+  - How to apply: submit through **EasyChair**. Tracks are **Full Paper**, **Student** (for
+    recent Bachelor's or Master's graduates, ideal for this project, includes a poster), and
+    **NECTAR** (re-presenting already-published results). Papers are **6 to 12 pages including
+    references, in CEURART single-column format**. Proceedings are published on **CEUR-WS**,
+    with **revised selected papers appearing in a Springer CCIS volume** (the 2025 Springer
+    volume exists).
+  - Action: (1) ask Vini to forward the AICS 2026 email / call link she mentioned; (2) watch
+    aicsconf.org and aiai.ucd.ie/conferences.html for the 2026 call; (3) target the Student
+    Track; (4) build a 6 to 12 page CEURART paper from the detection work (the audit result is
+    a strong, self-contained story) using the abstract in `conference_abstract_draft.md`.
 
 ## Immediate step
 
