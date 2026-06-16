@@ -94,7 +94,8 @@ on AI text detection, explainability, argument mining, and question generation. 
 sets out the detection methodology and the first results, including the dataset, how the AI
 essays were built, and the audit that found and removed a corpus artefact. Chapter 4 covers
 the implementation of the parts built so far. Chapter 5 explains the detector's decisions and
-tests whether those explanations are faithful. The later chapters cover the remaining
+tests whether those explanations are faithful. Chapter 6 tests robustness, how the detector
+transfers to unseen generators and unseen domains. The later chapters cover the remaining
 components (argument mining, question generation, the Bloom's check, and the output guide),
-the evaluation, a discussion of what the results mean and where the limits are, and the
+the full evaluation, a discussion of what the results mean and where the limits are, and the
 conclusion with future work.

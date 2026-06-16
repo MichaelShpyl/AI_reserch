@@ -22,5 +22,17 @@
   "fig_explain_faithfulness": {
     "w": 1639,
     "h": 960
+  },
+  "fig_m4_per_generator": {
+    "w": 1720,
+    "h": 919
+  },
+  "fig_m4_transfer_gap": {
+    "w": 1440,
+    "h": 919
+  },
+  "fig_m4_per_domain": {
+    "w": 1800,
+    "h": 960
   }
 }

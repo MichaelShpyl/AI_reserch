@@ -501,3 +501,34 @@ needs supervisor sign-off, no heavy multi-agent workflows, laptop only).
   validates. Regenerated `dissertation/Dissertation_Shpyl_progress_draft.docx`.
 - Note for the student: this is rough first-person draft prose to rewrite in your own words before
   any assessed submission. Nothing here changes the locked scope.
+
+### M4 robustness evaluation (16 June 2026): the honest harder case
+
+Ran the zero-shot transfer test the project needed (`src/detection/eval_m4_transfer.py`): apply the
+in-domain DeBERTa detector, with no adaptation, to the M4 / SemEval-2024 Task 8 benchmark, which has
+many generators and domains the detector never saw. Split into two honest tests.
+
+- **Cross-generator, essays (M4 OUTFOX split).** F1 0.97. The detector caught all six unseen
+  generators (GPT-4, ChatGPT, Cohere, BLOOMz, Dolly, davinci) at 96 to 100 percent, with a 5 percent
+  human false-positive rate. The AI-style fingerprint is largely **generator-agnostic** on essays:
+  a Llama-only detector still recognises text from quite different models. This corrected my prior
+  expectation that cross-generator transfer would be weak.
+- **Cross-domain (M4 reddit/wikihow/arxiv/wikipedia/peerread).** F1 falls to 0.79, and the failure is
+  one-sided and important. The detector still catches machine text (86 to 98 percent) but **wrongly
+  flags genuine human text as AI**: 79 percent on arXiv abstracts, about 40 percent on Wikipedia and
+  WikiHow, 30 percent on peer-review, 23 percent on Reddit. It learned "human = student essay" and so
+  misjudges more formal human writing. This is a **false-accusation** failure, exactly the harm the
+  project exists to prevent, and it ties straight to the fairness concern (writers whose style differs
+  from the training norm, including non-native writers, are most at risk).
+- Reading: the detector is **robust across AI models but fragile across domains**, and the fragility
+  hurts humans, not machines. The honest headline is that it spots AI essays from many models well, and
+  is not safe to point at human writing from a domain it was not trained on. This is a lower bound
+  (zero-shot, no adaptation); training on diverse human text and several generators should help, and is
+  the next experiment.
+- Figures: `fig_m4_per_generator.png`, `fig_m4_transfer_gap.png`, `fig_m4_per_domain.png`. Report:
+  `outputs/m4_transfer.json`. Written up as Chapter 6 (`chapters/06_robustness.md`) and folded into the
+  dissertation (now 31 pages) and the AICS paper draft (M4 result added; the earlier "will fall on
+  other generators" claim corrected to "robust across generators, fragile across domains").
+- Build note: the dissertation `.docx` was open in Word during the run (locked), so the canonical file
+  was not overwritten. The builder now accepts a `DISS_OUT` override; to refresh the canonical file,
+  close Word and run `node dissertation/docgen/build_dissertation.js`.

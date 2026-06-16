@@ -24,9 +24,13 @@ markup from both classes, the detector still scores an F1 of 0.99, and a classif
 function words alone reaches 99.5 percent, which shows the residual signal is writing style rather
 than topic or formatting. An Integrated Gradients analysis with a faithfulness-by-ablation test
 shows the style signal is diffuse, spread across ordinary words and punctuation, so per-word
-highlights are a weak standalone explanation and a feature-level explanation is preferable. We argue
-that for single-generator, in-domain detection a near-perfect score is expected, and that the useful
-contributions are the audit method and the honest, interpretable account of what the detector uses.
+highlights are a weak standalone explanation and a feature-level explanation is preferable. Tested
+zero-shot on the M4 benchmark, the detector transfers across unseen generators (F1 0.97 on essays)
+but is fragile across domains (F1 0.79), failing by flagging formal human text such as arXiv
+abstracts as AI, which underlines the fairness risk of single-domain detectors. We argue that for
+single-generator, in-domain detection a near-perfect score is expected, and that the useful
+contributions are the audit method, the honest robustness picture, and an interpretable account of
+what the detector uses.
 
 ## 1. Introduction
 
@@ -107,26 +111,44 @@ prediction to chance. The style signal is diffuse, spread across the whole essay
 highlight is a weak explanation on its own. The faithful, interpretable explanation is the
 feature-level one: the function-word fingerprint and the two-cluster style space from the audit.
 
-## 6. Discussion
+## 6. Robustness: zero-shot transfer to M4
+
+To test whether the in-domain score means anything beyond the training setting, we applied the
+detector with no adaptation to the M4 benchmark, which spans many generators and domains the detector
+never saw. On M4's essay split (human essays versus six unseen generators: GPT-4, ChatGPT, Cohere,
+BLOOMz, Dolly, davinci) the detector reached F1 0.97 and flagged every generator at 96 to 100 percent,
+so the AI-style fingerprint is largely generator-agnostic. On out-of-domain text (reddit, wikihow,
+arxiv, wikipedia, peer-review) the F1 fell to 0.79, and the failure was one-sided: the detector still
+caught machine text (86 to 98 percent) but wrongly flagged genuine human text as AI, at 79 percent on
+arXiv abstracts and about 40 percent on Wikipedia and WikiHow. The detector had learned that "human"
+looks like a student essay, so it misjudges more formal human writing. This is a false-accusation
+failure, the exact harm the wider project aims to prevent, and it mirrors the known bias of these
+detectors against writing that differs from the training norm.
+
+## 7. Discussion
 
 A near-perfect in-domain score is the expected outcome when separating one known generator from human
 writing in one domain, which the literature treats as close to solved [verify]. The value here is
 methodological. First, a strong result must be stress-tested before it is believed, and the markup
 artifact is a clean example of why. Second, faithfulness testing tells us which explanation to trust,
 and for this detector it rules out naive token highlighting in favour of feature-level explanation.
-Both points generalise to anyone building an interpretable detector on a constructed corpus.
+Third, the robustness picture is honest rather than flattering: strong across models, fragile across
+domains, and fragile in the direction that hurts students. All three points generalise to anyone
+building an interpretable detector on a constructed corpus.
 
-## 7. Limitations and future work
+## 8. Limitations and future work
 
-The detector is tested against a single generator in one domain, so the score is an upper bound and
-will fall on other generators, paraphrased text, and mixed human and AI documents. We also found a
-locale tell: the human students write British English while the model defaults to American, which is
-shallow and would shrink if the generator were prompted for British English. Next steps are
-multi-generator robustness (the M4 benchmark), paraphrase robustness, SHAP on the stylometric
-features, and the rest of the pipeline (argument mining and source-grounded verification questions).
-The project runs entirely on a laptop GPU, which constrains model sizes.
+The transfer test above is zero-shot, with no adaptation, so it is a lower bound: a detector trained
+on diverse human text and several generators would likely do better across domains, and that is the
+clear next experiment. The cross-domain false positives come from the in-domain "human" being student
+essays, so the fix is more varied human data and per-domain calibration. We also found a locale tell:
+the human students write British English while the model defaults to American, which is shallow and
+would shrink if the generator were prompted for British English. The remaining robustness gaps to test
+are paraphrased and "humanised" AI text and documents that mix human and AI writing. Beyond detection,
+the wider pipeline (argument mining, source-grounded verification questions, a Bloom's-level check)
+is future work. The project runs entirely on a laptop GPU, which constrains model sizes.
 
-## 8. Conclusion
+## 9. Conclusion
 
 We presented an audit of a near-perfect AI-text detector. The perfect score was partly a corpus-markup
 artifact, which we identified, measured and removed. After cleaning, the classes remain almost

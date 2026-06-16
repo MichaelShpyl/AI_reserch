@@ -17,7 +17,10 @@ const {
 const REPO = path.resolve(__dirname, "..", "..");
 const CH = path.join(REPO, "dissertation", "chapters");
 const FIGS = path.join(REPO, "dissertation", "figures");
-const OUT = path.join(REPO, "dissertation", "Dissertation_Shpyl_progress_draft.docx");
+// Default output path; override with DISS_OUT (useful when the .docx is open/locked in Word).
+const OUT = process.env.DISS_OUT
+  ? path.resolve(process.env.DISS_OUT)
+  : path.join(REPO, "dissertation", "Dissertation_Shpyl_progress_draft.docx");
 const figdims = JSON.parse(fs.readFileSync(path.join(__dirname, "figdims.json"), "utf8"));
 
 // Match the official 2026 template: Calibri body, Office-blue headings, 12pt 1.5 justified.
@@ -237,6 +240,9 @@ const FIGURE_LIST = [
   ["Figure 3.4", "Essays in function-word style space: two clusters"],
   ["Figure 5.1", "Integrated Gradients token attributions for a matched essay pair"],
   ["Figure 5.2", "Faithfulness by ablation: the signal is diffuse"],
+  ["Figure 6.1", "Transfer to unseen generators on essays"],
+  ["Figure 6.2", "In-domain vs cross-generator vs cross-domain F1"],
+  ["Figure 6.3", "Cross-domain failure modes by domain"],
 ];
 const tableOfFigures = [
   h1("Table of Figures"),
@@ -271,6 +277,7 @@ ch2 = [ch2[0], ch2note, ...ch2.slice(1)];  // insert the note right after the H1
 const ch3 = readChapter("03_detection.md");
 const ch4 = readChapter("04_implementation.md");
 const ch5 = readChapter("05_explainability.md");
+const ch6 = readChapter("06_robustness.md");
 
 const doc = new Document({
   creator: "Mykhailo Shpyl",
@@ -311,7 +318,7 @@ const doc = new Document({
     children: [
       ...titlePage1, ...titlePage2, ...declaration, ...acknowledgements, ...abstract,
       ...acronyms, ...toc, ...tableOfFigures,
-      ...ch1, ...ch2, ...ch3, ...ch4, ...ch5,
+      ...ch1, ...ch2, ...ch3, ...ch4, ...ch5, ...ch6,
     ],
   }],
 });
