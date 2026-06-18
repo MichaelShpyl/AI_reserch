@@ -532,3 +532,29 @@ many generators and domains the detector never saw. Split into two honest tests.
 - Build note: the dissertation `.docx` was open in Word during the run (locked), so the canonical file
   was not overwritten. The builder now accepts a `DISS_OUT` override; to refresh the canonical file,
   close Word and run `node dissertation/docgen/build_dissertation.js`.
+
+### Stylometric detector and SHAP explanation (16 June 2026)
+
+Completed the feature-level explanation Chapter 5 promised, and built the stylometric half of the
+hybrid detector (`src/explainability/shap_stylometric.py`).
+
+- Computed hand-crafted style features (sentence-length variation, burstiness, vocabulary richness,
+  word length, punctuation, POS mix) for the cleaned 1,280-essay corpus (cached to
+  `data/processed/stylometric_features.parquet`), dropped the length-related columns to keep it pure
+  style, and trained a gradient-boosted classifier on the student-level splits.
+- **Result: a fully interpretable, style-only detector reaches F1 0.985** (confusion [[98, 2], [1, 99]]),
+  almost matching the transformer's 0.99, with a balanced false-positive rate of 0.02 for both native
+  and non-native writers. So the signal is captured nearly as well by transparent features as by a
+  large model. This is also the non-transformer half of the planned hybrid detector (component 1).
+- **SHAP** (`fig_shap_stylometric.png`, report `outputs/stylometric_shap.json`) gives the faithful,
+  feature-level explanation: longer words and denser auxiliary-verb use push toward AI; more
+  sentence-length variation, richer vocabulary, and more rare one-off words push toward human. This is
+  the defensible "this was flagged because the sentences are uniform and the words longer" account the
+  project is built around, and it is faithful because the model literally uses those features (unlike
+  the diffuse token-level view in 5.3).
+- Written up as Chapter 5 section 5.5 (with Figure 5.3); folded into the dissertation (now 32 pages,
+  validates) and added to the AICS paper. The token-level finding from earlier in the chapter is what
+  motivates preferring this feature-level explanation.
+- Env note: installing `shap` downgraded numpy 2.3.4 -> 2.0.2 (shap needs < 2.3). All tools still
+  import and run (spaCy, sklearn, transformers, torch), and this actually satisfies the earlier
+  scipy/sklearn "numpy < 2.3" warning. Keep this in mind for the eventual version re-pin.

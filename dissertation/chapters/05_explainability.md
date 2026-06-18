@@ -65,11 +65,35 @@ by the function-words-only result rather than contradicted by it. So the defensi
 explanation is the style and feature picture, supported by the source-grounded verification
 questions that come later in the pipeline, not a single highlighted sentence.
 
-## 5.5 Next steps for explainability
+## 5.5 The faithful explanation: stylometric features and SHAP
 
-Three things follow. First, add SHAP on the stylometric features once the hybrid detector is built,
-so the feature-level explanation has per-feature attributions to sit alongside the lexical view.
-Second, keep the token attributions as a supporting visual, useful for showing a lecturer roughly
-where the model looked, but always paired with the honest caveat from the faithfulness test. Third,
-carry this faithfulness check forward as a standard step: any explanation the system shows should be
-one I have tested, not one I have assumed.
+To make the feature-level explanation concrete I built a detector from hand-crafted style features
+alone, with no transformer: sentence-length variation and burstiness, vocabulary richness, word
+length, punctuation, and the part-of-speech mix (`src/explainability/shap_stylometric.py`). Trained
+on the same student-level splits, this transparent model reaches an F1 of 0.985 on the test set,
+almost matching the transformer's 0.99, with a balanced false-positive rate of 0.02 for both native
+and non-native writers. That is an important result on its own: the signal is not only real, it is
+captured almost as well by a handful of interpretable features as by a large model.
+
+Because the model is built from named features, I can explain it faithfully with SHAP, which
+attributes each decision to the features that drove it. Figure 5.3 shows the picture across the test
+set. Longer words and a denser use of auxiliary verbs push a text toward AI, while more
+sentence-length variation, richer vocabulary, and more rare one-off words push it toward human. This
+is the explanation the project actually needs: a lecturer can be told that a piece was flagged
+because its sentences are unusually uniform, its words longer, and its vocabulary less varied than a
+typical student's, and that account is faithful because the model literally uses those features. It
+is the opposite of the black-box percentage the project set out to replace.
+
+![Figure 5.3: SHAP on the stylometric detector. Each dot is an essay; position shows how much a feature pushed the decision toward AI (right) or human (left), and colour shows the feature value. Longer words push toward AI; richer vocabulary and more varied sentence length push toward human.](../figures/fig_shap_stylometric.png)
+
+This stylometric model is also the non-transformer half of the planned hybrid detector, so this step
+serves both the explainability layer and the detector itself.
+
+## 5.6 Next steps for explainability
+
+Three things follow. First, fuse the stylometric model with the transformer into the hybrid detector,
+and add perplexity (a strong feature that needs the GPU) to the feature set. Second, keep the token
+attributions as a supporting visual, useful for showing a lecturer roughly where the model looked,
+but always paired with the honest caveat from the faithfulness test, with the SHAP feature view as
+the primary explanation. Third, carry the faithfulness check forward as a standard step: any
+explanation the system shows should be one I have tested, not one I have assumed.

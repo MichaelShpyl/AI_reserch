@@ -110,6 +110,11 @@ more than removing the same number of random tokens, and keeping only the top to
 prediction to chance. The style signal is diffuse, spread across the whole essay, so a per-word
 highlight is a weak explanation on its own. The faithful, interpretable explanation is the
 feature-level one: the function-word fingerprint and the two-cluster style space from the audit.
+A detector built from hand-crafted style features alone (sentence-length variation, vocabulary
+richness, word length, punctuation, part-of-speech mix) reaches F1 0.985, almost matching the
+transformer, and SHAP attributes each decision to named features (longer words push toward AI;
+richer vocabulary and more varied sentence length push toward human), giving the defensible,
+lecturer-facing explanation the project is built around.
 
 ## 6. Robustness: zero-shot transfer to M4
 

@@ -240,6 +240,7 @@ const FIGURE_LIST = [
   ["Figure 3.4", "Essays in function-word style space: two clusters"],
   ["Figure 5.1", "Integrated Gradients token attributions for a matched essay pair"],
   ["Figure 5.2", "Faithfulness by ablation: the signal is diffuse"],
+  ["Figure 5.3", "SHAP on the stylometric detector (feature-level explanation)"],
   ["Figure 6.1", "Transfer to unseen generators on essays"],
   ["Figure 6.2", "In-domain vs cross-generator vs cross-domain F1"],
   ["Figure 6.3", "Cross-domain failure modes by domain"],
