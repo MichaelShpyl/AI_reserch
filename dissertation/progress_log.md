@@ -611,3 +611,30 @@ Strategic findings for the 23 June supervisor meeting (not acted on, they touch 
   simplify argument mining to claim extraction) to the supervisor.
 - Good news the review confirmed: numbers are internally consistent across chapters, the split-leakage
   audit is sound, and the prose shows no AI-writing tells and obeys the no-em-dash rule.
+
+### Question generation: first working slice of the core contribution (16 June 2026)
+
+Built the first end-to-end slice of the argument-aware question generation (the project's core
+contribution, CLAUDE.md components 3 to 6), running on the local model today.
+
+- `src/question_gen/generate_questions.py`: takes a flagged essay and produces a Verification
+  Interview Guide. Steps: number the sentences; extract the student's main claims with each claim
+  citing the sentence numbers it comes from (so provenance is guaranteed, the model cites indices and
+  we look up the real sentence, it cannot hallucinate a quote); generate grounded verification
+  questions per claim that cannot be answered from the claim alone; tag each with a Bloom's level
+  (transparent heuristic, a placeholder for the Component 5 BERT classifier); assemble JSON + Markdown.
+- Backends are pluggable behind one interface. This slice uses the local Llama 3.1 8B via Ollama (the
+  basis for Backend B); the commercial Backend A is a stub that plugs into the same interface once an
+  API key is available, which is what enables the core commercial-versus-local comparison. The backend
+  is recorded in every guide so runs are comparable.
+- Demo on flagged essay 3108a: 4 claims, each tied to exact source sentences, 3 grounded questions
+  each (for example, for a claim about Shakespeare's "dramatic intensity" it asked what specific
+  features of the dialogue justify that description). Output in
+  `outputs/verification_guides/3108a_ai.md` and `.json`. The questions genuinely need understanding,
+  not just the claim, which is the whole point.
+- Written up as Chapter 7 (`chapters/07_question_generation.md`); dissertation now 37 pages, validates.
+- Honest first-slice caveats recorded in the chapter: claim extraction is prompted (a stand-in for the
+  trained Persuasive-Essays argument miner), Bloom's is a heuristic, and the questions are not yet
+  evaluated (the discrimination simulation is the next step). Backend A (commercial) and the 8B-vs-3B
+  Backend B decision are for the supervisor meeting.
+- Ops: restarted Ollama (`ollama serve`) to run the local backend; left running idle.

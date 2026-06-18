@@ -95,7 +95,9 @@ sets out the detection methodology and the first results, including the dataset,
 essays were built, and the audit that found and removed a corpus artefact. Chapter 4 covers
 the implementation of the parts built so far. Chapter 5 explains the detector's decisions and
 tests whether those explanations are faithful. Chapter 6 tests robustness, how the detector
-transfers to unseen generators and unseen domains. The later chapters cover the remaining
-components (argument mining, question generation, the Bloom's check, and the output guide),
-the full evaluation, a discussion of what the results mean and where the limits are, and the
-conclusion with future work.
+transfers to unseen generators and unseen domains. Chapter 7 is the first slice of the core
+contribution: turning a flag into verification questions drawn from the student's own claims,
+with the source provenance and a Bloom's level. The later chapters cover the full argument
+miner and Bloom's classifier, the commercial-versus-local question-generation comparison and
+its evaluation, the assembled output guide, a discussion of what the results mean and where the
+limits are, and the conclusion with future work.
