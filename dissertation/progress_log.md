@@ -558,3 +558,56 @@ hybrid detector (`src/explainability/shap_stylometric.py`).
 - Env note: installing `shap` downgraded numpy 2.3.4 -> 2.0.2 (shap needs < 2.3). All tools still
   import and run (spaCy, sklearn, transformers, torch), and this actually satisfies the earlier
   scipy/sklearn "numpy < 2.3" warning. Keep this in mind for the eventual version re-pin.
+
+### Critical review and rigour/honesty improvements (16 June 2026)
+
+Ran a multi-agent review of the detection/explainability/robustness work and the dissertation
+(four reviewers plus adversarial verification; two verify agents hit a session limit so I verified
+the rest against the code myself). It returned 29 findings, all well-evidenced. Acted on the
+empirical-rigour and honesty findings now; the strategic/scope findings are summarised for the
+supervisor meeting.
+
+Implemented (new results):
+- **Confidence intervals + seed stability** (`src/evaluation/confidence.py`, `fig_confidence_intervals.png`,
+  `outputs/confidence_intervals.json`), the review's top finding. Bootstrap 95% CIs on the test
+  metrics: DeBERTa F1 0.99 [0.97, 1.00], RoBERTa 0.995 [0.98, 1.00], stylometric 0.985 [0.97, 1.00],
+  M4 cross-generator 0.97 [0.97, 0.98], M4 cross-domain 0.79 [0.77, 0.80]. The in-domain intervals
+  overlap heavily (n=200), so the model differences are within sampling noise; the M4 intervals are
+  tight (large n). The stylometric model is identical (0.985) across five seeds, so it is stable.
+- **Style-vs-locale control** (`src/detection/style_locale_control.py`, `outputs/style_locale_control.json`):
+  removing every British/American spelling variant and contraction (1,251/1,280 essays changed)
+  leaves the function-words accuracy unchanged (0.995 -> 1.00) and the TF-IDF model at 1.00. So the
+  locale/formality tell is real but non-load-bearing; the separability is genuine distributional
+  style. This answers the reviewer's concern and strengthens the claim.
+
+Honesty/wording fixes folded into the chapters and the AICS paper:
+- Softened the DeBERTa-vs-RoBERTa "architecture agreement" claim: the 0.990/0.995 gap is one essay
+  on n=200 and within the overlapping CIs; the meaningful agreement is the shared one-sided error
+  (false positives on human text, no AI missed), not the near-identical scores.
+- Reported the in-domain fairness FPR as counts with the caveat that n=50/group is too small to
+  establish a fairness gap; pointed to the Chapter 6 cross-domain result as the real fairness evidence.
+- Named the two robustness corpora separately (Test A = OUTFOX essays, Test B = M4/SemEval-2024 Task 8),
+  noted the generator sets differ, and made the human-side false-positive rate the load-bearing
+  evidence for the domain claim (it cannot be a generator artefact).
+- Noted the TF-IDF 100% had one residual markup token ("fnote") in its vocabulary, so the
+  function-words-only 99.5% is the cleaner evidence.
+- Flagged the IG sufficiency curve as an empty-input artefact (rely on comprehensiveness), and added
+  the like-for-like caveat (stylometric model sees the full essay, DeBERTa only the first 512 tokens),
+  the length-sensitivity of TTR/hapax, and that perplexity is deferred to the hybrid.
+- Dissertation rebuilt to 35 pages, validates. Added Figure 3.5 (CIs).
+
+Strategic findings for the 23 June supervisor meeting (not acted on, they touch locked scope):
+- Detection and explainability are genuinely complete and well-validated; resist further polishing.
+- The core contribution, question generation (Component 4, commercial vs local), is unbuilt
+  (`src/question_gen/` empty). On-plan (weeks 7-8) but it is the bottleneck for the primary research
+  question, the evaluation, and the output assembler. Recommended next: stand up Backend A
+  (commercial via API, structured prompting over flagged passages) as a first slice.
+- Backend B QLoRA toolchain (bitsandbytes/peft/trl) is not installed and untested; the 8B-on-8GB fit
+  is unresolved. Smoke-test on a 3B model and bring the 8B-vs-3B decision to the supervisor.
+- Chapter 2 (literature review) is still a skeleton with zero verified citations: the biggest writing
+  gap, needs several sessions; the non-native-bias citation is load-bearing for Ch1/Ch6.
+- Timeline: argument mining, Bloom's, output assembler, and the full evaluation are unstarted with
+  ~10 weeks left and writing weeks protected; bring a depth-vs-breadth re-scoping decision (e.g.
+  simplify argument mining to claim extraction) to the supervisor.
+- Good news the review confirmed: numbers are internally consistent across chapters, the split-leakage
+  audit is sound, and the prose shows no AI-writing tells and obeys the no-em-dash rule.

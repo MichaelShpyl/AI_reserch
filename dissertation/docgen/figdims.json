@@ -11,6 +11,10 @@
     "w": 1080,
     "h": 1000
   },
+  "fig_confidence_intervals": {
+    "w": 1760,
+    "h": 960
+  },
   "fig_why_style_clusters": {
     "w": 1520,
     "h": 1200

@@ -95,10 +95,17 @@ that human plain text never contains. Both are artifacts of how the corpus halve
 
 **What survives cleaning.** We normalised both classes (`text_normalize.py`), removing the export
 tags and the markdown and flattening layout, and rebuilt the corpus. On cleaned text a TF-IDF and
-logistic-regression model still separates the classes at 100 percent, and a model restricted to
-function words alone reaches 99.5 percent. Function words carry no topic, so the residual signal is
-writing style. The cleaned-text DeBERTa detector scores F1 = 0.99 (confusion matrix [[98, 2], [0,
-100]]), with a native-writer false-positive rate of 0.04. RoBERTa agrees at F1 = 0.995.
+logistic-regression model still separates the classes at 100 percent (with one residual tag token
+surviving into its vocabulary, so we rely on the next result), and a model restricted to function
+words alone reaches 99.5 percent. Function words carry no topic and no markup, so the residual signal
+is writing style. We also controlled for the British-versus-American spelling and contraction tells:
+removing every spelling variant and contraction leaves the function-word accuracy unchanged
+(0.995 to 1.00), so the locale tell is a real but non-load-bearing add-on. The cleaned-text DeBERTa
+detector scores F1 = 0.99 (confusion matrix [[98, 2], [0, 100]]); on a 200-essay test set the 95%
+bootstrap interval is about [0.97, 1.00], so we read it as "about 0.99". RoBERTa scores 0.995, but
+its interval overlaps DeBERTa's almost completely, so the two are statistically indistinguishable.
+The native-writer false-positive rate is 2 of 50 essays, too few to claim fairness; the cross-domain
+result in Section 6 is the stronger fairness evidence.
 
 ## 5. Explainability and a faithfulness check
 
@@ -116,14 +123,17 @@ transformer, and SHAP attributes each decision to named features (longer words p
 richer vocabulary and more varied sentence length push toward human), giving the defensible,
 lecturer-facing explanation the project is built around.
 
-## 6. Robustness: zero-shot transfer to M4
+## 6. Robustness: zero-shot transfer
 
 To test whether the in-domain score means anything beyond the training setting, we applied the
-detector with no adaptation to the M4 benchmark, which spans many generators and domains the detector
-never saw. On M4's essay split (human essays versus six unseen generators: GPT-4, ChatGPT, Cohere,
-BLOOMz, Dolly, davinci) the detector reached F1 0.97 and flagged every generator at 96 to 100 percent,
-so the AI-style fingerprint is largely generator-agnostic. On out-of-domain text (reddit, wikihow,
-arxiv, wikipedia, peer-review) the F1 fell to 0.79, and the failure was one-sided: the detector still
+detector with no adaptation to two held-out corpora that span generators and domains it never saw.
+On the OUTFOX essay set (human essays versus six unseen generators: GPT-4, ChatGPT, Cohere, BLOOMz,
+Dolly, davinci) the detector reached F1 0.97 and flagged every generator at 96 to 100 percent, so the
+AI-style fingerprint is largely generator-agnostic. On out-of-domain M4 / SemEval-2024 Task 8 text
+(reddit, wikihow,
+arxiv, wikipedia, peer-review) the F1 fell to 0.79. Because the generator set here also differs from
+the OUTFOX test, the combined F1 mixes domain shift with generator shift, so the load-bearing evidence
+is the one-sided failure on the human side, which cannot be a generator artefact: the detector still
 caught machine text (86 to 98 percent) but wrongly flagged genuine human text as AI, at 79 percent on
 arXiv abstracts and about 40 percent on Wikipedia and WikiHow. The detector had learned that "human"
 looks like a student essay, so it misjudges more formal human writing. This is a false-accusation

@@ -42,9 +42,12 @@ keep only the top tokens and hide the rest, does the confidence hold up?
 
 Figure 5.2 shows the comprehensiveness result as I remove more and more tokens. Removing the
 top-ranked tokens does hurt the detector more than removing random ones, but only by a little, and
-only once a fair number are removed. The sufficiency result is starker: keeping only the top tokens
-drops the detector to a coin-flip, whatever number I keep. In other words, no small set of words is
-enough to carry the decision.
+only once a fair number are removed. This comprehensiveness sweep is the load-bearing, honest part
+of the test. I also ran a sufficiency check (keep only the top tokens, hide the rest), but with at
+most a few dozen of 256 tokens kept the model sees almost nothing and sits at a coin-flip for every
+k, so that flat result is an empty-input artefact of the design rather than a finding, and I do not
+rely on it. The comprehensiveness result on its own already says what matters: no small set of words
+is enough to carry the decision.
 
 ![Figure 5.2: Faithfulness by ablation. Removing the top attributed tokens (orange) lowers detector confidence only slightly more than removing random tokens (teal). Keeping only the top tokens collapses the prediction to chance. The signal is spread across the whole essay.](../figures/fig_explain_faithfulness.png)
 
@@ -70,10 +73,19 @@ questions that come later in the pipeline, not a single highlighted sentence.
 To make the feature-level explanation concrete I built a detector from hand-crafted style features
 alone, with no transformer: sentence-length variation and burstiness, vocabulary richness, word
 length, punctuation, and the part-of-speech mix (`src/explainability/shap_stylometric.py`). Trained
-on the same student-level splits, this transparent model reaches an F1 of 0.985 on the test set,
-almost matching the transformer's 0.99, with a balanced false-positive rate of 0.02 for both native
-and non-native writers. That is an important result on its own: the signal is not only real, it is
-captured almost as well by a handful of interpretable features as by a large model.
+on the same student-level splits, this transparent model reaches an F1 of 0.985 on the test set
+(95% bootstrap confidence interval about [0.97, 1.00], and identical, 0.985, across five training
+seeds, so it is stable). Two honest caveats. The comparison with the transformer's 0.99 is not
+quite like for like: the feature model reads the whole essay while DeBERTa reads only the first 512
+tokens, which helps the feature model, so I read this as "competitive" rather than "equal". And the
+false-positive rate of 0.02 for native and non-native writers is one essay in fifty each, too small
+to claim fairness; the cross-domain result in Chapter 6 is the real fairness evidence. Two of the
+features (type-token ratio and the rare-word ratio) are length-sensitive, but since the essay lengths
+are matched across the classes this carries little class signal; the length-robust vocabulary measure
+behaves the same way. Perplexity, one of the strongest stylometric signals in the literature, is
+implemented but not yet in this model (it needs a GPU pass) and is deferred to the hybrid. Even so,
+the headline holds: the signal is captured almost as well by a handful of interpretable features as
+by a large model.
 
 Because the model is built from named features, I can explain it faithfully with SHAP, which
 attributes each decision to the features that drove it. Figure 5.3 shows the picture across the test

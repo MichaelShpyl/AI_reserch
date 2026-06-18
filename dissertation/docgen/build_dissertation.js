@@ -238,6 +238,7 @@ const FIGURE_LIST = [
   ["Figure 3.2", "The words the cleaned-text model keys on (style, not topic)"],
   ["Figure 3.3", "DeBERTa on the held-out test set after markup removal"],
   ["Figure 3.4", "Essays in function-word style space: two clusters"],
+  ["Figure 3.5", "Detector F1 with 95% bootstrap confidence intervals"],
   ["Figure 5.1", "Integrated Gradients token attributions for a matched essay pair"],
   ["Figure 5.2", "Faithfulness by ablation: the signal is diffuse"],
   ["Figure 5.3", "SHAP on the stylometric detector (feature-level explanation)"],

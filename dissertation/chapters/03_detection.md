@@ -73,10 +73,12 @@ window sees them. This is the shortcut behind a large part of the perfect score.
 (`src/detection/text_normalize.py`) that strips the BAWE tags from the human side and the
 markdown from the AI side and flattens the layout, then rebuilt the corpus from the cleaned
 text. On the cleaned text a simple TF-IDF and logistic-regression model still separates the
-two classes at 100 percent on the test set. More tellingly, a model that is allowed to use
-only function words (the, and, because, therefore, and the like, which carry no topic
-information at all) still reaches 99.5 percent. Topic cannot explain that. The thing that
-remains after the markup is gone is writing style.
+two classes at 100 percent on the test set. I treat that 100 percent with some caution, because
+one residual markup token ("fnote") survived the cleaning into the full model's vocabulary, so
+the cleanest evidence is the next result, not this one. A model that is allowed to use only
+function words (the, and, because, therefore, and the like, which carry no topic information at
+all, and no markup) still reaches 99.5 percent. Topic cannot explain that, and neither can a
+leftover tag. The thing that remains after the markup is gone is writing style.
 
 ![Figure 3.1: What each signal achieves on its own. A markup-only rule already scores 92.5 percent on the raw text, which is the size of the artefact. After cleaning, a simple model still separates the classes, and a function-words-only model still reaches 99.5 percent, so the residual signal is writing style.](../figures/fig_audit_separability.png)
 
@@ -94,19 +96,33 @@ and the AI writing is smoother and more uniform.
 After removing the artefact I retrained DeBERTa on the cleaned corpus. The score moved off
 the ceiling, which is what I wanted: test accuracy 0.99, precision 0.98, recall 1.00, F1
 0.990, with a confusion matrix of [[98, 2], [0, 100]]. Two human essays are flagged as AI and
-no AI essay is missed. The native-writer false-positive rate is 0.04 and the non-native rate
-is 0.00 on this small test set. The full-document linear probe still scores 1.00 on the same
-cleaned text, while DeBERTa makes two mistakes, which fits the fact that the transformer only
-reads the opening 512 tokens while the linear model sees the whole essay.
+no AI essay is missed. The test set is small (100 human and 100 AI essays), so I put a number
+on that uncertainty: a 95% bootstrap confidence interval on the F1 is about [0.97, 1.00]
+(`src/evaluation/confidence.py`, Figure 3.5). One extra misclassification moves the F1 by
+roughly 0.005, so the headline should be read as "about 0.99" rather than an exact value. The
+full-document linear probe still scores 1.00 on the same cleaned text, while DeBERTa makes two
+mistakes, which fits the fact that the transformer only reads the opening 512 tokens while the
+linear model sees the whole essay.
+
+On fairness, the human false-positive rate is 2 of 50 native writers (0.04) and 0 of 50
+non-native writers (0.00). With only 50 humans per group, one essay is worth 0.02, so this is
+not enough to establish a fairness gap, and I treat it as indicative only. The stronger fairness
+evidence is the cross-domain result in Chapter 6, where the human false-positive rate is measured
+on far more text and shows the real bias mechanism.
 
 ![Figure 3.3: DeBERTa on the held-out test set after the markup was removed. Two human essays are flagged as AI and no AI essay is missed (F1 0.990).](../figures/fig_detector_confusion.png)
 
 RoBERTa, trained the same way on the cleaned corpus, lands in the same place: F1 0.995, a
-confusion matrix of [[99, 1], [0, 100]], native false-positive rate 0.02. Both models fall off
-the perfect ceiling once the markup is gone, and both make their few mistakes the same way, by
-flagging a small number of human essays as AI rather than missing AI. Two different
-architectures agreeing is a sign that the residual signal is a real style difference and not a
-quirk of one model.
+confusion matrix of [[99, 1], [0, 100]], native false-positive rate 0.02. Its only difference
+from DeBERTa is one human essay flipping, and the two confidence intervals overlap almost
+completely (Figure 3.5), so on this 200-essay test set 0.990 and 0.995 are statistically
+indistinguishable and I do not read anything into the gap. What is meaningful is that both
+architectures land in the same regime: high accuracy, and every mistake is a human essay flagged
+as AI rather than an AI essay missed. That shared one-sided error pattern, not the near-identical
+scores, is the sign that the residual signal is a real style difference and not a quirk of one
+model.
+
+![Figure 3.5: Test F1 with 95% bootstrap confidence intervals. The in-domain detectors (DeBERTa, RoBERTa, stylometric) have heavily overlapping intervals on n=200, so their differences are within sampling noise; the M4 transfer results have tight intervals on much larger samples.](../figures/fig_confidence_intervals.png)
 
 So the cleaned F1 of 0.990 is the number I report, and the raw 1.000 is kept only to show how
 large the artefact was. Either way the in-domain task is easy, which is consistent with the
@@ -142,6 +158,14 @@ too: the human essays use about three times as many contractions. None of these 
 decisive, but they stack, and a 2D picture of the essays in pure style space (Figure 3.4,
 function words only) shows two clouds that barely touch. So 0.99 is the expected result for an
 easy setting, not a hidden error.
+
+I checked how much of this is the shallow locale tell rather than deep style
+(`src/detection/style_locale_control.py`). When I remove every British and American spelling
+variant and every contraction from the text, which changes 1,251 of the 1,280 essays, the
+function-words-only accuracy does not fall: it goes from 0.995 to 1.00, and the full TF-IDF model
+stays at 1.00. So the locale and formality tells are real but they are not what the separation
+rests on; the distributional style signal is there with or without them. I keep the locale point
+as an honest caveat and a planned fix, not as the explanation for the score.
 
 ![Figure 3.4: Every essay placed by its function-word style alone, with all topic words removed. Human and AI fall into two separate clouds, which is why a single generator in one domain is easy to separate.](../figures/fig_why_style_clusters.png)
 
