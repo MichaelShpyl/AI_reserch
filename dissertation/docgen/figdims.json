@@ -42,5 +42,9 @@
   "fig_m4_per_domain": {
     "w": 1800,
     "h": 960
+  },
+  "fig_discrimination_sim": {
+    "w": 2200,
+    "h": 919
   }
 }

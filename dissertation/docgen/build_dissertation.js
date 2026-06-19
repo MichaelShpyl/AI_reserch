@@ -245,6 +245,7 @@ const FIGURE_LIST = [
   ["Figure 6.1", "Transfer to unseen generators on essays"],
   ["Figure 6.2", "In-domain vs cross-generator vs cross-domain F1"],
   ["Figure 6.3", "Cross-domain failure modes by domain"],
+  ["Figure 8.1", "Discrimination simulation: claim-grounded vs generic questions"],
 ];
 const tableOfFigures = [
   h1("Table of Figures"),
@@ -281,6 +282,7 @@ const ch4 = readChapter("04_implementation.md");
 const ch5 = readChapter("05_explainability.md");
 const ch6 = readChapter("06_robustness.md");
 const ch7 = readChapter("07_question_generation.md");
+const ch8 = readChapter("08_evaluation_questions.md");
 
 const doc = new Document({
   creator: "Mykhailo Shpyl",
@@ -321,7 +323,7 @@ const doc = new Document({
     children: [
       ...titlePage1, ...titlePage2, ...declaration, ...acknowledgements, ...abstract,
       ...acronyms, ...toc, ...tableOfFigures,
-      ...ch1, ...ch2, ...ch3, ...ch4, ...ch5, ...ch6, ...ch7,
+      ...ch1, ...ch2, ...ch3, ...ch4, ...ch5, ...ch6, ...ch7, ...ch8,
     ],
   }],
 });

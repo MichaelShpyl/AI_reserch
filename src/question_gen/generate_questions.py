@@ -112,13 +112,21 @@ def extract_claims(sents: list[str], backend: Backend, n: int) -> list[dict]:
 
 
 def questions_for_claim(claim: str, source: str, backend: Backend, k: int = 3) -> list[str]:
+    # Discrimination-simulation finding (see src/evaluation/discrimination_sim.py): questions that
+    # state specific domain facts can be answered from world knowledge without the essay and so do
+    # not discriminate. Good verification questions must require the student's OWN essay: their
+    # reasoning, the specific evidence they used, the choices they made, and how their points connect.
     system = ("You write verification questions for a lecturer to check whether a student genuinely "
-              "understands a claim in their own essay. A good question cannot be answered well by "
-              "someone who only read the claim; it needs understanding of the reasoning or evidence "
-              "behind it. Avoid yes/no questions. Reply with JSON only.")
-    user = (f"Claim: {claim}\nSource sentences from the essay: {source}\n\n"
-            f"Write {k} verification questions the lecturer can ask the student about this claim. "
-            f'Return JSON: {{"questions":["...","..."]}}')
+              "understands and wrote a claim in their own essay. The crucial property: a knowledgeable "
+              "person who has NOT read this essay should be unable to answer well from general "
+              "knowledge. So do not ask about general facts; ask the student to reconstruct their own "
+              "reasoning, name the specific evidence or examples they used, justify the choices they "
+              "made, and explain how this point connects to the rest of their essay. Avoid yes/no "
+              "questions and avoid questions that contain their own answer. Reply with JSON only.")
+    user = (f"The student's claim: {claim}\nThe sentences in their essay it comes from: {source}\n\n"
+            f"Write {k} verification questions that require the student's own essay to answer "
+            f"(their reasoning, their chosen evidence, their connections), not general subject "
+            f'knowledge. Return JSON: {{"questions":["...","..."]}}')
     out = backend.chat_json(system, user)
     return [q.strip() for q in out.get("questions", []) if isinstance(q, str) and q.strip()][:k]
 

@@ -638,3 +638,34 @@ contribution, CLAUDE.md components 3 to 6), running on the local model today.
   evaluated (the discrimination simulation is the next step). Backend A (commercial) and the 8B-vs-3B
   Backend B decision are for the supervisor meeting.
 - Ops: restarted Ollama (`ollama serve`) to run the local backend; left running idle.
+
+### Discrimination simulation: the primary, judge-free question evaluation (16 June 2026)
+
+Stood up the project's main evaluation method (`src/evaluation/discrimination_sim.py`) and got the
+first measured question-generation result, with a finding I did not expect.
+
+- Method: for each question, a context-aware model answers it WITH the source passage and a
+  context-blind model answers with the question ONLY; discrimination = similarity(aware-answer,
+  source) minus similarity(blind-answer, source), via local chat + local embeddings (nomic-embed-text),
+  so no API key and no judge. Bootstrap 95% CIs included.
+- Result (flagged essay 3108a): claim-grounded questions mean discrimination ~0.05 [0.01, 0.10];
+  generic essay questions ("what is your main argument", "what evidence supports your conclusion")
+  ~0.31 [0.27, 0.36]. Non-overlapping CIs. The generic questions discriminate MORE, the opposite of
+  what I assumed (`fig_discrimination_sim.png`, `outputs/discrimination_sim.json`).
+- Why, and the finding: the context-blind model is a full LLM with broad world knowledge, so a
+  question that names specific content ("what makes Shakespeare's dialogue intense") is answerable
+  without the essay. Generic "explain your own argument/evidence" questions force retrieval of the
+  student's actual essay, so they discriminate. The simulation therefore measures essay-specificity,
+  and the lesson is that good verification questions must make the student reproduce their own
+  reasoning/evidence/choices, not recite subject facts.
+- Did a finding -> fix -> re-measure loop: rewrote the question prompt to demand the student's own
+  reasoning and evidence (kept in `generate_questions.py`); grounded discrimination rose from ~0.03
+  (v1, preserved in `discrimination_sim_v1.json`) to ~0.05 (v2), still below generic, because a
+  specific question still tends to name the content.
+- Honest caveat recorded: the blind LLM is a strong, conservative stand-in (more knowledge than a
+  non-understanding student), so a low score means "answerable by a knowledgeable non-reader", not
+  "useless"; the real picture sits between the two lines.
+- Written up as Chapter 8 (`chapters/08_evaluation_questions.md`); dissertation now 40 pages, validates.
+- Next: run the simulation across many essays (not one), add the supplementary LLM-as-judge rubric
+  with cross-model agreement, and bring in the commercial backend for the commercial-vs-local
+  comparison on the same measure.

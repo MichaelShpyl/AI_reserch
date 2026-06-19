@@ -97,7 +97,8 @@ the implementation of the parts built so far. Chapter 5 explains the detector's 
 tests whether those explanations are faithful. Chapter 6 tests robustness, how the detector
 transfers to unseen generators and unseen domains. Chapter 7 is the first slice of the core
 contribution: turning a flag into verification questions drawn from the student's own claims,
-with the source provenance and a Bloom's level. The later chapters cover the full argument
-miner and Bloom's classifier, the commercial-versus-local question-generation comparison and
-its evaluation, the assembled output guide, a discussion of what the results mean and where the
-limits are, and the conclusion with future work.
+with the source provenance and a Bloom's level. Chapter 8 is the primary evaluation of those
+questions, a judge-free discrimination simulation. The later chapters cover the full argument
+miner and Bloom's classifier, the commercial-versus-local question-generation comparison, the
+assembled output guide, a discussion of what the results mean and where the limits are, and the
+conclusion with future work.
