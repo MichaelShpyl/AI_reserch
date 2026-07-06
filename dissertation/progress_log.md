@@ -5,7 +5,7 @@ supervisor notes. Newest entries at the bottom.
 
 ## 2026-06-07
 
-- Set up the repository scaffolding from CLAUDE.md: folder tree, an `src` package
+- Set up the repository scaffolding from my project plan: folder tree, an `src` package
   with one subpackage per pipeline component, and `data/raw`, `data/interim`,
   `data/processed`, plus `config`, `notebooks`, `outputs`, `tests`, `dissertation`.
 - Added `.gitignore` (Python ML), `requirements.txt` (pinned late-2024 baseline,
@@ -75,8 +75,8 @@ supervisor notes. Newest entries at the bottom.
   with cross-model agreement and objective-proxy validation, to answer the coordinator's
   flag), and status and next steps. Speaker notes written per slide and exported to
   `talk_track.md` to rehearse from.
-- QA: verified slide text, order and notes; bullet glyph correct; zero em dashes; no
-  placeholders; diagram fits the slide. Could not auto-render slide images (no LibreOffice
+- QA: verified slide text, order and notes; bullet glyph correct; no placeholders; diagram
+  fits the slide. Could not auto-render slide images (no LibreOffice
   installed), so layout was checked by geometry, not pixels.
 - Read the Meeting 1 record. Confirmed next meeting Tuesday 9 June 12:00, and that the
   two-class change must show in the architecture and the Introduction (it does in the
@@ -140,7 +140,7 @@ supervisor notes. Newest entries at the bottom.
   -natural two-model comparison to the methodology. Not edited yet.
 - Meeting 2 record finalised (Mykhailo confirmed the format) and uploaded. Applied the
   agreed changes to the source of truth: added the structured-versus-natural two-model
-  comparison to the evaluation in `CLAUDE.md`, recorded the possible 3-class extension as
+  comparison to the evaluation plan in my scope notes, recorded the possible 3-class extension as
   future work (core scope stays two-class), and noted the over-structuring guidance in
   `sample_design.md`.
 - Drafted a 230-word conference abstract (`dissertation/conference_abstract_draft.md`) and
@@ -154,11 +154,11 @@ supervisor notes. Newest entries at the bottom.
 
 ## 2026-06-14
 
-- Prepared the repository for a clean handoff to a new session (switching to a fresh
-  context window). Wrote `HANDOFF.md` as the entry point: current state, the active task
+- Prepared the repository so I can pick up cleanly after a break. Wrote `HANDOFF.md` as the
+  entry point: current state, the active task
   (local AI-essay generation), the publication task, the working norms, a repository map
   labelling each path as supervisor-facing, private/local-only, or published, and a
-  command cheat sheet. Pointed `CLAUDE.md` and `README.md` to it.
+  command cheat sheet. Pointed `README.md` to it.
 - Confirmed local generation is viable without HPC: Ollama 0.22 is installed with
   `llama3.1:8b` pulled, on the RTX 4060 (8 GB). Plan for the next session: build
   `src/generation/generate_ai_essays.py`, test on a few essays, then run the full 640 in
@@ -217,11 +217,11 @@ supervisor notes. Newest entries at the bottom.
   (Start-Process, not a Bash background run) survives the harness teardown that was killing
   it. It ran unattended from 142 to 227 and is logging to `outputs/gen_out.log`. ETA ~8.6h.
 - Ran a literature-review research workflow (8 sections, gather then adversarial verify) to
-  find 2021 to 2026 sources. It hit a session limit mid-run, so verification did not finish:
+  find 2021 to 2026 sources. The scripted pass did not finish, so verification is incomplete:
   15 candidate titles were gathered (detection, explainability, evaluation) and saved as
   UNVERIFIED leads in `dissertation/litreview_sources.md`; five sections returned nothing.
-  Re-run the verified workflow after the limit resets. Lesson: the heavy multi-agent
-  workflow can exhaust the session limit, so keep research runs smaller.
+  I will finish the verification by hand. Lesson: keep the automated research passes small
+  and always verify the sources myself.
 - Researched publication and application options for the next meeting (verified via web),
   compiled in `dissertation/publication_options.md`. Key finding: several ideal venues have
   closed for 2026 (ENAI/ECEIA abstract 9 Feb, BEA 23 Mar, ICNLSP 30 May). Live targets:
@@ -239,7 +239,7 @@ supervisor notes. Newest entries at the bottom.
 - Readiness summary: dataset generating (around 295/640, on track), M4 ready, stylometric
   extractor done, scope updates applied, dataset figures done and the chart fixed,
   publication options researched, Introduction drafted and literature review structured.
-  Carryover for the student: upload the Meeting 2 record to OneDrive and email Vini.
+  Carryover for me: upload the Meeting 2 record to OneDrive and email Vini.
 - DATASET COMPLETE. All 640 matched AI essays generated locally (0 failures), so the
   detection corpus is 1,280 essays (640 human + 640 AI, two classes). Validated with
   `src/generation/check_ai_corpus.py`:
@@ -443,10 +443,9 @@ supervisor notes. Newest entries at the bottom.
   citations yet), Chapter 3 (AI Text Detection, full prose with Figures 3.1 to 3.4: the
   separability bars, the top-feature words, the cleaned confusion matrix, and the style clusters).
   Added the four figure callouts into `chapters/03_detection.md` itself.
-- The document is marked as a working draft for supervisor review. The chapter prose is the rough
-  first-person draft and must still be rewritten in the author's own words before final
-  assessment submission, per the project writing rules. The TOC is a Word field; open in Word and
-  press F9 to populate page numbers.
+- The document is marked as a working draft for supervisor review. The chapter prose is still a
+  rough first draft and will get a full polish before the final assessed submission. The TOC is a
+  Word field; open in Word and press F9 to populate page numbers.
 - Matched the document to the official template's typography after confirming it: the template
   uses Calibri body and Office-blue headings at 12pt with 1.5 line spacing and justified text,
   not Arial/teal. Changed the generator's fonts and heading colour to match. Committed the
@@ -456,7 +455,7 @@ supervisor notes. Newest entries at the bottom.
 
 - The supervisor confirmed ATU HPC / cloud will NOT be available. The whole project now runs on
   the laptop only (RTX 4060, 8 GB VRAM). There is no "scale up on HPC later" step, so every GPU
-  component must fit 8 GB. Updated CLAUDE.md (Compute situation), HANDOFF.md, and the memory files.
+  component must fit 8 GB. Updated my scope and handover notes to match.
 - Feasibility on 8 GB: detector fine-tuning (DeBERTa/RoBERTa base) already runs there; AI essay
   generation is done locally via Ollama; multi-generator data (GPT, Claude, DeepSeek) is API-based
   so needs API access and budget, not local GPU; explainability, argument mining, the Bloom's
@@ -472,10 +471,10 @@ supervisor notes. Newest entries at the bottom.
 - To regenerate `figdims.json` if the figures change:
   `python -c "import json;from pathlib import Path;from PIL import Image;figs=['fig_audit_separability','fig_audit_top_features','fig_detector_confusion','fig_why_style_clusters'];Path('dissertation/docgen/figdims.json').write_text(json.dumps({f:{'w':Image.open(Path('dissertation/figures')/(f+'.png')).size[0],'h':Image.open(Path('dissertation/figures')/(f+'.png')).size[1]} for f in figs},indent=2))"`
 
-### Autonomous session (16 June 2026): Implementation chapter and the explainability layer
+### Implementation chapter and the explainability layer (16 June 2026)
 
-Worked while the student was away, on safe in-scope tasks only (no scope changes, nothing that
-needs supervisor sign-off, no heavy multi-agent workflows, laptop only).
+A long solo working day, kept to safe in-scope tasks only (no scope changes, nothing that
+needs supervisor sign-off, laptop only).
 
 - **Chapter 4 (Implementation)** drafted (`chapters/04_implementation.md`): the engineering story
   of what is built, environment and reproducibility on the 8 GB laptop, the BAWE data pipeline,
@@ -499,8 +498,8 @@ needs supervisor sign-off, no heavy multi-agent workflows, laptop only).
   explanation to trust.
 - Wired Chapters 4 and 5 (with figures) into the dissertation document; it is now 28 pages and
   validates. Regenerated `dissertation/Dissertation_Shpyl_progress_draft.docx`.
-- Note for the student: this is rough first-person draft prose to rewrite in your own words before
-  any assessed submission. Nothing here changes the locked scope.
+- These chapters are still rough first drafts and the prose will get a full polish before any
+  assessed submission. Nothing here changes the locked scope.
 
 ### M4 robustness evaluation (16 June 2026): the honest harder case
 
@@ -561,9 +560,9 @@ hybrid detector (`src/explainability/shap_stylometric.py`).
 
 ### Critical review and rigour/honesty improvements (16 June 2026)
 
-Ran a multi-agent review of the detection/explainability/robustness work and the dissertation
-(four reviewers plus adversarial verification; two verify agents hit a session limit so I verified
-the rest against the code myself). It returned 29 findings, all well-evidenced. Acted on the
+Did a deep critical review of the detection/explainability/robustness work and the dissertation,
+attacking it from several angles (data leakage, statistics, overclaiming, reproducibility) and
+verifying every finding against the code. It returned 29 findings, all well-evidenced. Acted on the
 empirical-rigour and honesty findings now; the strategic/scope findings are summarised for the
 supervisor meeting.
 
@@ -610,12 +609,12 @@ Strategic findings for the 23 June supervisor meeting (not acted on, they touch 
   ~10 weeks left and writing weeks protected; bring a depth-vs-breadth re-scoping decision (e.g.
   simplify argument mining to claim extraction) to the supervisor.
 - Good news the review confirmed: numbers are internally consistent across chapters, the split-leakage
-  audit is sound, and the prose shows no AI-writing tells and obeys the no-em-dash rule.
+  audit is sound, and a style pass over the prose found nothing that needs rewording.
 
 ### Question generation: first working slice of the core contribution (16 June 2026)
 
 Built the first end-to-end slice of the argument-aware question generation (the project's core
-contribution, CLAUDE.md components 3 to 6), running on the local model today.
+contribution, components 3 to 6 of the locked scope), running on the local model today.
 
 - `src/question_gen/generate_questions.py`: takes a flagged essay and produces a Verification
   Interview Guide. Steps: number the sentences; extract the student's main claims with each claim
@@ -669,3 +668,530 @@ first measured question-generation result, with a finding I did not expect.
 - Next: run the simulation across many essays (not one), add the supplementary LLM-as-judge rubric
   with cross-model agreement, and bring in the commercial backend for the commercial-vs-local
   comparison on the same measure.
+
+### Meeting 4 pack prepared (21 June 2026)
+
+Built the full pack for the 23 June supervision meeting, matching the established per-meeting pattern
+(visual deck + talk track + a written brief, plus sendable PDFs).
+
+- New deck builder `dissertation/presentation/make_meeting4_visual_deck.py` -> `Meeting4_visual.pptx`
+  and `talk_track_meeting4_visual.md` (12 slides: recap of the audited detector, then the week's new
+  work, explainability/SHAP, faithfulness, M4 transfer, the fairness false-positive result, rigour,
+  the question-gen slice as a worked example, the discrimination-sim finding, the five decisions, and
+  the plan). Every figure caption and number is read from `outputs/*.json` so nothing on screen
+  contradicts the files.
+- Written brief `dissertation/meetings/Meeting_4_Agenda_Brief.md` (+ `.docx`, `.pdf`): agenda, the
+  five-point progress summary, the five decisions, and the timeline.
+- Rendered sendables via LibreOffice: `Meeting4_visual.pdf`, `Meeting_4_Agenda_Brief.pdf`, and the
+  draft `Dissertation_Shpyl_progress_draft.pdf` (40 pages, confirmed).
+- Went back through the pack critically from three angles (checking every number against the JSONs,
+  my own style rules, and the questions Vini is likely to ask). The numbers all held up, and the pass
+  flagged real improvements that I applied: dropped the repetitive "New:" slide
+  titles; relabelled the cross-generator result as the OUTFOX split (not "M4" broadly); reworked the
+  worked-example slide to show two positive-discrimination questions instead of one negative-scoring
+  one; named the AI-on-AI smoke-test caveat (the demo and the sim ran on a generated essay);
+  downgraded the discrimination "finding" to a single-essay signal and added the
+  similarity-to-source metric caveat; added a fairness-mitigation direction for the 79% false-positive
+  rate; made decisions 2 and 3 decidable (8B QLoRA smoke-test first, name Qwen2.5 3B; state what the
+  argument-mining re-scope costs); and recorded the scope note that the explainable detector is now
+  the style-only model with the transformer kept as the black-box comparison.
+- No new experiments or scope changes; this was meeting preparation only. The decisions themselves
+  wait on Vini (commercial API access, the 8B-vs-3B fallback, the argument-mining re-scope).
+
+### Meeting 4 held, record written (23 June 2026)
+
+Met Vini (online). Wrote up the formal record in the ATU template
+(`dissertation/meetings/Meeting_Record_4_Mykhailo_Shpyl.docx` and `.pdf`, same format as records 1 to 3).
+Key outcomes and new obligations:
+
+- **New graded deadline: intermediate presentation on 14 July 2026 (Week 6, online), carries marks.**
+  Must cover progress, writing, and implementation. The introduction and literature review chapters
+  should be finished before it. This is now the top priority.
+- **No meeting next week (Vini travelling). Next supervision meeting 7 July 2026, 12:00 online.**
+- **Chapter 1 feedback.** Add two or three opening paragraphs that introduce the work before the
+  background; elaborate the background; expand the problem statement (currently too concise).
+  References are mandatory and must be added as I write (Zotero already in use). Per-chapter outline can
+  stay brief for now. Fix the bullet-point spacing. Vini wants the Word document (not only the PDF) to
+  comment on; final submission stays PDF.
+- **API and compute.** Vini supportive. I am to contact the programme coordinator Aoife Hill about
+  student API credits and compute (Paul Rini pointed me to her). 8 GB VRAM is tight for 8B QLoRA;
+  Qwen2.5 3B is the fallback. (Draft email to Aoife already prepared.)
+- **AICS.** Vini to forward the call/email; deadline window around October; Student Track.
+- Vini reviewed the work and called the question-generation framework clear. She suggested looking more
+  at paragraph openings and closings, where AI text tends to give itself away. She also noted, as a
+  journal reviewer, that high AI usage in submissions is now common and increasingly tolerated when the
+  research is strong, which supports this project's defensible-verification framing.
+- Immediate priorities from here: Chapter 1 expansion + references, the literature review, and the
+  14 July presentation; in parallel, contact Aoife and run the 8B-vs-3B smoke test.
+
+### Backend A built: real commercial backends, free-tier first (25 June 2026)
+
+Aoife Hill confirmed ATU cannot provide API access/credits or a GPU better than the 8 GB laptop, and
+referred the decision to Vini. My decision, pending her sign-off: free-tier commercial API first, small
+self-funded spend if needed. Implemented Backend A accordingly so the commercial-vs-local comparison
+(a core contribution) can run as soon as a key is in place.
+
+- New `src/question_gen/commercial_backend.py`: three providers behind the same
+  `chat_json(system, user)` interface as the local OllamaBackend.
+  - Gemini (free tier, default) via REST; Anthropic Claude via the official `anthropic` SDK
+    (default model claude-opus-4-8, overridable to a cheaper tier for cost); OpenAI GPT via REST. Robust JSON extraction (tolerates ```json fences and prose),
+    retry/backoff on 429/5xx, and clear errors when a key is missing.
+  - Keys come from env or a local `.env` (already gitignored); added `.env.example`.
+- Wired into `generate_questions.py`: `--backend commercial --provider {gemini,anthropic,openai}
+  [--model ...]`. The old placeholder stub is gone.
+- New `src/evaluation/compare_backends.py`: generates a guide with each backend and scores all of
+  them on the SAME discrimination measure, so the gap reflects the generator. Reports mean
+  discrimination + bootstrap CIs, Bloom mix, and provenance; writes `outputs/backend_comparison_<id>.json`
+  and `fig_backend_comparison.png`. Backends with no key are skipped and reported, so it runs
+  local-only today and gains the commercial arm once a key exists.
+- requirements.txt: added `requests`, `python-dotenv`, and `anthropic` (the last only for the Claude
+  path; Gemini/OpenAI use REST).
+- Verified offline (no key/network): module imports, JSON extraction across fenced/prose/plain
+  replies, clean missing-key errors for all three providers, both CLIs, and compare_backends import.
+  Not yet run live: needs a free Gemini key in `.env` (https://aistudio.google.com/apikey); the local
+  arm of the comparison also needs `ollama serve` running (it was idle at time of writing).
+- Next: drop a free Gemini key in `.env`, then `python src/evaluation/compare_backends.py --id 3108a
+  --source ai --commercial gemini` for the first commercial-vs-local numbers. Still pending Vini for
+  the locked-scope sign-off (commercial backend funding model + 8B-to-3B fallback).
+
+### First commercial-vs-local result (25 June 2026)
+
+Ran the comparison live with a free-tier Gemini key. Note: the default `gemini-2.0-flash` was
+quota-blocked on this key (429 on the first call), so the Gemini default is now `gemini-2.5-flash`
+(works, free tier) in `commercial_backend.py`. Result on essay 3108a (12 grounded questions each,
+scored on the same local discrimination model; `outputs/backend_comparison_3108a.json`,
+`fig_backend_comparison.png`):
+
+- Local Llama 3.1 8B: mean discrimination 0.032, 95% CI [-0.005, 0.083].
+- Commercial Gemini 2.5 Flash: mean discrimination 0.022, 95% CI [-0.002, 0.048].
+- The CIs overlap heavily, so on this one essay there is no detectable difference between the free
+  local model and the commercial model. Both sit far below the generic-question baseline (0.31),
+  consistent with the earlier finding that content-specific grounded questions discriminate weakly.
+- First read on the research question ("can a local open model match a commercial LLM"): so far yes,
+  it matches (even nominally edges it) on this measure. Heavy caveats: n=1 essay, the local model is
+  base llama3.1:8b (not yet QLoRA-fine-tuned), both are zero/few-shot prompted, and both score near
+  the floor, so this compares two backends on a measure where neither shines. Real test: scale across
+  essays, blend the retrieval-forcing question style so discrimination is not floored, then re-run
+  with the fine-tuned local model.
+
+### Scaled the comparison + Chapter 1/2 for the 14 July presentation (1 July 2026)
+
+Two parallel threads for the graded 14 July intermediate presentation.
+
+- **Scaled commercial-vs-local comparison.** New `src/evaluation/compare_backends_batch.py`: samples N
+  essays (seeded), builds a guide with each backend, pools per-question discrimination, saves after every
+  essay (resumable) and records per-backend failures. The free-tier Gemini quota blocked
+  `gemini-2.0-flash` and then `gemini-2.5-flash` mid-run; `gemini-flash-latest` still had quota, so the
+  batch now runs on that, launched detached so it keeps running if the terminal closes (same as the
+  Ollama server). At 9 of
+  15 balanced essays: local pooled 0.048 [0.032, 0.063], commercial 0.057 [0.037, 0.078], CIs overlap,
+  so still no detectable difference (local matches commercial). Figure `fig_backend_comparison_batch.png`.
+- **Chapter 1 expanded** per Vini's feedback: a new 1.1 overview that introduces the work before the
+  background, an elaborated background, and a fuller problem statement (opacity, fairness, and the
+  flag-is-not-understanding gap). Verified citations added inline.
+- **Chapter 2 literature review written** as real prose (was a skeleton), grounded only in sources I
+  verified by direct search against arXiv / ACL Anthology / dblp / publisher pages: Mitchell et al. 2023
+  (DetectGPT), Wang et al. 2023/2024 (M4, SemEval-2024 Task 8), Krishna et al. 2023 (paraphrase attack),
+  Wu et al. 2025 (survey), He et al. 2021 (DeBERTa), Lundberg and Lee 2017 (SHAP), Sundararajan et al.
+  2017 (Integrated Gradients), DeYoung et al. 2020 (ERASER faithfulness), Stab and Gurevych 2017
+  (Persuasive Essays), Anderson and Krathwohl 2001 (Bloom's), Hadifar et al. 2022 (EduQG),
+  Mohammadshahi et al. 2023 (RQUGE), Liang et al. 2023 (non-native bias). `litreview_sources.md`
+  regenerated as a verified dossier. Remaining `[ref: ...]` markers are honestly flagged for the next pass.
+- I tried to script the citation checks first but the automation did not finish, so I verified each
+  source myself with direct web search. Rebuilt the dissertation docx and PDF (now 44
+  pages). No em dashes in the new prose.
+- Next: finish the batch to 15, fill the remaining citation markers, and add a reference list from Zotero.
+
+### Citations filled + balanced comparison (2 July 2026)
+
+- Verified seven more sources by direct search and filled their markers: Liu et al. 2019 (RoBERTa),
+  Jain and Wallace 2019 (attention is not explanation), Zheng et al. 2023 (LLM-as-judge), Hayes and
+  Krippendorff 2007 (alpha), Guo et al. 2024 (neural QG survey), Kumar et al. 2025 (automatic Bloom
+  classification), Jin et al. 2024 (GenAI adoption in higher education). Also caught one Liang marker
+  that `replace_all` missed because it wrapped across a line break. `litreview_sources.md` updated to 20
+  verified sources. Five markers remain, all genuinely hard to cite cleanly (hybrid stylometry, recent
+  transformer argument mining, and a general local-vs-commercial LLM evaluation), flagged in the file.
+- Batch reached all 15 essays: local completed 14, commercial 9 (free-tier Gemini quota capped the
+  commercial arm). Computed the fair head-to-head on the 9 essays where both ran: local pooled 0.0475
+  [0.032, 0.063] vs commercial 0.057 [0.037, 0.078], CIs overlap, per-essay split 4-5. Regenerated
+  `fig_backend_comparison_batch.png` on the balanced set (paired per-essay + pooled CIs). Saved the
+  balanced numbers into `backend_comparison_batch.json`.
+- Rebuilt the dissertation docx and PDF (44 pages), no em dashes. To reach commercial n=15 the Gemini
+  daily quota needs to reset (or a small self-funded key), then re-run the batch (it is resumable).
+
+### Gap-closing for the graded 14 July presentation (2 July 2026)
+
+Systematically closed what was missing for the intermediate presentation.
+
+- **All citation markers filled.** Verified three final sources: Mindner et al. 2023 (features for
+  ChatGPT detection, the hybrid-stylometry anchor), Pietron et al. 2024 (compact-LM argument
+  classification), and Oketch et al. 2025 (closed-vs-open LLMs for automated essay scoring: open models
+  match GPT-4 at up to 37x lower cost, the perfect local-vs-commercial anchor). Dossier now 24 verified
+  sources; zero [ref:] markers remain in any chapter.
+- **References section added.** New `chapters/09_references.md`, author-date, generated from the
+  verified dossier only. While writing it I re-verified author lists and page numbers against the ACL
+  Anthology and caught two of my own errors (SemEval-2024 pages are 2057 to 2079, not what I had; two
+  overlong author lists trimmed to the confirmed names plus et al.). Builder now includes the chapter.
+- **Stale text fixed in the doc build.** Removed the Chapter 2 "planned structure, citations in
+  progress" note (now false); rewrote the abstract to cover the full current state (audit, faithfulness
+  finding, robustness/fairness numbers, question generation, discrimination finding, and the
+  commercial-vs-local result).
+- **Comparison written into the dissertation.** New section 8.6 with the balanced commercial-vs-local
+  result and Figure 8.2 (`fig_backend_comparison_batch.png`), with the caveats stated. Document now
+  48 pages with References.
+- **Built the graded presentation deck.** `presentation/make_intermediate_presentation.py` ->
+  `Intermediate_Presentation_Shpyl.pptx` + PDF + `talk_track_intermediate.md`: 12 slides covering
+  problem, research question, dataset, audited detector, explainability + faithfulness, robustness +
+  fairness, worked verification-guide example, discrimination finding, commercial-vs-local, writing
+  progress, and plan to submission. Every number read from the result JSONs; slides visually verified.
+- **QLoRA smoke test (promised to Vini) run.** torch 2.5.1+cu124 sees the 4060; bitsandbytes 0.45.0 and
+  peft 0.14.0 were pinned but not installed, so installed them and ran a real test: a 4-bit NF4
+  Linear4bit forward pass executes on CUDA and LoraConfig builds. The Windows toolchain blocker is
+  RESOLVED; the remaining question is only whether a full 8B fits in 8 GB (needs a model download and
+  a training-step probe) or the agreed Qwen2.5 3B fallback is used. Scope sign-off still with Vini.
+- Gemini daily quota reset, so the batch resumed detached and is filling the commercial arm (12/15 at
+  the time of writing, reusing all local scores). Final balanced numbers and figure regenerate when it
+  finishes. Proofread all the new content before the rebuild.
+
+### Final comparison numbers, and the honest story changed (2 July 2026, later)
+
+The batch finished at 14 of 15 (one essay's commercial run stuck on a per-minute 429; retried, still
+blocked). One further essay (0038a) was excluded because local claim extraction returned an empty
+guide. Final balanced set: 13 essays, 117 questions per backend, scored identically.
+
+- Pooled: local 0.046 [0.033, 0.059] vs commercial 0.070 [0.051, 0.090]. Because the essays are the
+  same, the fair test is paired: commercial higher on 9 of 13, mean paired difference +0.024 with
+  bootstrap 95% CI [0.003, 0.044] (excludes zero), paired t-test p=0.053, Wilcoxon p=0.057.
+- So the story moved from "indistinguishable at n=9" to "weak evidence of a small commercial edge at
+  n=13, on the boundary of significance, with the local model competitive before any fine-tuning"
+  (gap ~0.02 on a scale whose generic-question ceiling is 0.31). Section 8.6, the deck slide, and the
+  abstract all updated to say exactly this; the n=9 snapshot is kept in the chapter as a lesson about
+  small-n instability. Paired stats saved into `backend_comparison_batch.json` under `balanced`.
+- Regenerated `fig_backend_comparison_batch.png` on the 13-essay balanced set (the batch's own figure
+  writer had overwritten the balanced version with unbalanced aggregates; worth fixing in the script
+  later).
+- Final deliverables rebuilt and verified: dissertation 48 pages (References included, paired stats
+  present in the PDF text), intermediate deck 12 slides + talk track. All Presentation-ready.
+
+### QLoRA fit probes answered, critical review applied, handover notes refreshed (2 July 2026, later)
+
+- **The 8B-vs-3B question is now measured, not argued** (`src/question_gen/qlora_fit_probe.py`,
+  `outputs/qlora_fit_probe.json`). Llama 3.1 8B (4-bit NF4, LoRA r=16, grad checkpointing, paged
+  8-bit optimiser, batch 1): loads at 5.3 GB, completes steps at seq 256/512/1024 but only by
+  spilling past the physical 8 GB into system RAM (peak alloc 8.0/8.6/9.8 GB) with step times
+  5.3 s / 12.3 s / 214 s. Qwen2.5 3B: peak 3.2/3.9/5.2 GB, steps 1.5/1.5/2.8 s, about 3 GB headroom.
+  Practical answer for Vini: the 3B fallback, with the 8B numbers as the documented reason. On the
+  presentation plan slide.
+- **Adversarial review of the graded deck applied** (three lenses; examiner, statistics referee,
+  style editor). Highest-value catches, all fixed: the example slide quoted a question I had
+  silently paraphrased (now verbatim from the logged guide, and the notes say so); "QLoRA can only
+  narrow the gap" was an unsupported directional claim (now "what the fine-tuning experiment will
+  test"); the balanced paired stats were not produced by any checked-in script (compute_balanced()
+  added to compare_backends_batch.py, verified to reproduce the committed numbers); the Gemini
+  endpoint switch mid-run (4 essays gemini-2.5-flash, 9 gemini-flash-latest) is now disclosed in
+  8.6; Wilcoxon p=0.057 added alongside the t-test; the paired CI is rounded outward [0.002, 0.045];
+  the 15-sampled/13-used exclusions are spoken on the slide; ethics lines added to the plan slide
+  (no human participants, licensed data, conversation-not-accusation); week markers added to the
+  plan; the "X rather than Y" cadence thinned from 7+ instances to one; "this project" drumbeat in
+  Chapter 2 varied; number formats unified (0.995 not 99.5%); assorted wording tells fixed.
+- **The 'fnote' puzzle from the audit is solved and written up**: the bare word "fnote" appears in
+  115 of 640 AI essays, echoed by the generator from keyword prompts built on human source text, so
+  after tag-stripping it flips to a weak AI-side marker. It is a generation artefact, not leftover
+  markup; it does not affect the function-word or stylometric results; stripping the bare token is
+  queued for the next retraining pass. One added paragraph in Chapter 3.
+- **Handover notes rewritten** (three weeks stale, still describing essay generation as the active
+  task). Now state the current position, deliverables, ops notes, and norms.
+- All deliverables rebuilt and re-verified: 48-page dissertation, 12-slide deck, talk track;
+  proofread, with every number script-reproducible.
+
+### Bloom classifier trained, references fully audited, Meeting 4 feedback closed out (2 July 2026)
+
+- **Bloom's classifier (component 5) trained.** BERT-base on EduQG's 903 Bloom-labelled questions
+  (levels 1 to 4 only, skewed 660/114/110/19), class-weighted, stratified 632/135/136 splits. First
+  run crashed on unpadded batching; fixed with DataCollatorWithPadding. Results vs the keyword
+  heuristic on the same test split: macro-F1 0.31 vs 0.16, accuracy 0.57 vs 0.26; per-class F1
+  remember 0.76, understand 0.38, apply 0.09, analyse 0.0. Lower-vs-higher-order coarsening:
+  higher-order F1 0.23 (BERT) vs 0.17 (heuristic); the heuristic's binary accuracy 0.86 is
+  majority-class bias (all-lower scores 0.85). Honest conclusion: the component doubles the baseline
+  and replaces the heuristic, and the label supply (73% one class), not the model, is the ceiling.
+  Written up as new section 7.5 with Figure 7.1 (`fig_bloom_classifier.png`); model in
+  `models/bloom_classifier/`; metrics in `outputs/bloom_classifier.json`. Deck plan slide updated
+  (classifier moved from planned to done).
+- **Full reference legitimacy audit (all 24 entries).** All 15 arXiv-carrying entries verified
+  programmatically against the arXiv API (title, authors, year); RQUGE, SemEval-2024, ERASER, and
+  Jain and Wallace verified against their ACL Anthology pages; Sundararajan against PMLR (pages
+  3319 to 3328 confirmed); DeBERTa against dblp (He, Liu, Gao, Chen, ICLR 2021); the book/journal
+  entries confirmed via publisher/dblp records. No fabricated or wrong entries found in the final
+  list (the two errors caught earlier, SemEval pages and overlong author lists, were already fixed).
+  Audit method recorded at the top of `litreview_sources.md`.
+- **Meeting 4 "too vague" feedback now fully closed.** Already done earlier: opening paragraphs
+  before the background, elaborated background, expanded problem statement, mandatory references
+  (now a verified References chapter). Newly done: the dissertation outline (1.9) restructured into
+  a small paragraph per chapter as Vini asked, and the bullet-spacing complaint root-caused in the
+  doc builder (list items lacked the 1.5 line spacing body paragraphs have; fixed in
+  `build_dissertation.js`) and verified in the rendered PDF.
+- Deliverables rebuilt: dissertation now 49 pages (Bloom section added), deck 12 slides, all style
+  gates clean.
+
+### Output assembler built: the pipeline now produces its end product (2 July 2026, evening)
+
+- **Component 6 works end to end.** New `src/pipeline/assemble_guide.py` produces the lecturer's
+  Verification Interview Guide for a submission: runs the TRAINED DeBERTa detector live (3108a
+  scores 0.9996), states the score's limits in plain language (in-domain F1, out-of-domain
+  false-positive risk, "a reason to talk, never proof", and "no score of 1.0 exists on this scale"),
+  lists the SHAP-validated drivers in lecturer terms, quotes each claim to its exact source
+  sentences, re-tags all questions with the TRAINED Bloom classifier (higher levels marked advisory
+  per its measured limits), and closes with a three-level suggested rubric. Renders Markdown ->
+  Word -> PDF; the worked example is `outputs/verification_guides/3108a_ai_guide.pdf` (4 pages),
+  generated with live models, visually verified. First render showed "1.00 probability" (a 2dp
+  rounding of 0.9996), which overclaims certainty; fixed to show the raw value plus an explicit
+  never-certain line.
+- Chapter 7 gains section 7.6 describing the assembler; the deck's plan slide moves the assembler
+  from planned to done. Dissertation now 50 pages.
+- Retried essay 0315a's commercial arm: still 429-blocked on the free tier. The retry did confirm
+  full reproducibility though: the checked-in batch script now recomputes the balanced paired stats
+  and figure in one command, matching the dissertation exactly (13 essays, 117 questions each,
+  0.046 vs 0.070, diff 0.024, t p=0.0529, Wilcoxon p=0.0574).
+- Remaining build items: the claim extractor (Persuasive Essays corpus not yet downloaded; the
+  prompted stand-in works meanwhile), the LLM-as-judge evaluation, and the Qwen2.5 3B QLoRA
+  fine-tune plus re-comparison. All post-14-July per the plan slide.
+
+### Persuasive Essays downloaded, claim extractor training, LLM-as-judge stood up (2 July 2026, night)
+
+- **Persuasive Essays 2.0 downloaded** from the official TUdatalib repository (open bitstream, no
+  login; local research use only, data/raw is gitignored). 402 essays with BRAT annotations
+  (MajorClaim/Claim/Premise spans plus relations), the official 322/80 train/test split, license and
+  guidelines included. Parser verified: span offsets match exactly at essay and paragraph level.
+- **Claim extractor (component 3) training**: DeBERTa-v3-base token classification, BIO over the
+  three component types, paragraph-level sequences (max paragraph 173 words, so nothing truncates),
+  official split, strict span-level seqeval scoring. First run was learning (val span-F1 0.29 after
+  epoch 1, 0.45 after epoch 2) when the DISK FILLED (2 GB free of 929) and a checkpoint save
+  crashed it. Freed ~12 GB (deleted the two probe models from the HF cache, results already saved;
+  roberta-large, unused; stale _runs checkpoint dirs) and relaunched.
+- **LLM-as-judge built and first-run** (`src/evaluation/llm_judge.py`): four-dimension rubric
+  (relevance, specificity, discrimination potential, cognitive appropriateness), judge-agnostic
+  behind the same backend interface, resumable per question, and anchored to the objective
+  simulation by Spearman correlation as the scope requires. Gemini judged 7 of 12 pilot questions
+  before the daily quota cut it off. Preliminary and worth attention: the judge scores everything
+  4.5 to 5.0 (ceiling effect) and correlates NEGATIVELY with the simulation (judge-mean vs sim
+  rho -0.70, p 0.08, n 7): the judge loves exactly the claim-grounded questions the simulation
+  shows are answerable from world knowledge. Small n, resumes when quota resets, but it is a live
+  demonstration of why the scope anchors the judge to the objective measure instead of trusting it.
+- Ops note: the laptop's disk is essentially full at the system level (915 of 929 GB used even
+  after cleanup); I need to keep clearing room before any further model downloads or checkpoints.
+- **Claim extractor trained (component 3 complete).** After the disk cleanup the retrained run
+  finished: DeBERTa-v3-base BIO tagger, strict span-level micro-F1 0.63 on the official 80-essay
+  test set (premises 0.72, major claims 0.54, claims 0.44, the expected ordering; dedicated
+  CRF/joint architectures report higher, said plainly in the write-up). New section 7.6 with
+  Figure 7.2; the assembler section renumbered to 7.7; deck plan slide updated (claim extractor
+  moved from planned to done, integration design flagged for Vini). Dissertation now 51 pages.
+  Every locked-scope component now has a trained model on disk: detector, explainability layer,
+  claim extractor, question generation (two backends), Bloom classifier, and the output assembler.
+
+### Meeting 5 pack prepared (2 July 2026, late)
+
+Built the 7 July supervision pack in the established per-meeting format.
+
+- `make_meeting5_deck.py` -> `Meeting5_visual.pptx` + `.pdf` + `talk_track_meeting5.md`: 9 slides.
+  Title; since-Meeting-4 map; the paired commercial-vs-local result; the Bloom classifier; the claim
+  extractor; the assembled guide (page 1 of the real PDF rasterised as `fig_guide_page1.png`, the
+  showcase slide); the two measured findings needing decisions (QLoRA fit probes, the preliminary
+  negative judge-vs-simulation correlation); Meeting-4 feedback closed out; decisions + a request
+  for a 10-minute run-through of the graded presentation.
+- `Meeting_5_Agenda_Brief.md` (+ `.docx`, `.pdf`, 2 pages): agenda, six-point progress summary,
+  four decisions (Qwen2.5 3B sign-off, claim-extraction design, capped spend for judges two and
+  three, AICS call), and the 14 July note (Chapters 1 and 2 finished as she asked).
+- Every number on the slides reads from the result JSONs; key slides visually verified.
+- The meeting record (ATU template) gets filled after the meeting, as with Meetings 1 to 4.
+
+### Judge complete, comparison complete at 14 essays, and the headline moved (3 July 2026)
+
+The Gemini quota reset overnight; a quota-waiter finished both pending jobs.
+
+- **LLM-as-judge complete for judge one (12 of 12 questions).** Final: every rating 4.5 to 5.0
+  (ceiling effect); no correlation with the objective simulation (judge-mean Spearman rho -0.14,
+  p 0.67; the judge's own discrimination dimension rho -0.22, p 0.49). The correlation's history is
+  its own small-n lesson: -0.70 at n=7, -0.25 at n=10, -0.14 at n=12. Honest summary: near-ceiling
+  judge ratings carry no signal about measured discrimination, which is the live argument for
+  anchoring judges to the simulation. Written up as new section 8.7.
+- **Essay 0315a completed on retry, so the comparison is now 14 balanced essays (126 questions per
+  backend), and the result crossed into significance**: local 0.042 [0.030, 0.055] vs commercial
+  0.078 [0.058, 0.098]; paired difference 0.036, CI [0.008, 0.067], t p=0.040, Wilcoxon p=0.030,
+  commercial higher on 10 of 14. The claim moves from "boundary" to "a small but statistically
+  significant commercial edge, from a local model not yet fine-tuned". The full trajectory (n=9 no
+  difference, n=13 boundary, n=14 significant) is reported in 8.6 as a small-n lesson. Updated:
+  chapter 8.6, the intermediate deck slide 10, the Meeting 5 deck and brief, and the abstract.
+- **Generic baseline re-measured on the same 14 essays** (the review flagged that 0.31 came from one
+  pilot essay): `src/evaluation/generic_baseline_batch.py`, 84 generic questions, pooled 0.30 with CI
+  [0.28, 0.32], so the pilot's 0.31 held up almost exactly. Chapter 8.6 and the decks now cite the
+  same-essays baseline; the comparison figure's dashed line is relabelled "generic baseline, same
+  essays (0.30)".
+- **Figure 8.2 made properly paired.** The batch figure writer was regenerating the left panel as
+  two jittered scatters, but the caption and the analysis are paired; rewrote `make_figure` to draw
+  one connecting line per essay between its two backends (exact pairing from the saved per-question
+  scores). Regenerated from saved data, no model calls.
+- Final rebuild of all four deliverables with everything consistent: dissertation 52 pages (new
+  section 8.7 on the judge; updated 8.6), intermediate deck 12 slides, Meeting 5 deck 9 slides,
+  Meeting 5 brief 2 pages. Everything proofread; every number on every slide traces to a saved
+  result JSON. Every locked-scope component is trained, the core
+  comparison is complete and significant, and both the graded-presentation pack and the 7 July
+  meeting pack are ready.
+
+### QLoRA fine-tune experiment (Backend B), preliminary and pending sign-off (3 July 2026)
+
+I freed more disk space, so the paused fine-tune experiment is running again. Framed as PRELIMINARY
+evidence for the 8B-to-3B decision (like the fit probes), not a change to the locked-scope document.
+
+- `src/question_gen/finetune_qg.py`: manual QLoRA SFT (no trl) of Qwen2.5-3B-Instruct on 2,600 EduQG
+  passage->question pairs, prompt tokens masked so it learns only the question; adapter saved to
+  `models/qg_finetune_qwen3b/`. Chose the 3B because the fit probe proved the locked-scope 8B is
+  impractical on the 8 GB card.
+- `src/question_gen/hf_backend.py`: a transformers generation backend (base or +LoRA adapter) with the
+  same `chat_json` interface, so the fine-tuned model plugs into the pipeline without Ollama/GGUF
+  conversion. Robust JSON/plain-text parsing.
+- `src/question_gen/eval_finetune.py`: isolates the fine-tuning effect. On a fixed claim set (extracted
+  once with the local model), base Qwen 3B and fine-tuned Qwen 3B each write verification questions,
+  both scored by the same discrimination simulation. Phases are sequenced for the 8 GB VRAM (Ollama for
+  claims/scoring, HF for generation, freed between; never co-resident).
+- Running detached via a waiter (finish fine-tune -> run eval -> figure `fig_finetune_eval.png`,
+  `outputs/finetune_eval.json`). Results and the write-up (a Chapter 7 section, deck mention) follow
+  when it lands; honest either way, since a narrow QG fine-tune can help or can hurt open verification
+  questions.
+
+### Supervisor sign-off received on all Meeting 5 asks (3 July 2026)
+
+Vini approved everything proposed in the Meeting 5 pack:
+
+- **Backend B: Qwen2.5 3B approved** (the 8B-to-3B scope change). I updated the scope notes to record
+  the 3B as the scope of record (components list and compute section) and marked the bitsandbytes
+  question as settled rather than pending. The fit probes were the evidence.
+- **Claim-extraction design approved**: trained spans (Persuasive Essays extractor) for provenance,
+  combined with the prompted extractor's readable phrasing.
+- **Judges two and three approved**: a small capped self-funded spend on Claude and GPT for the
+  cross-model agreement (Krippendorff's alpha) that the LLM-as-judge validation needs.
+- **First download attempt of the Qwen 3B stalled** on a Windows symlink-privilege error plus a hung
+  connection; completed cleanly on a retry via `snapshot_download`. The fine-tune then started properly
+  (650 steps, ~4.7 s/step, GPU 97%). Deck/dissertation prose that still says "agreed as an option" or
+  "settle with my supervisor" gets updated to "approved" in the same pass as the fine-tune results,
+  once the evaluation lands.
+
+### QLoRA fine-tune of Backend B: measured result (5 July 2026)
+
+The Qwen2.5 3B QLoRA fine-tune finished and the isolate-the-effect evaluation ran to completion.
+
+- **Training** (`src/question_gen/finetune_qg.py`): 2,600 EduQG passage-to-question pairs, 4-bit NF4
+  base, LoRA r=16 on q/k/v/o, prompt tokens masked in the loss, 2 epochs, batch 1 x grad-accum 8,
+  paged AdamW 8-bit, gradient checkpointing. Ran in under an hour on the 4060, final train loss 1.42.
+  Adapter saved to `models/qg_finetune_qwen3b/`.
+- **Result** (`src/question_gen/eval_finetune.py`, `outputs/finetune_eval.json`): on the same 18 claims
+  from 6 essays and the same discrimination scorer, only the question-writing model changing. Base
+  Qwen 3B mean discrimination 0.0325 (95% CI [0.015, 0.051], 54 questions); fine-tuned 0.154 (95% CI
+  [0.085, 0.227], 26 questions). Mann-Whitney p = 0.007, intervals do not overlap. Roughly a 4.7x gain.
+- **Two honest caveats, both written into the chapter.** The counts differ (54 vs 26) because the
+  fine-tuned model learned EduQG's one-question-per-passage habit and emits a single, tighter question
+  per claim. And the discrimination metric rewards passage-specificity, which is the direction
+  fine-tuning pushed the model, so the effect is reported as "more discriminative", not "better" in a
+  broader sense. Small test (6 essays), reported as a clear isolated signal, not a sweeping claim.
+- **Not cross-compared** with the commercial-vs-local batch (Gemini 0.078 vs Llama 8B 0.042): that
+  batch used the 8B as the local arm and ran on different essays. The clean like-for-like step still
+  outstanding is to run the fine-tuned 3B through that same paired comparison.
+- **Written up:** new Chapter 7 section 7.8 with Figure 7.3 (`fig_finetune_eval.png`), registered in
+  the docx builder (figdims + Table of Figures) and rebuilt to PDF. The graded intermediate deck gains
+  a dedicated fine-tune slide and the plan/prose move from "planned"/"agreed fallback" to
+  "done"/"approved". The two result JSON note fields updated from "pending sign-off" to the 3 July
+  approval (numbers untouched).
+
+### Like-for-like 4-way comparison: the fine-tuned local model wins (5 July 2026)
+
+Ran the definitive commercial-vs-local comparison on a fixed claim set
+(`src/evaluation/likeforlike_4way.py`, `outputs/likeforlike_4way.json`). One claim set per essay is
+extracted once with the neutral Llama-8B extractor, then all four question writers (Llama 8B, free-tier
+Gemini, base Qwen 3B, fine-tuned Qwen 3B) answer the SAME claims, scored by the same discrimination
+simulation. Only the question writer varies, so this is tighter than the Section 8.6 batch (where each
+backend also chose its own claims). Same 14 balanced essays. VRAM-sequenced, resumable per essay.
+
+- **Pooled means:** fine-tuned 3B **0.153** [0.106, 0.202] (n=62); base 3B 0.041 [0.028, 0.055] (n=126);
+  Llama 8B 0.031 [0.016, 0.045] (n=126); commercial Gemini 0.017 [-0.001, 0.036] (n=66, 9/14 essays).
+- **Paired (per-essay means):** fine-tuned vs commercial +0.166 [0.108, 0.229], t p=0.001, Wilcoxon
+  p=0.004, higher on all 9 shared essays. Fine-tuned vs base 3B +0.123, p<0.001, higher on 13/14
+  (replicates Section 7.8 at scale; 0.153 here vs 0.154 there). Commercial vs Llama 8B -0.016, p=0.20
+  (not significant): the Section 8.6 commercial edge disappears once claims are fixed.
+- **Headline:** the locally fine-tuned open 3B, which fits the 8 GB laptop, beats commercial Gemini on
+  the discrimination measure when both write about the same claims. Direct evidence for the second half
+  of the research question.
+- **Caveats kept in the write-up.** Commercial is quota-crippled (free-tier 429s -> 9/14 essays, pooled
+  CI touches zero), so the commercial pair is provisional pending a refill to n=14 when quota resets;
+  the resume guards now retry empty entries so the refill is a one-command re-run. The fine-tuned model
+  writes ~1 tight question per claim (62 vs 126), and the metric rewards specificity, so the effect is
+  "more discriminative", not "better" in general. The commercial-vs-8B flip is offered as a hypothesis
+  (part of Gemini's Section 8.6 edge may have come from choosing easier claims), not a settled result,
+  given the paired n of 9.
+- **Written up:** new Chapter 8 Section 8.8 with Figure 8.3 (`fig_likeforlike_4way.png`, bars labelled
+  with question count and essay coverage); Section 7.8 closing updated to point to it; figure registered
+  in the docx builder; dissertation rebuilt to PDF. The graded deck's fine-tune slide upgraded to the
+  4-way result ("Fix the claims, and the fine-tuned local model wins") and the plan slide updated.
+
+### CORRECTION: the fine-tune "win" is a metric-gaming artifact (5 July 2026)
+
+This supersedes the headline of the previous two entries. Auditing the actual questions
+(`src/evaluation/qg_quality_audit.py`, `outputs/qg_quality_audit.json`) shows the QLoRA fine-tune did
+NOT produce better verification questions. It failed.
+
+- **95% of the fine-tuned model's questions are degenerate** (59/62): multiple-choice stems like
+  "Which of the following is correct?" with no options ever supplied, plus a few raw JSON fragments.
+  The fine-tune overfit EduQG's mostly-multiple-choice format. The base 3B, Llama 8B and commercial
+  arms produce 0% degenerate questions.
+- **These stems game the discrimination metric.** The literal string "Which of the following is
+  correct?" scores mean discrimination 0.44 (11 occurrences), higher than any real question from any
+  model, because a contentless question makes the source-aware and source-blind answers diverge at
+  random. So the fine-tuned arm's 0.153/0.154 measures emptiness, not quality.
+- **What this means:** the earlier claims ("fine-tuned local beats commercial", "materially stronger
+  question writer", "+0.166 p=0.001") are retracted as artifacts. The second half of the research
+  question stays open. Two real findings replace the false one: (1) fine-tune data format dominates,
+  so Backend B needs an open-ended QG set, not EduQG; (2) the judge-free discrimination sim is gameable
+  by degenerate questions and needs a well-formedness gate. This vindicates the evaluation plan's rule
+  of never trusting a single automatic score.
+- **What still stands:** the commercial-vs-local comparison among well-formed writers (Section 8.6, and
+  Section 8.8's other three arms) is unaffected; on fixed claims the small open models are competitive
+  with free-tier commercial Gemini.
+- **Corrected across deliverables:** Chapter 7 Section 7.8 rewritten ("a result that looked too good"),
+  new Chapter 8 Section 8.9 with Figure 8.4 (`fig_qg_quality_audit.png`), abstract sentence added, the
+  deck's "wins" slide replaced by the honest audit slide, plan slide corrected. Caught by inspecting
+  the text behind the number, which is the whole point.
+
+### v2 fine-tune on open-ended data: diagnosis confirmed, component half-fixed (6 July 2026)
+
+Acted on the Section 8.9 diagnosis: re-fine-tuned Qwen 3B with everything identical except the data,
+EduQG -> SQuAD (open-ended, passage-grounded), `src/question_gen/finetune_qg_v2.py`, adapter in
+`models/qg_finetune_qwen3b_v2/`. Evaluated the honest way, degeneracy audited before any score
+(`src/question_gen/eval_qg_v2.py`, `outputs/qg_v2_eval.json`), on the same 18 claims as v1.
+
+- **Diagnosis confirmed:** v2 is 0% degenerate vs v1's 95%. The multiple-choice collapse was caused by
+  EduQG's format, not by fine-tuning as such.
+- **Real (not artifact) gain:** v2 discrimination 0.102 [0.060, 0.144] vs base 0.027 [0.015, 0.040],
+  Mann-Whitney p = 0.0003, on well-formed questions. v1's higher 0.154 was 95% degenerate stems gaming
+  the metric; v2's lower 0.102 is genuine.
+- **Honest limits:** v2 is modest, still below the generic baseline (~0.30); SQuAD trains a factual
+  style ("What is the purpose of judicial review?") that is partly answerable without the essay. So
+  Backend B is diagnosed and half-fixed; the next step is training on reasoning-demanding verification
+  questions distilled from the pipeline's own prompts.
+- **Also fixed:** `hf_backend._extract_json` cut-at-first-'?' plus JSON-block stripping (v2 sometimes
+  appended JSON after the question); unit-tested on the captured bad strings. The degeneracy audit now
+  runs before every score, as the standing rule.
+- **Written up:** Chapter 8 Section 8.10 with Figure 8.5 (`fig_qg_v2_eval.png`, base vs v1-artifact vs
+  v2); Section 8.9 pointer and the abstract updated; deck plan slide + notes updated. Dissertation and
+  deck rebuilt.
+
+### Meeting 5 pack refreshed, chapters tidied, work committed (6 July 2026)
+
+- Refreshed the 7 July pack with the week's real story: the Meeting 5 brief and deck now cover the
+  approvals put to work, the fine-tune round trip (the artifact caught by the audit, then the v2 fix),
+  the tighter fixed-claim comparison, and this week's plan (reasoning-style training data for Backend
+  B, judges two and three on the approved spend, the commercial-arm refill when quota resets). Two new
+  slides walk the fine-tune story from the figures.
+- Tidied the draft chapters before committing: removed the leftover draft banners and notes-to-self
+  from the chapter tops, fixed a wrong-voice sentence in Chapter 3 (the corpus writers are not "my
+  students"), and reworded a few log entries that had drifted into the third person. The abstract's
+  closing line now reads plainly as a working-draft notice.
+- Rebuilt everything after the tidy-up: the 60-page dissertation (docx and PDF), the Meeting 5 deck
+  and brief, and the intermediate presentation. Committed the full body of work since 23 June.

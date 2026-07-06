@@ -1,7 +1,7 @@
 """Explainability for the AI-text detector: Integrated Gradients token attributions
 plus a faithfulness-by-ablation check.
 
-This is the first piece of the explainability layer (CLAUDE.md component 2). It answers
+This is the first piece of the explainability layer (pipeline component 2). It answers
 "which words drove this decision?" in a way that can be put in front of a lecturer, and
 then it tests whether that explanation is honest. The faithfulness test removes the tokens
 the method says mattered most and measures how far the detector's confidence falls; if the

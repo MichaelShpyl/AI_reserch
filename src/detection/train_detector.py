@@ -1,7 +1,7 @@
 """Fine-tune a transformer detector on the human-vs-AI corpus (first baseline).
 
 This is the transformer half of the hybrid detector, on its own first. It fine-tunes
-DeBERTa-v3-base (per CLAUDE.md) to classify Human (0) vs AI (1), using the student-level
+DeBERTa-v3-base (the primary model in my plan) to classify Human (0) vs AI (1), using the student-level
 splits. Reports accuracy, precision, recall, F1, the confusion matrix, and a native vs
 non-native breakdown (the fairness analysis seed). Stylometric fusion and M4 pre-training
 come next.

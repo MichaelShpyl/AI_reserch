@@ -46,5 +46,33 @@
   "fig_discrimination_sim": {
     "w": 2200,
     "h": 919
+  },
+  "fig_backend_comparison_batch": {
+    "w": 2200,
+    "h": 919
+  },
+  "fig_bloom_classifier": {
+    "w": 2100,
+    "h": 880
+  },
+  "fig_claim_extractor": {
+    "w": 1440,
+    "h": 840
+  },
+  "fig_finetune_eval": {
+    "w": 1200,
+    "h": 860
+  },
+  "fig_likeforlike_4way": {
+    "w": 1520,
+    "h": 940
+  },
+  "fig_qg_quality_audit": {
+    "w": 2100,
+    "h": 860
+  },
+  "fig_qg_v2_eval": {
+    "w": 1440,
+    "h": 919
   }
 }

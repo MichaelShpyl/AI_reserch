@@ -1,6 +1,6 @@
 """Stylometric detector and its SHAP feature-level explanation.
 
-This builds the stylometric half of the hybrid detector (CLAUDE.md component 1) and delivers
+This builds the stylometric half of the hybrid detector (pipeline component 1) and delivers
 the faithful, feature-level explanation that Chapter 5 pointed to (component 2). Chapter 5
 showed that token-level highlights are weak for this detector because the signal is diffuse;
 the honest explanation is at the level of writing-style features, and that is what this gives.

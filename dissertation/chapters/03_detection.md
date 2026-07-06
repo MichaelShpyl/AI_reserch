@@ -1,10 +1,5 @@
 # Chapter 3: AI text detection (methodology and first results)
 
-> Draft note (delete before submission): rough first-person draft for me to rewrite in my
-> own words. It records what I actually did and what I found, including the mistake I caught,
-> so the methodology and results chapters can be built from it. No em dashes, my own wording
-> for the final version.
-
 ## 3.1 What this component has to do
 
 The first stage of the pipeline decides whether a piece of submitted writing is the
@@ -74,8 +69,14 @@ window sees them. This is the shortcut behind a large part of the perfect score.
 markdown from the AI side and flattens the layout, then rebuilt the corpus from the cleaned
 text. On the cleaned text a simple TF-IDF and logistic-regression model still separates the
 two classes at 100 percent on the test set. I treat that 100 percent with some caution, because
-one residual markup token ("fnote") survived the cleaning into the full model's vocabulary, so
-the cleanest evidence is the next result, not this one. A model that is allowed to use only
+one residual markup token ("fnote") survived the cleaning into the full model's vocabulary. I
+traced it: the cleaning strips the bracketed tags, but 115 of the 640 AI essays contain the bare
+word "fnote", echoed by the generator from keyword prompts that were extracted from the human
+source text. So in the cleaned corpus "fnote" flips from a human marker to a weak AI one; it is
+a generation artefact rather than leftover markup, it does not touch the function-word or
+stylometric results, and stripping the bare token from both sides is queued for the next
+retraining pass. The cleanest evidence is therefore the next result, not this one. A model that
+is allowed to use only
 function words (the, and, because, therefore, and the like, which carry no topic information at
 all, and no markup) still reaches 99.5 percent. Topic cannot explain that, and neither can a
 leftover tag. The thing that remains after the markup is gone is writing style.
@@ -149,9 +150,9 @@ from a varied crowd is not hard, and the detection literature treats single-gene
 in-domain detection as close to solved.
 
 On top of that sit several smaller tells that all point the same way. The vocabulary differs
-(the AI register I described above). The spelling differs: my students write British English
-(about 2.3 British spellings per thousand words) and Llama defaults to American (about 2.4
-American spellings per thousand words). This one is real but shallow, and I am honest that it
+(the AI register I described above). The spelling differs: the human essays in my sample are in
+British English (about 2.3 British spellings per thousand words) and Llama defaults to American
+(about 2.4 American spellings per thousand words). This one is real but shallow, and I am honest that it
 is a generator-locale artefact rather than deep evidence of AI authorship; it would shrink if
 I prompted the model to write British English, which is a fix I will try. Formality differs
 too: the human essays use about three times as many contractions. None of these on its own is

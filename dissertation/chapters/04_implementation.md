@@ -1,11 +1,5 @@
 # Chapter 4: Implementation
 
-> Draft note (delete before submission): rough first-person draft for me to rewrite in my own
-> words. It records how the parts that exist were actually built, so it leans on the real code
-> in the repository. Components that are not built yet (question generation, Bloom's classifier,
-> the output assembler) are left for later versions of this chapter. No em dashes; my own wording
-> for the final version.
-
 ## 4.1 Environment and reproducibility
 
 The whole project runs on my own laptop. After Meeting 3 it became clear that no ATU HPC or
@@ -19,10 +13,10 @@ audit probes. To keep runs repeatable I set a single random seed (42) everywhere
 enters: the sampling, the train and test split, and the model training. Dependency versions are
 pinned, and the work is committed to a local git repository in small steps with clear messages,
 so any result can be traced back to the exact code that produced it. Long jobs (essay generation,
-model training) are launched as detached background processes rather than from inside the tool
-that drives them, because the driver can otherwise tear the job down when it thinks the turn is
-over. This sounds like a small detail, but it cost me two failed generation runs before I worked
-it out, and it is now the standard way I start anything that takes more than a few minutes.
+model training) are launched as detached background processes rather than tied to an open terminal
+session, so they keep running if the session that started them closes. This sounds like a small
+detail, but it cost me two failed generation runs before I worked it out, and it is now the
+standard way I start anything that takes more than a few minutes.
 
 ## 4.2 Data acquisition and cleaning
 

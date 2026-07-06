@@ -1,0 +1,49 @@
+# References
+
+Anderson, L. W. and Krathwohl, D. R. (2001). A Taxonomy for Learning, Teaching, and Assessing: A Revision of Bloom's Taxonomy of Educational Objectives. Longman, New York.
+
+DeYoung, J., Jain, S., Rajani, N. F., Lehman, E., Xiong, C., Socher, R. and Wallace, B. C. (2020). ERASER: A Benchmark to Evaluate Rationalized NLP Models. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics (ACL 2020), pp. 4443 to 4458.
+
+Guo, S., Liao, X., Li, C. and Chua, T.-S. (2024). A Survey on Neural Question Generation: Methods, Applications, and Prospects. In Proceedings of the 33rd International Joint Conference on Artificial Intelligence (IJCAI 2024). arXiv:2402.18267.
+
+Hadifar, A., Bitew, S. K., Deleu, J., Develder, C. and Demeester, T. (2022). EduQG: A Multi-format Multiple Choice Dataset for the Educational Domain. IEEE Access. arXiv:2210.06104.
+
+Hayes, A. F. and Krippendorff, K. (2007). Answering the Call for a Standard Reliability Measure for Coding Data. Communication Methods and Measures, 1(1), pp. 77 to 89.
+
+He, P., Liu, X., Gao, J. and Chen, W. (2021). DeBERTa: Decoding-enhanced BERT with Disentangled Attention. In Proceedings of the 9th International Conference on Learning Representations (ICLR 2021).
+
+Jain, S. and Wallace, B. C. (2019). Attention is not Explanation. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics (NAACL 2019), pp. 3543 to 3556.
+
+Jin, Y., Yan, L., Echeverria, V., Gasevic, D. and Martinez-Maldonado, R. (2024). Generative AI in Higher Education: A Global Perspective of Institutional Adoption Policies and Guidelines. arXiv:2405.11800.
+
+Krishna, K., Song, Y., Karpinska, M., Wieting, J. and Iyyer, M. (2023). Paraphrasing Evades Detectors of AI-Generated Text, but Retrieval is an Effective Defense. In Advances in Neural Information Processing Systems 36 (NeurIPS 2023). arXiv:2303.13408.
+
+Kumar, S., Gulwani, R. and Singh, P. (2025). Automated Analysis of Learning Outcomes and Exam Questions Based on Bloom's Taxonomy. arXiv:2511.10903.
+
+Liang, W., Yuksekgonul, M., Mao, Y., Wu, E. and Zou, J. (2023). GPT Detectors Are Biased Against Non-Native English Writers. Patterns, 4(7), 100779. arXiv:2304.02819.
+
+Liu, Y., Ott, M., Goyal, N., Du, J., Joshi, M., Chen, D., Levy, O., Lewis, M., Zettlemoyer, L. and Stoyanov, V. (2019). RoBERTa: A Robustly Optimized BERT Pretraining Approach. arXiv:1907.11692.
+
+Lundberg, S. M. and Lee, S.-I. (2017). A Unified Approach to Interpreting Model Predictions. In Advances in Neural Information Processing Systems 30 (NeurIPS 2017), pp. 4766 to 4777.
+
+Mindner, L., Schlippe, T. and Schaaff, K. (2023). Classification of Human- and AI-Generated Texts: Investigating Features for ChatGPT. arXiv:2308.05341.
+
+Mitchell, E., Lee, Y., Khazatsky, A., Manning, C. D. and Finn, C. (2023). DetectGPT: Zero-Shot Machine-Generated Text Detection Using Probability Curvature. In Proceedings of the 40th International Conference on Machine Learning (ICML 2023), PMLR 202, pp. 24950 to 24962.
+
+Mohammadshahi, A., Scialom, T., Yazdani, M., Yanki, P., Fan, A., Henderson, J. and Saeidi, M. (2023). RQUGE: Reference-Free Metric for Evaluating Question Generation by Answering the Question. In Findings of the Association for Computational Linguistics: ACL 2023, pp. 6845 to 6867. arXiv:2211.01482.
+
+Oketch, K., Lalor, J. P., Yang, Y. and Abbasi, A. (2025). Bridging the LLM Accessibility Divide? Performance, Fairness, and Cost of Closed versus Open LLMs for Automated Essay Scoring. arXiv:2503.11827.
+
+Pietron, M., Olszowski, R. and Gomulka, J. (2024). Efficient Argument Classification with Compact Language Models and ChatGPT-4 Refinements. arXiv:2403.15473.
+
+Stab, C. and Gurevych, I. (2017). Parsing Argumentation Structures in Persuasive Essays. Computational Linguistics, 43(3), pp. 619 to 659.
+
+Sundararajan, M., Taly, A. and Yan, Q. (2017). Axiomatic Attribution for Deep Networks. In Proceedings of the 34th International Conference on Machine Learning (ICML 2017), PMLR 70, pp. 3319 to 3328.
+
+Wang, Y., Mansurov, J., Ivanov, P., Su, J., Shelmanov, A., Tsvigun, A., et al. (2023). M4: Multi-Generator, Multi-Domain, and Multi-Lingual Black-Box Machine-Generated Text Detection. arXiv:2305.14902.
+
+Wang, Y., Mansurov, J., Ivanov, P., Su, J., Shelmanov, A., Tsvigun, A., Mohammed Afzal, O., Mahmoud, T., Puccetti, G., Arnold, T., et al. (2024). SemEval-2024 Task 8: Multidomain, Multimodel and Multilingual Machine-Generated Text Detection. In Proceedings of the 18th International Workshop on Semantic Evaluation (SemEval-2024), pp. 2057 to 2079. arXiv:2404.14183.
+
+Wu, J., Yang, S., Zhan, R., Yuan, Y., Chao, L. S. and Wong, D. F. (2025). A Survey on LLM-Generated Text Detection: Necessity, Methods, and Future Directions. Computational Linguistics, 51(1), pp. 275 to 338. arXiv:2310.14724.
+
+Zheng, L., Chiang, W.-L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., Lin, Z., Li, Z., Li, D., Xing, E. P., Zhang, H., Gonzalez, J. E. and Stoica, I. (2023). Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. In Advances in Neural Information Processing Systems 36 (NeurIPS 2023), Datasets and Benchmarks Track. arXiv:2306.05685.

@@ -43,3 +43,8 @@ matplotlib==3.9.3
 
 # ---- Utilities ----
 tqdm==4.67.1
+
+# ---- Commercial backend (Backend A): free-tier Gemini, self-funded Claude / GPT ----
+requests==2.32.3        # REST calls to the Gemini and OpenAI APIs (also used by the Ollama client)
+python-dotenv>=1.0      # load API keys from a local .env (gitignored), so keys are never committed
+anthropic>=0.40         # only needed for the self-funded Claude backend; Gemini/OpenAI use REST

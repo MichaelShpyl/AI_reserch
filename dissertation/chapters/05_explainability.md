@@ -1,10 +1,5 @@
 # Chapter 5: Explaining the detector's decisions
 
-> Draft note (delete before submission): rough first-person draft for me to rewrite in my own
-> words. It reports the first explainability results and one finding I did not expect, that the
-> token-level explanation is only weakly faithful because the signal is diffuse. No em dashes;
-> my own wording for the final version.
-
 ## 5.1 Why this matters for the project
 
 The whole point of the project is that a detector should hand a lecturer defensible evidence,

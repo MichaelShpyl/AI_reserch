@@ -85,11 +85,12 @@ function parseChapter(md) {
     buf = "";
     if (!text) { mode = null; return; }
     if (mode === "bullet") {
+      // Match body spacing (1.5 lines) so lists do not collapse: supervisor feedback, Meeting 4.
       out.push(new Paragraph({ numbering: { reference: "bullets", level: 0 },
-        spacing: { after: 80 }, children: inlineRuns(text) }));
+        spacing: { after: 100, line: 360 }, children: inlineRuns(text) }));
     } else if (mode === "num") {
       out.push(new Paragraph({ numbering: { reference: "nums", level: 0 },
-        spacing: { after: 80 }, children: inlineRuns(text) }));
+        spacing: { after: 100, line: 360 }, children: inlineRuns(text) }));
     } else {
       out.push(new Paragraph({ spacing: { after: 160, line: 360 },
         alignment: AlignmentType.JUSTIFIED, children: inlineRuns(text) }));
@@ -245,7 +246,14 @@ const FIGURE_LIST = [
   ["Figure 6.1", "Transfer to unseen generators on essays"],
   ["Figure 6.2", "In-domain vs cross-generator vs cross-domain F1"],
   ["Figure 6.3", "Cross-domain failure modes by domain"],
+  ["Figure 7.1", "Bloom's-level classification: trained BERT vs the keyword heuristic"],
+  ["Figure 7.2", "Argument-component extraction: strict span F1 on Persuasive Essays"],
+  ["Figure 7.3", "QLoRA fine-tune vs base Qwen 3B: discrimination on the same claims"],
   ["Figure 8.1", "Discrimination simulation: claim-grounded vs generic questions"],
+  ["Figure 8.2", "Commercial vs local question generation, balanced across essays"],
+  ["Figure 8.3", "Four question writers on one fixed claim set (like-for-like)"],
+  ["Figure 8.4", "Question-quality audit: the fine-tune's discrimination score is an artifact"],
+  ["Figure 8.5", "Fixing the fine-tune: v2 on open-ended data (real but modest gain)"],
 ];
 const tableOfFigures = [
   h1("Table of Figures"),
@@ -255,7 +263,7 @@ const tableOfFigures = [
 
 const abstract = [
   h1("Abstract"),
-  body("Universities increasingly rely on automatic detectors to judge whether student work was written with generative AI. Most detectors return a single percentage with nothing behind it, which a lecturer cannot defend if a student challenges it, and which says nothing about whether the student understands the work they submitted. This dissertation develops an explainable pipeline for academic integrity verification. It detects likely AI-generated text, explains which features drove each decision, extracts the claims and evidence in a flagged submission, and generates verification questions tied to those claims so a lecturer can check understanding in a short conversation. The detector is the first component reported here. It was trained on a balanced corpus of 640 human essays from the British Academic Written English corpus and 640 length-matched and topic-matched AI essays generated locally with Llama 3.1. An initial model reached a perfect score, which was treated as a warning rather than a result. A reproducible audit found that the original corpus leaked formatting markup that gave the answer away, removed it from both classes, and confirmed on cleaned text that the two classes remain separable on writing style alone, with a function-words-only model still reaching 99.5 percent. On the cleaned corpus the transformer detector scores an F1 of 0.99. The high in-domain score is consistent with the literature on single-generator detection, and the work now turns to explainability and robustness on harder settings. This document is a working draft submitted for supervisor review; the prose will be revised in the author's own words for final submission."),
+  body("Universities increasingly rely on automatic detectors to judge whether student work was written with generative AI. Most detectors return a single percentage with nothing behind it, which a lecturer cannot defend if a student challenges it, and which says nothing about whether the student understands the work they submitted. This dissertation develops an explainable pipeline for academic integrity verification. It detects likely AI-generated text, explains which features drove each decision, extracts the claims in a flagged submission, and generates verification questions tied to those claims so a lecturer can check understanding in a short conversation. The detector was trained on a balanced corpus of 640 human essays from the British Academic Written English corpus and 640 length-matched and topic-matched AI essays generated locally with Llama 3.1. An initial model reached a perfect score, which was treated as a warning rather than a result: a reproducible audit found the corpus leaked formatting markup, removed it from both classes, and confirmed that the classes remain separable on writing style alone (a function-words-only model still reaches 99.5 percent; the cleaned transformer scores an F1 of 0.99). The decisions are then explained, and the explanations tested: token-level attributions on the transformer prove diffuse and only weakly faithful, while SHAP over stylometric features passes an ablation-based faithfulness test and gives the lecturer-facing explanation. On an external benchmark the detector transfers to unseen generators (F1 0.97) but degrades across domains (F1 0.79), where its errors concentrate on falsely flagging human academic text, which quantifies the fairness risk that motivates the project. A first slice of the question-generation pipeline turns a flagged essay into claim-grounded verification questions with sentence-level provenance, and a judge-free discrimination simulation evaluates them, showing that questions forcing a student to reproduce their own reasoning discriminate better than questions answerable from general knowledge. A commercial-versus-local comparison over fourteen essays finds a small but statistically significant commercial advantage (paired difference 0.036, p = 0.040) with the local open model competitive before any fine-tuning, and a first LLM-as-judge run whose near-ceiling ratings show no correlation with the objective measure, supporting the decision to anchor judges to the simulation. A QLoRA fine-tune of a small local model on an educational-question corpus appeared on the same simulation to beat the commercial model, but inspection of its output showed it had collapsed into degenerate multiple-choice stems that game the metric: a negative result that redirects the local-model work toward open-ended training data and shows the discrimination measure needs a well-formedness guard. Re-fine-tuning on open-ended questions (SQuAD) confirmed the diagnosis, removing the degeneracy entirely and yielding a real but modest gain over the base model (0.10 vs 0.03, p = 0.0003) on well-formed questions, still short of a strong verification-question generator. This document is a working progress draft for supervisor review and will be revised further before final submission."),
 ];
 
 const toc = [
@@ -266,23 +274,15 @@ const toc = [
   new TableOfContents("Contents", { hyperlink: true, headingStyleRange: "1-3" }),
 ];
 
-// Chapter 2 status note (it is a planned structure, not finished prose).
-const ch2note = new Paragraph({
-  spacing: { before: 120, after: 200 },
-  border: { left: { style: BorderStyle.SINGLE, size: 18, color: TEAL, space: 12 } },
-  children: [t("This chapter is presented as a planned structure and reading plan. The section headings below show the intended coverage of the review. The prose and the verified 2021 to 2026 citations are in progress and will be completed once the corresponding components are built.",
-    { italics: true, size: 22, color: "52616B" })],
-});
-
 const ch1 = readChapter("01_introduction.md");
-let ch2 = readChapter("02_literature_review.md");
-ch2 = [ch2[0], ch2note, ...ch2.slice(1)];  // insert the note right after the H1
+const ch2 = readChapter("02_literature_review.md");
 const ch3 = readChapter("03_detection.md");
 const ch4 = readChapter("04_implementation.md");
 const ch5 = readChapter("05_explainability.md");
 const ch6 = readChapter("06_robustness.md");
 const ch7 = readChapter("07_question_generation.md");
 const ch8 = readChapter("08_evaluation_questions.md");
+const ch9 = readChapter("09_references.md");
 
 const doc = new Document({
   creator: "Mykhailo Shpyl",
@@ -323,7 +323,7 @@ const doc = new Document({
     children: [
       ...titlePage1, ...titlePage2, ...declaration, ...acknowledgements, ...abstract,
       ...acronyms, ...toc, ...tableOfFigures,
-      ...ch1, ...ch2, ...ch3, ...ch4, ...ch5, ...ch6, ...ch7, ...ch8,
+      ...ch1, ...ch2, ...ch3, ...ch4, ...ch5, ...ch6, ...ch7, ...ch8, ...ch9,
     ],
   }],
 });

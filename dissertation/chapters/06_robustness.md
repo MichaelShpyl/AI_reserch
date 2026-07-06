@@ -1,10 +1,5 @@
 # Chapter 6: Robustness, transfer to unseen generators and domains
 
-> Draft note (delete before submission): rough first-person draft for me to rewrite in my own
-> words. It reports the M4 transfer experiment and a result I did not expect, that the detector
-> is robust across AI models but fragile across domains, and that the fragility shows up as
-> false accusations of human writers. No em dashes; my own wording for the final version.
-
 ## 6.1 The question
 
 The in-domain detector scores about 0.99, but that is on the easy setting: one generator

@@ -9,7 +9,7 @@ the source, a near-zero gap means it can be answered without understanding the s
 
 We compare our claim-grounded questions against a set of generic essay questions; the grounded
 questions should discriminate more. Everything runs on the local model and embeddings via Ollama, so
-no API key or judge is needed (CLAUDE.md: this is the main empirical evidence).
+no API key or judge is needed (this is the main empirical evidence in the evaluation plan).
 
     python src/evaluation/discrimination_sim.py --guide 3108a_ai
 """

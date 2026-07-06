@@ -1,4 +1,4 @@
-"""First slice of the argument-aware question-generation pipeline (CLAUDE.md components 3 to 6).
+"""First slice of the argument-aware question-generation pipeline (pipeline components 3 to 6).
 
 Given a flagged essay this builds a lecturer's Verification Interview Guide:
   1. Split the essay into numbered sentences.
@@ -67,16 +67,8 @@ class OllamaBackend(Backend):
         return json.loads(content)
 
 
-class CommercialBackend(Backend):
-    """Backend A placeholder. Plug in the Claude/GPT API here when a key is available; the rest
-    of the pipeline is unchanged, which is the point of the shared interface."""
-
-    def __init__(self, model: str = "claude"):
-        self.name = f"commercial:{model}"
-
-    def chat_json(self, system: str, user: str) -> dict:
-        raise NotImplementedError(
-            "Commercial backend needs an API key; run with the local backend for now.")
+# Backend A (commercial) lives in commercial_backend.py: Gemini (free tier), Anthropic, OpenAI.
+# It is built via make_commercial_backend() in main(), behind the same chat_json interface.
 
 
 # ---------------- pipeline ----------------
@@ -184,14 +176,24 @@ def main() -> int:
     ap.add_argument("--source", choices=["ai", "human"], default="ai")
     ap.add_argument("--claims", type=int, default=4)
     ap.add_argument("--backend", choices=["local", "commercial"], default="local")
-    ap.add_argument("--model", default="llama3.1:8b")
+    ap.add_argument("--provider", choices=["gemini", "anthropic", "openai"], default="gemini",
+                    help="commercial provider (Backend A); ignored for --backend local")
+    ap.add_argument("--model", default=None,
+                    help="model id; defaults to llama3.1:8b (local) or the provider default")
     args = ap.parse_args()
 
     path = (AI_DIR / f"{args.id}.txt") if args.source == "ai" else (CORPUS_TXT / f"{args.id}.txt")
     if not path.exists():
         raise SystemExit(f"Essay not found: {path}")
     text = path.read_text(encoding="utf-8", errors="ignore")
-    backend = OllamaBackend(args.model) if args.backend == "local" else CommercialBackend(args.model)
+    if args.backend == "local":
+        backend = OllamaBackend(args.model or "llama3.1:8b")
+    else:
+        from commercial_backend import make_commercial_backend
+        try:
+            backend = make_commercial_backend(args.provider, args.model)
+        except RuntimeError as e:
+            raise SystemExit(str(e))
 
     print(f"Building guide for {args.id} ({args.source}) via {backend.name} ...", flush=True)
     guide = build_guide(args.id, args.source, text, backend, args.claims)

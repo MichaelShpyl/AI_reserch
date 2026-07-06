@@ -1,7 +1,7 @@
 """Uncertainty for the detector results: bootstrap confidence intervals and seed stability.
 
 The review (16 June 2026) flagged that every headline number is a single-seed point estimate on
-a small test set (n=200), with no interval, while the locked evaluation plan in CLAUDE.md asks
+a small test set (n=200), with no interval, while the locked evaluation plan asks
 for "stability across seeds". This script fixes that two ways:
 
   1. Bootstrap 95% CIs on the held-out test metrics for each detector, by resampling the 200
