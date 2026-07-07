@@ -45,34 +45,61 @@ run-through of the graded intermediate presentation (14 July). The detail is in 
 
 4. **A tighter comparison design.** In the scaled run each backend chose its own claims, so a backend
    could look better by picking easier claims. I re-ran the comparison with one fixed claim set per
-   essay and every question writer answering the same claims. On that design the commercial edge
-   disappears (Gemini 0.017, Llama 8B 0.031, base Qwen 3B 0.041; paired p = 0.20), which suggests
-   part of the earlier edge was claim selection. Held as a hypothesis for now: the commercial arm
-   covered 9 of 14 essays before free-tier quota ran out, and the run completes when quota resets.
+   essay and every question writer answering the same claims, now complete at 14 of 14 essays per
+   arm. On that design the commercial edge disappears entirely (Gemini 0.024, Llama 8B 0.031, base
+   Qwen 3B 0.041; paired difference -0.005, p = 0.62, Gemini higher on 7 of 14, a coin flip). The
+   earlier edge came substantially from claim selection: fix the task and the laptop models write
+   questions as discriminative as the commercial one.
 
-5. **LLM-as-judge, complete for judge one.** The free-tier judge rated all 12 pilot questions 4.5 to
-   5.0 (a ceiling effect) with no correlation to the objective simulation (Spearman -0.14, p = 0.67).
-   Judge scores alone would certify questions the objective measure contradicts, which reinforces the
-   same lesson as the fine-tune episode: no single automatic number gets trusted in this project.
+5. **LLM-as-judge, now complete for all three judges** (Gemini free tier; Claude and GPT on the
+   capped spend you approved). The result is decisive: Gemini and GPT sit at the rating ceiling
+   (means 4.81 and 4.94) while Claude uses the scale (mean 3.67), cross-model agreement is poor
+   (Krippendorff's alpha -0.25, no pairwise correlation significant), and no judge correlates
+   positively with the objective simulation (GPT's near-ceiling ratings even reach significantly
+   negative, rho -0.75). Judge ratings measure how good a question looks, not whether it works;
+   the anchoring the evaluation plan insisted on was needed.
 
-6. **Writing kept pace.** Your Meeting 4 feedback stayed closed out (opening paragraphs, elaborated
-   background, per-chapter outline, references verified against the real papers). The fine-tune
-   episode added three new results sections (8.8 to 8.10) and two figures. The draft is 60 pages and
-   you have the Word version.
+6. **Backend B, v3 done overnight, completing the data-format experiment.** 2,604 verification
+   questions distilled from the pipeline's own prompt (teacher: local Llama 8B; evaluation essays
+   excluded; only gate-passing questions kept), then the identical fine-tune. Result: zero degenerate
+   output, 2.3 questions per claim, on-style verification questions, discrimination 0.064 (about 2.5
+   times base, and double the 8B teacher itself). One twist worth two minutes today: v2 still posts a
+   higher raw score (0.102) with terse factual questions that are not verification questions at all,
+   so the metric alone would pick the wrong adapter. Third instance of the project's central lesson;
+   v3 is the working Backend B on style-fit plus real gain, with v2 documented.
+
+7. **Writing kept pace.** Your Meeting 4 feedback stayed closed out (opening paragraphs, elaborated
+   background, per-chapter outline, references verified against the real papers). This week added
+   the fine-tune story (Sections 8.8 to 8.10), the completed three-judge validation (8.7), and the
+   third explanation method, attention, measured on the same faithfulness yardstick as the others
+   (5.6). The draft is 62 pages and you have the Word version.
 
 ## This week's plan
 
-1. **Backend B, next step.** SQuAD proved the data format is the lever, but it trains a factual
-   style. Next: a training set of reasoning-demanding verification questions distilled from the
-   pipeline's own prompts, then re-fine-tune and re-measure on the same fixed claims.
+1. **The balanced-vs-natural training comparison** (your Meeting 2 evaluation item) is running
+   today: two same-size detectors, identical settings, one trained on the balanced writer mix and one
+   on BAWE's natural skewed mix, both evaluated on the same test split with per-cell and
+   natural-weighted metrics plus the fairness read.
 
-2. **Judges two and three.** Executing the capped spend you approved (Claude and GPT) for
-   cross-model agreement (Krippendorff's alpha), anchored to the simulation.
+2. **Hybrid detector fusion.** The scope's component 1 is a transformer combined with stylometric
+   features; both halves exist and score 0.99 and 0.985, so this week they get fused (with the
+   deferred GPT-2 perplexity feature added) and evaluated against each half.
 
-3. **Commercial arm refill.** The fixed-claim comparison completes its remaining five essays when
-   the free-tier quota window reopens; the framework resumes automatically.
+3. **Claim-extraction integration** per the design you approved: trained spans for provenance plus
+   prompted phrasing, then a regenerated showcase guide with every trained component and the new
+   well-formedness gate.
 
-4. **AICS.** The call or email when convenient; the Student-Track draft is ready to align to it.
+4. **One decision when convenient: relation classification.** The scope's argument-mining component
+   mentions pairwise relation classification alongside the span tagger. The question generator only
+   consumes claims, so I see two honest options: a basic relation classifier on Persuasive Essays
+   (about two days), or descoping it with your sign-off and a sentence in the write-up. Your call.
+
+5. **Then the writing:** the Discussion and Conclusions chapters, a consistency pass over the earlier
+   chapters (several passages still promise work that is now done), and completing the reference list
+   with the method papers (QLoRA, LoRA, SQuAD, SHAP, Integrated Gradients, Krippendorff), each
+   verified against the real publication as always.
+
+6. **AICS.** The call or email when convenient; the Student-Track draft is ready to align to it.
 
 ## For 14 July
 

@@ -1195,3 +1195,147 @@ EduQG -> SQuAD (open-ended, passage-grounded), `src/question_gen/finetune_qg_v2.
   closing line now reads plainly as a working-draft notice.
 - Rebuilt everything after the tidy-up: the 60-page dissertation (docx and PDF), the Meeting 5 deck
   and brief, and the intermediate presentation. Committed the full body of work since 23 June.
+
+### Well-formedness gate implemented; v3 pipeline built; refill and judges (6 July 2026, later)
+
+- **The gate from Section 8.9 is now code, not a promise.** One shared rule
+  (`src/question_gen/wellformed.py`) is used by the quality audit, the guide builder, and the
+  evaluations. `build_guide` now filters malformed questions before they can reach a lecturer and
+  records `n_dropped_malformed` in every guide, so a misbehaving backend is visible rather than
+  hidden. Evaluations keep scoring raw output but always report the degeneracy rate next to the
+  score. Unit-checked against the captured degenerate stems.
+- **v3 of the fine-tune is ready to run.** `build_v3_dataset.py` distills reasoning-style
+  verification questions from the local Llama 3.1 8B running the production prompt over the training
+  essays (the 15 evaluation essays are excluded to avoid contamination; only well-formed teacher
+  questions become targets; Llama's licence permits training other models on its output).
+  `finetune_qg_v3.py` keeps every setting identical to v1 and v2 so the three-way comparison isolates
+  the data format: multiple-choice (EduQG) vs factual open-ended (SQuAD) vs verification-style
+  (self-distilled). `eval_qg_v3.py` audits degeneracy before scoring, on the same 18 claims.
+- **Commercial refill running.** Gemini quota reopened, so the fixed-claim comparison is filling its
+  five missing commercial essays (the framework reuses everything else). One transient hang in an
+  Ollama stop call was fixed with a timeout; the run is otherwise cache-driven.
+- **Judges two and three are still blocked on keys.** The `.env` has placeholder entries for the
+  Anthropic and OpenAI keys but no real values yet; the judge script is ready and resumable once the
+  keys arrive.
+
+### Commercial arm refilled: the no-edge result now stands on the full sample (6 July 2026, later)
+
+Gemini quota reopened and the fixed-claim comparison refilled its five missing commercial essays
+(105 commercial questions, 14 of 14 essays on every arm; a few claims inside covered essays were lost
+to per-minute rate limits). The headline sharpened: on identical claims the commercial edge is gone
+entirely. Gemini 0.024 [0.008, 0.041] vs Llama 8B 0.031 and base Qwen 3B 0.041; the paired difference
+is -0.005 (p = 0.62), with Gemini higher on 7 of 14 essays, a coin flip. So the Section 8.6 edge
+(+0.036, p = 0.040, own-claims design) does not survive fixing the claims, measured on the complete
+sample rather than hypothesised from a partial one. The reading: it came substantially from claim
+selection. Chapter 8.8, Figure 8.3 (now 14/14 on every bar), both decks, and the Meeting 5 brief all
+updated and rebuilt. The v3 chain (distil reasoning-style pairs -> train -> audited eval) is running
+in the background at about 1,200 pairs per hour.
+
+### Attention visualisation done: component 2's three methods on one yardstick (6 July 2026, later)
+
+- Built `src/explainability/attention_viz.py`: final-layer [CLS] attention averaged over heads, on
+  the same matched essay pair as the IG figure, then the identical ERASER-style ablation protocol
+  (same 50-essay test sample, same seed, same k-sweep), run on CPU so the GPU stayed free for the v3
+  chain. This closes the third method the scope lists for the explainability layer.
+- Result: attention and IG are nearly indistinguishable on faithfulness (comprehensiveness ratio
+  1.43 vs 1.44 at k=34; both leave the detector at a coin flip when only their top tokens are kept).
+  The diffuse-signal conclusion now stands on three methods rather than two, and the SHAP feature
+  view stays the lecturer-facing explanation. A nice detail: the AI essay's single most-attended
+  token is an em dash, echoing the stylometric register story.
+- New Section 5.6 with Figures 5.4 and 5.5; dissertation rebuilt (now 62 pages).
+- Also built and dry-ran `src/evaluation/balanced_vs_natural.py` for the Meeting 2 training-data
+  structure comparison: 247 human essays per arm (plus AI twins), natural allocation matching full
+  BAWE proportions (AH-native 53 vs AH-non-native 10) against a balanced allocation (31 per cell),
+  same size, same hyperparameters, same test split; per-cell F1, natural-weighted aggregate,
+  fairness FPR by L1, paired McNemar. Queued to train when the v3 chain frees the GPU.
+- Judge agreement is ready to compute automatically (Krippendorff's alpha, interval metric,
+  unit-tested) as soon as a second judge completes; both commercial judges await account credit.
+
+### Judge machinery smoke-tested with a preliminary manual rating (6 July 2026, later)
+
+The second and third commercial judges are still blocked on account credit, so the cross-judge
+agreement machinery was smoke-tested with a clearly-labelled stand-in: I rated the 12 pilot questions
+against the exact rubric myself as a manual stand-in for the intended Claude judge, stored in
+`outputs/llm_judge_preliminary_claude.json` with the provenance spelled out (manual, not
+reproducible by script, rater not context-free, NOT a judge of record; the canonical llm_judge.json
+is untouched). Nothing from this goes in the dissertation; the funded API judges replace it.
+
+What the preview shows is still useful:
+- The machinery works end to end (Krippendorff's alpha, pairwise Spearman, anchoring).
+- The preliminary ratings spread the scale (3.0 to 4.75, mean 3.9) where Gemini sits at the ceiling
+  (4.5 to 5.0). Agreement between them is consequently poor (alpha -0.40, Spearman 0.26 ns), which
+  previews the likely real finding: a ceiling-effect judge cannot agree with any judge that actually
+  discriminates, which is more support for anchoring judges to the objective simulation.
+- The preliminary ratings also show no correlation with the simulation (mean rho -0.14, and the
+  discrimination dimension alone -0.02), matching Gemini's -0.14. Two judge-like raters, zero signal
+  about measured discrimination between them.
+
+### All three LLM judges complete: the judge validation lands a decisive negative (6 July 2026, later)
+
+API credit arrived, so judges two and three ran on the approved capped spend (Claude Opus 4.8 via the
+Anthropic API, GPT-4o-mini via the OpenAI API; the anthropic SDK installed on the way). All three
+judges have now rated the 12 pilot questions, and the scope's validation criteria are all computed
+(`outputs/llm_judge.json`):
+
+- **Ceiling effects in two of three:** Gemini 4.5 to 5.0 (mean 4.81), GPT 4.75 to 5.0 (mean 4.94).
+  Claude uses the scale, 2.5 to 4.5 (mean 3.67), marking down the content-naming questions.
+- **Cross-model agreement: poor.** Krippendorff's alpha (interval) across the three judges is -0.25;
+  no pairwise Spearman is significant (0.20 to 0.45, all p > 0.13).
+- **Anchoring: no judge tracks the objective measure.** Gemini rho -0.14 (ns), Claude -0.30 (ns), and
+  GPT significantly negative at -0.75 (p = 0.005): its few below-ceiling ratings fell on the questions
+  that objectively discriminate best.
+- **Reading:** rubric ratings measure how good a question looks, not whether it works. The judge-free
+  simulation carries the empirical weight, and the anchored design is vindicated with evidence. This is
+  the second independent instance of the project's central lesson (after the fine-tune artifact): no
+  automatic score is trusted until checked against something it cannot game.
+- The preliminary manual rating from earlier today is marked superseded in its own file; notably it
+  predicted the pattern (spread scale, poor agreement with the ceiling judge) almost exactly.
+- Chapter 8.7 rewritten as "three judges, anchored, and the anchoring was needed"; abstract, Meeting 5
+  brief and deck, and the intermediate deck all updated; every deliverable rebuilt for tomorrow's
+  meeting (dissertation now 63 pages).
+
+### v3 complete: the data-format experiment has its answer (7 July 2026)
+
+The overnight chain finished: 2,604 self-distilled verification questions (307 essays, evaluation
+essays excluded, teacher Llama 8B via the production prompt, only gate-passing questions kept), the
+identical QLoRA fine-tune (final loss 0.72 vs v1's 1.42 and v2's 1.27, on-format data is easier to
+learn), and the audited evaluation on the same 18 claims.
+
+- **v3 output is exactly what the product needs:** zero degenerate questions of 42, 2.3 per claim
+  (v2 managed 1.3), and the style is the pipeline's own ("How did you decide to use the example of X
+  as evidence", "how did you connect it to your broader argument").
+- **Metric: 0.064 [0.033, 0.096]**, about 2.5x base (0.027) and double the 8B teacher's own score in
+  the fixed-claim comparison (0.031), so the 3B student overtook its teacher.
+- **The twist:** v2 still posts the higher raw number (0.102) with terse factual one-liners that are
+  not verification questions at all. The metric alone would pick the unfit adapter (it rewards
+  specificity and penalises the content-quoting that verification style requires, Section 8.3). Third
+  instance of the central lesson after the v1 artifact and the judge panel; the metric does not get to
+  decide alone. v3 is the working Backend B on style-fit plus real gain, v2 documented.
+- Written up as Section 8.11 with Figure 8.6 (base / v1-artifact / v2 / v3); 8.10's ending now hands
+  over to it. Meeting 5 brief restructured (v3 into results, a real plan section: balanced-vs-natural
+  running, hybrid fusion, claim-extraction integration, the relation-classification decision, then the
+  Discussion and Conclusions chapters). All deliverables rebuilt; dissertation 65 pages.
+- Balanced-vs-natural launched on the freed GPU (both models ~20 minutes; near-ceiling expected
+  overall, the per-cell, natural-weighted and fairness numbers are the informative part).
+
+### Morning integration: v3 written up, natural-distribution control done, references completed (7 July 2026)
+
+- **Section 8.11 and Figure 8.6**: the completed data-format experiment (base 0.027 / v1 artifact /
+  v2 0.102 / v3 0.064 with 0% degeneracy), including the honest reading that the metric alone would
+  rank the unfit v2 first, so it does not decide alone. Meeting 5 brief restructured around it.
+- **Section 6.6 and Figure 6.4**: the balanced-vs-natural training control (Meeting 2 item). Both
+  same-size detectors score identically everywhere (F1 1.000, zero prediction disagreements, McNemar
+  p = 1.0), so the balanced design is not what makes the corpus separable; at this separability the
+  comparison has no resolution, which is stated plainly.
+- **Nine method references added, every one verified against its primary source** (NeurIPS
+  proceedings, ACL Anthology, CrossRef, arXiv, the OpenAI report PDF): QLoRA, LoRA, SQuAD, Qwen2.5,
+  Llama 3, GPT-2, BERT, the BAWE corpus article (Alsop and Nesi 2009), and Nomic Embed. In-text
+  citations placed at first use in Chapters 3, 4, 7 and 8. Reference list now 33 entries; the
+  verification evidence is recorded in litreview_sources.md.
+- **Chapter 7 staleness pass**: title no longer says "first slice"; 7.2 and 7.4 now read as a
+  point-in-time record whose stand-ins are resolved by 7.5, 7.6, 7.8 and Chapter 8, instead of
+  promising work that is already done.
+- **Hybrid fusion running** (component 1 completion): GPT-2 perplexity feature added, four arms on
+  the home test split, and a zero-shot cross-domain arm on the identical M4 sample as Chapter 6 to
+  test whether the fusion softens the false-positive failure. One real bug caught before the run:
+  the feature-to-text join must use (id, label) because human essays and their AI twins share ids.
