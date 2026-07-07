@@ -143,14 +143,20 @@ def bloom_level(q: str) -> str:
 
 def build_guide(essay_id: str, source_label: str, text: str, backend: Backend,
                 n_claims: int) -> dict:
+    # Production gate (see wellformed.py): a degenerate question must never reach a lecturer, and
+    # the number dropped is recorded so a misbehaving backend is visible rather than hidden.
+    from wellformed import well_formed
     sents = sentences(normalize_text(text))
     claims = extract_claims(sents, backend, n_claims)
+    n_dropped = 0
     for c in claims:
         src = " ".join(s["text"] for s in c["source_sentences"])
         qs = questions_for_claim(c["claim"], src, backend)
-        c["questions"] = [{"question": q, "bloom_level": bloom_level(q)} for q in qs]
+        kept = [q for q in qs if well_formed(q)]
+        n_dropped += len(qs) - len(kept)
+        c["questions"] = [{"question": q, "bloom_level": bloom_level(q)} for q in kept]
     return {"essay_id": essay_id, "source": source_label, "backend": backend.name,
-            "n_sentences": len(sents), "claims": claims}
+            "n_sentences": len(sents), "n_dropped_malformed": n_dropped, "claims": claims}
 
 
 def to_markdown(guide: dict) -> str:

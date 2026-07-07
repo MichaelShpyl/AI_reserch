@@ -18,7 +18,7 @@ is measured rather than asserted. It is the evidence behind the corrected write-
 from __future__ import annotations
 
 import json
-import re
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -31,27 +31,11 @@ ARMS = ["local8b", "commercial", "base3b", "ft3b"]
 ARM_LABEL = {"local8b": "local 8B", "commercial": "commercial\nGemini",
              "base3b": "base 3B", "ft3b": "fine-tuned 3B"}
 
-# Transparent degeneracy rule: multiple-choice stems (no options are ever supplied), raw JSON
-# leakage, and contentless "which/what is correct" fragments. These are not usable verification
-# questions: a verification question must ask the student to reconstruct their own reasoning.
-DEGEN_PATTERNS = [
-    r"which of the following",
-    r"^\s*\{?\"?questions\"?\s*:",              # raw JSON leaked into the text
-    r"^which (statement|option|answer|case)\b",
-    r"^what is the (correct|right) answer",
-    r"^(choose|select) the\b",
-    r"^true or false",
-]
-
-
-def is_degenerate(q: str) -> bool:
-    ql = q.lower().strip()
-    if any(re.search(p, ql) for p in DEGEN_PATTERNS):
-        return True
-    words = re.findall(r"[a-z]+", ql)
-    if len(words) <= 6 and any(w in ql for w in ("following", "correct", "statement")):
-        return True
-    return False
+# The transparent degeneracy rule lives in one shared module (src/question_gen/wellformed.py) so
+# the audit, the production pipeline, and the evaluations all apply the same test. Re-exported here
+# because the evaluation scripts import it from this module.
+sys.path.insert(0, str(REPO / "src" / "question_gen"))
+from wellformed import DEGEN_PATTERNS, is_degenerate  # noqa: E402,F401
 
 
 def collect(es, arm):
