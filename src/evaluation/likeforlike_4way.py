@@ -49,7 +49,10 @@ ARM_LABEL = {"local8b": "local 8B", "commercial": "commercial\nGemini",
 
 def free_ollama():
     for m in ("llama3.1:8b", "nomic-embed-text"):
-        subprocess.run([str(OLLAMA_EXE), "stop", m], capture_output=True)
+        try:
+            subprocess.run([str(OLLAMA_EXE), "stop", m], capture_output=True, timeout=30)
+        except subprocess.TimeoutExpired:
+            print(f"  (ollama stop {m} timed out; continuing)", flush=True)
     time.sleep(3)
 
 
@@ -236,8 +239,9 @@ def make_figure(result):
     ax.axhline(0, color="#888", lw=1)
     ax.set_ylim(top=max(0.32, max(ci[1] for ci in [result["arms"][x]["pooled_ci95"] for x in arms]) + 0.06))
     ax.set_ylabel("pooled mean discrimination (aware - blind)")
-    ax.set_title("Same fixed claims, same scorer: only the question writer changes\n"
-                 "(*commercial short of 14 essays: free-tier quota)",
+    short = [a for a in arms if result["arms"][a]["n_essays_covered"] < total]
+    subtitle = ("\n(*short of 14 essays: free-tier quota)" if short else "")
+    ax.set_title("Same fixed claims, same scorer: only the question writer changes" + subtitle,
                  fontsize=11, fontweight="bold", color="#222831")
     ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()
