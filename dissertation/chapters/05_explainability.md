@@ -77,8 +77,9 @@ false-positive rate of 0.02 for native and non-native writers is one essay in fi
 to claim fairness; the cross-domain result in Chapter 6 is the real fairness evidence. Two of the
 features (type-token ratio and the rare-word ratio) are length-sensitive, but since the essay lengths
 are matched across the classes this carries little class signal; the length-robust vocabulary measure
-behaves the same way. Perplexity, one of the strongest stylometric signals in the literature, is
-implemented but not yet in this model (it needs a GPU pass) and is deferred to the hybrid. Even so,
+behaves the same way. Perplexity, one of the strongest stylometric signals in the literature, needs a GPU pass and joins
+the feature set when the hybrid is assembled in Section 6.7, where it proves to be the strongest
+single feature. Even so,
 the headline holds: the signal is captured almost as well by a handful of interpretable features as
 by a large model.
 
@@ -96,10 +97,41 @@ is the opposite of the black-box percentage the project set out to replace.
 This stylometric model is also the non-transformer half of the planned hybrid detector, so this step
 serves both the explainability layer and the detector itself.
 
-## 5.6 Next steps for explainability
+## 5.6 Attention, the third method, on the same yardstick
 
-Three things follow. First, fuse the stylometric model with the transformer into the hybrid detector,
-and add perplexity (a strong feature that needs the GPU) to the feature set. Second, keep the token
+The explainability component names three methods, and attention visualisation is the third
+(`src/explainability/attention_viz.py`). The view is the classic one: how strongly the classifier
+position attends to each token in the final layer, averaged over heads, which is often presented as
+"what the model looked at". On the matched pair from Section 5.2 it produces a plausible-looking
+picture (Figure 5.4): in the AI essay the most-attended token is an em dash, followed by content
+words like "extract" and "poetry", while in the human essay the attention mass sits on ordinary
+function words like "the", "as" and "is". The em dash detail is a pleasing echo of the stylometric
+story, since dash-heavy punctuation is one of the register tells the feature model also picks up.
+
+Plausible-looking is not faithful, though, and attention weights have a reputation for being poor
+guides to what actually drives a decision. So the same ablation protocol as Section 5.3 was applied,
+same test sample, same seed, same k-sweep, making all three methods comparable on one yardstick.
+Attention lands almost exactly where Integrated Gradients does (Figure 5.5): removing its top 34
+tokens drops confidence by 0.17 against 0.12 for random tokens, a ratio of 1.43 to IG's 1.44, and
+keeping only its top tokens leaves the detector near a coin flip (sufficiency around 0.53), just as
+it does for IG. At small k attention is even marginally ahead of IG, but neither method's top tokens
+are anywhere near sufficient to carry the decision.
+
+![Figure 5.4: Final-layer attention from the classification position for the same matched pair as Figure 5.1. The picture looks interpretable, and in the AI essay the single most-attended token is an em dash, but the faithfulness test is what decides whether it can be trusted.](../figures/fig_attention_tokens.png)
+
+![Figure 5.5: Attention and Integrated Gradients on the identical faithfulness protocol. The two token-level methods are nearly indistinguishable, both only modestly above the random-removal baseline, which is the diffuse-signal finding again from a third angle.](../figures/fig_attention_faithfulness.png)
+
+The conclusion triangulates rather than changes. Three methods now sit on one measured yardstick:
+attention and Integrated Gradients agree with each other and are both weakly faithful, because the
+style signal is spread across many ordinary tokens rather than concentrated in a few, while SHAP over
+the named stylometric features passes its ablation test and remains the explanation shown to
+lecturers. Having the third method measured matters for the argument: the weakness is not a quirk of
+one attribution technique, it is a property of token-level explanation on this task.
+
+## 5.7 What follows for explainability
+
+Three things follow. First, the stylometric model and the transformer are fused into the hybrid
+detector in Section 6.7, with perplexity added to the feature set. Second, keep the token
 attributions as a supporting visual, useful for showing a lecturer roughly where the model looked,
 but always paired with the honest caveat from the faithfulness test, with the SHAP feature view as
 the primary explanation. Third, carry the faithfulness check forward as a standard step: any

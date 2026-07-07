@@ -20,7 +20,8 @@ standard way I start anything that takes more than a few minutes.
 
 ## 4.2 Data acquisition and cleaning
 
-The human side of the corpus is the British Academic Written English (BAWE) collection, which I
+The human side of the corpus is the British Academic Written English (BAWE) collection (Alsop
+and Nesi, 2009), which I
 downloaded from the Oxford Text Archive. A first script (`src/data/explore_bawe.py`) reads the
 holdings spreadsheet, prints a summary, and cross-checks the recorded word counts against a plain
 count of the text files so I know the metadata is trustworthy. A second script
@@ -79,8 +80,8 @@ script reports accuracy, precision, recall, F1 and the confusion matrix, and on 
 breaks out the false-positive rate for native and non-native writers separately, which is the seed
 of the fairness analysis. The stylometric feature extractor (`src/detection/stylometric.py`)
 computes the linguistic features (sentence-length variation, vocabulary richness, part-of-speech
-mix, and so on); fusing those with the transformer is the next step and is not part of this first
-detector.
+mix, and so on); those features are fused with the transformer into the hybrid detector in
+Section 6.7 (`src/detection/hybrid_fusion.py`).
 
 ## 4.7 The audit and the cleaning step
 

@@ -243,9 +243,13 @@ const FIGURE_LIST = [
   ["Figure 5.1", "Integrated Gradients token attributions for a matched essay pair"],
   ["Figure 5.2", "Faithfulness by ablation: the signal is diffuse"],
   ["Figure 5.3", "SHAP on the stylometric detector (feature-level explanation)"],
+  ["Figure 5.4", "Final-layer attention for the matched essay pair"],
+  ["Figure 5.5", "Attention vs Integrated Gradients on the same faithfulness protocol"],
   ["Figure 6.1", "Transfer to unseen generators on essays"],
   ["Figure 6.2", "In-domain vs cross-generator vs cross-domain F1"],
   ["Figure 6.3", "Cross-domain failure modes by domain"],
+  ["Figure 6.4", "Training-distribution control: balanced vs natural writer mix"],
+  ["Figure 6.5", "The hybrid detector: ceiling in-domain, fewer false accusations out of domain"],
   ["Figure 7.1", "Bloom's-level classification: trained BERT vs the keyword heuristic"],
   ["Figure 7.2", "Argument-component extraction: strict span F1 on Persuasive Essays"],
   ["Figure 7.3", "QLoRA fine-tune vs base Qwen 3B: discrimination on the same claims"],
@@ -254,6 +258,7 @@ const FIGURE_LIST = [
   ["Figure 8.3", "Four question writers on one fixed claim set (like-for-like)"],
   ["Figure 8.4", "Question-quality audit: the fine-tune's discrimination score is an artifact"],
   ["Figure 8.5", "Fixing the fine-tune: v2 on open-ended data (real but modest gain)"],
+  ["Figure 8.6", "The data-format experiment complete: base, v1, v2, v3 on the same claims"],
 ];
 const tableOfFigures = [
   h1("Table of Figures"),
@@ -263,7 +268,7 @@ const tableOfFigures = [
 
 const abstract = [
   h1("Abstract"),
-  body("Universities increasingly rely on automatic detectors to judge whether student work was written with generative AI. Most detectors return a single percentage with nothing behind it, which a lecturer cannot defend if a student challenges it, and which says nothing about whether the student understands the work they submitted. This dissertation develops an explainable pipeline for academic integrity verification. It detects likely AI-generated text, explains which features drove each decision, extracts the claims in a flagged submission, and generates verification questions tied to those claims so a lecturer can check understanding in a short conversation. The detector was trained on a balanced corpus of 640 human essays from the British Academic Written English corpus and 640 length-matched and topic-matched AI essays generated locally with Llama 3.1. An initial model reached a perfect score, which was treated as a warning rather than a result: a reproducible audit found the corpus leaked formatting markup, removed it from both classes, and confirmed that the classes remain separable on writing style alone (a function-words-only model still reaches 99.5 percent; the cleaned transformer scores an F1 of 0.99). The decisions are then explained, and the explanations tested: token-level attributions on the transformer prove diffuse and only weakly faithful, while SHAP over stylometric features passes an ablation-based faithfulness test and gives the lecturer-facing explanation. On an external benchmark the detector transfers to unseen generators (F1 0.97) but degrades across domains (F1 0.79), where its errors concentrate on falsely flagging human academic text, which quantifies the fairness risk that motivates the project. A first slice of the question-generation pipeline turns a flagged essay into claim-grounded verification questions with sentence-level provenance, and a judge-free discrimination simulation evaluates them, showing that questions forcing a student to reproduce their own reasoning discriminate better than questions answerable from general knowledge. A commercial-versus-local comparison over fourteen essays finds a small but statistically significant commercial advantage (paired difference 0.036, p = 0.040) with the local open model competitive before any fine-tuning, and a first LLM-as-judge run whose near-ceiling ratings show no correlation with the objective measure, supporting the decision to anchor judges to the simulation. A QLoRA fine-tune of a small local model on an educational-question corpus appeared on the same simulation to beat the commercial model, but inspection of its output showed it had collapsed into degenerate multiple-choice stems that game the metric: a negative result that redirects the local-model work toward open-ended training data and shows the discrimination measure needs a well-formedness guard. Re-fine-tuning on open-ended questions (SQuAD) confirmed the diagnosis, removing the degeneracy entirely and yielding a real but modest gain over the base model (0.10 vs 0.03, p = 0.0003) on well-formed questions, still short of a strong verification-question generator. This document is a working progress draft for supervisor review and will be revised further before final submission."),
+  body("Universities increasingly rely on automatic detectors to judge whether student work was written with generative AI. Most detectors return a single percentage with nothing behind it, which a lecturer cannot defend if a student challenges it, and which says nothing about whether the student understands the work they submitted. This dissertation develops an explainable pipeline for academic integrity verification. It detects likely AI-generated text, explains which features drove each decision, extracts the claims in a flagged submission, and generates verification questions tied to those claims so a lecturer can check understanding in a short conversation. The detector was trained on a balanced corpus of 640 human essays from the British Academic Written English corpus and 640 length-matched and topic-matched AI essays generated locally with Llama 3.1. An initial model reached a perfect score, which was treated as a warning rather than a result: a reproducible audit found the corpus leaked formatting markup, removed it from both classes, and confirmed that the classes remain separable on writing style alone (a function-words-only model still reaches 99.5 percent; the cleaned transformer scores an F1 of 0.99). The decisions are then explained, and the explanations tested: token-level attributions on the transformer prove diffuse and only weakly faithful, while SHAP over stylometric features passes an ablation-based faithfulness test and gives the lecturer-facing explanation. On an external benchmark the detector transfers to unseen generators (F1 0.97) but degrades across domains (F1 0.79), where its errors concentrate on falsely flagging human academic text, which quantifies the fairness risk that motivates the project. A first slice of the question-generation pipeline turns a flagged essay into claim-grounded verification questions with sentence-level provenance, and a judge-free discrimination simulation evaluates them, showing that questions forcing a student to reproduce their own reasoning discriminate better than questions answerable from general knowledge. A commercial-versus-local comparison over fourteen essays finds a small but statistically significant commercial advantage (paired difference 0.036, p = 0.040) with the local open model competitive before any fine-tuning, and a three-judge LLM-as-judge panel (Gemini, Claude, GPT) whose members neither agree with each other (Krippendorff's alpha -0.25) nor correlate positively with the objective measure, supporting the decision to anchor judges to the simulation rather than trust them. A QLoRA fine-tune of a small local model on an educational-question corpus appeared on the same simulation to beat the commercial model, but inspection of its output showed it had collapsed into degenerate multiple-choice stems that game the metric: a negative result that redirects the local-model work toward open-ended training data and shows the discrimination measure needs a well-formedness guard. Re-fine-tuning on open-ended questions (SQuAD) confirmed the diagnosis, removing the degeneracy entirely and yielding a real but modest gain over the base model (0.10 vs 0.03, p = 0.0003) on well-formed questions, still short of a strong verification-question generator. This document is a working progress draft for supervisor review and will be revised further before final submission."),
 ];
 
 const toc = [
@@ -282,7 +287,9 @@ const ch5 = readChapter("05_explainability.md");
 const ch6 = readChapter("06_robustness.md");
 const ch7 = readChapter("07_question_generation.md");
 const ch8 = readChapter("08_evaluation_questions.md");
-const ch9 = readChapter("09_references.md");
+const ch9 = readChapter("09_discussion.md");
+const ch10 = readChapter("10_conclusions.md");
+const ch11 = readChapter("11_references.md");
 
 const doc = new Document({
   creator: "Mykhailo Shpyl",
@@ -323,7 +330,7 @@ const doc = new Document({
     children: [
       ...titlePage1, ...titlePage2, ...declaration, ...acknowledgements, ...abstract,
       ...acronyms, ...toc, ...tableOfFigures,
-      ...ch1, ...ch2, ...ch3, ...ch4, ...ch5, ...ch6, ...ch7, ...ch8, ...ch9,
+      ...ch1, ...ch2, ...ch3, ...ch4, ...ch5, ...ch6, ...ch7, ...ch8, ...ch9, ...ch10, ...ch11,
     ],
   }],
 });

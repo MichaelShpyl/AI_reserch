@@ -151,14 +151,17 @@ comparing token-level attributions on the transformer against SHAP over the styl
 Chapter 6 tests robustness: how the detector transfers to generators it never saw and to other kinds
 of text, and what its failures mean for fairness.
 
-Chapter 7 presents the first slice of the core contribution: turning a flag into verification
-questions drawn from the student's own claims, with sentence-level provenance and a Bloom's level on
-each question.
+Chapter 7 presents the core contribution: turning a flag into verification questions drawn from the
+student's own claims, with sentence-level provenance and a Bloom's level on each question. It builds
+the first thin slice, then replaces its stand-ins with the trained Bloom's classifier and the trained
+claim extractor, assembles the lecturer's Verification Interview Guide, and fine-tunes the local
+backend.
 
-Chapter 8 evaluates those questions with a judge-free discrimination simulation and reports the first
-scaled comparison between the commercial and local backends.
+Chapter 8 evaluates the questions. It builds the judge-free discrimination simulation, runs the
+commercial-versus-local comparison under two designs, validates a three-judge LLM panel against the
+objective measure, and reports the fine-tuning data-format experiment together with the quality audit
+that caught a metric-gaming failure.
 
-The chapters that follow in the final document cover the remaining components (the trained argument
-miner and the Bloom's classifier), the fine-tuned local backend and the completed
-commercial-versus-local comparison, the assembled Verification Interview Guide, a discussion of what
-the results mean and where the limits are, and the conclusion with future work.
+Chapter 9 discusses what the results mean: the answer to the research question, the methodological
+lesson the failures taught, the case for verification over accusation, the limitations, and the
+implications for practice. Chapter 10 concludes and sets out future work, and the references follow.

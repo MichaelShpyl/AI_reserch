@@ -111,3 +111,17 @@
 - A general local-versus-commercial / open-versus-proprietary LLM evaluation (Chapters 1.1 and 2.6); the
   comparisons found so far are domain-specific (for example medical), so a cleaner general reference is
   still wanted.
+
+## Method references added 7 July 2026 (all verified against primary sources)
+
+Each entry below was verified by locating the actual publication before it entered Chapter 9.
+
+- Dettmers et al. (2023), QLoRA. Verified: NeurIPS 2023 proceedings page (oral) + arXiv:2305.14314.
+- Hu et al. (2022), LoRA. Verified: arXiv:2106.09685 + dblp record for ICLR 2022 (OpenReview nZeVKeeFYf9).
+- Rajpurkar et al. (2016), SQuAD. Verified: ACL Anthology D16-1264 (DOI 10.18653/v1/D16-1264), pp. 2383 to 2392.
+- Yang et al. (2024), Qwen2.5 Technical Report. Verified: arXiv:2412.15115 (collective author "Qwen"; v2 Jan 2025).
+- Grattafiori et al. (2024), The Llama 3 Herd of Models. Verified: arXiv:2407.21783 (v1 listed Dubey first; current v3 lists Grattafiori).
+- Radford et al. (2019), GPT-2 report. Verified: the OpenAI-hosted PDF (no arXiv version exists; technical report).
+- Devlin et al. (2019), BERT. Verified: ACL Anthology N19-1423, NAACL-HLT 2019, pp. 4171 to 4186.
+- Alsop and Nesi (2009), the BAWE corpus article. Verified: CrossRef metadata for DOI 10.3366/E1749503209000227, Corpora 4(1), pp. 71 to 83. The dataset itself is OTA record 2539 (Nesi, Gardner, Thompson, Wickens; CC BY-NC-SA 3.0).
+- Nussbaum et al. (2024), Nomic Embed. Verified: arXiv:2402.01613 (later published in TMLR 02/2025; the arXiv preprint is cited).

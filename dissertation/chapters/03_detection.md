@@ -12,8 +12,8 @@ is right.
 
 I needed text that is labelled human or AI and that does not give the answer away for the
 wrong reason. The human side is a stratified sample of 640 real student essays from BAWE
-(the sampling is described in the sample design note). For the AI side I generated one essay
-per human essay with Llama 3.1 8B running locally, matched on topic, keywords and target
+(Alsop and Nesi, 2009; the sampling is described in the sample design note). For the AI side I
+generated one essay per human essay with Llama 3.1 8B (Grattafiori et al., 2024) running locally, matched on topic, keywords and target
 length. Length matching matters: if the AI essays were systematically longer or shorter, a
 detector could score well just by counting words and would learn nothing about style. After
 generation the lengths line up closely (Pearson r about 0.98 between each AI essay and its
@@ -31,9 +31,9 @@ RoBERTa-base is a comparison, both fine-tuned to classify human (0) against AI (
 same settings and the same student-level splits. I report accuracy, precision, recall, F1
 and the confusion matrix, plus a separate false-positive rate for native and non-native
 English writers, because wrongly flagging a non-native student as AI is the failure mode I
-most want to avoid. A stylometric feature model (perplexity, burstiness, vocabulary richness,
-part-of-speech mix) is being added as the second half of the hybrid; this chapter is the
-transformer half on its own.
+most want to avoid. The second half of the hybrid, a stylometric feature model (perplexity,
+burstiness, vocabulary richness, part-of-speech mix), is built in Chapter 5 and the two halves are
+fused in Section 6.7; this chapter is the transformer half on its own.
 
 ## 3.4 The result, and why I did not trust it at first
 
@@ -175,12 +175,11 @@ AI-like scores 0.43 on the AI scale, so it is still correctly called human, and 
 cases are a small mix of native and non-native writers rather than a pile of non-native essays,
 which is the bias I was watching for.
 
-## 3.8 What this means for the next steps
+## 3.8 Where this chapter's threads are picked up
 
 The audit also seeds the explainability layer. The system can already point at the words that
 drove a decision, which is the first concrete version of the defensible evidence the whole
-project is built around. The immediate next steps are to fuse the stylometric features with
-the transformer, to test the detector against the M4 multi-generator benchmark so I have an
-honest cross-generator number, and to build the attribution methods (Integrated Gradients and
-SHAP) on top of the model so the word-level explanation is faithful and not just a linear
-proxy.
+project is built around. The threads this chapter opens are closed later in the document: the
+attribution methods (Integrated Gradients, SHAP and attention) are built and faithfulness-tested
+in Chapter 5, the M4 multi-generator and cross-domain tests are Chapter 6, and the stylometric
+features are fused with the transformer into the hybrid detector in Section 6.7.

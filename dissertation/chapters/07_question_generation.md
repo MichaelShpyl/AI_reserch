@@ -1,4 +1,4 @@
-# Chapter 7: From a flag to verification questions (first slice)
+# Chapter 7: From a flag to verification questions
 
 ## 7.1 Why this is the point of the project
 
@@ -7,7 +7,8 @@ be out of domain. The actual contribution of the project is what happens after t
 suspected submission into something a lecturer can act on fairly, which is a short set of questions,
 drawn from the student's own claims, that check whether the student understands what they handed in.
 A student who wrote and understood the work can answer them; a student who did not will struggle.
-This chapter is the first working version of that step.
+This chapter builds that step: a first thin slice end to end, then the trained components that
+replace its stand-ins one by one, and the fine-tuning of the local backend.
 
 ## 7.2 How the slice works
 
@@ -23,10 +24,10 @@ verification questions that are grounded in the source sentences and written so 
 answered well by someone who only read the claim. Fourth, each question is tagged with a Bloom's
 cognitive level.
 
-Backends sit behind one interface. This slice runs on the local open-source model (Llama 3.1 8B
-through Ollama), which is the basis for Backend B. The commercial Backend A plugs into the same
-interface once an API key is available, and because the backend is recorded with every guide the
-two can be compared directly, which is the core commercial-versus-local research question.
+Backends sit behind one interface. This first slice runs on the local open-source model (Llama 3.1
+8B through Ollama), which is the basis for Backend B. The commercial Backend A plugs into the same
+interface, and because the backend is recorded with every guide the two can be compared directly;
+that comparison, the core commercial-versus-local research question, is carried out in Chapter 8.
 
 ## 7.3 An example
 
@@ -46,27 +47,24 @@ question a student who genuinely engaged with the texts can answer and a student
 The full guide, with every claim, its exact source sentences, and the Bloom's levels, is saved as
 `outputs/verification_guides/3108a_ai.md`.
 
-## 7.4 What is first-slice and what comes next
+## 7.4 What was first-slice, and where each stand-in went
 
-This is deliberately a thin path through the remaining pipeline, and I am honest about the parts that
-are stand-ins. The claim extraction is currently prompted rather than the trained argument miner
-planned in the scope (the Persuasive Essays corpus, claim and premise labelling); a prompted
-extractor can miss or merge claims, but it feeds question generation now and can be upgraded later.
-The Bloom's tag is a transparent keyword heuristic, a placeholder for the BERT classifier that is its
-own component. And the questions have not yet been evaluated: the planned discrimination simulation,
-where a model with the source and a model without it both try to answer each question and the gap
-shows how well the question targets understanding, is the next piece of work and is what will turn
-these example questions into measured results.
-
-The immediate next steps are therefore to add the commercial backend and run the commercial-versus-local
-comparison, to stand up the discrimination-simulation evaluation, and to decide with my supervisor
-whether the local backend is the full Llama 3 8B with QLoRA or a smaller model that fits the laptop,
-since that choice affects the comparison.
+The slice above was deliberately a thin path through the remaining pipeline, with three declared
+stand-ins, and it is worth recording what they were because the rest of this chapter replaces them
+one by one. The claim extraction was prompted rather than the trained argument miner planned in the
+scope; the trained extractor arrives in Section 7.6. The Bloom's tag was a transparent keyword
+heuristic, replaced by the trained classifier in Section 7.5. And the questions themselves were not
+yet evaluated; the discrimination simulation that turns them into measured results is the subject of
+Chapter 8, where the commercial backend also joins the comparison. The one open decision at this
+point, whether the local backend should be the full Llama 3 8B with QLoRA or a smaller model that
+fits the laptop, was settled with my supervisor on the evidence of the fit probes and is picked up
+in Section 7.8.
 
 ## 7.5 The Bloom's classifier: replacing the heuristic
 
 The keyword heuristic above was always a placeholder, and component 5 of the scope is a trained
-classifier. I fine-tuned BERT-base on the Bloom-labelled subset of EduQG (Hadifar et al., 2022): 903
+classifier. I fine-tuned BERT-base (Devlin et al., 2019) on the Bloom-labelled subset of EduQG
+(Hadifar et al., 2022): 903
 questions carrying a cognitive level, of which only four levels occur (remember, understand, apply,
 analyse) in a heavily skewed distribution (660, 114, 110 and 19 examples respectively). Training used
 class weights against that imbalance, stratified splits (632 train, 135 validation, 136 test), and six
@@ -139,8 +137,9 @@ only trains by spilling past the physical 8 GB into system memory, at 214 second
 headroom (`outputs/qlora_fit_probe.json`). On the strength of those probes my supervisor signed off on
 Qwen2.5 3B as Backend B on 3 July 2026, so the fine-tuning experiment runs on the 3B.
 
-I fine-tuned Qwen2.5-3B-Instruct with QLoRA (`src/question_gen/finetune_qg.py`): 4-bit NF4 base,
-a LoRA adapter (rank 16) on the attention projections, gradient checkpointing and a paged 8-bit
+I fine-tuned Qwen2.5-3B-Instruct (Yang et al., 2024) with QLoRA (Dettmers et al., 2023;
+`src/question_gen/finetune_qg.py`): 4-bit NF4 base, a LoRA adapter (rank 16; Hu et al., 2022) on
+the attention projections, gradient checkpointing and a paged 8-bit
 optimiser, batch 1 with gradient accumulation of 8, two epochs over 2,600 passage-to-question pairs
 from EduQG. The prompt tokens are masked in the loss, so the model learns only to produce the
 question. Training finished in under an hour on the 4060 at a final loss of 1.42, and the adapter is

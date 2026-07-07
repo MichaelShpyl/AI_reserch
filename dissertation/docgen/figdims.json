@@ -74,5 +74,25 @@
   "fig_qg_v2_eval": {
     "w": 1440,
     "h": 919
+  },
+  "fig_attention_tokens": {
+    "w": 2300,
+    "h": 919
+  },
+  "fig_attention_faithfulness": {
+    "w": 1639,
+    "h": 960
+  },
+  "fig_qg_v3_eval": {
+    "w": 1560,
+    "h": 940
+  },
+  "fig_balanced_vs_natural": {
+    "w": 2200,
+    "h": 880
+  },
+  "fig_hybrid_fusion": {
+    "w": 2300,
+    "h": 919
   }
 }

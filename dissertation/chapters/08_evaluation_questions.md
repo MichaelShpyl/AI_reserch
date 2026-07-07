@@ -7,7 +7,8 @@ student who does not cannot. I evaluate that without humans or an LLM judge, usi
 simulation (`src/evaluation/discrimination_sim.py`). For each question, one model answers it WITH
 the source passage from the essay (the "context-aware" answer) and another answers it with the
 question ONLY (the "context-blind" answer). I then measure how close each answer is to the source,
-using embedding similarity, and take the gap, aware minus blind, as the discrimination score. A high
+using embedding similarity (nomic-embed-text; Nussbaum et al., 2024), and take the gap, aware
+minus blind, as the discrimination score. A high
 gap means the question genuinely needs the source; a near-zero gap means it can be answered without
 it. Everything runs on the local model and local embeddings, so the evaluation needs no API key and
 no judge.
@@ -107,30 +108,42 @@ baseline, and the commercial arm is one provider's free tier rather than a front
 the comparison to more essays, more providers, and the fine-tuned local backend is mechanical from
 here, since the framework saves per essay and resumes.
 
-## 8.7 LLM-as-judge: the first judge, anchored and found wanting
+## 8.7 LLM-as-judge: three judges, anchored, and the anchoring was needed
 
-The supplementary evaluation puts an LLM judge over the questions with the four-dimension rubric
+The supplementary evaluation puts LLM judges over the questions with the four-dimension rubric
 (relevance, specificity, discrimination potential, cognitive appropriateness, each 1 to 5), and the
-plan has always been to validate judges rather than trust them. The first judge (the free-tier
-commercial model) has now rated all twelve grounded questions from the pilot guide
-(`src/evaluation/llm_judge.py`, resumable across quota interruptions; results in
-`outputs/llm_judge.json`).
+plan has always been to validate judges rather than trust them. All three judges the scope calls for
+have now rated the twelve grounded questions from the pilot guide: Gemini (2.5 Flash, free tier),
+Claude (Opus 4.8) and GPT (4o-mini), the last two on a small capped spend approved by my supervisor
+(`src/evaluation/llm_judge.py`, resumable across quota interruptions; results and the agreement
+statistics in `outputs/llm_judge.json`).
 
-Two findings. First, a ceiling effect: the judge rates every question between 4.5 and 5.0, so its
-scores barely vary and mostly say that the questions look well-formed. Second, and the reason the
-anchoring exists: the judge's ratings show no meaningful correlation with the objective
-discrimination simulation on the same questions (Spearman rho of -0.14 for the judge's mean rating,
--0.22 for its discrimination dimension, both far from significance at n = 12). The judge is
-confident about exactly the questions the simulation shows a knowledgeable non-reader can answer, so
-judge scores alone would certify question quality that the objective measure contradicts.
+The three judges do not tell one story, and that is the finding. Gemini and GPT both sit at the
+ceiling: Gemini rates everything 4.5 to 5.0 (mean 4.81) and GPT even tighter, 4.75 to 5.0 (mean
+4.94), so their scores mostly say the questions look well-formed. Claude behaves differently, using
+the scale from 2.5 to 4.5 (mean 3.67) and marking down exactly the content-naming questions such as
+"how does the metaphor evoke longing", which general knowledge can answer. Cross-model agreement,
+the scope's own validation criterion, is therefore poor: Krippendorff's alpha across the three
+judges is -0.25, and no pairwise rank correlation reaches significance (Spearman 0.20 to 0.45, all
+p > 0.13). Two judges at a ceiling cannot agree with a third that discriminates.
 
-The correlation's own history is a small-n caution worth recording: at seven questions it looked
-strongly negative (about -0.7), and it attenuated toward zero as the remaining questions were
-scored. The honest summary is not "the judge is anti-correlated" but "the judge's near-ceiling
-ratings carry no signal about measured discrimination", which is precisely why the evaluation plan
-anchors every judge to the simulation and requires cross-model agreement before judge scores count.
-Completing that requires the second and third judges, which is a budget decision recorded in the
-supervision notes.
+The anchoring to the objective measure settles what the disagreement leaves open. None of the three
+judges correlates positively with the discrimination simulation on the same questions: Gemini's mean
+rating sits at rho -0.14 (p = 0.67), Claude's at -0.30 (p = 0.34), and GPT's near-constant ratings
+manage a significantly negative rho of -0.75 (p = 0.005), meaning the few questions it rated below
+the ceiling were among the ones that objectively discriminate best. With n = 12 the individual
+correlations deserve caution (an earlier partial run of the first judge looked strongly negative at
+seven questions and attenuated to nothing by twelve), but the pattern across three independent
+providers is consistent: rubric ratings measure how good a question looks, not how well it separates
+someone who read the essay from someone who did not.
+
+The conclusion for the evaluation design is the one the plan anticipated, now with evidence rather
+than caution behind it. Judge scores in this setup cannot certify question quality on their own,
+because the judges neither agree with each other nor track the objective measure; the judge-free
+discrimination simulation carries the empirical weight, and the judge panel's value is exactly this
+negative result. It is also a second, independent instance of the project's central methodological
+lesson from Section 8.9: a plausible-looking automatic score, whether a judge rating or a
+discrimination number, means nothing until it is checked against something that cannot be gamed.
 
 ## 8.8 Like-for-like: the four writers on one fixed claim set
 
@@ -145,9 +158,9 @@ across the four arms is the model that writes the question (`src/evaluation/like
 `outputs/likeforlike_4way.json`). The 14 essays are the balanced set from Section 8.6.
 
 On the discrimination score the ordering looks dramatic (Figure 8.3). The fine-tuned 3B reaches a
-pooled mean of 0.153 (95% CI [0.106, 0.202]), far above the base 3B at 0.041 [0.028, 0.055], Llama 8B
-at 0.031 [0.016, 0.045], and commercial Gemini at 0.017 [-0.001, 0.036]. Its paired lead is 0.166 over
-commercial (p = 0.001) and 0.123 over its own base (p < 0.001), and it reproduces the 0.154 from
+pooled mean of 0.153 (95% CI [0.105, 0.202]), far above the base 3B at 0.041 [0.028, 0.055], Llama 8B
+at 0.031 [0.016, 0.045], and commercial Gemini at 0.024 [0.008, 0.041]. Its paired lead is 0.138 over
+commercial (p < 0.001) and 0.123 over its own base (p < 0.001), and it reproduces the 0.154 from
 Section 7.8. Read at face value, the locally fine-tuned open model does not merely match the commercial
 one, it buries it.
 
@@ -159,21 +172,24 @@ are well-formed.
 
 ![Figure 8.3: The four question writers on one fixed claim set per essay, same scorer, pooled mean discrimination with 95% bootstrap intervals, each bar labelled with its question count and essay coverage. The fine-tuned 3B posts the highest raw score, but Section 8.9 shows that score to be an artifact of degenerate questions; the meaningful comparison is among the other three arms.](../figures/fig_likeforlike_4way.png)
 
-Among those three the picture is modest and close. On the fixed claims the two open models edge the
-commercial one: base Qwen 3B at 0.041 and Llama 8B at 0.031 against Gemini at 0.017, though all three
-sit low and the commercial interval touches zero. Two things frame even this. The commercial arm is
-short, because free-tier quota ran out mid-run, so Gemini produced scored questions for only 9 of the
-14 essays (66 questions); that comparison should be read as provisional until the arm is refilled to
-fourteen, which the framework resumes mechanically. And there is a real shift from Section 8.6. There,
-with each backend choosing its own claims, Gemini beat Llama 8B (0.078 to 0.042); here, on fixed
-claims, that advantage disappears (paired difference -0.016, p = 0.20, Gemini higher on only three of
-nine essays). The plausible reading is that part of the commercial edge in Section 8.6 came from Gemini
-selecting easier-to-discriminate claims rather than from writing stronger questions on the same ones,
-but with nine paired essays that is a hypothesis for the full set, not a settled result. The firm
-conclusion of this section is narrower than the one I first drafted: on identical claims the small open
-models are competitive with free-tier commercial Gemini on this measure, while the second half of the
-research question, whether a fine-tuned local model can beat a commercial one, stays open, because the
-fine-tune that was supposed to answer it produced unusable questions.
+Among those three the picture is modest and close. On the fixed claims the three models are
+statistically indistinguishable: base Qwen 3B at 0.041, Llama 8B at 0.031, and Gemini at 0.024, all low
+and with overlapping intervals. The run initially covered only 9 of 14 essays on the commercial arm
+because free-tier quota ran out mid-run; the framework resumed when quota returned, and the numbers
+here are the complete set (105 commercial questions across all 14 essays, a few claims lost to
+rate-limiting inside otherwise-covered essays). The complete set settles what the partial one could
+only suggest. In Section 8.6, with each backend choosing its own claims, Gemini held a significant edge
+over Llama 8B (0.078 to 0.042, paired p = 0.040); here, on identical claims, that edge is simply gone
+(paired difference -0.005, p = 0.62, Gemini higher on seven of fourteen essays, a coin flip). So the
+Section 8.6 advantage does not survive fixing the claims. The reading I take is that it came
+substantially from claim selection, Gemini choosing easier-to-discriminate claims when allowed to,
+rather than from writing stronger questions on the same ones; the design here cannot rule out every
+alternative, but the disappearance itself is now measured on the full sample, not hypothesised. The
+firm conclusion of this section is narrower than the one I first drafted and arguably more useful: when
+the task is fixed, small open models running on a laptop write questions as discriminative as a
+commercial model's, while the second half of the research question, whether a fine-tuned local model
+can beat a commercial one, stays open at this point in the story, because the fine-tune that was
+supposed to answer it produced unusable questions.
 
 ## 8.9 The fine-tuned model games the metric: a quality audit
 
@@ -207,15 +223,19 @@ the right data, an open-ended question-generation set (SQuAD-style questions, or
 verification prompts distilled into training pairs) rather than a multiple-choice corpus, and that is
 the next experiment, carried out in Section 8.10. For the evaluation, the lesson is that the judge-free
 discrimination simulation, valuable as it is for well-formed questions, needs a well-formedness gate in
-front of it (the Bloom classifier already rejects non-questions, or a one-line filter can), and that no
-automatic score should be read without inspecting the text behind it. That is precisely the discipline
-the evaluation plan was built on, which is why this failure was caught here rather than in a viva.
+front of it, and that no automatic score should be read without inspecting the text behind it. That
+gate is now part of the pipeline (`src/question_gen/wellformed.py`): the same transparent rule the
+audit uses is applied wherever questions leave the system, the guide builder drops malformed questions
+before a lecturer can see them and records how many it dropped, and every fine-tune evaluation reports
+its degeneracy rate next to its score. That is precisely the discipline the evaluation plan was built
+on, which is why this failure was caught here rather than in a viva.
 
 ## 8.10 Fixing the fine-tune: v2 on open-ended data
 
 Section 8.9 made a testable prediction: if the degeneracy was caused by EduQG's multiple-choice format,
 then changing only the training data to open-ended questions should fix it. So I re-ran the fine-tune
-with everything held identical except the data, swapping EduQG for SQuAD, whose questions are
+with everything held identical except the data, swapping EduQG for SQuAD (Rajpurkar et al.,
+2016), whose questions are
 open-ended and passage-grounded (`src/question_gen/finetune_qg_v2.py`, adapter in
 `models/qg_finetune_qwen3b_v2/`). The evaluation repeats the Section 7.8 design on the same 18 claims,
 base against the new adapter, and it audits degeneracy before reading any score
@@ -241,7 +261,55 @@ the parser now takes the first well-formed question and drops the rest. And the 
 before the score, as the standing rule now requires. The overall arc is the useful result: fine-tuning
 a small local model does help once the training data has the right form, but SQuAD's factual questions
 are not the ideal signal for verification, so the genuinely next step is a training set of
-reasoning-demanding questions, distilled from the pipeline's own verification prompts, which would test
-whether the local backend can be pushed from this modest 0.102 toward the commercial models' range on
-well-formed questions. That is where Backend B stands: a diagnosed and half-fixed component with a clear
-path, reported honestly rather than as the false win of Section 7.8's first draft.
+reasoning-demanding questions, distilled from the pipeline's own verification prompts, which is the v3
+experiment of the next section. That is where the arc stood before its final leg: a diagnosed and
+half-fixed component, reported honestly rather than as the false win of Section 7.8's first draft.
+
+## 8.11 Completing the data-format experiment: v3 on the pipeline's own style
+
+The third leg trains on data in exactly the format the task wants. A training set of 2,604
+verification questions was distilled from the pipeline itself (`src/question_gen/build_v3_dataset.py`):
+the local Llama 3.1 8B ran the production claim-extraction and question-writing prompts over 307
+training essays, and each well-formed question became one passage-to-question pair, with the passage
+being the claim plus its source sentences, which is what the model sees at inference. Three
+precautions mattered. All fifteen evaluation essays were excluded from the training pool, so nothing
+the fine-tunes are tested on was ever trained on. Only questions passing the well-formedness gate
+became training targets, since a noisy teacher would poison the experiment. And Llama's licence
+permits training other models on its output, which is why the teacher is local rather than a
+commercial API. Training kept every setting identical to v1 and v2 once again
+(`src/question_gen/finetune_qg_v3.py`); the final loss of 0.72, against 1.42 for v1 and 1.27 for v2,
+already hints that on-format data is simply easier to learn.
+
+The evaluation follows the standing protocol: degeneracy audited before any score, same 18 fixed
+claims (`src/question_gen/eval_qg_v3.py`, `outputs/qg_v3_eval.json`). v3 is fully well-formed, zero
+degenerate questions out of 42, and it answers the request for three questions per claim far better
+than v2 did (2.3 per claim against 1.3). Its output finally reads like the pipeline's design language:
+"How did you decide to use the example of a decision made by a public authority as evidence", "what
+role does the concept of authority play in your argument, and how did you connect it", "in what ways
+does your discussion relate to the broader themes of your essay". On the metric it lands at a mean
+discrimination of 0.064 (95% CI [0.033, 0.096]), roughly two and a half times the base model's 0.027
+([0.015, 0.040]), with the intervals barely brushing; notably that also doubles the 8B teacher's own
+score in the fixed-claim comparison (0.031, Section 8.8), so the 3B student overtook the model that
+taught it (Figure 8.6).
+
+![Figure 8.6: The data-format experiment complete on the same 18 claims: base model, v1 (multiple-choice EduQG, hatched because its score is a degeneracy artifact), v2 (factual SQuAD) and v3 (verification-style self-distillation), with each bar's degeneracy rate. Both open-ended formats produce fully well-formed output and real gains; only the multiple-choice format collapses.](../figures/fig_qg_v3_eval.png)
+
+The result that resists a tidy ranking is that v2 still posts the higher number (0.102 against 0.064),
+and saying why matters more than the numbers themselves. The two adapters learned different trades.
+v2 writes one terse factual question per claim; that style happens to suit the simulation, but "What
+is the purpose of judicial review?" is not a verification question, since it never asks the student
+about their own essay. v3 writes the questions the product actually needs, demanding the student's
+reasoning, choices and connections, but in doing so it quotes the claim's content back, and Section
+8.3 established that handing content to the source-blind answerer shrinks the measured gap. So the
+metric, taken alone, would pick the adapter whose output is unfit for purpose. This is the third time
+in this chapter a single automatic number pointed the wrong way (after the v1 artifact and the judge
+panel), and it is why the decision about Backend B is not delegated to the metric: v3 becomes the
+working local backend on the grounds that its output is well-formed, on-style and a real improvement
+over base, with v2's higher raw score documented and explained rather than chased.
+
+What the completed experiment establishes is worth stating cleanly, because it is the dissertation's
+answer on fine-tuning. Format dominates: a multiple-choice corpus collapses the model, and either
+open-ended format fixes it. Fine-tuning a 3B model on an 8 GB laptop reliably lifts it well clear of
+its base, whichever open format is used, and self-distillation can lift a small student past its own
+larger teacher on the target measure. And no single automatic score, not this one and not a judge's,
+is allowed to settle a design decision by itself in this project.
