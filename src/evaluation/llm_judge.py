@@ -110,9 +110,51 @@ def main() -> int:
             }
             print(f"anchoring: judge-mean vs sim rho={rho_m.statistic:.3f} (p={rho_m.pvalue:.3f}); "
                   f"judge-discrimination vs sim rho={rho_d.statistic:.3f} (p={rho_d.pvalue:.3f})")
+    # Cross-model agreement, computed over every judge that has scored all the questions.
+    complete = {k: v["scores"] for k, v in data["judges"].items()
+                if len(v.get("scores", {})) == len(items)}
+    if len(complete) >= 2:
+        qs = [q for _, q in items]
+        judges = sorted(complete)
+        matrix = [[complete[j][q]["mean"] for q in qs] for j in judges]
+        agreement = {"judges": judges, "n_questions": len(qs),
+                     "krippendorff_alpha_interval": round(krippendorff_alpha_interval(matrix), 3)}
+        from scipy import stats
+        pair_rho = {}
+        for i in range(len(judges)):
+            for j in range(i + 1, len(judges)):
+                r = stats.spearmanr(matrix[i], matrix[j])
+                pair_rho[f"{judges[i]} vs {judges[j]}"] = {
+                    "rho": round(float(r.statistic), 3), "p": round(float(r.pvalue), 4)}
+        agreement["pairwise_spearman"] = pair_rho
+        data["agreement"] = agreement
+        print(f"cross-judge agreement ({len(judges)} judges): "
+              f"Krippendorff alpha = {agreement['krippendorff_alpha_interval']}")
     OUT.write_text(json.dumps(data, indent=2), encoding="utf-8")
     print(f"Saved {OUT.relative_to(REPO)} ({done}/{len(items)} questions judged by {jkey})")
     return 0
+
+
+def krippendorff_alpha_interval(matrix: list[list[float]]) -> float:
+    """Krippendorff's alpha with the interval metric. `matrix` is raters x items; missing values
+    may be None. Standard formulation: alpha = 1 - Do/De with squared-difference distance."""
+    units = []  # list of lists: the values present for each item
+    for i in range(len(matrix[0])):
+        vals = [row[i] for row in matrix if row[i] is not None]
+        if len(vals) >= 2:
+            units.append(vals)
+    pooled = [v for u in units for v in u]
+    n = len(pooled)
+    if n < 2:
+        return float("nan")
+    do = 0.0
+    for u in units:
+        m = len(u)
+        do += sum((a - b) ** 2 for a in u for b in u) / (m - 1)
+    do /= n
+    de = sum((a - b) ** 2 for a in pooled for b in pooled) / (n - 1)
+    de /= n
+    return 1.0 if de == 0 else 1.0 - do / de
 
 
 if __name__ == "__main__":
