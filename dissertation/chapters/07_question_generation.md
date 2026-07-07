@@ -125,7 +125,9 @@ student's answers. The guide renders to Markdown, Word, and PDF
 (`outputs/verification_guides/3108a_ai_guide.pdf` is the worked example, generated end to end with
 live models). One design note carried through the document: the framing on the first page states that
 the guide is evidence for a conversation, not an accusation, which is the position the fairness
-results of Chapter 6 make necessary.
+results of Chapter 6 make necessary. This was the assembler's first complete version, running the
+transformer detector and the prompted claims; Section 7.9 returns to it once the trained argument
+miner and the fine-tuned backend are in place, and reports the fully integrated guide.
 
 ## 7.8 Fine-tuning the local backend: a result that looked too good
 
@@ -190,3 +192,34 @@ well-formed questions and can be gamed by degenerate ones, so it needs a well-fo
 simple filter, or the Bloom classifier, rejecting non-questions) before its scores are trusted. That
 caution is exactly why the evaluation plan never rested on a single automatic metric, and Section 8.9
 turns the episode into that methodological point.
+
+## 7.9 The integrated guide: every trained component in one document
+
+Sections 7.5 to 7.8 replaced the first slice's stand-ins one at a time. This section puts the trained
+pieces together into the artifact the whole project exists to produce, in the form my supervisor
+approved at our fifth meeting (`src/question_gen/integrated_guide.py`, `src/pipeline/assemble_guide.py`).
+A submission now flows through five trained models. The prompted extractor supplies each claim in
+readable phrasing with sentence citations, and the trained argument miner of Section 7.6 supplies the
+provenance in the student's own words: each claim carries the verbatim major-claim, claim and premise
+spans the miner found in its cited sentences, labelled by role. This is the "spans for provenance,
+prompt for phrasing" design in one place, and it is stronger than either extractor alone, because the
+lecturer sees both a sentence they can read and the exact words the model keyed on. The questions are
+written by the v3 fine-tuned local backend, filtered through the well-formedness gate so nothing
+degenerate reaches the page (the guide records how many, if any, were dropped), and tagged with the
+trained Bloom classifier, with the levels the classifier is weak on marked advisory. The detector at
+the top of the guide is the hybrid of Section 6.7, and it reports its component views honestly: on the
+worked submission it scores 0.957, noticeably calmer than the transformer's own 0.9996, because the
+style half pulls an over-confident transformer back, which is exactly the behaviour a lecturer facing
+a possible false positive should want.
+
+The document itself is organised for its reader, a lecturer with no time to prepare
+(Figure 7.4). It opens with the position the fairness results of Chapter 6 make necessary, that the
+guide is evidence for a conversation and not an accusation, then gives the detection verdict with its
+limits in plain language, the SHAP-validated drivers of the decision in lecturer terms, the claims
+with their two-way provenance and grounded questions, and a three-level rubric for reading the
+answers. It renders to Markdown, Word and PDF, generated end to end with live models on the 8 GB
+laptop (`outputs/verification_guides/3108a_ai_guide.pdf` is the worked example). Every element on the
+page is the output of a trained component of this project rather than a mock-up, which is the sense in
+which the pipeline, and not just its parts, now works.
+
+![Figure 7.4: The first page of the assembled Verification Interview Guide, generated end to end with live models. The detection verdict is the hybrid detector with its component views; the claims that follow carry both readable phrasing and the trained argument miner's verbatim spans; the questions are written by the fine-tuned local backend and tagged by the trained Bloom classifier. The framing states that the guide is evidence for a conversation, not an accusation.](../figures/fig_guide_page1.png)

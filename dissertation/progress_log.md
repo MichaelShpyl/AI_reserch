@@ -1339,3 +1339,24 @@ learn), and the audited evaluation on the same 18 claims.
   the home test split, and a zero-shot cross-domain arm on the identical M4 sample as Chapter 6 to
   test whether the fusion softens the false-positive failure. One real bug caught before the run:
   the feature-to-text join must use (id, label) because human essays and their AI twins share ids.
+
+### The integrated guide: every trained component in one artifact (7 July 2026)
+
+Built the final form of the pipeline's output, the design Vini approved at Meeting 5.
+`src/argument_mining/extract_spans.py` is the inference side of the trained claim extractor (BIO
+decoding over paragraph sequences, verbatim spans with char offsets and roles).
+`src/question_gen/integrated_guide.py` orchestrates the approved "spans for provenance, prompt for
+phrasing" design: prompted claims give readable phrasing and sentence citations, the trained miner
+attaches the verbatim major-claim/claim/premise spans found in those sentences (matched by word
+overlap), the v3 fine-tuned backend writes the questions, and the well-formedness gate filters them.
+`src/detection/save_hybrid.py` persists the fitted hybrid (perplexity-augmented GBM plus the logistic
+fuser, with home-corpus perplexity cached), and `src/detection/hybrid_detect.py` scores a single
+submission with it, so the assembler now reports the hybrid detector rather than the bare transformer.
+
+On the worked submission (3108a) the guide came out with four claims, twelve questions, zero dropped
+by the gate, and the hybrid scored 0.957 against the transformer's own 0.9996: the style half pulls
+the over-confident transformer back, which is the behaviour a lecturer facing a possible false
+positive wants. Every element on the page is now a trained component's live output. Written up as
+Section 7.9 with Figure 7.4 (the guide's first page, regenerated from the integrated build). One
+honest touch kept in: short claim fragments from the miner (its known claim-boundary weakness) are
+filtered from the display, so only substantive spans appear.

@@ -42,23 +42,12 @@ ADVISORY = {"apply", "analyse"}
 
 
 def detect(text: str) -> dict:
-    """Score the submission with the trained detector; returns prob(AI) and the verdict."""
-    import torch
-    from transformers import AutoModelForSequenceClassification, AutoTokenizer
-    tok = AutoTokenizer.from_pretrained(str(DETECTOR))
-    model = AutoModelForSequenceClassification.from_pretrained(str(DETECTOR)).eval()
-    if torch.cuda.is_available():
-        model = model.cuda()
-    enc = tok(normalize_text(text), truncation=True, max_length=512, return_tensors="pt")
-    if torch.cuda.is_available():
-        enc = {k: v.cuda() for k, v in enc.items()}
-    with torch.no_grad():
-        p = torch.softmax(model(**enc).logits, dim=-1)[0]
-    prob_ai = float(p[1])
-    del model
-    if torch.cuda.is_available():
-        torch.cuda.empty_cache()
-    return {"prob_ai": round(prob_ai, 4), "flagged": prob_ai >= 0.5}
+    """Score the submission with the hybrid detector (Section 6.7), falling back to the transformer
+    alone if the hybrid has not been saved. Returns prob(AI), the verdict, and the components."""
+    import sys as _sys
+    _sys.path.insert(0, str(REPO / "src" / "detection"))
+    from hybrid_detect import hybrid_detect
+    return hybrid_detect(text)
 
 
 def bloom_tag(questions: list[str]) -> list[str]:
@@ -108,11 +97,19 @@ def build_markdown(essay_id: str, source: str, det: dict, guide: dict,
     L.append("## 1. Detection summary")
     L.append("")
     verdict = "flagged as likely AI-generated" if det["flagged"] else "not flagged"
-    L.append(f"The trained detector scores this submission at **{det['prob_ai']}** probability "
+    which = ("hybrid detector (transformer fused with stylometric features and GPT-2 perplexity)"
+             if det.get("detector") == "hybrid" else "trained transformer detector")
+    L.append(f"The {which} scores this submission at **{det['prob_ai']}** probability "
              f"of being AI-generated, so it is **{verdict}**. No score of 1.0 exists on this scale: "
              f"the model is never certain, only confident. On matched in-domain test data the "
              f"detector's F1 is 0.99; on out-of-domain academic text its false-positive rate rises "
              f"sharply, so treat the score as a reason to talk, never as proof.")
+    comp = det.get("components", {})
+    if det.get("detector") == "hybrid" and comp:
+        L.append("")
+        L.append(f"*Component views: transformer {comp.get('transformer')}, "
+                 f"style-plus-perplexity {comp.get('style_plus_perplexity')}. The hybrid fuses both "
+                 f"because the style half keeps the detector calmer on unusual but human writing.*")
     L.append("")
     L.append("**What drives decisions like this one** (validated by faithfulness testing):")
     L.append("")
@@ -121,18 +118,29 @@ def build_markdown(essay_id: str, source: str, det: dict, guide: dict,
     L.append("")
     L.append("## 2. The student's claims and where they come from")
     L.append("")
-    L.append("Each claim below was extracted from the submission and is quoted to its exact "
-             "sentence numbers, so nothing here is invented: every question can be traced to the "
+    L.append("Each claim below is phrased for readability, then anchored two ways so nothing here is "
+             "invented: to the exact sentence numbers it was drawn from, and to the verbatim "
+             "argument spans the trained argument miner found in those sentences, each labelled by "
+             "its role (major claim, claim, or premise). Every question can be traced to the "
              "student's own words.")
     L.append("")
     for i, c in enumerate(guide["claims"], 1):
         L.append(f"### Claim {i}: {c['claim']}")
         L.append("")
-        L.append("**Source in the submission:**")
+        L.append("**Source in the submission (cited sentences):**")
         L.append("")
         for s in c["source_sentences"]:
             L.append(f"> [{s['n']}] {s['text']}")
         L.append("")
+        # Show only substantive spans: the trained miner is weakest on short claim fragments
+        # (span-F1 0.44 on claims), so a two-word fragment is not useful provenance.
+        spans = [sp for sp in c.get("argument_spans", []) if len(sp["text"].split()) >= 5]
+        if spans:
+            L.append("**Argument spans found by the trained miner (verbatim, in the student's words):**")
+            L.append("")
+            for sp in spans:
+                L.append(f"- *{sp['type']}:* “{sp['text']}”")
+            L.append("")
         L.append("**Verification questions:**")
         L.append("")
         for q in c["questions"]:

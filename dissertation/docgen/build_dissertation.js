@@ -253,6 +253,7 @@ const FIGURE_LIST = [
   ["Figure 7.1", "Bloom's-level classification: trained BERT vs the keyword heuristic"],
   ["Figure 7.2", "Argument-component extraction: strict span F1 on Persuasive Essays"],
   ["Figure 7.3", "QLoRA fine-tune vs base Qwen 3B: discrimination on the same claims"],
+  ["Figure 7.4", "The assembled Verification Interview Guide (first page)"],
   ["Figure 8.1", "Discrimination simulation: claim-grounded vs generic questions"],
   ["Figure 8.2", "Commercial vs local question generation, balanced across essays"],
   ["Figure 8.3", "Four question writers on one fixed claim set (like-for-like)"],
