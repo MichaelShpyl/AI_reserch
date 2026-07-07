@@ -1360,3 +1360,25 @@ positive wants. Every element on the page is now a trained component's live outp
 Section 7.9 with Figure 7.4 (the guide's first page, regenerated from the integrated build). One
 honest touch kept in: short claim fragments from the miner (its known claim-boundary weakness) are
 filtered from the display, so only substantive spans appear.
+
+### Graded presentation rebuilt for a 20-minute general audience (7 July 2026)
+
+Vini confirmed the 14 July intermediate presentation is 20 minutes with no questions, for a general
+audience (basic computer literacy, no project knowledge). Rebuilt the deck accordingly:
+
+- Three new plain-language concept figures (`make_concept_figures.py`): an end-to-end pipeline diagram
+  ("a flag opens a conversation, not an accusation"), a picture explaining the two-AI question test,
+  and a roadmap that marks "we are here" at the half-way point with Done on the left and Still-to-do
+  on the right.
+- 16 slides, plain language throughout, arc: the problem in everyday terms, the whole idea in one
+  picture, the building blocks with the honesty stories (the 100% artefact, the fairer hybrid, the
+  fine-tune that lied), how questions are graded without students, laptop-vs-cloud, then an explicit
+  "where it is weak" slide, the half-way roadmap, the plan, and a one-sentence takeaway.
+- Deliberately honest about being half done and about explainability being the weakest part (not yet
+  clear enough for a non-technical lecturer), which is named as the biggest job for the second half.
+- Ran a three-persona comprehension review (layperson, first-year CS student, skeptical examiner) via
+  a workflow. Fixed everything it flagged: the one blocking issue (why empty questions fool the score,
+  now spelled out), defined "word patterns vs writing style", replaced all "out-of-domain" jargon with
+  "unfamiliar kinds of writing", relabelled the on-screen "Bloom" tag as "Thinking level" and named
+  Bloom's taxonomy in the script, clarified the 61% base rate, broke the pipeline caption into steps,
+  and added the stress-test bridge on the hybrid slide.
