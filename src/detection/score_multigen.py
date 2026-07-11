@@ -81,6 +81,14 @@ def main() -> int:
                  "flag_rate_hybrid": round(det_h, 4)}
         if g != "human":
             entry["mean_length_ratio"] = round(float(df.loc[m, "len_ratio"].mean()), 3)
+            # GPT-4o-mini undershoots length on some essays; report the reasonably-matched
+            # subset too so a length artefact cannot hide inside the headline number.
+            mm = m & (df["len_ratio"].values >= 0.5)
+            if mm.sum():
+                entry["matched_subset_ratio_ge_0.5"] = {
+                    "n": int(mm.sum()),
+                    "flag_rate_transformer": round(float((p_deb[mm] >= 0.5).mean()), 4),
+                    "flag_rate_hybrid": round(float((p_hy[mm] >= 0.5).mean()), 4)}
         result["groups"][g] = entry
         print(f"{g:8s} n={m.sum():3d} flagged: transformer {det_t:.2f} hybrid {det_h:.2f}", flush=True)
 

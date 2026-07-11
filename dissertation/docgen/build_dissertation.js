@@ -251,6 +251,7 @@ const FIGURE_LIST = [
   ["Figure 6.4", "Training-distribution control: balanced vs natural writer mix"],
   ["Figure 6.5", "The hybrid detector: ceiling in-domain, fewer false accusations out of domain"],
   ["Figure 6.6", "The abstain band, priced: accuracy rises, confident errors remain"],
+  ["Figure 6.7", "Unseen commercial generators on the home recipe: the fusion trade measured"],
   ["Figure 7.1", "Bloom's-level classification: trained BERT vs the keyword heuristic"],
   ["Figure 7.2", "Argument-component extraction: strict span F1 on Persuasive Essays"],
   ["Figure 7.3", "Relation classification: supports-links learned, attacks starved"],
@@ -262,6 +263,7 @@ const FIGURE_LIST = [
   ["Figure 8.4", "Question-quality audit: the fine-tune's discrimination score is an artifact"],
   ["Figure 8.5", "Fixing the fine-tune: v2 on open-ended data (real but modest gain)"],
   ["Figure 8.6", "The data-format experiment complete: base, v1, v2, v3 on the same claims"],
+  ["Figure 8.7", "The fixed-claim comparison at thirty essays with the working v3 backend"],
 ];
 const tableOfFigures = [
   h1("Table of Figures"),

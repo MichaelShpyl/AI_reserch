@@ -22,7 +22,7 @@ the source is looked up from the real numbered sentences and the model cannot in
 claim therefore points at exact lines in the submission. Third, for each claim it generates
 verification questions that are grounded in the source sentences and written so that they cannot be
 answered well by someone who only read the claim. Fourth, each question is tagged with a Bloom's
-cognitive level.
+cognitive level (Anderson and Krathwohl, 2001).
 
 Backends sit behind one interface. This first slice runs on the local open-source model (Llama 3.1
 8B through Ollama), which is the basis for Backend B. The commercial Backend A plugs into the same
@@ -102,7 +102,7 @@ paragraph fits inside 256 subwords, so nothing is truncated; evaluation is stric
 The result is a micro span-F1 of 0.63: premises 0.72, major claims 0.54, claims 0.44 (Figure 7.2).
 Strict matching is a hard yardstick, and the per-class order is the expected one, since claim
 boundaries are the classic ambiguity in this corpus. Dedicated argument-mining architectures with
-CRF decoding or joint relation modelling report higher figures, so this is a working first version
+CRF decoding or joint relation modelling report higher figures (Pietron et al., 2024), so this is a working first version
 rather than the state of the art, and I report it as such. For the pipeline it opened a design
 choice, settled with my supervisor and implemented in Section 7.9: the trained extractor finds spans
 in the student's own words, the prompted extractor produces readable claim paraphrases with sentence

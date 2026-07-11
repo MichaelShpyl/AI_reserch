@@ -313,3 +313,40 @@ open-ended format fixes it. Fine-tuning a 3B model on an 8 GB laptop reliably li
 its base, whichever open format is used, and self-distillation can lift a small student past its own
 larger teacher on the target measure. And no single automatic score, not this one and not a judge's,
 is allowed to settle a design decision by itself in this project.
+
+## 8.12 The comparison at scale: thirty essays, and the answer firms up
+
+Chapter 9 names the comparison's sample size as a limitation, so the final experiment scales the
+fixed-claim design from fourteen essays to thirty and puts the backend the pipeline actually ships,
+v3, in the frame against the local 8B, the base 3B and commercial Gemini
+(`src/evaluation/likeforlike_scaled.py`, `outputs/likeforlike_scaled.json`). The protocol is
+unchanged: one fixed claim set per essay from the neutral extractor, every writer answering the same
+claims, one scorer, and the degeneracy rate reported next to every score. Two contamination guards
+matter at this size: the sixteen new essays are drawn only from the pool that is neither an existing
+evaluation essay nor one of the 307 essays v3's training questions were distilled from, and the
+original fourteen essays' claims and arms are reused verbatim rather than regenerated. Every arm is
+fully well-formed, zero degenerate questions out of 754.
+
+Three findings, in rising order of importance (Figure 8.7). First, the replication: the commercial
+model still has no edge over the plain local 8B on fixed claims (paired difference -0.005, p = 0.62),
+the same null as Section 8.8, now standing beside a larger design. Second, the fine-tune's gain is
+solid at scale: v3 reaches 0.081 (95% CI [0.066, 0.097]) against the base 3B's 0.038, a paired
+difference of +0.040 at p = 0.0001, higher on 22 of 27 essays. Third, the result I refused to claim
+in Section 8.8 because the evidence there was an artifact: on the essays both arms cover, the
+fine-tuned local model now beats the commercial one, +0.050 paired, p = 0.0094, higher on 11 of 13.
+The reason this claim is admissible now when it was retracted before is exactly the difference this
+chapter has been building: v1's "win" came from degenerate output gaming the metric, while v3's
+output is one hundred percent well-formed, on-style verification questions, so the ranking and the
+fitness for purpose finally agree.
+
+![Figure 8.7: The fixed-claim comparison at thirty essays with the working v3 backend. Every arm is fully well-formed. v3 clears the base 3B (p = 0.0001) and, on the shared essays, the commercial model (p = 0.0094); the commercial-versus-8B null replicates. Coverage is printed on each bar: Gemini's free tier lapsed again at 14 of 30 essays, so the commercial pair rests on thirteen essays and is read accordingly.](../figures/fig_likeforlike_scaled.png)
+
+The honest frame around the third finding. The commercial arm is a free-tier flash model, not a
+frontier one, and its quota lapsed again at fourteen of thirty essays, so the v3-versus-commercial
+pair rests on thirteen shared essays; the direction is consistent (eleven of thirteen) and the test
+significant, but the pair deserves a refill when quota allows, and the claim is "a QLoRA fine-tune on
+an 8 GB laptop beats the free commercial tier at writing verification questions", not "local models
+beat commercial models". Within that frame, the second half of the research question now has its
+answer in the affirmative, earned the slow way: the first version of this claim was retracted as an
+artifact, the second was declined because the metric and the product disagreed, and this one stands
+because output quality and measured discrimination finally point the same direction.

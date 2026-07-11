@@ -25,12 +25,16 @@ finding. When each backend chose its own claims, the commercial model held a sma
 (paired difference 0.036, p = 0.040). When every model wrote questions for identical claims, the edge
 vanished (difference -0.005, p = 0.62): most of the apparent commercial advantage was claim selection,
 not question writing. Fine-tuning then moved the local backend well clear of its own base once the
-training data had the right format, and the fine-tuned 3B model doubled the score of the 8B model that
-taught it. Put together, the honest answer to "can locally fine-tuned open models match commercial
-LLMs at this task" is yes on this evidence, with the caveat that the margin between all well-formed
-question writers is small against the generic-question baseline, and the deeper point that the
-comparison itself is fragile: its outcome flipped with the experimental design, which is why the
-dissertation reports both designs rather than the friendlier one.
+training data had the right format, and at thirty essays the fine-tuned 3B not only holds its gain
+over its own base (+0.040, p = 0.0001) but beats the free-tier commercial model on the essays both
+cover (+0.050, p = 0.0094, higher on eleven of thirteen), with every question well-formed, which is
+why that claim is made here after being retracted twice in weaker forms. Put together, the honest
+answer to "can locally fine-tuned open models match commercial LLMs at this task" is yes on this
+evidence, and on the fixed task the fine-tuned local model does better than the free commercial tier;
+the caveats are that the commercial arm is a flash model rather than a frontier one, that all
+well-formed writers still sit below the generic-question baseline, and the deeper point that the
+comparison's outcome moved with the experimental design, which is why the dissertation reports every
+design it ran rather than the friendliest one.
 
 ## 9.2 What the failures taught: trust nothing you have not checked
 
@@ -83,10 +87,11 @@ The limitations are stated throughout the chapters; gathering the important ones
 the claims honest. The evaluation of question quality rests on a simulation, not on students; that
 was a deliberate scope decision (it keeps the project clear of human-participants approval), but it
 means the discrimination scores are proxies with a conservative bias, and classroom validation is the
-single most important piece of future work. Sample sizes are modest: fourteen essays and eighteen
-fixed claims in the comparisons, twelve questions in the judge study; paired designs and bootstrap
-intervals are used throughout, and the sample-size trajectory of the main comparison is reported
-precisely because small snapshots would have supported whichever story I preferred. The detection
+single most important piece of future work. Sample sizes grew but stay modest: the final comparison
+runs thirty essays with 754 questions and the fine-tune tests rest on 27-essay paired designs, while
+the judge study is twelve questions; bootstrap intervals are used throughout, and the sample-size
+trajectory of the first comparison is reported precisely because small snapshots would have supported
+whichever story I preferred. The detection
 corpus pairs one human corpus with one generator, and although the detector transfers to six unseen
 generators, the corpus itself cannot show generator diversity. The commercial arm is one provider's
 free tier rather than a frontier model, and quota limits caused disclosed irregularities. On the home

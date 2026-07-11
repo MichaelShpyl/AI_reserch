@@ -1432,3 +1432,31 @@ for accuracy, per-domain calibration is still needed for fairness, and the quest
 backstop. Also tonight: the scaled 30-essay comparison relaunched with an Ollama self-healing guard
 after the server died mid-run again (the guard detected and restarted it on first use), and the
 multi-generator slice continues generating.
+
+### Completion sprint, part 2: the scaled answer, and two more safeguards priced (8 July 2026, early)
+
+The overnight experiments landed faster than planned thanks to state reuse, and the results close the
+evaluation programme.
+
+- **The scaled fixed-claim comparison (30 essays, 754 questions, all arms 0 percent degenerate).**
+  Three findings in rising order: the commercial-vs-8B null replicates (-0.005, p = 0.62); the v3
+  fine-tune's gain is solid at scale (0.081 vs base 0.038, +0.040 paired, p = 0.0001, higher on 22 of
+  27 essays); and the claim retracted twice in weaker forms is now admissible, the fine-tuned local
+  model beats free-tier Gemini on shared essays (+0.050, p = 0.0094, higher on 11 of 13), with the
+  ranking and fitness-for-purpose finally agreeing because every question passed the gate. Honest
+  frame kept: Gemini quota lapsed again at 14 of 30 essays, so the commercial pair rests on 13, and
+  the claim is scoped to the free tier. Written as Section 8.12 with Figure 8.7; Chapter 9's answer
+  and sample-size limitation updated.
+- **The multi-generator slice, scored.** The transformer of record flags 100 percent of both unseen
+  commercial generators' essays (Gemini n=19, GPT-4o-mini n=40, matched subset agrees) and none of
+  the 40 human sources. The hybrid catches all of GPT but only 68 percent of Gemini: the same style
+  half that cut false accusations of humans extends some protection to a generator whose style
+  drifts human-ward. The trade the fusion was designed to make, now measured on its other side.
+  Section 6.9 with Figure 6.7.
+- **The consistency audit is now a script** (`dissertation/docgen/audit_consistency.py`): fourteen
+  headline numbers checked against their result JSONs, citation cross-check (33 in-text citations,
+  33 entries, all matched after adding three genuinely missing citations: Anderson and Krathwohl for
+  Bloom's taxonomy, DeYoung for ERASER, Pietron for the argument-mining comparison), and figure
+  numbering. ALL CLEAN, and rerunnable before every hand-in.
+- Draft stands at 86 pages. The evaluation programme named in the completion plan is done; what
+  remains is writing polish, the real-student study (future work by design), and submission process.

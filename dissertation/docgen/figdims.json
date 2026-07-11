@@ -106,5 +106,13 @@
   "fig_abstain_band": {
     "w": 1639,
     "h": 919
+  },
+  "fig_multigen_detection": {
+    "w": 1600,
+    "h": 919
+  },
+  "fig_likeforlike_scaled": {
+    "w": 1560,
+    "h": 940
   }
 }

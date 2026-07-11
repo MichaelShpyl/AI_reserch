@@ -29,8 +29,8 @@ the essay is about.
 
 ## 5.3 Are the highlights honest? A faithfulness test
 
-A highlight is only useful if it is faithful. I tested this by ablation (the same script). For a
-sample of test essays I ranked the tokens by their attribution and then asked two questions.
+A highlight is only useful if it is faithful. I tested this by ablation in the style of the ERASER
+benchmark (DeYoung et al., 2020), in the same script. For a sample of test essays I ranked the tokens by their attribution and then asked two questions.
 First, comprehensiveness: if I remove the top tokens, does the detector's confidence fall, and
 does it fall more than if I remove the same number of random tokens? Second, sufficiency: if I
 keep only the top tokens and hide the rest, does the confidence hold up?

@@ -171,3 +171,29 @@ fix; the confidently wrong flags need per-domain calibration or domain detection
 trusted at all, and until then the question stage remains the real backstop for exactly these cases.
 This is what "measure your safeguards" looks like in practice: the safeguard survived, and its
 limits are now on the record next to its benefits.
+
+## 6.9 Unseen commercial generators, on home ground
+
+The last gap in the robustness picture was that the cross-generator evidence (Section 6.2) lives on
+an external benchmark with its own corpus design. This closes it at home. For forty test-split human
+essays, matched AI counterparts were generated with two commercial models the detector never saw,
+Gemini 2.5 Flash and GPT-4o-mini, using the identical recipe as the original corpus: the same system
+prompt, the same title-plus-keywords-plus-target-length user turn
+(`src/generation/multigen_test_slice.py`). Gemini completed nineteen of the forty before its free
+tier ran dry, GPT completed all forty, and the length ratios are recorded per essay because
+GPT-4o-mini undershoots its target on many of them (mean ratio 0.45); results are therefore reported
+for all essays and for the reasonably matched subset, and the two agree
+(`src/detection/score_multigen.py`, `outputs/multigen_detection.json`).
+
+The transformer of record generalises perfectly here: it flags 100 percent of both unseen
+generators' essays and none of the forty human sources. The interesting result is the hybrid, which
+catches all of GPT-4o-mini but only 68 percent of Gemini's essays. The style half, the same
+component that cut false accusations of humans by three to eight times in Section 6.7, reads a third
+of Gemini's essays as human-like enough to pull the fused score under the threshold. That is not a
+malfunction; it is the trade the fusion was designed to make, err toward not accusing, now measured
+on its other side. A detector tuned to protect unusual human writing will extend some of that
+protection to a generator whose style drifts toward human. For deployment the reading is the same as
+Section 6.8's: the fusion sets the right default, and the question stage exists precisely because no
+threshold can be both safe for humans and airtight against every generator at once.
+
+![Figure 6.7: Unseen commercial generators produced with the home corpus recipe. The transformer flags every AI essay from both new generators and no human sources; the hybrid trades 32 percent of Gemini recall for the false-accusation protection measured in Section 6.7.](../figures/fig_multigen_detection.png)
