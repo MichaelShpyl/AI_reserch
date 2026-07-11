@@ -250,6 +250,7 @@ const FIGURE_LIST = [
   ["Figure 6.3", "Cross-domain failure modes by domain"],
   ["Figure 6.4", "Training-distribution control: balanced vs natural writer mix"],
   ["Figure 6.5", "The hybrid detector: ceiling in-domain, fewer false accusations out of domain"],
+  ["Figure 6.6", "The abstain band, priced: accuracy rises, confident errors remain"],
   ["Figure 7.1", "Bloom's-level classification: trained BERT vs the keyword heuristic"],
   ["Figure 7.2", "Argument-component extraction: strict span F1 on Persuasive Essays"],
   ["Figure 7.3", "Relation classification: supports-links learned, attacks starved"],

@@ -43,6 +43,28 @@ ARM_LABEL = {"local8b": "local 8B", "commercial": "commercial\nGemini",
 SEED = 42
 
 
+def ensure_ollama():
+    """The Ollama server dies occasionally between long runs; ping it and restart if needed."""
+    import requests
+    for attempt in range(2):
+        try:
+            requests.get("http://localhost:11434/api/version", timeout=5)
+            return
+        except Exception:
+            print("  ollama down; starting the server ...", flush=True)
+            subprocess.Popen([str(OLLAMA_EXE), "serve"],
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                             creationflags=0x00000008)  # DETACHED_PROCESS
+            for _ in range(20):
+                time.sleep(3)
+                try:
+                    requests.get("http://localhost:11434/api/version", timeout=5)
+                    return
+                except Exception:
+                    pass
+    raise RuntimeError("could not start Ollama")
+
+
 def free_ollama():
     for m in ("llama3.1:8b", "nomic-embed-text"):
         try:
@@ -264,6 +286,7 @@ def main() -> int:
     print(f"== {len(ids)} essays ==", flush=True)
 
     print("== Phase A: claims + local 8B (Ollama) ==", flush=True)
+    ensure_ollama()
     ensure_claims(state, ids)
     from generate_questions import OllamaBackend
     generate_arm(state, ids, "local8b", lambda: OllamaBackend("llama3.1:8b"))
@@ -292,6 +315,7 @@ def main() -> int:
         print(f"[skip] commercial unavailable: {e}", flush=True)
 
     print("== Phase E: scoring (Ollama) ==", flush=True)
+    ensure_ollama()
     for arm in ARMS:
         score_arm(state, ids, arm)
     free_ollama()

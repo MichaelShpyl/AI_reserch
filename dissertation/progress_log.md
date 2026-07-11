@@ -1417,3 +1417,18 @@ The full completion plan is in motion; this entry records the first wave.
   evaluation essay nor one of the 307 essays v3 trained on (guards checked: zero violations).
 - **Appendices added as Chapter 12**: the pipeline's verbatim prompts, a model-and-training
   configuration table, the repository map, and the worked guide reference.
+
+### The abstain band, measured, and it half-refutes its own proposal (7 July 2026, night)
+
+The abstain-band sweep ran on the cross-domain sample with per-text hybrid probabilities kept.
+Accuracy among judged texts climbs from 0.79 (no band) to 0.88 (band 0.2-0.8, declining 28.5 percent
+of texts), so abstention genuinely concentrates verdicts on cases the detector gets right. But the
+human false-positive rate among judged texts barely moves (about 0.19 across the sweep): the
+surviving false accusations are confident errors, mostly arXiv abstracts, that no uncertainty band
+can catch. I had drafted the figure title as "abstention cuts false accusations" before reading the
+sweep; the data refused, the title was corrected, and the write-up (new Section 6.8, Figure 6.6)
+records both the benefit and the limit. The mitigation plan updates: abstention is worth deploying
+for accuracy, per-domain calibration is still needed for fairness, and the question stage remains the
+backstop. Also tonight: the scaled 30-essay comparison relaunched with an Ollama self-healing guard
+after the server died mid-run again (the guard detected and restarted it on first use), and the
+multi-generator slice continues generating.

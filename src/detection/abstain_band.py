@@ -133,9 +133,9 @@ def make_figure(result):
                     xytext=(6, -12), fontsize=8, color="#52616B")
     ax.set_xlabel("texts the system declines to judge (%)")
     ax.set_ylabel("percent")
-    ax.set_title("Buying safety with abstention: widening the uncertain band cuts false\n"
-                 "accusations of humans on out-of-domain text", fontsize=11.5,
-                 fontweight="bold", color="#222831")
+    ax.set_title("What abstention buys, measured: accuracy rises, but the remaining\n"
+                 "false accusations are confident ones the band does not catch",
+                 fontsize=11.5, fontweight="bold", color="#222831")
     ax.legend(fontsize=9.5, frameon=False)
     ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()

@@ -143,3 +143,31 @@ remaining errors away from falsely accusing human writers, which is exactly the 
 system must err in, and it does so for the price of a feature extractor that runs anywhere. Component
 1 of the scope is now complete as specified, and the hybrid, not the bare transformer, is the
 detector the rest of the pipeline should call.
+
+## 6.8 The abstain band, priced in numbers
+
+Sections 6.4 and 9.5 propose an abstain band as a deployment safeguard: when the hybrid's probability
+falls in a middle band, the system should say "uncertain" rather than flag. Proposals are cheap, so
+this section prices it. On the same cross-domain sample as Section 6.7, with the per-text hybrid
+probabilities kept this time, a sweep of bands from none to 0.2-0.8 measures what abstention actually
+buys (`src/detection/abstain_band.py`, `outputs/abstain_band.json`).
+
+Half of the answer is what the proposal hoped (Figure 6.6). Accuracy among the texts the system still
+judges climbs steadily, from 0.79 with no band to 0.88 when the widest band declines 28.5 percent of
+texts, so abstention does concentrate the detector's verdicts on cases it gets right. The other half
+is the finding the proposal did not anticipate: the human false-positive rate among judged texts
+barely moves, sitting near 0.19 across the whole sweep. The false accusations that survive the hybrid
+are not hesitant ones hovering near the threshold; they are confident errors, mostly the dense arXiv
+abstracts that the detector scores as machine-like with conviction, and no uncertainty band can catch
+an error that is not uncertain. I nearly titled the figure "abstention cuts false accusations" before
+reading the sweep, which would have been the fourth time this project wrote a headline the data then
+refused; the discipline held.
+
+![Figure 6.6: The abstain band swept from none to 0.2-0.8 on the cross-domain sample. Accuracy on the judged texts rises steadily, but the human false-positive rate barely moves: the surviving false accusations are confident errors that no uncertainty band can catch.](../figures/fig_abstain_band.png)
+
+The practical reading updates the mitigation plan rather than confirming it. Abstention is worth
+deploying, a quarter of verdicts withheld buys nine points of accuracy, but it is not the fairness
+fix; the confidently wrong flags need per-domain calibration or domain detection before the score is
+trusted at all, and until then the question stage remains the real backstop for exactly these cases.
+This is what "measure your safeguards" looks like in practice: the safeguard survived, and its
+limits are now on the record next to its benefits.

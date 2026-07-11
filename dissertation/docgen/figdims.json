@@ -102,5 +102,9 @@
   "fig_relation_classifier": {
     "w": 1400,
     "h": 840
+  },
+  "fig_abstain_band": {
+    "w": 1639,
+    "h": 919
   }
 }
