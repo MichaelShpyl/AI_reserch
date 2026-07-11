@@ -105,28 +105,35 @@ class GeminiBackend:
         self._key = _require_key("GEMINI_API_KEY", "GOOGLE_API_KEY")
 
     def chat_json(self, system: str, user: str) -> dict:
+        return _extract_json(self._generate(system, user, json_mode=True))
+
+    def chat_text(self, system: str, user: str) -> str:
+        """Raw prose completion (no JSON mode), for tasks like essay generation."""
+        return self._generate(system, user, json_mode=False)
+
+    def _generate(self, system: str, user: str, json_mode: bool) -> str:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent"
+        cfg = {"temperature": self.temperature}
+        if json_mode:
+            cfg["responseMimeType"] = "application/json"
         body = {
             "system_instruction": {"parts": [{"text": system}]},
             "contents": [{"role": "user", "parts": [{"text": user}]}],
-            "generationConfig": {"temperature": self.temperature,
-                                 "responseMimeType": "application/json"},
+            "generationConfig": cfg,
         }
         data = _post_with_retry(url, {"x-goog-api-key": self._key,
                                       "content-type": "application/json"}, body)
         if "error" in data:
             raise RuntimeError(f"Gemini error: {data['error']}")
         try:
-            text = data["candidates"][0]["content"]["parts"][0]["text"]
+            return data["candidates"][0]["content"]["parts"][0]["text"]
         except (KeyError, IndexError):
             raise RuntimeError(f"Unexpected Gemini response: {json.dumps(data)[:300]}")
-        return _extract_json(text)
 
 
 class AnthropicBackend:
-    """Anthropic Claude via the official `anthropic` Python SDK (per the claude-api guidance, the
-    SDK is the right surface for Python). Self-funded path. The SDK reads ANTHROPIC_API_KEY and
-    retries 429/5xx itself."""
+    """Anthropic Claude via the official `anthropic` Python SDK, which is the supported surface for
+    Python. Self-funded path. The SDK reads ANTHROPIC_API_KEY and retries 429/5xx itself."""
 
     def __init__(self, model: str = DEFAULT_MODELS["anthropic"], temperature: float = 0.2):
         self.model = model
@@ -162,16 +169,24 @@ class OpenAIBackend:
         self._key = _require_key("OPENAI_API_KEY")
 
     def chat_json(self, system: str, user: str) -> dict:
+        return _extract_json(self._generate(system, user, json_mode=True))
+
+    def chat_text(self, system: str, user: str) -> str:
+        """Raw prose completion (no JSON mode), for tasks like essay generation."""
+        return self._generate(system, user, json_mode=False)
+
+    def _generate(self, system: str, user: str, json_mode: bool) -> str:
         body = {
             "model": self.model, "temperature": self.temperature,
-            "response_format": {"type": "json_object"},
             "messages": [{"role": "system", "content": system},
                          {"role": "user", "content": user}],
         }
+        if json_mode:
+            body["response_format"] = {"type": "json_object"}
         data = _post_with_retry("https://api.openai.com/v1/chat/completions",
                                 {"Authorization": f"Bearer {self._key}",
                                  "content-type": "application/json"}, body)
-        return _extract_json(data["choices"][0]["message"]["content"])
+        return data["choices"][0]["message"]["content"]
 
 
 _PROVIDERS = {"gemini": GeminiBackend, "anthropic": AnthropicBackend, "openai": OpenAIBackend}
