@@ -110,6 +110,12 @@ def build_markdown(essay_id: str, source: str, det: dict, guide: dict,
         L.append(f"*Component views: transformer {comp.get('transformer')}, "
                  f"style-plus-perplexity {comp.get('style_plus_perplexity')}. The hybrid fuses both "
                  f"because the style half keeps the detector calmer on unusual but human writing.*")
+    if not det["flagged"]:
+        L.append("")
+        L.append("**This submission is not flagged.** No verification interview is suggested. The "
+                 "sections below are generated anyway so this guide can serve as a contrast "
+                 "example: they show what the system would have asked, and a lecturer may still "
+                 "find the claim summary useful for ordinary feedback.")
     L.append("")
     card = det.get("explain_card")
     if card:

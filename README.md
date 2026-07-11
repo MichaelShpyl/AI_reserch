@@ -17,7 +17,8 @@ evidence. The target user is a lecturer running a large module (150 to 300
 students) who has no time to prepare individual verification questions for every
 flagged submission.
 
-See `CLAUDE.md` for the full scope, research questions, datasets, and phase plan.
+The full write-up, including scope, research question, datasets and results, is the dissertation
+draft in `dissertation/` (built by `dissertation/docgen/build_dissertation.js`).
 
 ## Setup (local: Windows, NVIDIA GPU)
 
@@ -61,9 +62,43 @@ Target machine: Windows 11, RTX 4060 laptop GPU, Python 3.11.
 
 ## Data
 
-Datasets are not stored in this repository. Download them per `CLAUDE.md` and put
-raw downloads in `data/raw/`. The BAWE corpus is the starting point; the loading
-and summary script lives in `src/data/`.
+Datasets are not stored in this repository (licences are respected; BAWE is CC BY-NC-SA). Put raw
+downloads in `data/raw/`: BAWE from the Oxford Text Archive, M4/SemEval-2024 Task 8, Persuasive
+Essays 2.0, EduQG, and SQuAD via the Hugging Face hub. The loading and summary scripts live in
+`src/data/`.
+
+## Running the pipeline
+
+The end product is the Verification Interview Guide, generated end to end with local models:
+
+    python src/question_gen/integrated_guide.py --id 3108a --source ai --claims 4
+    python src/pipeline/assemble_guide.py --id 3108a --source ai
+
+The first command extracts claims (prompted phrasing plus the trained argument miner's verbatim
+spans), writes questions with the fine-tuned local backend through the well-formedness gate; the
+second scores the submission with the hybrid detector, builds the per-submission explanation card,
+tags questions with the trained Bloom classifier, and renders Markdown, Word and PDF into
+`outputs/verification_guides/`.
+
+Every experiment writes its result to a JSON under `outputs/`, and the pre-submission consistency
+audit checks the written chapters against those files:
+
+    python dissertation/docgen/audit_consistency.py
+
+## Results at a glance
+
+- Detection: F1 0.99 in-domain after a corpus-artefact audit; transfers to six unseen generators at
+  0.97; degrades cross-domain to 0.79 with false accusation as the failure mode, which motivates the
+  design.
+- The hybrid (transformer + stylometric features + GPT-2 perplexity) cuts cross-domain false
+  accusations of humans by three to eight times at equal F1.
+- Explanations are faithfulness-tested; the feature-level account passes where all three token-level
+  methods fail, and each guide carries a plain-language per-submission explanation card.
+- Question generation: on fixed claims across 30 essays, the QLoRA fine-tuned 3B (trained on
+  self-distilled verification questions) beats its base (p = 0.0001) and the free-tier commercial
+  model on shared essays (p = 0.0094), with every question passing the well-formedness gate.
+- Three LLM judges neither agree with each other (Krippendorff's alpha -0.25) nor track the
+  objective measure, which is why the judge-free simulation carries the evidence.
 
 ## Tooling (writing, diagrams, slides)
 
@@ -89,6 +124,7 @@ VS Code so `pandoc` and `dot` are on PATH:
 
 ## Status
 
-Foundation (data and environment) is complete. Current work: generating the AI half
-of the detection corpus locally, then the detector. New contributors and new AI
-sessions should start with `HANDOFF.md`.
+All six locked-scope components are built and trained, the pipeline runs end to end on an 8 GB
+laptop, and the evaluation programme is complete. The dissertation draft (86 pages, twelve chapters)
+lives in `dissertation/`, with a per-session progress log in `dissertation/progress_log.md`.
+Remaining work is writing polish and submission process.

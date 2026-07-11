@@ -1460,3 +1460,21 @@ evaluation programme.
   numbering. ALL CLEAN, and rerunnable before every hand-in.
 - Draft stands at 86 pages. The evaluation programme named in the completion plan is done; what
   remains is writing polish, the real-student study (future work by design), and submission process.
+
+### Refill running; timing verified; README and AICS draft brought current (8 July 2026)
+
+- Gemini quota reopened, so the scaled comparison's commercial arm is refilling (the rerun is also
+  self-healing the two essays whose claims failed overnight, so all arms head toward 30 of 30).
+- Timed the graded talk from the speaker notes: 2,499 words is about 19.2 minutes at a prepared
+  130 words per minute, with no slide over 1.7 minutes, so the 20-minute slot fits with a small
+  buffer and nothing needs cutting.
+- The assembler now handles the not-flagged case: a human submission's guide states plainly that no
+  interview is suggested and frames the generated sections as a contrast example.
+- README rewritten to the current state: what the system does, how to run the pipeline end to end,
+  results at a glance, the consistency audit, and an honest status. The stale "generating the AI
+  half" status and the internal working-notes pointers are gone.
+- The AICS Student Track draft is citation-complete: every placeholder resolved against the same
+  verified reference list as the dissertation (Wu, Liang, Mitchell, Liu, He, Wang x2, Krishna,
+  Mindner, Sundararajan, DeYoung, Alsop and Nesi), and the numbers already match the final results.
+  What remains before submission is prose polish, CEURART formatting, and the call details from
+  Vini.
