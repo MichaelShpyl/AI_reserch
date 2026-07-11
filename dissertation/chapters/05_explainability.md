@@ -128,7 +128,34 @@ the named stylometric features passes its ablation test and remains the explanat
 lecturers. Having the third method measured matters for the argument: the weakness is not a quirk of
 one attribution technique, it is a property of token-level explanation on this task.
 
-## 5.7 What follows for explainability
+## 5.7 From researcher's chart to lecturer's card
+
+The SHAP beeswarm of Figure 5.3 is the faithful explanation, but it is a researcher's picture: it
+takes training to read, and the audience for this system is a lecturer with none. The supervision
+feedback on the mid-project presentation said the same thing plainly, that the explanations convince
+the person who built them and not yet the person who must use them. So the explanation layer gained a
+second rendering aimed squarely at that reader (`src/explainability/explain_submission.py`), and it
+is now part of every generated guide.
+
+For one submission, the card takes the same style model the hybrid detector uses, computes which
+habits moved this particular essay's score, and states each one as a plain sentence with its number
+set against what is typical for real student essays in the corpus: "the sentences are unusually
+uniform in length, variation 7.5 against a typical 11.4", "a language model finds this text unusually
+easy to predict, surprise score 18 against a typical 30". Each sentence ends with the direction it
+pushed, and a small bar chart shows the same five habits with arrows toward AI or human. Two design
+rules keep it honest. The wording is generated from the numbers, higher or lower than the human
+median, so a sentence can never contradict its own figures. And the card explains the very model that
+produced the score, not a simplified stand-in, so faithfulness carries over from Section 5.5 rather
+than being re-argued.
+
+This does not finish the explainability work; it starts its second half. The card has not yet been
+tested on actual lecturers, its reference band is one corpus's idea of "typical", and the transformer
+half of the hybrid still contributes to the score without a per-essay account of its own. Those are
+named in the plan. But the direction is set: every explanation in this project must survive two
+tests, the ablation test that says it is faithful, and the plain-reader test that says it is
+understood.
+
+## 5.8 What follows for explainability
 
 Three things follow. First, the stylometric model and the transformer are fused into the hybrid
 detector in Section 6.7, with perplexity added to the feature set. Second, keep the token

@@ -111,6 +111,16 @@ def build_markdown(essay_id: str, source: str, det: dict, guide: dict,
                  f"style-plus-perplexity {comp.get('style_plus_perplexity')}. The hybrid fuses both "
                  f"because the style half keeps the detector calmer on unusual but human writing.*")
     L.append("")
+    card = det.get("explain_card")
+    if card:
+        L.append("**Why this particular score? The habits that moved it, against typical student "
+                 "writing:**")
+        L.append("")
+        for s in card["sentences"]:
+            L.append(f"- {s}")
+        L.append("")
+        L.append(f"![The writing habits that moved this submission's score]({Path(card['png_path']).name})")
+        L.append("")
     L.append("**What drives decisions like this one** (validated by faithfulness testing):")
     L.append("")
     for d in drivers():
@@ -170,7 +180,10 @@ def render(md_path: Path) -> None:
     docx = md_path.with_suffix(".docx")
     pdf = md_path.with_suffix(".pdf")
     if PANDOC.exists():
-        subprocess.run([str(PANDOC), str(md_path), "-o", str(docx)], check=True, timeout=120)
+        # --resource-path lets pandoc find images referenced by bare filename next to the markdown
+        # (the per-submission explanation card).
+        subprocess.run([str(PANDOC), str(md_path), "-o", str(docx),
+                        "--resource-path", str(md_path.parent)], check=True, timeout=120)
         print(f"Saved {docx.name}")
         if SOFFICE.exists():
             subprocess.run([str(SOFFICE), "--headless",
@@ -199,6 +212,18 @@ def main() -> int:
     print("Scoring submission with the trained detector ...", flush=True)
     det = detect(text)
     print(f"  prob(AI) = {det['prob_ai']}", flush=True)
+
+    # The lecturer-facing explanation card: this submission's writing habits against typical
+    # student writing, from the same style model the hybrid uses (explain_submission.py).
+    try:
+        import sys as _s
+        _s.path.insert(0, str(REPO / "src" / "explainability"))
+        from explain_submission import explain_submission
+        card_png = GUIDES / f"{args.id}_{args.source}_explain.png"
+        print("Building the per-submission explanation card ...", flush=True)
+        det["explain_card"] = explain_submission(text, card_png)
+    except Exception as e:
+        print(f"  (explanation card skipped: {type(e).__name__}: {str(e)[:100]})", flush=True)
 
     questions = [q["question"] for c in guide["claims"] for q in c["questions"]]
     print(f"Tagging {len(questions)} questions with the trained Bloom classifier ...", flush=True)
