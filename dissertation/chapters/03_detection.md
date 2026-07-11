@@ -73,9 +73,12 @@ one residual markup token ("fnote") survived the cleaning into the full model's 
 traced it: the cleaning strips the bracketed tags, but 115 of the 640 AI essays contain the bare
 word "fnote", echoed by the generator from keyword prompts that were extracted from the human
 source text. So in the cleaned corpus "fnote" flips from a human marker to a weak AI one; it is
-a generation artefact rather than leftover markup, it does not touch the function-word or
-stylometric results, and stripping the bare token from both sides is queued for the next
-retraining pass. The cleanest evidence is therefore the next result, not this one. A model that
+a generation artefact rather than leftover markup, and it does not touch the function-word or
+stylometric results. To close the question I later ran the promised control: the bare token
+stripped from both classes and the same DeBERTa configuration retrained on the same splits
+(`src/detection/fnote_control.py`, `outputs/fnote_control.json`). The control scores F1 0.995
+against the detector of record's 0.990, one test essay of difference, so "fnote" was carrying
+nothing and the headline stands without it. The cleanest evidence is still the next result. A model that
 is allowed to use only
 function words (the, and, because, therefore, and the like, which carry no topic information at
 all, and no markup) still reaches 99.5 percent. Topic cannot explain that, and neither can a
