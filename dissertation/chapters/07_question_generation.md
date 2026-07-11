@@ -52,7 +52,7 @@ The full guide, with every claim, its exact source sentences, and the Bloom's le
 The slice above was deliberately a thin path through the remaining pipeline, with three declared
 stand-ins, and it is worth recording what they were because the rest of this chapter replaces them
 one by one. The claim extraction was prompted rather than the trained argument miner planned in the
-scope; the trained extractor arrives in Section 7.6. The Bloom's tag was a transparent keyword
+scope; the trained argument miner arrives in Section 7.6. The Bloom's tag was a transparent keyword
 heuristic, replaced by the trained classifier in Section 7.5. And the questions themselves were not
 yet evaluated; the discrimination simulation that turns them into measured results is the subject of
 Chapter 8, where the commercial backend also joins the comparison. The one open decision at this
@@ -89,7 +89,7 @@ questions can be trusted, and tags on the higher levels should be treated as sug
 label supply improves. Both the model and the full metrics are saved
 (`models/bloom_classifier/`, `outputs/bloom_classifier.json`).
 
-## 7.6 The trained claim extractor
+## 7.6 The trained argument miner: spans and relations
 
 The prompted claim extraction above was the declared stand-in for component 3, and the trained
 version now exists. I downloaded the Persuasive Essays 2.0 corpus from its official repository (402
@@ -103,13 +103,32 @@ The result is a micro span-F1 of 0.63: premises 0.72, major claims 0.54, claims 
 Strict matching is a hard yardstick, and the per-class order is the expected one, since claim
 boundaries are the classic ambiguity in this corpus. Dedicated argument-mining architectures with
 CRF decoding or joint relation modelling report higher figures, so this is a working first version
-rather than the state of the art, and I report it as such. For the pipeline it opens a design choice
-to settle with my supervisor: the trained extractor finds spans in the student's own words, while the
-prompted extractor produces readable claim paraphrases with sentence citations, so the natural
-combination is spans for provenance and the prompt for phrasing. The model and metrics are saved
-(`models/claim_extractor/`, `outputs/claim_extractor.json`).
+rather than the state of the art, and I report it as such. For the pipeline it opened a design
+choice, settled with my supervisor and implemented in Section 7.9: the trained extractor finds spans
+in the student's own words, the prompted extractor produces readable claim paraphrases with sentence
+citations, and the guide combines them, spans for provenance and the prompt for phrasing. The model
+and metrics are saved (`models/claim_extractor/`, `outputs/claim_extractor.json`).
 
 ![Figure 7.2: Argument-component extraction on the official Persuasive Essays test set, strict span-level F1 per class. Premises are learned well; claim boundaries are the hard case, matching the corpus literature.](../figures/fig_claim_extractor.png)
+
+The component's second half, pairwise relation classification, is also built
+(`src/argument_mining/train_relation_classifier.py`, `outputs/relation_classifier.json`). Following
+the corpus's own structure, candidate pairs are ordered pairs of gold components within one
+paragraph, and DeBERTa reads the source and target components together and decides supports,
+attacks, or no direct link, trained with class weights on the official split. The result splits
+cleanly along the data's fault line (Figure 7.3). Supports-links are learned well, F1 0.75 with
+recall 0.80, which sits where the corpus literature puts link identification when component
+boundaries are given, and unlinked pairs score 0.95. Attacks are not learned at all, F1 0.0, and the
+reason is the label supply rather than the model: attack relations are 0.7 percent of candidate
+pairs, about the same starvation that capped the Bloom classifier's smallest classes. The macro-F1
+of 0.57 against a 0.30 majority baseline is therefore honest but slightly misleading in both
+directions, dragged down by an unlearnable class and propped up by an easy one; the informative
+number is the supports-F1. For the guide, the practical use is ordering, since which premises
+support which claim tells the lecturer which evidence to probe first; the question generator itself
+only needs the claims, so this completes the scope's argument-mining specification without changing
+the pipeline's behaviour.
+
+![Figure 7.3: Relation classification on the official Persuasive Essays test split, per class. Supports-links reach F1 0.75 with gold components; attack relations, 0.7 percent of pairs, are unlearnable from this corpus, the same label-starvation pattern as the Bloom classifier's smallest classes.](../figures/fig_relation_classifier.png)
 
 ## 7.7 The assembled guide: the pipeline's output document
 
@@ -162,7 +181,7 @@ CI 0.085 to 0.227), a Mann-Whitney p of 0.007 and confidence intervals that do n
 7.3). Taken at face value that is roughly a five-fold gain, and the same 0.15 shows up again at essay
 scale in Section 8.8. I nearly wrote it up as the headline result of the whole project.
 
-![Figure 7.3: The QLoRA fine-tune of Qwen2.5 3B against its own base model on the same 18 claims, mean discrimination with 95 percent bootstrap intervals. The raw score rises from 0.033 to 0.154, but the quality audit in Section 8.9 shows this rise to be an artifact of degenerate output rather than better questions.](../figures/fig_finetune_eval.png)
+![Figure 7.4: The QLoRA fine-tune of Qwen2.5 3B against its own base model on the same 18 claims, mean discrimination with 95 percent bootstrap intervals. The raw score rises from 0.033 to 0.154, but the quality audit in Section 8.9 shows this rise to be an artifact of degenerate output rather than better questions.](../figures/fig_finetune_eval.png)
 
 Reading the actual questions stopped that. The fine-tuned model had overfit the format of its training
 data. EduQG is largely a multiple-choice corpus, and the adapter learned to emit multiple-choice
@@ -213,7 +232,7 @@ style half pulls an over-confident transformer back, which is exactly the behavi
 a possible false positive should want.
 
 The document itself is organised for its reader, a lecturer with no time to prepare
-(Figure 7.4). It opens with the position the fairness results of Chapter 6 make necessary, that the
+(Figure 7.5). It opens with the position the fairness results of Chapter 6 make necessary, that the
 guide is evidence for a conversation and not an accusation, then gives the detection verdict with its
 limits in plain language, the SHAP-validated drivers of the decision in lecturer terms, the claims
 with their two-way provenance and grounded questions, and a three-level rubric for reading the
@@ -222,4 +241,4 @@ laptop (`outputs/verification_guides/3108a_ai_guide.pdf` is the worked example).
 page is the output of a trained component of this project rather than a mock-up, which is the sense in
 which the pipeline, and not just its parts, now works.
 
-![Figure 7.4: The first page of the assembled Verification Interview Guide, generated end to end with live models. The detection verdict is the hybrid detector with its component views; the claims that follow carry both readable phrasing and the trained argument miner's verbatim spans; the questions are written by the fine-tuned local backend and tagged by the trained Bloom classifier. The framing states that the guide is evidence for a conversation, not an accusation.](../figures/fig_guide_page1.png)
+![Figure 7.5: The first page of the assembled Verification Interview Guide, generated end to end with live models. The detection verdict is the hybrid detector with its component views; the claims that follow carry both readable phrasing and the trained argument miner's verbatim spans; the questions are written by the fine-tuned local backend and tagged by the trained Bloom classifier. The framing states that the guide is evidence for a conversation, not an accusation.](../figures/fig_guide_page1.png)

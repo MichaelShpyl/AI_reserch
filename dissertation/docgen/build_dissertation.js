@@ -252,8 +252,9 @@ const FIGURE_LIST = [
   ["Figure 6.5", "The hybrid detector: ceiling in-domain, fewer false accusations out of domain"],
   ["Figure 7.1", "Bloom's-level classification: trained BERT vs the keyword heuristic"],
   ["Figure 7.2", "Argument-component extraction: strict span F1 on Persuasive Essays"],
-  ["Figure 7.3", "QLoRA fine-tune vs base Qwen 3B: discrimination on the same claims"],
-  ["Figure 7.4", "The assembled Verification Interview Guide (first page)"],
+  ["Figure 7.3", "Relation classification: supports-links learned, attacks starved"],
+  ["Figure 7.4", "QLoRA fine-tune vs base Qwen 3B: discrimination on the same claims"],
+  ["Figure 7.5", "The assembled Verification Interview Guide (first page)"],
   ["Figure 8.1", "Discrimination simulation: claim-grounded vs generic questions"],
   ["Figure 8.2", "Commercial vs local question generation, balanced across essays"],
   ["Figure 8.3", "Four question writers on one fixed claim set (like-for-like)"],
@@ -291,6 +292,7 @@ const ch8 = readChapter("08_evaluation_questions.md");
 const ch9 = readChapter("09_discussion.md");
 const ch10 = readChapter("10_conclusions.md");
 const ch11 = readChapter("11_references.md");
+const ch12 = readChapter("12_appendices.md");
 
 const doc = new Document({
   creator: "Mykhailo Shpyl",
@@ -331,7 +333,7 @@ const doc = new Document({
     children: [
       ...titlePage1, ...titlePage2, ...declaration, ...acknowledgements, ...abstract,
       ...acronyms, ...toc, ...tableOfFigures,
-      ...ch1, ...ch2, ...ch3, ...ch4, ...ch5, ...ch6, ...ch7, ...ch8, ...ch9, ...ch10, ...ch11,
+      ...ch1, ...ch2, ...ch3, ...ch4, ...ch5, ...ch6, ...ch7, ...ch8, ...ch9, ...ch10, ...ch11, ...ch12,
     ],
   }],
 });

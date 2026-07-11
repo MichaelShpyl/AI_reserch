@@ -92,9 +92,9 @@ generators, the corpus itself cannot show generator diversity. The commercial ar
 free tier rather than a frontier model, and quota limits caused disclosed irregularities. On the home
 corpus the detection task saturates, which is why the training-distribution control could show the
 balancing is harmless but not whether it helps on a harder task. And the argument-mining component
-extracts claims at a working but unspectacular span-F1 of 0.63, and relation classification between
-claims and premises is not built; whether to add a basic version or record a descope is an open
-question with my supervisor at the time of writing.
+extracts claims at a working but unspectacular span-F1 of 0.63, and the relation classifier learns
+supports-links well (F1 0.75 with gold components) but cannot learn attack relations from the 0.7
+percent of pairs that carry them, a label-supply ceiling it shares with the Bloom classifier.
 
 ## 9.5 Implications for practice
 

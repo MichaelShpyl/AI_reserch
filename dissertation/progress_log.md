@@ -1382,3 +1382,38 @@ audience (basic computer literacy, no project knowledge). Rebuilt the deck accor
   "unfamiliar kinds of writing", relabelled the on-screen "Bloom" tag as "Thinking level" and named
   Bloom's taxonomy in the script, clarified the 61% base rate, broke the pipeline caption into steps,
   and added the stress-test bridge on the hybrid slide.
+
+### Completion sprint, part 1: promises discharged and the weak points attacked (7 July 2026, evening)
+
+The full completion plan is in motion; this entry records the first wave.
+
+- **The fnote control (Chapter 3's promise) is discharged.** Stripped the bare token from both
+  classes, retrained the identical DeBERTa configuration as a control (`fnote_control.py`): F1 0.995
+  against the record's 0.990, one test essay of difference, confirming the token carried nothing.
+  The detector of record stays untouched; Chapter 3's sentence now reports the control instead of
+  promising it.
+- **The relation classifier (the last unbuilt scope element) is training.** Ordered within-paragraph
+  component pairs from Persuasive Essays 2.0, official split, supports / attacks / none with
+  class-weighted loss (attacks are only 0.7 percent of pairs, which the write-up will state
+  plainly). About 20,600 training pairs, 4,900 test pairs.
+- **The explainability upgrade the presentation admits is needed has its first concrete piece:** a
+  per-submission explanation card (`explain_submission.py`). For one essay it turns the hybrid's own
+  style model into five plain sentences, each with its number set against the human-corpus median
+  ("sentences unusually uniform: variation 7.5 against a typical 11.4") and its push direction, plus
+  a small bar chart. One bug caught in testing: wording was driven by the SHAP sign and could
+  contradict the numbers ("more helper verbs" over a below-median value); rewritten so the words
+  always follow the values. The card is now embedded in every generated guide, and Chapter 5 gained
+  Section 5.7 describing it and what it does not yet do (no lecturer testing yet).
+- **The multi-generator test slice is generating**: matched essays from Gemini and GPT-4o-mini with
+  the original corpus recipe (same system prompt, title plus keywords plus target length), for 40
+  test-split sources; chat_text added to the commercial backends for raw prose. Length ratios are
+  recorded per essay; GPT undershoots length notably on some essays, which the analysis will state.
+- **Two measured-safeguard scripts are ready to run** once the GPU frees: the abstain-band sweep
+  (turning the proposed uncertain band into abstain-rate versus false-accusation curves) and the
+  multigen scorer (detection rates on generators the detector never saw, on home ground).
+- **The scaled fixed-claim comparison is written and validated**: 30 essays, the working v3 backend
+  replacing the artifact v1 arm, seeded from the 4-way state so the 14 original essays' claims and
+  three arms are reused verbatim, and new essays drawn only from the pool that is neither an
+  evaluation essay nor one of the 307 essays v3 trained on (guards checked: zero violations).
+- **Appendices added as Chapter 12**: the pipeline's verbatim prompts, a model-and-training
+  configuration table, the repository map, and the worked guide reference.

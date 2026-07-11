@@ -98,5 +98,9 @@
   "fig_guide_page1": {
     "w": 1275,
     "h": 1650
+  },
+  "fig_relation_classifier": {
+    "w": 1400,
+    "h": 840
   }
 }
