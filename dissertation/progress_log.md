@@ -1478,3 +1478,28 @@ evaluation programme.
   Mindner, Sundararajan, DeYoung, Alsop and Nesi), and the numbers already match the final results.
   What remains before submission is prose polish, CEURART formatting, and the call details from
   Vini.
+
+### Scaled refill lands, judge study grows 5x, and a full style revision (12 July 2026)
+
+- The commercial arm refill finished on gemini-flash-latest after gemini-2.5-flash's quota died:
+  coverage rose from 14 to 22 of 30 essays (856 questions total, still zero degenerate anywhere).
+  The headline hardened with it: v3 beats the free commercial tier +0.047 paired, p = 0.0002,
+  higher on 20 of 22 shared essays, and beats its own base +0.046, p < 0.0001, on 25 of 30. The
+  commercial-versus-8B null replicates (p = 0.60). Eight essays still lack commercial questions;
+  the rerun after the next quota window tops them up.
+- Split the commercial arm by model version for the disclosure: the refill questions are shorter
+  (median 29 words vs 43) and score higher (0.035 vs 0.024), so the mixed arm does not flatter the
+  local side. Disclosed in Section 8.12 next to the free-tier caveat.
+- Expanded the judge study from 12 to 60 questions (20 per arm from the scaled run, one seeded
+  sample, anchored to the same run's simulation scores). The anti-correlation is not a small-sample
+  artifact: Claude rho -0.34 (p = 0.010), GPT -0.37 (p = 0.004). New nuance: the judges now agree
+  with each other in rank (0.58) while both point away from the objective measure, and both rank
+  v3, the best arm by simulation, at or near the bottom. Written into Section 8.7; the Gemini
+  judge reruns when its quota allows.
+- A full style revision of the dissertation and the deck: the prose leaned on the same few
+  rhetorical habits (mirrored contrasts, punchline paragraph endings, trailing "which is"
+  significance tags, recycled catchphrases, staged triads) and rewrote chapter by chapter, keeping
+  every number, citation and figure reference fixed and re-running the consistency audit after.
+- The graded deck now leads with the strong results (99% detection, 100% on two unseen commercial
+  generators with zero false accusations, the laptop model beating the cloud tier 20 of 22) while
+  keeping the honesty arc; talk re-timed at 18.5 minutes. Abstract rewritten to match.

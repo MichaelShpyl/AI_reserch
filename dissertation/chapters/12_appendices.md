@@ -2,16 +2,16 @@
 
 ## Appendix A: the prompts the pipeline uses
 
-The pipeline's behaviour depends on its prompts, so they are reproduced verbatim. Three prompts do
-the argument-aware work.
+The pipeline's behaviour depends on its prompts, so this appendix reproduces them verbatim. Three
+of them do the argument-aware work.
 
 **Claim extraction** (system role): "You analyse a student essay for an academic-integrity
 verification interview. A claim is a substantive position the student asserts and argues for, not
 background, definition, or quotation. You cite the sentence numbers each claim is drawn from. Reply
 with JSON only." The user turn supplies the essay as numbered sentences and asks for the n most
-important claims, each with a one-line paraphrase and its sentence numbers. Because the model cites
-numbers rather than quoting, the source text is looked up from the real sentences and cannot be
-invented.
+important claims, each with a one-line paraphrase and its sentence numbers. The model only returns
+sentence numbers. The pipeline then looks up the source text from the real sentences, so an
+invented quotation is impossible.
 
 **Question writing** (system role): "You write verification questions for a lecturer to check
 whether a student genuinely understands and wrote a claim in their own essay. The crucial property:
@@ -19,8 +19,8 @@ a knowledgeable person who has NOT read this essay should be unable to answer we
 knowledge. So do not ask about general facts; ask the student to reconstruct their own reasoning,
 name the specific evidence or examples they used, justify the choices they made, and explain how
 this point connects to the rest of their essay. Avoid yes/no questions and avoid questions that
-contain their own answer. Reply with JSON only." This wording is the direct product of the Section
-8.3 finding that content-naming questions are answerable from general knowledge.
+contain their own answer. Reply with JSON only." This wording came out of the Section 8.3 finding
+that content-naming questions are answerable from general knowledge.
 
 **Fine-tune training prompt** (identical across v1, v2 and v3, so only the data differs): "You are
 a teacher. Read the passage and write one clear question that checks whether a student understood
@@ -48,8 +48,8 @@ essay title, keywords extracted from the human source, and the target length.
 | Local generation | Llama 3.1 8B (Ollama) | temperature 0.2, seed 42 |
 | Embeddings (simulation) | nomic-embed-text | local, via Ollama |
 
-Every experiment writes its full result to a JSON file under `outputs/`, and every number quoted in
-this document traces to one of those files.
+Each experiment writes its full result to a JSON file under `outputs/`. All the numbers quoted in
+this document trace back to one of those files.
 
 ## Appendix C: repository map
 
@@ -72,10 +72,10 @@ models/            trained checkpoints and adapters (not committed)
 
 ## Appendix D: the worked Verification Interview Guide
 
-The complete guide for the worked submission (essay 3108a, AI-generated variant), exactly as the
-pipeline produced it with live models, is included with the electronic submission as
-`outputs/verification_guides/3108a_ai_guide.pdf`. Its first page appears as Figure 7.4. The guide
-comprises the hybrid detection summary with component views and the per-submission explanation card,
+The complete guide for the worked submission (essay 3108a, AI-generated variant) is included with
+the electronic submission as `outputs/verification_guides/3108a_ai_guide.pdf`. It is the file the
+pipeline produced with live models, unedited. Its first page appears as Figure 7.4. The guide
+contains the hybrid detection summary with component views, the per-submission explanation card,
 four claims with two-way provenance (cited sentences plus the trained miner's verbatim argument
 spans), twelve gated verification questions with thinking-level tags, and the three-level suggested
 rubric for reading the student's answers.
