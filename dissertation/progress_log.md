@@ -1542,3 +1542,17 @@ evaluation programme.
   (`src/bloom/train_bloom_v2.py`).
 - Side effect to know: the Anthropic API credit ran out mid-run (547 of 903 on the few-shot pass);
   the zero-shot Claude pass and the GPT pass are complete, so the verdict rests on full runs.
+
+### The explanation card reads by position, not units (13 July 2026, late)
+
+- Redesigned the lecturer-facing card. The old version plotted SHAP magnitudes as bars, which are
+  meaningless units to the intended reader. The new version shows each habit as a dot on a strip:
+  a grey band for the middle 80 percent of real student essays, a line at the typical value, and
+  the dot for this essay, coloured by the direction it pushed the score. On the demo pair the
+  effect is immediate: the AI essay's five dots all sit outside the band, the human twin's sit
+  inside it. Position on a range needs no statistics to read.
+- Cleaned up the card's language while there: plain names for the part-of-speech features (no
+  more raw NOUN label leaking through), and the predictability sentence no longer editorialises
+  in a direction its own push arrow can contradict.
+- Both demo guides regenerated with the new card; Section 5.7 describes the design; deck and crib
+  page count corrected to 88 after the Bloom section landed. Audit clean.

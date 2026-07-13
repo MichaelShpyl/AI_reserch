@@ -141,9 +141,12 @@ habits moved this particular essay's score, and states each one as a plain sente
 number set against what is typical for real student essays in the corpus: "the sentences are
 unusually uniform in length, variation 7.5 against a typical 11.4", "a language model finds this
 text unusually easy to predict, surprise score 18 against a typical 30". Each sentence ends with
-the direction it pushed, and a small bar chart shows the same five habits with arrows toward AI
-or human. The wording is generated from the numbers themselves (higher or lower than the human
-median), so a sentence cannot contradict its own figures. The card also explains the very model
+the direction it pushed, and the picture beside them shows each habit as a dot on a strip: a grey
+band marks the middle 80 percent of real student essays, a line marks the typical value, and the
+dot marks this essay, coloured by the direction it pushed. For a flagged AI essay every dot sits
+outside the band; for its human twin the dots sit inside it. Position on a range needs no
+statistics to read, which is the point. The wording is generated from the numbers themselves
+(higher or lower than the human median), so a sentence cannot contradict its own figures. The card also explains the very model
 that produced the score rather than a simplified stand-in, so the faithfulness shown in Section
 5.5 carries over without needing a new argument.
 

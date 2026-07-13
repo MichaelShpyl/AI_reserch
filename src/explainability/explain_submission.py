@@ -63,13 +63,28 @@ PLAIN = {
                     "Punctuation is sparser than typical ({v:.3f} against {m:.3f})"),
     "gpt2_ppl": ("predictability",
                  "A language model finds this text harder to predict than typical (surprise score {v:.0f} against {m:.0f})",
-                 "A language model finds this text unusually easy to predict (surprise score {v:.0f} against a typical {m:.0f}); machine text tends to be predictable"),
+                 "A language model finds this text easier to predict than typical (surprise score {v:.0f} against {m:.0f})"),
     "pos_AUX": ("auxiliary verbs",
                 "More helper verbs (is, has, can) than typical ({v:.3f} against {m:.3f})",
                 "Fewer helper verbs (is, has, can) than typical ({v:.3f} against {m:.3f})"),
     "pos_DET": ("determiners",
                 "More small grammar words (the, this) than typical ({v:.3f} against {m:.3f})",
                 "Fewer small grammar words (the, this) than typical ({v:.3f} against {m:.3f})"),
+    "pos_NOUN": ("nouns",
+                 "More nouns than typical ({v:.2f} against {m:.2f})",
+                 "Fewer nouns than typical ({v:.2f} against {m:.2f})"),
+    "pos_VERB": ("verbs",
+                 "More verbs than typical ({v:.2f} against {m:.2f})",
+                 "Fewer verbs than typical ({v:.2f} against {m:.2f})"),
+    "pos_ADJ": ("adjectives",
+                "More describing words than typical ({v:.2f} against {m:.2f})",
+                "Fewer describing words than typical ({v:.2f} against {m:.2f})"),
+    "pos_ADV": ("adverbs",
+                "More adverbs than typical ({v:.2f} against {m:.2f})",
+                "Fewer adverbs than typical ({v:.2f} against {m:.2f})"),
+    "pos_PRON": ("pronouns",
+                 "More pronouns (I, they, it) than typical ({v:.2f} against {m:.2f})",
+                 "Fewer pronouns (I, they, it) than typical ({v:.2f} against {m:.2f})"),
 }
 
 
@@ -118,37 +133,62 @@ def explain_submission(text: str, out_png: Path, top_k: int = 5) -> dict:
         push = "toward AI" if toward_ai else "toward human"
         sentences.append(f"{body}, which here points {push}.")
         rows.append({"feature": feat, "label": label, "shap": float(sv[i]),
-                     "value": v, "human_median": med})
+                     "value": v, "human_median": med,
+                     "human_p10": float(human[feat].quantile(0.10)),
+                     "human_p90": float(human[feat].quantile(0.90))})
 
     _draw_card(rows, out_png)
     return {"png_path": str(out_png), "sentences": sentences, "features": rows}
 
 
+def _fmt(x: float) -> str:
+    ax = abs(x)
+    return f"{x:.0f}" if ax >= 10 else f"{x:.1f}" if ax >= 1 else f"{x:.2f}" if ax >= 0.1 else f"{x:.3f}"
+
+
 def _draw_card(rows: list[dict], out_png: Path) -> None:
+    """One strip per habit: a grey band for the middle 80 percent of real student essays, a line
+    at the typical value (median), and a dot where THIS essay sits, coloured by which way the
+    habit pushed the score. No model units anywhere; a lecturer reads position, not magnitude."""
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    rows = rows[::-1]
-    labels = [r["label"] for r in rows]
-    vals = [r["shap"] for r in rows]
-    colors = ["#d98e3b" if v > 0 else "#2b6777" for v in vals]
-    fig, ax = plt.subplots(figsize=(8.6, 0.62 * len(rows) + 1.6))
-    ax.barh(range(len(vals)), vals, color=colors, height=0.62)
-    ax.axvline(0, color="#52616b", lw=1)
-    ax.set_yticks(range(len(vals)))
-    ax.set_yticklabels(labels, fontsize=11)
-    ax.set_xticks([])
-    lim = max(abs(v) for v in vals) * 1.35
-    ax.set_xlim(-lim, lim)
-    ax.text(lim, len(vals) - 0.2, "pushes toward AI", ha="right", fontsize=10,
-            color="#d98e3b", fontweight="bold")
-    ax.text(-lim, len(vals) - 0.2, "pushes toward human", ha="left", fontsize=10,
-            color="#2b6777", fontweight="bold")
-    ax.set_title("Why this score? The writing habits that moved it",
-                 fontsize=12.5, fontweight="bold", color="#222831", pad=12)
-    for s in ("top", "right", "left", "bottom"):
-        ax.spines[s].set_visible(False)
-    fig.tight_layout()
+
+    AI, HUMAN, BAND, INKC, GREYC = "#d98e3b", "#2b6777", "#e3e7ea", "#222831", "#52616b"
+    n = len(rows)
+    fig, ax = plt.subplots(figsize=(9.4, 0.78 * n + 2.0))
+
+    for k, r in enumerate(rows):
+        y = n - 1 - k
+        lo, hi, med, v = r["human_p10"], r["human_p90"], r["human_median"], r["value"]
+        span_lo = min(lo, v); span_hi = max(hi, v)
+        pad = (span_hi - span_lo) * 0.12 or abs(span_hi) * 0.12 or 1.0
+        a, b = span_lo - pad, span_hi + pad
+
+        def nx(x):
+            return (x - a) / (b - a)
+
+        ax.barh(y, nx(hi) - nx(lo), left=nx(lo), height=0.34, color=BAND, zorder=1)
+        ax.plot([nx(med), nx(med)], [y - 0.24, y + 0.24], color=GREYC, lw=1.6, zorder=2)
+        dot = AI if r["shap"] > 0 else HUMAN
+        ax.scatter([nx(v)], [y], s=150, color=dot, zorder=3, edgecolors="white", linewidths=1.5)
+        ax.text(-0.02, y, r["label"], ha="right", va="center", fontsize=12, color=INKC)
+        ax.text(1.02, y, f"this essay {_fmt(v)}  ·  typical {_fmt(med)}",
+                ha="left", va="center", fontsize=9.5, color=GREYC)
+        push = "pushes toward AI" if r["shap"] > 0 else "pushes toward human"
+        ax.text(nx(v), y + 0.34, push, ha="center", va="bottom", fontsize=8.5,
+                color=dot, fontweight="bold")
+
+    ax.set_xlim(-0.32, 1.42)
+    ax.set_ylim(-0.7, n - 0.1)
+    ax.axis("off")
+    fig.suptitle("This essay's writing habits, against typical student writing",
+                 fontsize=13, fontweight="bold", color=INKC, x=0.03, y=0.97, ha="left")
+    fig.text(0.03, 0.03,
+             "grey band = middle 80% of real student essays   |   line = typical (median)   |   "
+             "dot = this essay, coloured by push direction",
+             fontsize=8.5, color=GREYC)
+    fig.tight_layout(rect=(0, 0.07, 1, 0.93))
     out_png.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_png, dpi=200, facecolor="white")
     plt.close(fig)
