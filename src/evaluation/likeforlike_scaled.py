@@ -275,6 +275,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--essays", type=int, default=30)
     ap.add_argument("--commercial", default="gemini")
+    ap.add_argument("--commercial-model", default=None,
+                    help="override the provider default (per-model free-tier quotas)")
     args = ap.parse_args()
     if not V3_ADAPTER.exists():
         raise SystemExit(f"No v3 adapter at {V3_ADAPTER}")
@@ -310,7 +312,8 @@ def main() -> int:
     print("== Phase D: commercial Gemini (API) ==", flush=True)
     from commercial_backend import make_commercial_backend
     try:
-        generate_arm(state, ids, "commercial", lambda: make_commercial_backend(args.commercial, None))
+        generate_arm(state, ids, "commercial",
+                     lambda: make_commercial_backend(args.commercial, args.commercial_model))
     except RuntimeError as e:
         print(f"[skip] commercial unavailable: {e}", flush=True)
 

@@ -51,24 +51,61 @@ def judge_question(backend, claim: str, question: str) -> dict:
     return scores
 
 
+def scaled_items(per_arm: int) -> tuple[list[tuple[str, str]], dict[str, float]]:
+    """A larger judging set: (claim, question) pairs sampled from the scaled comparison's
+    well-formed arms (local8b, base3b, v3), seeded so every judge rates the same set. Also
+    returns each sampled question's simulation score (score[arm][claim][q] parallels gen),
+    so the anchoring check runs against the scaled state instead of the guide sim file."""
+    import random
+    state = json.loads((REPO / "outputs" / "likeforlike_scaled.json").read_text(encoding="utf-8"))
+    rng = random.Random(42)
+    items, sim_map = [], {}
+    for arm in ("local8b", "base3b", "v3"):
+        pool = []
+        for e in state["essays"].values():
+            gen = e.get("gen", {}).get(arm)
+            if not gen:
+                continue
+            sc = e.get("score", {}).get(arm) or []
+            for ci, (c, qs) in enumerate(zip(e["claims"], gen)):
+                for qi, q in enumerate(qs):
+                    pool.append((c["claim"], q))
+                    try:
+                        sim_map[q] = sc[ci][qi]
+                    except (IndexError, TypeError):
+                        pass
+        rng.shuffle(pool)
+        items.extend(pool[:per_arm])
+    return items, sim_map
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--provider", default="gemini", help="gemini|anthropic|openai")
     ap.add_argument("--model", default=None)
     ap.add_argument("--guide", default="3108a_ai",
                     help="guide stem whose questions to judge (must exist in verification_guides)")
+    ap.add_argument("--source", choices=["guide", "scaled"], default="guide",
+                    help="'scaled' judges a 60-question sample from the scaled comparison")
+    ap.add_argument("--per-arm", type=int, default=20)
     args = ap.parse_args()
 
     from commercial_backend import make_commercial_backend
     backend = make_commercial_backend(args.provider, args.model)
 
-    guide = json.loads((REPO / "outputs" / "verification_guides" / f"{args.guide}.json")
-                       .read_text(encoding="utf-8"))
-    items = [(c["claim"], q["question"]) for c in guide["claims"] for q in c["questions"]]
+    if args.source == "scaled":
+        items, scaled_sim = scaled_items(args.per_arm)
+        source_key = f"scaled_{args.per_arm}x3"
+    else:
+        scaled_sim = None
+        guide = json.loads((REPO / "outputs" / "verification_guides" / f"{args.guide}.json")
+                           .read_text(encoding="utf-8"))
+        items = [(c["claim"], q["question"]) for c in guide["claims"] for q in c["questions"]]
+        source_key = args.guide
 
     data = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {"judges": {}}
-    jkey = backend.name
-    data["judges"].setdefault(jkey, {"guide": args.guide, "scores": {}})
+    jkey = f"{backend.name}|{source_key}" if args.source == "scaled" else backend.name
+    data["judges"].setdefault(jkey, {"guide": source_key, "scores": {}})
     scores = data["judges"][jkey]["scores"]
 
     done = 0
@@ -87,10 +124,14 @@ def main() -> int:
         OUT.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
     # Anchor to the objective measure: Spearman correlation of judge mean (and the discrimination
-    # dimension alone) with the simulation's per-question discrimination scores.
-    if SIM.exists() and scores:
-        sim = json.loads(SIM.read_text(encoding="utf-8"))
-        sim_scores = {d["question"]: d["discrimination"] for d in sim["questions"]["grounded"]}
+    # dimension alone) with the simulation's per-question discrimination scores. For the scaled
+    # source the per-question scores come from the scaled state; otherwise from the guide sim.
+    if scores and (scaled_sim is not None or SIM.exists()):
+        if scaled_sim is not None:
+            sim_scores = scaled_sim
+        else:
+            sim = json.loads(SIM.read_text(encoding="utf-8"))
+            sim_scores = {d["question"]: d["discrimination"] for d in sim["questions"]["grounded"]}
         paired = [(scores[q]["mean"], scores[q]["discrimination"], sim_scores[q])
                   for q in scores if q in sim_scores]
         if len(paired) >= 5:
@@ -110,9 +151,13 @@ def main() -> int:
             }
             print(f"anchoring: judge-mean vs sim rho={rho_m.statistic:.3f} (p={rho_m.pvalue:.3f}); "
                   f"judge-discrimination vs sim rho={rho_d.statistic:.3f} (p={rho_d.pvalue:.3f})")
-    # Cross-model agreement, computed over every judge that has scored all the questions.
-    complete = {k: v["scores"] for k, v in data["judges"].items()
-                if len(v.get("scores", {})) == len(items)}
+    # Cross-model agreement, computed over judges of the SAME question set only (the guide
+    # judges and the scaled judges rate different questions, so they must never be mixed, and
+    # the scaled result must not overwrite the guide result the write-up already quotes).
+    same_source = {k: v["scores"] for k, v in data["judges"].items()
+                   if v.get("guide") == source_key}
+    complete = {k: s for k, s in same_source.items()
+                if all(q in s for _, q in items)}
     if len(complete) >= 2:
         qs = [q for _, q in items]
         judges = sorted(complete)
@@ -127,7 +172,7 @@ def main() -> int:
                 pair_rho[f"{judges[i]} vs {judges[j]}"] = {
                     "rho": round(float(r.statistic), 3), "p": round(float(r.pvalue), 4)}
         agreement["pairwise_spearman"] = pair_rho
-        data["agreement"] = agreement
+        data["agreement_scaled" if args.source == "scaled" else "agreement"] = agreement
         print(f"cross-judge agreement ({len(judges)} judges): "
               f"Krippendorff alpha = {agreement['krippendorff_alpha_interval']}")
     OUT.write_text(json.dumps(data, indent=2), encoding="utf-8")
