@@ -93,6 +93,22 @@ trusted, while tags on the higher levels should be treated as suggestions until 
 improves. Both the model and the full metrics are saved
 (`models/bloom_classifier/`, `outputs/bloom_classifier.json`).
 
+The label supply invited one obvious fix, and I tried it under a rule fixed in advance. With human
+labelling out of scope, the candidate was silver labels from a commercial LLM. The rule: the
+annotator first labels the gold questions blind, and it earns the right to label new training data
+only if it agrees with the gold labels on the starved classes (`src/bloom/llm_annotate.py`,
+`outputs/bloom_llm_annotation.json`). It did not earn it. On the held-out test split, Claude Opus
+agrees well on remember (F1 0.79) and fails the classes that matter: apply 0.0, analyse 0.0.
+Teaching it the dataset's convention with worked examples drawn from the training split moved
+understand from 0.24 to 0.31 and apply to 0.12, still far from usable, and GPT-4o-mini with the
+same examples scored 0.0 on apply. Both providers match the gold convention exactly where the
+classifier already works and miss it exactly where the classifier needs help. Retraining on those
+labels would have looked like progress, a populated analyse class and a bigger training set, while
+quietly moving the model away from the gold benchmark, so the silver labels were not used, and the
+advisory reading of higher-order tags stands. What this component needs is human labels. The gate
+that blocked the shortcut is the same one used everywhere in this project: an automatic signal is
+measured against gold before it is allowed to touch anything downstream.
+
 ## 7.6 The trained argument miner
 
 The prompted claim extraction above was the declared stand-in for component 3, and the trained

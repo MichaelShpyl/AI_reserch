@@ -70,8 +70,9 @@ itself without leaning on an external benchmark. Cross-domain deployment needs c
 per-domain thresholds before anyone should trust a flag outside student essays, and the measured
 abstain band shows what calibration alone will not fix. The training-distribution control should
 be re-run on a task hard enough to have resolution. The Bloom classifier is held back by label
-supply, not architecture, so a better-populated labelling of higher-order questions would lift the
-guide's quality control. The relation classifier learns supports links well (F1 0.75) but attack
+supply, not architecture, and the cheap route to more labels is now closed: LLM annotators were
+tried under a pre-registered validation against the gold labels and failed it on the higher-order
+classes (Section 7.5), so the supply that would lift the guide's quality control has to be human. The relation classifier learns supports links well (F1 0.75) but attack
 relations are too rare in the training corpus to learn at all; a corpus with denser attack
 annotation would finish that component. And the agreed extension of the classification target, a
 third partial-AI class, becomes worth piloting once mixed human-and-AI documents can be

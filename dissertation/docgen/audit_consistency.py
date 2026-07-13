@@ -71,6 +71,10 @@ NUMBER_CHECKS = [
     ("multigen gemini hybrid", "06_robustness.md", "68 percent",
      lambda: j("multigen_detection.json", "groups", "gemini", "flag_rate_hybrid"),
      lambda v: abs(v - 0.6842) < 0.01),
+    ("bloom annotator remember F1", "07_question_generation.md", "F1 0.79",
+     lambda: j("bloom_llm_annotation.json", "gold|commercial:anthropic:claude-opus-4-8",
+               "agreement_vs_gold_testsplit", "per_class", "remember", "f1"),
+     lambda v: abs(v - 0.794) < 0.005),
 ]
 
 

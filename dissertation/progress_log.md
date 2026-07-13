@@ -1524,3 +1524,21 @@ evaluation programme.
   generators caught at 100 percent).
 - Generated the contrast guide for the human twin of essay 3108a, exercising the assembler's
   not-flagged path end to end with the trained models.
+
+### The Bloom label-supply fix fails its own gate, which is the result (13 July 2026, evening)
+
+- Tried the one in-scope route to more higher-order Bloom labels: silver labels from a commercial
+  LLM, under a rule fixed before the run. The annotator labels all 903 gold questions blind and
+  only earns the right to label new training data if it agrees with gold on the starved classes.
+- It did not come close, on either provider. On the held-out test split Claude Opus matches gold
+  well on remember (F1 0.79) and scores 0.0 on both apply and analyse; worked examples from the
+  training split lifted understand to 0.31 and apply only to 0.12; GPT-4o-mini with the same
+  examples scored 0.0 on apply. Both models match the gold convention exactly where the classifier
+  already works and miss it where help was needed.
+- So no retrain: silver labels would have moved the model away from the gold benchmark while
+  looking like progress. The advisory reading of higher-order tags stands, Section 7.5 now records
+  the attempt and the refusal, and the conclusions note the cheap route to labels is closed, the
+  supply has to be human. The v2 training script stays in the repo ready for real labels
+  (`src/bloom/train_bloom_v2.py`).
+- Side effect to know: the Anthropic API credit ran out mid-run (547 of 903 on the few-shot pass);
+  the zero-shot Claude pass and the GPT pass are complete, so the verdict rests on full runs.
