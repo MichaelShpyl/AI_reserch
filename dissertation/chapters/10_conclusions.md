@@ -32,8 +32,8 @@ the metrics.
 Fifth, the local-versus-commercial answer. The comparison ran under two designs, and the outcome
 depended on the design, which is itself a finding. With self-chosen claims the commercial backend
 held a significant edge. With the claims held fixed the edge disappeared, and after fine-tuning,
-the local 3B wrote better questions than the free commercial tier on 20 of the 22 shared essays
-(p = 0.0002) at thirty-essay scale. A university can run this kind of verification on ordinary
+the local 3B wrote better questions than the free commercial tier on 24 of the 29 shared essays
+(p = 0.0003) at thirty-essay scale. A university can run this kind of verification on ordinary
 hardware, without sending student work to a third party.
 
 Sixth, a controlled data-format experiment. The same model was fine-tuned three times with

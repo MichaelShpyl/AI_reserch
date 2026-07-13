@@ -26,8 +26,8 @@ feature account.
 
 On the second half, the strongest result in the dissertation is where the comparison ended up. At
 thirty essays the fine-tuned 3B holds its gain over its own base (+0.046, p < 0.0001, higher on 25
-of 30 essays) and beats the free-tier commercial model on the 22 essays both cover (+0.047,
-p = 0.0002, higher on 20 of 22), with every question well-formed. I make that claim after retracting
+of 30 essays) and beats the free-tier commercial model on the 29 essays both cover (+0.040,
+p = 0.0003, higher on 24 of 29), with every question well-formed. I make that claim after retracting
 two weaker forms of it. On this evidence the answer to "can locally fine-tuned open models match
 commercial LLMs at this task" is yes, and on the fixed task the fine-tuned local model does better
 than the free commercial tier.
@@ -35,7 +35,7 @@ than the free commercial tier.
 Getting there depended on holding the task fixed, and that dependence is a finding in itself. When
 each backend chose its own claims, the commercial model held a small significant edge (paired
 difference 0.036, p = 0.040). When every model wrote questions for identical claims, the edge
-vanished (difference -0.004, p = 0.60). Most of the apparent commercial advantage was claim
+vanished (difference +0.003, p = 0.74). Most of the apparent commercial advantage was claim
 selection, not question writing. Fine-tuning then moved the local backend well clear of its own base
 once the training data had the right format.
 
@@ -105,7 +105,7 @@ scope decision (it keeps the project clear of human-participants approval), but 
 discrimination scores are proxies with a conservative bias. Classroom validation is the single most
 important piece of future work.
 
-Sample sizes grew but stay modest. The final comparison runs thirty essays with 856 questions, and
+Sample sizes grew but stay modest. The final comparison runs thirty essays with 901 questions, and
 the fine-tune tests rest on 27-essay paired designs. The judge study grew from twelve questions to
 sixty. At sixty, its anti-correlation with the simulation could no longer be attributed to sample
 size. Bootstrap intervals are used throughout, and the sample-size trajectory of the first

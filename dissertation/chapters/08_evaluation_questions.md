@@ -340,16 +340,16 @@ claims, one scorer, and the degeneracy rate reported next to every score. Contam
 guarding against at this size. The sixteen new essays come only from the pool that is neither an
 evaluation essay nor one of the 307 essays that supplied v3's training questions. And the original
 fourteen essays keep their claims and questions as first generated; nothing is regenerated. The run
-scored 856 questions across the four arms. None is degenerate.
+scored 901 questions across the four arms. None is degenerate.
 
 The headline result is the strongest in this dissertation (Figure 8.7). The fine-tuned v3 reaches a
-mean discrimination of 0.085 (95% CI [0.071, 0.099]), more than double every other arm. Against its
+mean discrimination of 0.085 (95% CI [0.071, 0.100]), more than double every other arm. Against its
 own base model the paired difference is +0.046 (p < 0.0001, higher on 25 of 30 essays). Against the
-commercial model, on the 22 essays both arms cover, it is +0.047 (p = 0.0002, higher on 20 of 22).
+commercial model, on the 29 essays both arms cover, it is +0.040 (p = 0.0003, higher on 24 of 29).
 On this task, with the claims held fixed, a model fine-tuned on one consumer laptop writes
 measurably better verification questions than the commercial free tier. The comparison also
 replicates the earlier null. Commercial Gemini has no edge over the plain local 8B (paired
-difference -0.004, p = 0.60, n = 22), which repeats the Section 8.8 finding that the commercial
+difference +0.003, p = 0.74, n = 29), which repeats the Section 8.8 finding that the commercial
 advantage in Section 8.6 came from claim selection, not question writing.
 
 I trust this result for a specific reason, having retracted a version of it once before. The v1
@@ -358,14 +358,15 @@ questions passes the well-formedness gate, and reading them confirms they are or
 questions in the intended style. The score and the output quality agree this time. Section 8.9
 established that agreement as the condition for believing any number this pipeline produces.
 
-![Figure 8.7: The fixed-claim comparison at thirty essays with the working v3 backend. All 856 questions are well-formed. v3 clears the base 3B (p < 0.0001) and, on the 22 shared essays, the commercial model (p = 0.0002); the commercial-versus-8B null replicates. Coverage is printed on each bar: the free-tier commercial arm covers 22 of 30 essays.](../figures/fig_likeforlike_scaled.png)
+![Figure 8.7: The fixed-claim comparison at thirty essays with the working v3 backend. All 901 questions are well-formed. v3 clears the base 3B (p < 0.0001) and, on the 29 shared essays, the commercial model (p = 0.0003); the commercial-versus-8B null replicates. Coverage is printed on each bar: the free-tier commercial arm covers 29 of 30 essays.](../figures/fig_likeforlike_scaled.png)
 
 Two disclosures apply. The commercial arm is a free-tier flash model, not a frontier one, so the
 claim is "a QLoRA fine-tune on an 8 GB laptop beats the free commercial tier at writing verification
 questions", not "local models beat commercial models". And quota interruptions shaped the commercial
-arm's coverage: it spans 22 of the 30 essays and mixes two versions of the same model, fourteen
-essays on gemini-2.5-flash (105 questions) and eight on gemini-flash-latest (54 questions) after a
-refill. The refilled questions are shorter (median 29 words against 43) and score slightly higher
-(0.035 against 0.024), so the mixture does not tilt the comparison toward the local side. With both
+arm's coverage: it spans 29 of the 30 essays and mixes two versions of the same model, fourteen
+essays on gemini-2.5-flash (105 questions) and fifteen on gemini-flash-latest (99 questions) across
+two refills. The refilled questions are shorter (median 30 words against 43) and score twice as high
+(0.050 against 0.024), so the mixture strengthens the commercial arm rather than the local side, and
+v3 clears it anyway. With both
 stated, the second half of the research question has its answer. A locally fine-tuned open model can
 match, and in this comparison beat, the commercial backend it was allowed to compare against.

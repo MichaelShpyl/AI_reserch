@@ -126,8 +126,8 @@ sits where the corpus literature puts link identification when component boundar
 Unlinked pairs score 0.95. Attacks are not learned at all (F1 0.0), and the cause is the label
 supply: attack relations are 0.7 percent of candidate pairs, about the same starvation that capped
 the Bloom classifier's smallest classes. The macro-F1 of 0.57 against a 0.30 majority baseline is
-therefore slightly misleading in both directions, pulled down by a class with almost no training
-signal and pulled up by an easy one. The supports-F1 is the informative number. For the guide, the
+therefore fairly computed but slightly misleading in both directions, pulled down by a class with
+almost no training signal and pulled up by an easy one. The supports-F1 is the informative number. For the guide, the
 practical use is ordering. Knowing which premises support which claim tells the lecturer which
 evidence to probe first. The question generator itself only needs the claims, so this completes the
 scope's argument-mining specification without changing the pipeline's behaviour.
@@ -189,7 +189,8 @@ up again at essay scale in Section 8.8.
 
 ![Figure 7.4: The QLoRA fine-tune of Qwen2.5 3B against its own base model on the same 18 claims, mean discrimination with 95 percent bootstrap intervals. The raw score rises from 0.033 to 0.154, but the quality audit in Section 8.9 shows this rise to be an artifact of degenerate output rather than better questions.](../figures/fig_finetune_eval.png)
 
-Then I read the questions themselves. The fine-tuned model had overfit the format of its training
+It nearly went into the write-up as the headline result of the project. Then I read the questions
+themselves. The fine-tuned model had overfit the format of its training
 data. EduQG is largely a multiple-choice corpus, and the adapter learned to emit multiple-choice
 stems: about 95 percent of its questions are strings like "Which of the following is correct?" or
 "Which of the following is not a reason why Peugeot is successful?", with no options ever supplied,

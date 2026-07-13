@@ -15,7 +15,8 @@ return a single score with no defensible explanation. We build a transparent two
 (human vs AI) detector and, more importantly, we audit it. On a balanced corpus of 640 human
 essays from the British Academic Written English (BAWE) corpus and 640 length-matched and
 topic-matched essays generated locally with Llama 3.1, a fine-tuned DeBERTa-v3 detector reached a
-perfect test score. Rather than report it, we treated it as a warning. A reproducible audit found
+perfect test score. We treated the score as a warning and audited it before reporting anything.
+The audit found
 that the human texts retained structural export markup that the AI texts lacked, so that a rule as
 trivial as "contains a tag, therefore human" already reached 92.5 percent. After removing the
 markup from both classes, the detector still scores an F1 of 0.99, and a classifier restricted to
@@ -25,10 +26,10 @@ shows the style signal is diffuse, spread across ordinary words and punctuation,
 highlights are a weak standalone explanation and a feature-level explanation is preferable. Tested
 zero-shot on the M4 benchmark, the detector transfers across unseen generators (F1 0.97 on essays)
 but is fragile across domains (F1 0.79), failing by flagging formal human text such as arXiv
-abstracts as AI, which underlines the fairness risk of single-domain detectors. We argue that for
-single-generator, in-domain detection a near-perfect score is expected, and that the useful
-contributions are the audit method, the honest robustness picture, and an interpretable account of
-what the detector uses.
+abstracts as AI, which underlines the fairness risk of single-domain detectors. We argue that a
+near-perfect score is the expected outcome for single-generator, in-domain detection. The useful
+contributions are the audit method, the robustness picture, and an account of what the detector
+actually uses.
 
 ## 1. Introduction
 
@@ -40,9 +41,8 @@ the student understands what they submitted (Wu et al., 2025). There is also evi
 detectors are biased against non-native English writers (Liang et al., 2023).
 
 This paper focuses on the detection component of a larger explainable pipeline for academic
-integrity verification. Our contribution here is not a new detector. It is a cautionary, reproducible
-audit of a detector that scored perfectly, and an honest account of why it scored that way and what
-survives once the easy shortcuts are removed.
+integrity verification. Our contribution is a cautionary, reproducible audit of a detector that
+scored perfectly: why it scored that way, and what survives once the easy shortcuts are removed.
 
 ## 2. Related work
 
@@ -108,8 +108,8 @@ result in Section 6 is the stronger fairness evidence.
 
 We applied Integrated Gradients to the cleaned-text detector and tested the result by ablation
 (`integrated_gradients.py`). The most influential tokens are punctuation and common words and
-fragments rather than topic words, consistent with the audit. The faithfulness test is the
-interesting part. Removing the top attributed tokens lowers the detector's confidence only slightly
+fragments rather than topic words, consistent with the audit. The faithfulness test changed how we
+read those attributions. Removing the top attributed tokens lowers the detector's confidence only slightly
 more than removing the same number of random tokens, and keeping only the top tokens collapses the
 prediction to chance. The style signal is diffuse, spread across the whole essay, so a per-word
 highlight is a weak explanation on its own. The faithful, interpretable explanation is the
@@ -133,9 +133,9 @@ the OUTFOX test, the combined F1 mixes domain shift with generator shift, so the
 is the one-sided failure on the human side, which cannot be a generator artefact: the detector still
 caught machine text (86 to 98 percent) but wrongly flagged genuine human text as AI, at 79 percent on
 arXiv abstracts and about 40 percent on Wikipedia and WikiHow. The detector had learned that "human"
-looks like a student essay, so it misjudges more formal human writing. This is a false-accusation
-failure, the exact harm the wider project aims to prevent, and it mirrors the known bias of these
-detectors against writing that differs from the training norm.
+looks like a student essay, so it misjudges more formal human writing. These failures are false
+accusations, the harm the wider project is designed to prevent, and they mirror the known bias of
+these detectors against writing that differs from the training norm.
 
 ## 7. Discussion
 
@@ -145,16 +145,21 @@ writing in one domain, which the recent survey literature treats as close to sol
 methodological. First, a strong result must be stress-tested before it is believed, and the markup
 artifact is a clean example of why. Second, faithfulness testing tells us which explanation to trust,
 and for this detector it rules out naive token highlighting in favour of feature-level explanation.
-Third, the robustness picture is honest rather than flattering: strong across models, fragile across
-domains, and fragile in the direction that hurts students. All three points generalise to anyone
-building an interpretable detector on a constructed corpus.
+Third, the robustness picture: strong across models, fragile across domains, with the failures
+landing on human writers. All three points generalise to anyone building an interpretable detector
+on a constructed corpus.
 
 ## 8. Limitations and future work
 
 The transfer test above is zero-shot, with no adaptation, so it is a lower bound: a detector trained
 on diverse human text and several generators would likely do better across domains, and that is the
 clear next experiment. The cross-domain false positives come from the in-domain "human" being student
-essays, so the fix is more varied human data and per-domain calibration. We also found a locale tell:
+essays, so the fix is more varied human data and per-domain calibration. Two follow-up measurements
+in the wider project support this reading: fusing the transformer with the stylometric features cuts
+the cross-domain human false-positive rate by three to eight times (arXiv abstracts from 79 to about
+61 percent), and on new test essays generated by two further commercial models (Gemini and GPT) the
+detector caught every AI essay with no human false positives, consistent with the generator-agnostic
+result above. We also found a locale tell:
 the human students write British English while the model defaults to American, which is shallow and
 would shrink if the generator were prompted for British English. The remaining robustness gaps to test
 are paraphrased and "humanised" AI text and documents that mix human and AI writing. Beyond detection,
@@ -166,8 +171,9 @@ is future work. The project runs entirely on a laptop GPU, which constrains mode
 We presented an audit of a near-perfect AI-text detector. The perfect score was partly a corpus-markup
 artifact, which we identified, measured and removed. After cleaning, the classes remain almost
 perfectly separable on writing style alone, and a faithfulness test shows that style signal is diffuse
-and best explained at the feature level. The honest framing, that in-domain detection is easy and the
-real work is robustness and explanation, is the contribution we hope is useful to others.
+and best explained at the feature level. Our conclusion is that in-domain detection of a single known
+generator is easy, and the work that matters is robustness and explanation. We hope the audit method
+travels to other constructed corpora.
 
 ## References
 

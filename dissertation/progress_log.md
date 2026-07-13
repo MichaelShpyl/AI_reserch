@@ -1503,3 +1503,24 @@ evaluation programme.
 - The graded deck now leads with the strong results (99% detection, 100% on two unseen commercial
   generators with zero false accusations, the laptop model beating the cloud tier 20 of 22) while
   keeping the honesty arc; talk re-timed at 18.5 minutes. Abstract rewritten to match.
+
+### The commercial arm reaches 29 of 30, and the write-up settles (13 July 2026)
+
+- The last refill landed: commercial coverage is now 29 of 30 essays (901 questions across the
+  four arms, none degenerate; only essay 0356a keeps failing generation). The final numbers: v3
+  beats the commercial arm +0.040 paired, p = 0.0003, higher on 24 of 29, and the
+  commercial-versus-8B null is flat (p = 0.74, 15 of 29). The refill slice on gemini-flash-latest
+  scores twice the 2.5-flash slice (0.050 against 0.024), so the mixed arm favours the commercial
+  side if anything, and v3 clears it regardless. Sections 8.12, 9.1, 10.1, the abstract, the deck
+  and the audit checks all carry the final numbers; document rebuilt at 87 pages, audit clean.
+- The Gemini judge on the 60-question set is the one piece quota still blocks (both Gemini models
+  rate-limited today after the refill). The command is in HANDOFF; the two funded judges' result
+  stands on its own and Section 8.7 words the Gemini gap accurately.
+- Semantic verification finished for the two chapters the earlier interruption had skipped: chapter 3
+  passed clean; chapter 7 needed two small restores (the near-headline disclosure in 7.8 and a
+  dropped concession about the relation macro-F1), both fixed.
+- The AICS draft got the same plain-language treatment, plus two follow-up results that strengthen
+  its story (the hybrid fusion cutting cross-domain false positives, and the two unseen commercial
+  generators caught at 100 percent).
+- Generated the contrast guide for the human twin of essay 3108a, exercising the assembler's
+  not-flagged path end to end with the trained models.
