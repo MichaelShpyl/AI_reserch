@@ -145,3 +145,35 @@ if __name__ == "__main__":
     fig_problem()
     fig_guide_pages()
     fig_degenerate_demo()
+
+
+def fig_dataset_pipeline():
+    """How the dataset was built: five stages, each one removing a shortcut."""
+    fig = plt.figure(figsize=(12.6, 4.6))
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.axis("off"); ax.set_xlim(0, 1); ax.set_ylim(0, 1)
+    stages = [
+        ("Real essays", ["BAWE corpus", "2,761 assignments by", "UK students, four", "discipline groups"], GREY),
+        ("1. Balanced sample", ["640 essays: 80 from", "each of 8 cells", "(4 disciplines x native", "/ non-native), capped", "per student"], TEAL),
+        ("2. AI twin for each", ["Local Llama 3.1 gets", "the topic keywords", "and target length,", "writes a matched twin", "(640 AI essays)"], ORANGE),
+        ("3. Clean both sides", ["Same normalisation", "for both classes;", "hidden format tags", "removed; 1,280", "essays total"], TEAL),
+        ("4. Split by student", ["394 students; no", "writer appears in two", "splits, so the model", "cannot memorise", "a person"], GREY),
+    ]
+    w, gap = 0.165, 0.028
+    x0 = (1 - (len(stages) * w + (len(stages) - 1) * gap)) / 2
+    for i, (head, body, c) in enumerate(stages):
+        x = x0 + i * (w + gap)
+        card(ax, x, 0.28, w, 0.42, c)
+        ax.text(x + w / 2, 0.78, head, ha="center", fontsize=12, fontweight="bold", color=c)
+        ax.text(x + w / 2, 0.49, chr(10).join(body), ha="center", va="center", fontsize=9.2, color=INK)
+        if i < len(stages) - 1:
+            ax.annotate("", xy=(x + w + gap - 0.004, 0.49), xytext=(x + w + 0.004, 0.49),
+                        arrowprops=dict(arrowstyle="-|>", color=GREY, lw=2))
+    ax.text(0.5, 0.115, "Each step removes a shortcut the detector could cheat with:",
+            ha="center", fontsize=12.5, color=INK, fontweight="bold")
+    ax.text(0.5, 0.045, "balancing removes topic bias, matching removes length, cleaning removes "
+            "formatting tells, student-level splits remove memorising a writer.",
+            ha="center", fontsize=11.5, color=INK)
+    fig.savefig(FIGS / "fig_dataset_pipeline.png", dpi=200, facecolor="white")
+    plt.close(fig)
+    print("fig_dataset_pipeline.png")
