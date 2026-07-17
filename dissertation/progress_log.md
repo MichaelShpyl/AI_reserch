@@ -1556,3 +1556,21 @@ evaluation programme.
   in a direction its own push arrow can contradict.
 - Both demo guides regenerated with the new card; Section 5.7 describes the design; deck and crib
   page count corrected to 88 after the Bloom section landed. Audit clean.
+
+### The literature review is complete, and the repo is ready for GitHub (15 July 2026)
+
+- Finished the full literature review for the upload Vini asked for. Eight new references, every
+  one verified against its primary source before it went in: Kirchenbauer et al. on watermarking
+  (the response detection cannot rely on), Weber-Wulff et al.'s fourteen-tool test in the
+  educational-integrity journal (the tools universities license are neither accurate nor
+  reliable), Koike et al.'s OUTFOX paper (whose essay corpus Chapter 6 already used and now
+  properly cites), Lyu et al.'s faithfulness survey (plausibility mistaken for faithfulness, the
+  distinction this project's explanation layer turns on), Kurdi et al.'s systematic review of
+  educational question generation, and the education side the review lacked: Perkins, Cotton et
+  al., and Sotiriadou et al.'s interactive-oral work, which grounds the Verification Interview
+  Guide in assessment literature. A new Section 2.10 connects detection to what universities can
+  actually do. 41 references, 41 citations, audit clean, 90-page rebuild.
+- Prepared the public copy of the repository: working notes and speech scripts removed from the
+  entire history, early machine-signed commit trailers stripped, no data, models, outputs or keys
+  anywhere in history. The clean copy lives beside the project, ready to push.
+- The submission deck (28 slides, speaker notes removed) is exported separately for upload.

@@ -4,8 +4,9 @@
 
 This review covers the parts of the literature the project draws on and, in places, argues against:
 detection of AI-generated text, the stylometric features behind the detector, explainability and
-faithfulness testing, argument mining, question generation, evaluation of question quality, and
-fairness. The sections follow the order of the pipeline components and end with the gap in the
+faithfulness testing, argument mining, question generation, evaluation of question quality,
+fairness, and the assessment literature on what universities can do beyond detection. The sections
+follow the order of the pipeline components and end with the gap in the
 literature. I anchored the search on the methods and datasets already chosen (the DeBERTa detector,
 the M4 benchmark, the Persuasive Essays corpus, Bloom's taxonomy, the answerability idea behind the
 evaluation) and then branched out to alternatives and criticisms.
@@ -14,6 +15,10 @@ evaluation) and then branched out to alternatives and criticisms.
 
 Work on detecting machine-generated text falls into two broad families. A recent survey by Wu et
 al. (2025) organises the field along these lines and adds watermarking and human-assisted methods.
+Watermarking is worth a note because it attacks the problem at the source: Kirchenbauer et al.
+(2023) embed a statistical signal in the model's own sampling that a verifier can later test for.
+It only works if the generator cooperates, which no institution can assume of the tools students
+actually use, so post-hoc detection remains the practical setting for this project.
 
 The first family is zero-shot and statistical. These methods score text using a language model's own
 probabilities and need no trained classifier. The clearest example is DetectGPT (Mitchell et al.,
@@ -34,7 +39,13 @@ generator and one kind of text transfers to unseen generators and unseen domains
 
 Both approaches have weaknesses that matter for this project. Detectors are brittle: Krishna et al.
 (2023) show that a strong paraphraser drops DetectGPT's accuracy from 70.3% to 4.6% without changing
-the meaning, and accuracy also falls under domain shift. The problem that matters more here is
+the meaning, and accuracy also falls under domain shift. Koike et al. (2024) push the same point
+further with OUTFOX, where an attacking model learns from a detector's own outputs to write harder
+essays; their essay corpus, which pairs human student writing with six generators, is the one this
+project uses for its cross-generator transfer test in Chapter 6. In the education setting the
+weakness is not hypothetical. Weber-Wulff et al. (2023) tested fourteen detection tools, including
+the systems universities license, and concluded they are neither accurate nor reliable on academic
+text. The problem that matters more here is
 opacity. Commercial detectors return a single score with nothing behind it, and a number without
 reasons is a weak basis for an academic-integrity decision. This project starts from that problem.
 
@@ -71,7 +82,12 @@ attention.
 An explanation is only useful if it is faithful, meaning the things it highlights actually drove the
 decision. DeYoung et al. (2020) introduced the ERASER benchmark and the comprehensiveness and
 sufficiency metrics, which measure faithfulness by removing or keeping the features an explanation
-calls important and watching whether the prediction moves. This project uses the same kind of
+calls important and watching whether the prediction moves. Faithfulness has since become a field of
+its own: Lyu et al. (2024) survey over a hundred explanation methods through that single lens and
+argue that plausibility, how convincing an explanation looks, is routinely mistaken for
+faithfulness. That distinction is load-bearing in this dissertation, where a convincing token
+highlight failed the ablation test and a plainer feature account passed it. This project uses the
+same kind of
 ablation test. The test showed the transformer's token-level attributions were diffuse and only
 weakly faithful, while the stylometric SHAP explanation held up.
 
@@ -91,7 +107,10 @@ at a different stage.
 
 ## 2.6 Automatic question generation
 
-Question generation has moved from neural models that generate a question from a passage to large
+Automatic question generation for education has a long history before LLMs; the systematic review
+of Kurdi et al. (2020) covers 93 pre-LLM systems and already identifies the field's persistent
+weakness, that generated questions cluster at the lowest cognitive levels. The field has since
+moved from neural models that generate a question from a passage to large
 language models prompted to do the same, with growing interest in controllable and grounded
 generation (Guo et al., 2024). Grounding matters most for verification. A question is only
 defensible if it can be traced to a specific claim in the student's own text, so the generator works
@@ -142,7 +161,22 @@ misclassified competent non-native writing as AI-generated. Chapter 6 measures t
 directly on my own detector and reports it as a main result rather than a footnote. It is also why
 transparency and defensibility run through the design.
 
-## 2.10 Summary and the gap
+## 2.10 What universities can do beyond detection
+
+The education literature has been arguing since ChatGPT's release that detection alone cannot carry
+an integrity policy. Perkins (2023) reviews the academic-integrity implications of LLMs and
+concludes that assessment design, not tool-banning, is where institutions have real leverage.
+Cotton et al. (2024) reach a similar position on the opportunities and risks, in a paper that
+famously had ChatGPT write its own first half, which rather proves their point about detection.
+The strand of that literature closest to this project is authentic and oral assessment. Sotiriadou
+et al. (2020) show that scaffolded assessment ending in an interactive oral, a short structured
+conversation about the student's own work, both deters misconduct and gives genuine evidence of
+understanding. That is precisely the conversation this project's Verification Interview Guide is
+built to equip, with the difference that here the questions are generated automatically from the
+submission itself, at a scale where a lecturer with three hundred scripts could not prepare them
+by hand.
+
+## 2.11 Summary and the gap
 
 Detection is improving but stays opaque, and on the evidence above it is sometimes unfair.
 Explainability methods exist, and there are established ways to test whether they are faithful.
