@@ -151,12 +151,44 @@ that produced the score rather than a simplified stand-in, so the faithfulness s
 5.5 carries over without needing a new argument.
 
 The explainability work is not finished here. The card has not yet been tested on actual
-lecturers, its reference band is one corpus's idea of "typical", and the transformer half of the
-hybrid still contributes to the score without a per-essay account of its own. Those items are
-named in the plan. From this point on, any explanation the system shows has to pass two checks,
+lecturers, and its reference band is one corpus's idea of "typical". The transformer half's
+per-essay account is taken up next, in Section 5.8, and the answer it gives is not the one I
+went looking for. From this point on, any explanation the system shows has to pass two checks,
 the ablation test for faithfulness and a plain-reader test for whether it is understood.
 
-## 5.8 Next steps for explainability
+## 5.8 Sentence-level occlusion: a reliable ranking of nothing in particular
+
+One route to a per-essay transformer account remained untried: occlusion at sentence level.
+Delete one sentence at a time, measure how the log-odds of the AI class move, and rank the
+sentences by the drop (`src/explainability/sentence_occlusion.py`,
+`outputs/sentence_occlusion.json`). Occlusion is faithful by construction, since it reports what
+the model actually did when the text changed, and a sentence is something a lecturer could quote.
+The measurement runs in log-odds because the in-domain detector saturates near probability 1.0,
+where sentence-sized changes vanish below rounding.
+
+The test mirrors Section 5.3 at the new granularity: on thirty test AI essays, remove the three
+top-ranked sentences together and compare the drop with removing three random sentences. The
+ranking turns out to be real. Targeted removal beats random on 27 of the 30 essays (Wilcoxon
+p < 0.001), and random removal does nothing at all (mean drop -0.001 log-odds). At sentence
+level the model's preferences can be recovered reliably, which token attributions could not
+manage (Figure 5.6).
+
+The magnitude is the other half of the answer, and it is the half that matters. The mean drop
+from removing the three most machine-like sentences is 0.011 log-odds, against a full-essay
+log-odds around 7.9: about 0.14 percent. Deleting the strongest evidence the ranking can find
+leaves the decision untouched. There are no flag-carrying sentences to point at, because the
+style signal is spread through essentially every sentence, which is the same diffusion the
+token-level analysis saw, now measured at the scale a lecturer would want to quote. This
+settles a design question with data. A "these sentences drove the flag" section in the guide
+would rank correctly and still mislead, implying the flag rests on quotable passages when
+removing them changes nothing, so the guide does not get one, and the habit-level card stays
+the per-essay explanation for a measured reason rather than a preference. The ranking keeps one
+narrow legitimate use: choosing which passages to quote as illustrations of the habits the card
+names, never as causes.
+
+![Figure 5.6: Sentence-level occlusion on thirty test AI essays. Removing the three top-ranked sentences (left) beats removing three random ones (right) on 27 of 30 essays, but the absolute effect is 0.011 log-odds against a full-essay log-odds near 7.9. The ranking is reliable; there is simply nothing localised for it to find.](../figures/fig_sentence_occlusion.png)
+
+## 5.9 Next steps for explainability
 
 The stylometric model and the transformer are fused into the hybrid detector in Section 6.7, with
 perplexity added to the feature set. The token attributions stay in as a supporting visual,

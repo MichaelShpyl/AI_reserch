@@ -175,6 +175,10 @@
   "w": 2480,
   "h": 1000
  },
+ "fig_sentence_occlusion": {
+  "w": 1520,
+  "h": 880
+ },
  "fig_shap_stylometric": {
   "w": 1666,
   "h": 1287

@@ -1611,3 +1611,18 @@ evaluation programme.
   credential. Sync flow: commit here, regenerate the mirror, push from the mirror.
 - The Gemini judge drip banked 21 more questions in an open quota window (37 of 60); the daily
   task continues.
+
+### The transformer gets its per-essay account, and the answer is that there is nothing to point at (16 July 2026, later)
+
+- Tried the remaining route to a per-essay transformer explanation: sentence-level occlusion in
+  log-odds (the probability scale saturates in domain). The ranking is real: removing the three
+  top-ranked sentences beats removing three random ones on 27 of 30 test essays, Wilcoxon
+  p < 0.001, and random removal does nothing. But the magnitude closes the question: 0.011
+  log-odds out of 7.9, about 0.14 percent. There are no flag-carrying sentences; the style
+  signal lives in every sentence, which is the token-level diffusion finding again at the scale
+  a lecturer would want to quote. Decision recorded in Section 5.8: the guide does NOT get a
+  "these sentences drove the flag" section, because it would rank correctly and still mislead;
+  the habit-level card stays the per-essay explanation, now for a measured reason.
+- Drafted the August validation study protocol for Vini (dissertation/study_protocol.md): a
+  two-arm design, students answering questions on their own versus read-only essays, and
+  lecturers thinking aloud over the real guides, with ethics surface, timeline and fallbacks.
