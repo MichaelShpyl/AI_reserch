@@ -94,11 +94,17 @@ audit checks the written chapters against those files:
   accusations of humans by three to eight times at equal F1.
 - Explanations are faithfulness-tested; the feature-level account passes where all three token-level
   methods fail, and each guide carries a plain-language per-submission explanation card.
-- Question generation: on fixed claims across 30 essays, the QLoRA fine-tuned 3B (trained on
-  self-distilled verification questions) beats its base (p = 0.0001) and the free-tier commercial
-  model on shared essays (p = 0.0094), with every question passing the well-formedness gate.
+- Question generation: on fixed claims across 30 essays (901 questions), the QLoRA fine-tuned 3B
+  (trained on self-distilled verification questions) beats its base (p < 0.0001, 25 of 30 essays)
+  and the free-tier commercial model on the 29 shared essays (p = 0.0003, 24 of 29), with every
+  question passing the well-formedness gate.
 - Three LLM judges neither agree with each other (Krippendorff's alpha -0.25) nor track the
-  objective measure, which is why the judge-free simulation carries the evidence.
+  objective measure, and the anti-correlation replicates at a five-times-larger question set,
+  which is why the judge-free simulation carries the evidence.
+- Two controls with teeth: the training-distribution control, run where the task is hard, shows
+  balancing the writer mix costs nothing in accuracy but slightly raises out-of-domain false
+  accusations (p < 0.001); and sentence-level occlusion shows the style signal has no
+  flag-carrying sentences to point at, which is why explanations stay at habit level.
 
 ## Tooling (writing, diagrams, slides)
 
@@ -125,6 +131,8 @@ VS Code so `pandoc` and `dot` are on PATH:
 ## Status
 
 All six locked-scope components are built and trained, the pipeline runs end to end on an 8 GB
-laptop, and the evaluation programme is complete. The dissertation draft (86 pages, twelve chapters)
-lives in `dissertation/`, with a per-session progress log in `dissertation/progress_log.md`.
-Remaining work is writing polish and submission process.
+laptop, and the evaluation programme is complete. The dissertation draft (92 pages, twelve
+chapters, 41 verified references) lives in `dissertation/`, with a per-session progress log in
+`dissertation/progress_log.md` and the August validation-study protocol in
+`dissertation/study_protocol.md`. Remaining work is the validation study, writing polish, and the
+submission process.

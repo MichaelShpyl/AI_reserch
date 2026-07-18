@@ -112,7 +112,10 @@ fragments rather than topic words, consistent with the audit. The faithfulness t
 read those attributions. Removing the top attributed tokens lowers the detector's confidence only slightly
 more than removing the same number of random tokens, and keeping only the top tokens collapses the
 prediction to chance. The style signal is diffuse, spread across the whole essay, so a per-word
-highlight is a weak explanation on its own. The faithful, interpretable explanation is the
+highlight is a weak explanation on its own. The diffusion holds at sentence scale too: occlusion
+ranks sentences reliably (targeted removal beats random on 27 of 30 essays, p < 0.001) yet the
+three most machine-like sentences carry only about 0.1 percent of the decision's log-odds, so
+there are no flag-carrying passages to quote. The faithful, interpretable explanation is the
 feature-level one: the function-word fingerprint and the two-cluster style space from the audit.
 A detector built from hand-crafted style features alone (sentence-length variation, vocabulary
 richness, word length, punctuation, part-of-speech mix) reaches F1 0.985, almost matching the
@@ -136,6 +139,14 @@ arXiv abstracts and about 40 percent on Wikipedia and WikiHow. The detector had 
 looks like a student essay, so it misjudges more formal human writing. These failures are false
 accusations, the harm the wider project is designed to prevent, and they mirror the known bias of
 these detectors against writing that differs from the training norm.
+
+A training-distribution control sharpens the picture. Two detectors of identical size, seed and
+hyperparameters, differing only in the human-writer mix (balanced across discipline and language
+cells versus the corpus's natural skew), tie on the easy in-domain task and tie on cross-domain
+accuracy (0.801 versus 0.800, McNemar p = 0.90), but the balanced mix wrongly flags more of the
+out-of-domain human text (20.1 versus 16.7 percent, McNemar p < 0.001). Balancing the training
+mix, usually done in fairness's name, is not automatically the safer choice for false positives
+outside the training domain.
 
 ## 7. Discussion
 

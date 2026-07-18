@@ -1626,3 +1626,13 @@ evaluation programme.
 - Drafted the August validation study protocol for Vini (dissertation/study_protocol.md): a
   two-arm design, students answering questions on their own versus read-only essays, and
   lecturers thinking aloud over the real guides, with ethics surface, timeline and fallbacks.
+
+### README and the AICS draft carry the newest results (16 July 2026, evening)
+
+- README's results-at-a-glance and status brought current: 901 questions, 24 of 29 at p = 0.0003,
+  the judge replication, the two new controls, 92 pages and 41 references, and a pointer to the
+  study protocol.
+- The AICS draft gains both findings that fit its scope: the sentence-level diffusion result in
+  the explainability section, and the training-distribution control in the robustness section,
+  with its caution that balancing a training mix is not automatically the safer choice for false
+  positives out of domain.
