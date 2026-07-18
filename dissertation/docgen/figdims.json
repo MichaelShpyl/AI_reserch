@@ -1,118 +1,190 @@
 {
-  "fig_audit_separability": {
-    "w": 1680,
-    "h": 919
-  },
-  "fig_audit_top_features": {
-    "w": 2200,
-    "h": 1040
-  },
-  "fig_detector_confusion": {
-    "w": 1080,
-    "h": 1000
-  },
-  "fig_confidence_intervals": {
-    "w": 1760,
-    "h": 960
-  },
-  "fig_why_style_clusters": {
-    "w": 1520,
-    "h": 1200
-  },
-  "fig_explain_ig_tokens": {
-    "w": 2200,
-    "h": 1240
-  },
-  "fig_explain_faithfulness": {
-    "w": 1639,
-    "h": 960
-  },
-  "fig_shap_stylometric": {
-    "w": 1666,
-    "h": 1287
-  },
-  "fig_m4_per_generator": {
-    "w": 1720,
-    "h": 919
-  },
-  "fig_m4_transfer_gap": {
-    "w": 1440,
-    "h": 919
-  },
-  "fig_m4_per_domain": {
-    "w": 1800,
-    "h": 960
-  },
-  "fig_discrimination_sim": {
-    "w": 2200,
-    "h": 919
-  },
-  "fig_backend_comparison_batch": {
-    "w": 2200,
-    "h": 919
-  },
-  "fig_bloom_classifier": {
-    "w": 2100,
-    "h": 880
-  },
-  "fig_claim_extractor": {
-    "w": 1440,
-    "h": 840
-  },
-  "fig_finetune_eval": {
-    "w": 1200,
-    "h": 860
-  },
-  "fig_likeforlike_4way": {
-    "w": 1520,
-    "h": 940
-  },
-  "fig_qg_quality_audit": {
-    "w": 2100,
-    "h": 860
-  },
-  "fig_qg_v2_eval": {
-    "w": 1440,
-    "h": 919
-  },
-  "fig_attention_tokens": {
-    "w": 2300,
-    "h": 919
-  },
-  "fig_attention_faithfulness": {
-    "w": 1639,
-    "h": 960
-  },
-  "fig_qg_v3_eval": {
-    "w": 1560,
-    "h": 940
-  },
-  "fig_balanced_vs_natural": {
-    "w": 2200,
-    "h": 880
-  },
-  "fig_hybrid_fusion": {
-    "w": 2300,
-    "h": 919
-  },
-  "fig_guide_page1": {
-    "w": 1275,
-    "h": 1650
-  },
-  "fig_relation_classifier": {
-    "w": 1400,
-    "h": 840
-  },
-  "fig_abstain_band": {
-    "w": 1639,
-    "h": 919
-  },
-  "fig_multigen_detection": {
-    "w": 1600,
-    "h": 919
-  },
-  "fig_likeforlike_scaled": {
-    "w": 1560,
-    "h": 940
-  }
+ "fig1_group_balance": {
+  "w": 1500,
+  "h": 960
+ },
+ "fig2_discipline_imbalance": {
+  "w": 1700,
+  "h": 1800
+ },
+ "fig3_l1_availability": {
+  "w": 1700,
+  "h": 1000
+ },
+ "fig4_student_clustering": {
+  "w": 1700,
+  "h": 1000
+ },
+ "fig5_sample_composition": {
+  "w": 2200,
+  "h": 1000
+ },
+ "fig6_sample_length_by_l1": {
+  "w": 1700,
+  "h": 1000
+ },
+ "fig7_ai_vs_human_length": {
+  "w": 1700,
+  "h": 1000
+ },
+ "fig_abstain_band": {
+  "w": 1639,
+  "h": 919
+ },
+ "fig_attention_faithfulness": {
+  "w": 1639,
+  "h": 960
+ },
+ "fig_attention_tokens": {
+  "w": 2300,
+  "h": 919
+ },
+ "fig_audit_separability": {
+  "w": 1680,
+  "h": 919
+ },
+ "fig_audit_top_features": {
+  "w": 2200,
+  "h": 1040
+ },
+ "fig_backend_comparison": {
+  "w": 1240,
+  "h": 880
+ },
+ "fig_backend_comparison_batch": {
+  "w": 2200,
+  "h": 919
+ },
+ "fig_balanced_vs_natural": {
+  "w": 2200,
+  "h": 880
+ },
+ "fig_bloom_classifier": {
+  "w": 2100,
+  "h": 880
+ },
+ "fig_claim_extractor": {
+  "w": 1440,
+  "h": 840
+ },
+ "fig_confidence_intervals": {
+  "w": 1760,
+  "h": 960
+ },
+ "fig_dataset_pipeline": {
+  "w": 2520,
+  "h": 919
+ },
+ "fig_degenerate_demo": {
+  "w": 2989,
+  "h": 1045
+ },
+ "fig_detector_confusion": {
+  "w": 1080,
+  "h": 1000
+ },
+ "fig_discrimination_explainer": {
+  "w": 2400,
+  "h": 1040
+ },
+ "fig_discrimination_sim": {
+  "w": 2200,
+  "h": 919
+ },
+ "fig_dist_crossdomain": {
+  "w": 1900,
+  "h": 919
+ },
+ "fig_explain_card_demo": {
+  "w": 1880,
+  "h": 1180
+ },
+ "fig_explain_faithfulness": {
+  "w": 1639,
+  "h": 960
+ },
+ "fig_explain_ig_tokens": {
+  "w": 2200,
+  "h": 1240
+ },
+ "fig_finetune_eval": {
+  "w": 1200,
+  "h": 860
+ },
+ "fig_guide_page1": {
+  "w": 1275,
+  "h": 1650
+ },
+ "fig_guide_pages": {
+  "w": 3159,
+  "h": 1311
+ },
+ "fig_hybrid_fusion": {
+  "w": 2300,
+  "h": 919
+ },
+ "fig_likeforlike_4way": {
+  "w": 1520,
+  "h": 940
+ },
+ "fig_likeforlike_scaled": {
+  "w": 1560,
+  "h": 940
+ },
+ "fig_m4_per_domain": {
+  "w": 1800,
+  "h": 960
+ },
+ "fig_m4_per_generator": {
+  "w": 1720,
+  "h": 919
+ },
+ "fig_m4_transfer_gap": {
+  "w": 1440,
+  "h": 919
+ },
+ "fig_multigen_detection": {
+  "w": 1600,
+  "h": 919
+ },
+ "fig_pipeline_overview": {
+  "w": 2520,
+  "h": 1000
+ },
+ "fig_problem": {
+  "w": 2958,
+  "h": 1088
+ },
+ "fig_qg_quality_audit": {
+  "w": 2100,
+  "h": 860
+ },
+ "fig_qg_v2_eval": {
+  "w": 1440,
+  "h": 919
+ },
+ "fig_qg_v3_eval": {
+  "w": 1560,
+  "h": 940
+ },
+ "fig_relation_classifier": {
+  "w": 1400,
+  "h": 840
+ },
+ "fig_roadmap": {
+  "w": 2480,
+  "h": 1000
+ },
+ "fig_shap_stylometric": {
+  "w": 1666,
+  "h": 1287
+ },
+ "fig_stylometry_human_vs_ai": {
+  "w": 2600,
+  "h": 840
+ },
+ "fig_why_style_clusters": {
+  "w": 1520,
+  "h": 1200
+ }
 }
