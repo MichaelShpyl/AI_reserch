@@ -68,8 +68,9 @@ detection corpus gained test essays from two more model families during the robu
 training side should be widened the same way, so the transfer results can be shown on the corpus
 itself without leaning on an external benchmark. Cross-domain deployment needs calibrated
 per-domain thresholds before anyone should trust a flag outside student essays, and the measured
-abstain band shows what calibration alone will not fix. The training-distribution control should
-be re-run on a task hard enough to have resolution. The Bloom classifier is held back by label
+abstain band shows what calibration alone will not fix. The training-distribution control, re-run on the hard cross-domain task, now shows a real
+trade-off (accuracy unchanged, more false flags from the balanced mix), and the next step is
+testing whether that effect reaches writer-level fairness on larger corpora. The Bloom classifier is held back by label
 supply, not architecture, and the cheap route to more labels is now closed: LLM annotators were
 tried under a pre-registered validation against the gold labels and failed it on the higher-order
 classes (Section 7.5), so the supply that would lift the guide's quality control has to be human. The relation classifier learns supports links well (F1 0.75) but attack

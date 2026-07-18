@@ -1596,3 +1596,18 @@ evaluation programme.
   actually say (among them, the Kurdi review's gap is controlled difficulty, not cognitive level,
   and an unverifiable anecdote about the Cotton paper was cut). The audit still pairs 41
   citations with 41 entries.
+
+### The distribution control gets its resolution, and the repo goes to GitHub (16 July 2026)
+
+- Re-ran the training-distribution control where the task is hard: the same two same-seed models
+  (balanced versus natural writer mix) on the exact cross-domain sample from the robustness
+  chapter. The result finally separates them, in one direction only: overall accuracy is a tie
+  (0.801 vs 0.800, McNemar p = 0.90), but the balanced mix false-flags more of the unfamiliar
+  human text (20.1 percent against 16.7, McNemar p < 0.001; 78 texts flagged only by the balanced
+  model against 27 only by the natural one). Balancing cost nothing in skill but made the detector
+  slightly more willing to accuse out of domain. Section 6.6 carries the result and Figure 6.8;
+  the discussion and conclusions updated; two new audit checks pin the numbers.
+- The clean repository is now on GitHub (private), pushed from the mirror after clearing a stale
+  credential. Sync flow: commit here, regenerate the mirror, push from the mirror.
+- The Gemini judge drip banked 21 more questions in an open quota window (37 of 60); the daily
+  task continues.

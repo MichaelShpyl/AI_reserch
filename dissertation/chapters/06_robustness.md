@@ -94,10 +94,30 @@ corpus is separable on function words alone, so 494 training essays saturate the
 regardless of how their writers are distributed. On the reassuring side, the balanced design did
 not manufacture the result, because a realistically skewed training mix reproduces it. That
 answers the Meeting 2 worry. The caveat is that at this level of separability the comparison has
-no resolution. Whether balancing helps or hurts can only be measured where the task is hard, such
-as the cross-domain settings of this chapter, and a future version of this control belongs there.
+no resolution. Whether balancing helps or hurts can only be measured where the task is hard.
 
 ![Figure 6.4: The training-distribution control. Two same-size detectors, one trained on the balanced writer mix and one on BAWE's natural skew, evaluated per cell and in aggregate on the same held-out split. The two are indistinguishable everywhere, so the balanced design does not explain why the corpus is separable.](../figures/fig_balanced_vs_natural.png)
+
+So I ran the same two models where the task is hard: the cross-domain sample from Section 6.3,
+identical texts, identical seed (`src/detection/dist_crossdomain.py`,
+`outputs/dist_crossdomain.json`). Here the control finally has resolution, and it splits cleanly
+in two (Figure 6.8). On overall skill the mixes still do not differ: accuracy 0.801 against
+0.800, and on the same texts each model uniquely gets about as many right as the other (118
+against 115, McNemar p = 0.90). On false accusations they do differ. The balanced model wrongly
+flags 20.1 percent of the out-of-domain human texts against the natural model's 16.7, and the
+paired counts are lopsided enough to be clear: 78 human texts are flagged only by the balanced
+model against 27 only by the natural one (McNemar p < 0.001), with the gap concentrated in
+WikiHow and Wikipedia and a small lean the other way on arXiv. A plausible mechanism, offered as
+a hypothesis rather than a finding, is that balancing doubles the weight of non-native writing,
+whose flatter, more uniform style sits closer to machine text on exactly the features Chapter 5
+identifies, narrowing what the balanced model accepts as human. Whatever the cause, the practical
+reading is honest on both sides. The balancing did not manufacture any result and costs nothing
+in accuracy, but it is not free either: out of domain it makes the detector slightly more willing
+to accuse, which is the direction this dissertation cares most about. A deployment that trains on
+a curated mix should re-check its false-positive behaviour on unfamiliar text rather than assume
+balance is automatically the safer choice.
+
+![Figure 6.8: The training-distribution control repeated on the hard task. Per-domain human false-positive rates for the balanced and natural training mixes on the identical cross-domain sample. Overall accuracy is tied (p = 0.90), but the balanced mix false-flags more human text (0.201 vs 0.167, McNemar p < 0.001), most visibly on WikiHow and Wikipedia.](../figures/fig_dist_crossdomain.png)
 
 ## 6.7 The hybrid detector
 

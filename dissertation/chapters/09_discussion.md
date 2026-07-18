@@ -115,8 +115,10 @@ preferred.
 The detection corpus pairs one human corpus with one generator. The detector transfers to six unseen
 generators, but the corpus itself cannot show generator diversity. The commercial arm is one
 provider's free tier rather than a frontier model, and quota limits caused disclosed irregularities.
-On the home corpus the detection task saturates. Because of that, the training-distribution control
-could show the balancing is harmless, but not whether it helps on a harder task.
+On the home corpus the detection task saturates, so the training-distribution control needed the
+harder cross-domain setting before it had resolution. There it found the balancing harmless for
+accuracy but slightly costly for false accusations on unfamiliar human text (Section 6.6), a
+trade-off measured on one corpus pair and worth re-testing at larger scale.
 
 The argument-mining component extracts claims at a working but unspectacular span-F1 of 0.63. The
 relation classifier learns supports-links well (F1 0.75 with gold components) but cannot learn
