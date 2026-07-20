@@ -145,7 +145,8 @@ The rest of the document is laid out as follows.
 
 Chapter 2 reviews the recent literature the project draws on, covering AI-text detection and its
 benchmarks, stylometric features, explainability and faithfulness, argument mining, question
-generation and its evaluation, and the fairness evidence behind the design.
+generation and its evaluation, the fairness evidence behind the design, and the assessment
+literature on what universities can do beyond detection.
 
 Chapter 3 sets out the detection methodology and the first results, including the dataset, the
 construction of the matched AI essays, and the audit that found and removed a corpus artefact
@@ -167,9 +168,10 @@ the trained claim extractor, assembles the lecturer's Verification Interview Gui
 the local backend.
 
 Chapter 8 evaluates the questions. It builds the judge-free discrimination simulation, runs the
-commercial-versus-local comparison under two designs, validates a three-judge LLM panel against the
-objective measure, and reports the fine-tuning data-format experiment together with the quality
-audit that caught a metric-gaming artefact.
+commercial-versus-local comparison under two designs and then at thirty-essay scale, validates a
+three-judge LLM panel against the objective measure, reports the fine-tuning data-format
+experiment together with the quality audit that caught a metric-gaming artefact, and closes by
+explaining the one number no grounded writer had beaten, the generic-question baseline.
 
 Chapter 9 discusses what the results mean, covering the answer to the research question, the
 methodological lesson drawn from the negative results, the case for verification over accusation,
