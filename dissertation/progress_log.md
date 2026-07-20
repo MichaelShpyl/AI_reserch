@@ -1651,3 +1651,16 @@ evaluation programme.
   specificity and v4's harder-to-fake form is exactly what the validation study can settle.
 - Chapter 9's caveat and the conclusions' contribution list updated; two audit checks pin the v4
   mean and the content-free ratio; 94-page rebuild, audit clean.
+
+### The gate at inference, measured, and the study gains its deciding arm (19 July 2026)
+
+- Ran v4 with the content gate applied at generation time: any question naming claim content is
+  rejected and regenerated, first at the default temperature and then warmer for variety. The
+  output becomes fully uniform, 100 percent content-free across all 54 questions with no
+  fallbacks, at 0.256 [0.230, 0.281], statistically the same as ungated v4's 0.266, for seven
+  extra generation rounds across the eighteen claims. Nothing technical blocks v4 any more;
+  Section 8.13 now says so, and the remaining v3-versus-v4 choice is about what works in a real
+  conversation.
+- The validation study protocol gains the arm that answers it: each participant's question set
+  now mixes the two styles blind, half v3 and half v4, so the own-versus-read gap per style is
+  measured directly on humans.

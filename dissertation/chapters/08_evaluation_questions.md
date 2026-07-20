@@ -405,12 +405,16 @@ anchoring the guide is built on, the Bloom spread, and mild adaptation to each c
 Two conclusions follow, one scientific and one practical. Scientifically, the baseline gap is now
 explained: most of it was the price of naming content, paid by every grounded writer in this
 chapter, and a 3B model reproduces the generic effect once that price is removed. Practically,
-the pipeline keeps shipping v3 for the moment. v4's content discipline is only as good as its
-training data pushed it, and a deployed version needs the same gate at inference, rejecting and
-regenerating the leaky questions, before its behaviour is uniform enough to hand to a lecturer.
-That is one small engineering step, and whether to take it is a supervisor conversation, since it
-trades v3's specific, quotable questions for v4's harder-to-fake ones. The instrument for
-settling that trade already exists: the validation study protocol, where both styles can face
-real students.
+the engineering step that a deployment would need has now been taken and measured
+(`src/question_gen/eval_qg_v4_gated.py`, `outputs/qg_v4_gated_eval.json`). With the content gate
+applied at inference, rejecting and regenerating any question that names claim content, the
+output becomes fully uniform: 100 percent content-free across all 54 questions with no fallbacks,
+at a mean discrimination of 0.256 (95% CI [0.230, 0.281]), statistically indistinguishable from
+the ungated 0.266, for a retry cost of seven extra generation rounds across the eighteen claims.
+Nothing technical now blocks v4; the pipeline still ships v3 because the remaining question is
+not an engineering one. Choosing between v3's specific, quotable questions and v4's
+harder-to-fake ones is a judgement about what works in a real conversation, and the validation
+study protocol now includes a blind v3-versus-v4 arm designed to answer exactly that with human
+evidence.
 
 ![Figure 8.8: The fine-tune series on the fixed 18 claims, with the v4 result. Trained to anchor without naming, v4 reaches 0.266 against the generic baseline's 0.30, with zero degenerate output, 51 of 54 unique questions and 89 percent content-free behaviour at inference. The gap to the baseline was mostly the price of naming content.](../figures/fig_qg_v4.png)

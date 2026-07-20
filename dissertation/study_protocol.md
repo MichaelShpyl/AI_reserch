@@ -28,6 +28,14 @@ five minutes to read (the "read-only" condition simulates a student defending wo
 not produce; reading it first makes the comparison conservative, since a contract-cheating
 student has at least read what they submitted).
 
+**Question style comparison.** Each question set mixes the two candidate backends, half v3
+(specific, quotes the claim's content) and half v4 (anchored to a claim shown beside the
+question but never naming it), in randomised order and blind to the participant. This settles
+the open product decision from the evaluation chapter with human evidence: v3's questions are
+easier to talk to but leak content an outsider can use, v4's are harder to fake but more
+uniform, and the own-versus-read gap per style is exactly the number that decides between
+them.
+
 **Participants.** Eight to twelve postgraduate volunteers from the department. No students in
 any live academic-integrity process; no real submissions; no deception.
 
