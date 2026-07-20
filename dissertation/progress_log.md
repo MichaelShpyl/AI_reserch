@@ -1689,3 +1689,14 @@ evaluation programme.
   three rank the best backend below the plain 8B. Sections 8.7, 9.2 and the conclusions carry
   the three-judge numbers; the audit check moved to the new alpha.
 - The daily task now has only the multigen top-up left (20 of 40) and stands down after it.
+
+### Tests for the gates, and the dev dependencies caught up (20 July 2026, later)
+
+- The tests directory finally earns its place: eleven unit tests covering the three pieces the
+  evaluation chain leans on hardest. The well-formedness gate (the degenerate MCQ stem from the
+  v1 artifact is the first test case), the v4 content gate (the exact Poland-and-Hungary leak
+  from its smoke test is a test case too), and the hand-rolled Krippendorff alpha (perfect,
+  inverted, missing-value and constant-offset cases, the last one documenting why three judges
+  who agree in rank can still produce a negative interval alpha). All pass in a fraction of a
+  second, so they can run before every commit.
+- requirements-dev gains pytest and the two PDF libraries the figure and checking scripts import.
