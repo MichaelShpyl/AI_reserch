@@ -1664,3 +1664,17 @@ evaluation programme.
 - The validation study protocol gains the arm that answers it: each participant's question set
   now mixes the two styles blind, half v3 and half v4, so the own-versus-read gap per style is
   measured directly on humans.
+
+### The promises catch up with the delivery (19 July 2026, later)
+
+- Chapter 1's contribution list, written when everything was a plan, now states what was shown:
+  the pipeline running end to end on one laptop, the fine-tuned local model ahead of the free
+  commercial tier on the fixed task, the judge-free measure plus the measured case against
+  unanchored LLM judges, the training-mix effect on false accusations, and the standing rule
+  that three of this project's own headline numbers were retracted on the way here. The abstract
+  gains one sentence for the v4 finding, that the generic-baseline gap was the price of naming
+  the claim's content.
+- The Gemini judge reached 59 of 60 before the day's quota closed one call short; its anchoring
+  at n=59 already sits near zero (rho -0.09, p = 0.51), consistent with every other judge. The
+  daily task finishes it and folds in the three-judge numbers. The multigen top-up got no quota
+  today and stays at 20 of 40.

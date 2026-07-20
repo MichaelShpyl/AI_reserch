@@ -124,13 +124,20 @@ focus on the system itself.
 What I think this project adds:
 
 - a pipeline that carries a detection flag through to evidence a lecturer can inspect and defend,
-  instead of stopping at a score;
+  instead of stopping at a score, running end to end on one consumer laptop;
 - verification questions tied back to the student's own writing, so a lecturer can see where each
   one came from;
-- a direct comparison of a locally run open model against a commercial one for this task, relevant
-  to any institution weighing cost and control;
-- an objective way to measure whether a question really tests understanding; and
-- an examination of how the detector treats native versus non-native writers.
+- a controlled comparison of locally run open models against a commercial one for this task,
+  relevant to any institution weighing cost and control, which ends with the fine-tuned local
+  model ahead of the free commercial tier on the fixed task;
+- an objective, judge-free way to measure whether a question really tests understanding, along
+  with measured evidence for why the popular LLM-as-judge alternative cannot be trusted without
+  an anchor;
+- an examination of how the detector treats writers and writing it was not trained on, including
+  what the make-up of the training data itself does to false accusations; and
+- a demonstration, run on my own results, that an automatic score is only worth the checks behind
+  it: three of this project's own headline numbers were caught and retracted on the way to the
+  ones reported here.
 
 ## 1.9 Dissertation outline
 
