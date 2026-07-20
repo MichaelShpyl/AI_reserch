@@ -1678,3 +1678,14 @@ evaluation programme.
   at n=59 already sits near zero (rho -0.09, p = 0.51), consistent with every other judge. The
   daily task finishes it and folds in the three-judge numbers. The multigen top-up got no quota
   today and stays at 20 of 40.
+
+### The judge panel completes at sixty questions, three judges (20 July 2026)
+
+- The last Gemini call landed and the scaled judge study is complete: all three judges over the
+  same sixty questions. The final picture is the cleanest form of the finding. Every pair of
+  judges now agrees in rank (Spearman 0.42 to 0.58, all significant), the interval alpha stays
+  negative (-0.14) because two judges sit near the rating ceiling, and no judge correlates
+  positively with the objective simulation (Claude -0.34, GPT -0.37, Gemini -0.08). Two of the
+  three rank the best backend below the plain 8B. Sections 8.7, 9.2 and the conclusions carry
+  the three-judge numbers; the audit check moved to the new alpha.
+- The daily task now has only the multigen top-up left (20 of 40) and stands down after it.

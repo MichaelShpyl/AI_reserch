@@ -140,17 +140,19 @@ five times the size once the scaled comparison of Section 8.12 provided a large 
 well-formed questions to draw from. Sixty questions were sampled evenly from its three fully
 well-formed arms (twenty each from the local 8B, the base 3B and the fine-tuned v3, one seeded
 sample that every judge rates identically), and anchored to the same run's per-question simulation
-scores. The two judges on funded APIs completed the set; the free-tier Gemini judge shares its
-quota with the comparison itself and is rerun as quota allows. The larger sample settles both open
+scores. All three judges completed the set, the free-tier one across several quota
+windows. The larger sample settles both open
 points. First, the anti-correlation is not a small-sample fluke. At sixty questions Claude's mean
-rating sits at rho -0.34 against the simulation (p = 0.010) and GPT's at -0.37 (p = 0.004), with
-GPT's own "discrimination potential" dimension the worst of all at -0.51 (p = 0.0001). Second, the
-disagreement between judges turns out to be calibration, not noise. The two correlate well in rank
-(Spearman 0.58, p < 0.001), while interval alpha stays negative (-0.54) because GPT's ratings sit
-at the ceiling (mean 4.87), a full point above Claude (3.56). The two judges share a stable notion
-of what a good question looks like, and that notion points away from what discriminates. At arm
-level the cost is concrete: the simulation ranks the sampled arms v3 first (0.071 against 0.039 and
-0.017), Claude ranks v3 second, and GPT ranks it last. A backend selection delegated to this panel
+rating sits at rho -0.34 against the simulation (p = 0.010), GPT's at -0.37 (p = 0.004) with its
+own "discrimination potential" dimension the worst of all at -0.51 (p = 0.0001), and Gemini's at
+-0.08 (p = 0.56); no judge correlates positively. Second, the disagreement between judges turns
+out to be calibration, not noise. Every pair correlates in rank (Spearman 0.42 to 0.58, all
+p < 0.001), while interval alpha stays negative (-0.14) because two judges sit near the ceiling
+(Gemini mean 4.63, GPT 4.87), a full point above Claude (3.56). The three judges share a stable
+notion of what a good question looks like, and that notion points away from what discriminates.
+At arm level the cost is concrete: the simulation ranks the sampled arms v3 first (0.071 against
+0.039 and 0.017), yet Claude ranks v3 second, and GPT and Gemini both rank it below the plain 8B.
+A backend selection delegated to this panel
 would have rejected the backend the pipeline ships.
 
 For the evaluation design this is the conclusion the plan anticipated, now with evidence behind it

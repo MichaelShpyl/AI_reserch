@@ -50,9 +50,9 @@ The discovery and the gate together are a methods contribution to an evaluation 
 leans heavily on LLM judges.
 
 Eighth, a replicated negative result on those judges. At twelve questions, three commercial judges
-neither agreed with each other nor tracked the objective measure. Rerun at sixty questions, the
-two funded judges agree with each other in rank and still point away from the measure, and both
-rank the best backend near the bottom. That is direct evidence for anchoring judge studies to an
+neither agreed with each other nor tracked the objective measure. Rerun at sixty questions, all
+three judges agree with each other in rank and still point away from the measure, and two of the
+three rank the best backend below the plain 8B. That is direct evidence for anchoring judge studies to an
 objective measure instead of trusting the panel.
 
 ## 10.2 Future work

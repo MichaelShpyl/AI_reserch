@@ -59,9 +59,9 @@ source-aware and source-blind answers diverge at random.
 
 The second case was the judge panel. Three commercial judges, the validation the scope called for,
 produced ratings that neither agree with each other (Krippendorff's alpha of -0.25) nor track the
-objective measure. Rerunning the panel at sixty questions made the verdict firmer. At sixty the
-judges agree with each other in rank, and both funded judges anti-correlate significantly with the
-simulation. Rubric ratings measure how good a question looks. The panel study stands as a
+objective measure. Rerunning the panel at sixty questions made the verdict firmer. At sixty all
+three judges agree with each other in rank, none correlates positively with the simulation, and
+the two funded ones anti-correlate significantly. Rubric ratings measure how good a question looks. The panel study stands as a
 replicated negative result.
 
 The third case was quieter but had the same shape. Ranking the fine-tunes by raw discrimination
