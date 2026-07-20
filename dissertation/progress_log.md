@@ -1574,3 +1574,25 @@ evaluation programme.
   entire history, early machine-signed commit trailers stripped, no data, models, outputs or keys
   anywhere in history. The clean copy lives beside the project, ready to push.
 - The submission deck (28 slides, speaker notes removed) is exported separately for upload.
+
+### Pinpoint notes in the references, for the examiners (15 July 2026, later)
+
+- Added a pinpoint scheme to the references: sixteen numbered notes ([n1] to [n16]) sit next to
+  the specific claims in the literature review, and each is expanded under its reference with the
+  exact place in the source (the abstract sentence, the named results section, the figure).
+  References used for their overall method or dataset carry a short "used as a whole" remark
+  instead. Every location was checked against the source before it went in; two claims that could
+  not be verified at the source were reworded to what the sources actually say (the Kurdi
+  cognitive-level point became the review's controlled-difficulty gap, and an anecdote about the
+  Cotton paper came out entirely).
+
+### The pinpoint notes come back out (15 July 2026, evening)
+
+- Removed the numbered pinpoint notes again: with most locations sitting in abstracts, the
+  apparatus read as if only abstracts had been read, the opposite of its purpose. The reference
+  list is back to its clean 41-entry form and the markers are gone from the text.
+- What the exercise leaves behind is the part worth keeping: every reference was re-verified
+  against its primary source, and the wording of five claims was corrected to what the sources
+  actually say (among them, the Kurdi review's gap is controlled difficulty, not cognitive level,
+  and an unverifiable anecdote about the Cotton paper was cut). The audit still pairs 41
+  citations with 41 entries.

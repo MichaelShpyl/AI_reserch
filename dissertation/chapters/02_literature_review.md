@@ -41,7 +41,7 @@ Both approaches have weaknesses that matter for this project. Detectors are brit
 (2023) show that a strong paraphraser drops DetectGPT's accuracy from 70.3% to 4.6% without changing
 the meaning, and accuracy also falls under domain shift. Koike et al. (2024) push the same point
 further with OUTFOX, where an attacking model learns from a detector's own outputs to write harder
-essays; their essay corpus, which pairs human student writing with six generators, is the one this
+essays; their essay corpus, which pairs human student writing with multiple generators, is the one this
 project uses for its cross-generator transfer test in Chapter 6. In the education setting the
 weakness is not hypothetical. Weber-Wulff et al. (2023) tested fourteen detection tools, including
 the systems universities license, and concluded they are neither accurate nor reliable on academic
@@ -62,7 +62,7 @@ one. Liang et al. (2023) attribute the misclassification of non-native English w
 perplexity, that is, its more limited linguistic variability, which makes it look more machine-like
 to a perplexity-based detector. So the same features that separate the classes can also encode bias.
 The pipeline uses them as interpretable evidence and checks their behaviour separately. Hand-crafted
-features (perplexity, readability, error-based and lexical features) have also been shown to
+features (perplexity, readability, error-based and other lexical features) have also been shown to
 classify AI-generated and even AI-rephrased text, alone and alongside neural models (Mindner et al.,
 2023). I took that result as support for the hybrid design.
 
@@ -83,9 +83,9 @@ An explanation is only useful if it is faithful, meaning the things it highlight
 decision. DeYoung et al. (2020) introduced the ERASER benchmark and the comprehensiveness and
 sufficiency metrics, which measure faithfulness by removing or keeping the features an explanation
 calls important and watching whether the prediction moves. Faithfulness has since become a field of
-its own: Lyu et al. (2024) survey over a hundred explanation methods through that single lens and
-argue that plausibility, how convincing an explanation looks, is routinely mistaken for
-faithfulness. That distinction is load-bearing in this dissertation, where a convincing token
+its own: Lyu et al. (2024) survey over a hundred explanation methods through that single lens,
+working from the definition that an explanation must reflect the model's actual reasoning.
+That requirement is load-bearing in this dissertation, where a convincing token
 highlight failed the ablation test and a plainer feature account passed it. This project uses the
 same kind of
 ablation test. The test showed the transformer's token-level attributions were diffuse and only
@@ -108,8 +108,8 @@ at a different stage.
 ## 2.6 Automatic question generation
 
 Automatic question generation for education has a long history before LLMs; the systematic review
-of Kurdi et al. (2020) covers 93 pre-LLM systems and already identifies the field's persistent
-weakness, that generated questions cluster at the lowest cognitive levels. The field has since
+of Kurdi et al. (2020) covers 93 pre-LLM studies and already identifies the field's persistent
+gap, that little of the work controls the difficulty or form of what gets generated. The field has since
 moved from neural models that generate a question from a passage to large
 language models prompted to do the same, with growing interest in controllable and grounded
 generation (Guo et al., 2024). Grounding matters most for verification. A question is only
@@ -119,7 +119,7 @@ per extracted claim and records the source sentences.
 The comparison at the centre of this project, a commercial model against a locally run open model,
 sits inside a wider question about cost and control in LLM deployment. In the closest study to this
 setting, Oketch et al. (2025) compared closed and open LLMs for automated essay scoring and found
-open models such as Llama 3 and Qwen2.5 comparable to GPT-4 in performance and fairness at up to 37
+open models such as Llama 3 and Qwen2.5 comparable to GPT-4 in performance at up to 37
 times lower cost. An institution that could run verification on a laptop instead of a paid API would
 have a cheaper and more controllable option, if the quality holds. The project tests whether it
 does.
@@ -156,7 +156,8 @@ anchored to the objective discrimination results.
 
 Fairness was one of the motivations for this project. Liang et al. (2023) tested seven widely used
 GPT detectors on TOEFL essays by non-native English writers and found an average false-positive rate
-of 61.3%, against about 5.1% for essays by native writers. The detectors systematically
+of 61.3%, while the same detectors classified essays by native US student writers accurately, at
+around 5 percent false positives read from the paper's first figure. The detectors systematically
 misclassified competent non-native writing as AI-generated. Chapter 6 measures the same failure mode
 directly on my own detector and reports it as a main result rather than a footnote. It is also why
 transparency and defensibility run through the design.
@@ -165,9 +166,10 @@ transparency and defensibility run through the design.
 
 The education literature has been arguing since ChatGPT's release that detection alone cannot carry
 an integrity policy. Perkins (2023) reviews the academic-integrity implications of LLMs and
-concludes that assessment design, not tool-banning, is where institutions have real leverage.
-Cotton et al. (2024) reach a similar position on the opportunities and risks, in a paper that
-famously had ChatGPT write its own first half, which rather proves their point about detection.
+concludes that what defines misconduct is undisclosed use, and that updated integrity policies,
+not tool bans, are where institutions have real leverage.
+Cotton et al. (2024) reach a similar position, recommending policies and procedures, training and
+support, and detection used as one method among several rather than as the verdict.
 The strand of that literature closest to this project is authentic and oral assessment. Sotiriadou
 et al. (2020) show that scaffolded assessment ending in an interactive oral, a short structured
 conversation about the student's own work, both deters misconduct and gives genuine evidence of
