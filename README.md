@@ -115,8 +115,6 @@ dissertation and producing meeting materials. The Python dev packages are in
 - Writing and output: Pandoc (markdown to Word and PDF), MiKTeX (the LaTeX engine
   Pandoc uses for PDF).
 - Diagrams: Graphviz (`dot`) and matplotlib.
-- Slides: `python-pptx` to build decks; LibreOffice to render a deck to images for a
-  visual check.
 - Document reading: `markitdown`.
 - Editor: VS Code with Python, Pylance, Jupyter, Ruff, Markdown All in One,
   markdownlint, Code Spell Checker, GitLens, Rainbow CSV, and LaTeX Workshop.
