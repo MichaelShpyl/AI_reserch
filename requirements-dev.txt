@@ -8,7 +8,7 @@
 #   Pandoc, Graphviz, LibreOffice, MiKTeX (LaTeX), VS Code.
 # Already present and used here: ruff (lint and format), jupyter.
 
-python-pptx==1.0.2        # build the supervision slide deck
+python-pptx==1.0.2        # inspect and verify .pptx meeting decks
 markitdown[pptx]==0.1.6   # read office and PDF documents as markdown
 pytest==9.1.1
 pypdf==6.12.1
