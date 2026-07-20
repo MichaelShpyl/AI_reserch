@@ -43,7 +43,8 @@ produced the backend the pipeline ships. In the same runs, the 3B student overto
 on the target measure.
 
 Seventh, an evaluation method for verification questions that needs no judge, together with a
-demonstration of how it can be gamed. The discrimination simulation measures whether a question
+demonstration of how it can be gamed, and a resolution of its stubbornest number: the v4
+experiment showed the generic-baseline gap to be mostly the price of naming the claim's content. The discrimination simulation measures whether a question
 needs the source. Contentless questions defeat it, and the well-formedness gate closes that hole.
 The discovery and the gate together are a methods contribution to an evaluation literature that
 leans heavily on LLM judges.

@@ -1636,3 +1636,18 @@ evaluation programme.
   the explainability section, and the training-distribution control in the robustness section,
   with its caution that balancing a training mix is not automatically the safer choice for false
   positives out of domain.
+
+### v4: the baseline gap was the price of naming the claim (17 July 2026)
+
+- The overnight chain finished: 2,600 v4 pairs from 583 essays, the QLoRA adapter, and the
+  18-claim evaluation. v4 reaches 0.266 [0.236, 0.296], four times v3 and within reach of the
+  0.30 generic baseline, with zero degenerate output. The number was not believed until the
+  output was read and measured: 51 of 54 questions unique, 89 percent content-free at inference
+  (the mechanical gate ran at training time only, and the model drifts back to naming content in
+  6 of 54), and the honest cost visible in heavy clustering around a few question angles.
+- Written up in Section 8.13 with the two conclusions separated: scientifically, the baseline
+  gap is now explained as mostly the price of naming content; practically, the pipeline keeps
+  shipping v3 until v4 gets the same gate at inference, and choosing between v3's quotable
+  specificity and v4's harder-to-fake form is exactly what the validation study can settle.
+- Chapter 9's caveat and the conclusions' contribution list updated; two audit checks pin the v4
+  mean and the content-free ratio; 94-page rebuild, audit clean.

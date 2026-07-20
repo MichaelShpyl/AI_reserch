@@ -39,8 +39,10 @@ vanished (difference +0.003, p = 0.74). Most of the apparent commercial advantag
 selection, not question writing. Fine-tuning then moved the local backend well clear of its own base
 once the training data had the right format.
 
-There are caveats. The commercial arm is a flash model, not a frontier one. All well-formed writers
-still sit below the generic-question baseline. And because the comparison's outcome moved with the
+There are caveats. The commercial arm is a flash model, not a frontier one. Every writer in the
+main comparison sits below the generic-question baseline, though the v4 experiment (Section 8.13)
+later showed most of that gap to be the price of naming the claim's content, closable by
+construction at some cost in phrasing variety. And because the comparison's outcome moved with the
 experimental design, the dissertation reports every design it ran, not only the friendliest one.
 
 ## 9.2 What the internal checks caught

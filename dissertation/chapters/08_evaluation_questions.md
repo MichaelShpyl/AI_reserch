@@ -370,3 +370,47 @@ two refills. The refilled questions are shorter (median 30 words against 43) and
 v3 clears it anyway. With both
 stated, the second half of the research question has its answer. A locally fine-tuned open model can
 match, and in this comparison beat, the commercial backend it was allowed to compare against.
+
+## 8.13 Closing the baseline gap by construction: the v4 experiment
+
+One number survived every comparison in this chapter untouched: the generic-question baseline of
+0.30, which no grounded writer approached. Section 8.3 diagnosed why. The four generic champions
+give a context-blind reader nothing to answer from, while grounded questions name their claim's
+content, and the naming is the leak the blind model exploits. If that diagnosis is right, the gap
+should close by construction: write questions that stay anchored to one claim but never name what
+the claim says. The lecturer loses nothing, because the guide prints the claim beside its
+questions. The blind model loses everything.
+
+v4 tests exactly that, with everything except the prompt held fixed against v3: the same local
+teacher, the same 2,600-pair target, the same QLoRA settings and the same 18-claim evaluation
+(`src/question_gen/build_v4_dataset.py`, `outputs/qg_v4_eval.json`). One addition proved
+necessary before the build could start. In the smoke test the 8B teacher ignored the no-naming
+instruction whenever the context tempted it, so the rule is enforced by a mechanical gate in the
+same family as the well-formedness gate: a candidate question that shares a content word with the
+claim, or a capitalized entity from the claim or source, is rejected before it can become
+training data.
+
+The result is the largest single movement in the fine-tune series (Figure 8.8). v4 reaches a mean
+discrimination of 0.266 (95% CI [0.236, 0.296]), four times v3 and within reach of the 0.30
+baseline, with zero degenerate questions. And because this series has been burned before, the
+number was not believed until the output was read and measured three more ways. The questions are
+real, answerable interview questions, not stubs: 51 of 54 are unique as strings, and 89 percent
+stay content-free at inference (the model saw the gate only through its training data, and drifts
+back to naming content in 6 of 54 questions). The honest cost is visible in the phrasing: the
+output converges toward a small family of angles, with nine questions opening on the evidence
+choice and seven on the connection to the wider argument. v4 closes the gap largely by converging
+toward the generic form, and what it adds over the four generic champions is the per-claim
+anchoring the guide is built on, the Bloom spread, and mild adaptation to each claim.
+
+Two conclusions follow, one scientific and one practical. Scientifically, the baseline gap is now
+explained: most of it was the price of naming content, paid by every grounded writer in this
+chapter, and a 3B model reproduces the generic effect once that price is removed. Practically,
+the pipeline keeps shipping v3 for the moment. v4's content discipline is only as good as its
+training data pushed it, and a deployed version needs the same gate at inference, rejecting and
+regenerating the leaky questions, before its behaviour is uniform enough to hand to a lecturer.
+That is one small engineering step, and whether to take it is a supervisor conversation, since it
+trades v3's specific, quotable questions for v4's harder-to-fake ones. The instrument for
+settling that trade already exists: the validation study protocol, where both styles can face
+real students.
+
+![Figure 8.8: The fine-tune series on the fixed 18 claims, with the v4 result. Trained to anchor without naming, v4 reaches 0.266 against the generic baseline's 0.30, with zero degenerate output, 51 of 54 unique questions and 89 percent content-free behaviour at inference. The gap to the baseline was mostly the price of naming content.](../figures/fig_qg_v4.png)
