@@ -191,21 +191,23 @@ external benchmark with its own corpus design, so this section repeats the test 
 corpus. For forty test-split human essays, I generated matched AI counterparts with two commercial
 models the detector never saw, Gemini 2.5 Flash and GPT-4o-mini, using the same recipe as the
 original corpus, the same system prompt and the same title-plus-keywords-plus-target-length user
-turn (`src/generation/multigen_test_slice.py`). Gemini completed nineteen of the forty before its
-free tier ran dry, and GPT completed all forty. Because GPT-4o-mini undershoots its target length
-on many essays (mean ratio 0.45), the length ratios are recorded per essay, and results are
-reported both for all essays and for the reasonably matched subset. The two agree
+turn (`src/generation/multigen_test_slice.py`). Gemini's free tier only allows a handful of
+generations per quota window, so the forty essays came in over several sessions spread across
+days; GPT completed all forty in one run. Because GPT-4o-mini undershoots its target length on
+many essays (mean ratio 0.45) and Gemini undershoots on a good number too (mean ratio 0.75), the
+length ratios are recorded per essay, and results are reported both for all essays and for the
+reasonably matched subset (length ratio at least 0.5). The two agree
 (`src/detection/score_multigen.py`, `outputs/multigen_detection.json`).
 
 The transformer of record generalises perfectly here. It flags 100 percent of both unseen
 generators' essays and none of the forty human sources. The hybrid behaves differently. It catches
-all of GPT-4o-mini but only 68 percent of Gemini's essays. The style half, the same component that
-cut false accusations of humans by three to eight times in Section 6.7, reads a third of Gemini's
-essays as human-like enough to pull the fused score under the threshold. This is the expected cost
-of a fusion built to err toward not accusing, now measured on its other side. A detector tuned to
-protect unusual human writing will extend some of that protection to a generator whose style
-drifts toward human. For deployment the conclusion matches Section 6.8's. The fusion sets the
-right default, and the question stage exists because no threshold can be both safe for humans and
-airtight against every generator at once.
+all of GPT-4o-mini but only 65 percent of Gemini's essays (64 percent on the length-matched subset
+of thirty-six). The style half, the same component that cut false accusations of humans by three
+to eight times in Section 6.7, reads over a third of Gemini's essays as human-like enough to pull
+the fused score under the threshold. This is the expected cost of a fusion built to err toward not
+accusing, now measured on its other side. A detector tuned to protect unusual human writing will
+extend some of that protection to a generator whose style drifts toward human. For deployment the
+conclusion matches Section 6.8's. The fusion sets the right default, and the question stage exists
+because no threshold can be both safe for humans and airtight against every generator at once.
 
-![Figure 6.7: Unseen commercial generators produced with the home corpus recipe. The transformer flags every AI essay from both new generators and no human sources; the hybrid trades 32 percent of Gemini recall for the false-accusation protection measured in Section 6.7.](../figures/fig_multigen_detection.png)
+![Figure 6.7: Unseen commercial generators produced with the home corpus recipe. The transformer flags every AI essay from both new generators and no human sources; the hybrid trades 35 percent of Gemini recall for the false-accusation protection measured in Section 6.7.](../figures/fig_multigen_detection.png)

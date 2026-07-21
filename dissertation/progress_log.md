@@ -1762,3 +1762,29 @@ evaluation programme.
   motion setting the film never set its advance timer, so pressing play would have frozen on the
   opening scene and ruined a recording on any machine with animation effects switched off. The
   film now always advances, and only the sweeping progress bar is held back.
+
+### Multigen Gemini slice finished (21 July 2026)
+
+- Topped up the Section 6.9 multigen test from nineteen Gemini essays to the full forty. Gemini's
+  free tier only grants a handful of generations per quota window, so this took two runs: the
+  first added twenty and then hit a 429 one essay short of the target, the second picked up
+  where it left off and finished the last one. GPT-4o-mini was already complete at forty from
+  the earlier session.
+- Re-scored both generators against the detector of record. The transformer still generalises
+  perfectly at the full sample, 100 percent flagged for both unseen generators and none of the
+  forty human sources. The hybrid holds at 100 percent for GPT-4o-mini and settles at 65 percent
+  for Gemini (64 percent on the length-matched subset of thirty-six), close to the 68 percent
+  measured at nineteen essays, so the story from the intermediate presentation stands: the style
+  half's protection against false accusation costs some Gemini recall, and the question stage is
+  the backstop for that gap.
+- Updated Section 6.9's prose and Figure 6.7's caption for the new counts and the 35 percent
+  recall trade, and moved the audit script's expected value for the multigen hybrid check from
+  68 to 65 percent. `audit_consistency.py` runs ALL CLEAN afterward.
+- Checked the README and the deck for stale claims tied to this number. The README does not
+  quote a multigen figure, so nothing needed changing there. The intermediate deck's builder
+  script does say the combined detector "caught 100% of test essays" from the two unseen
+  generators, which was true only for GPT-4o-mini and was written before the Gemini slice had
+  enough essays to show the 65 percent split; the deck is a submitted, graded artefact from 14
+  July, so its files were left as they are rather than edited after the fact. Worth remembering
+  if anyone asks about that slide against the current numbers.
+- Rebuilt the progress-draft docx and pdf from the updated chapter.
