@@ -1754,3 +1754,11 @@ evaluation programme.
   is about three and a half minutes, essentially unchanged, but the reading load per scene is now
   well within what a viewer can take in without pausing. Stepped through all eighteen scenes with
   no errors and confirmed the auto-advance still runs start to finish.
+- Two defects found by measuring the film instead of watching it. At 1280 by 720, the standard
+  recording size, the simulation scene overflowed its screen by nine pixels, so the end of the
+  gate paragraph sat below the fold where an auto-playing film never reveals it. A short-screen
+  rule now tightens the vertical rhythm below 780 pixels of height, and no scene overflows at
+  1920x1080, 1366x768, 1280x800, 1280x720 or 1024x640. The second was worse: under the reduced
+  motion setting the film never set its advance timer, so pressing play would have frozen on the
+  opening scene and ruined a recording on any machine with animation effects switched off. The
+  film now always advances, and only the sweeping progress bar is held back.

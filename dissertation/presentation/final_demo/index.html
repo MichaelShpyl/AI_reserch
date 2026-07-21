@@ -246,6 +246,24 @@ header{
 .cnt .w{font-family:Cambria,Georgia,serif; font-style:italic}
 .cnt .n{font-family:Consolas,monospace; font-weight:700; color:var(--rust)}
 .cnt .n small{color:var(--muted); font-weight:400; font-family:inherit}
+/* Short screens (720p recording, small laptops): tighten the vertical rhythm so no scene's
+   content ever falls below the fold. In an auto-playing film, anything that scrolls is unseen. */
+@media (max-height: 780px){
+  .scene{padding-top:2.4vh; padding-bottom:2.4vh}
+  .scene .sub{margin-top:.8rem}
+  .duo{margin-top:1.4rem; gap:2.2rem}
+  .duo .half .who{min-height:2.9em}
+  .qcard{margin-top:.9rem}
+  .statgrid{margin-top:1.3rem}
+  .fairgrid{margin-top:1rem}
+  .pipe{margin-top:1.3rem}
+  .signcols{margin-top:1.3rem}
+  .minidoc{margin-top:1rem}
+  .judges{margin-top:1.3rem}
+  .blackbox{margin-top:1.1rem; padding:1.2rem 2.2rem}
+  .qa{margin-top:1.1rem}
+  .credits{margin-top:1.5rem}
+}
 @media (prefers-reduced-motion: reduce){
   *{transition:none !important; animation:none !important}
 }
@@ -1034,8 +1052,10 @@ function go(i){
   clearTimeout(filmTimer); cancelAnimationFrame(rafBar);
   filmStart=performance.now(); filmPaused=false;
   const dur=SCENES[filmIdx].dur*1000;
+  // The film always advances: pacing is the point, and a reduced-motion viewer would otherwise
+  // be stranded on scene one. Only the sweeping progress bar is held back when motion is reduced.
+  filmTimer=setTimeout(()=>go(filmIdx+1), dur);
   if(!REDUCED){
-    filmTimer=setTimeout(()=>go(filmIdx+1), dur);
     (function bar(now){
       if(filmPaused) return;
       $("#filmbar").style.width=Math.min(100,(now-filmStart)/dur*100)+"%";
