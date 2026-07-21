@@ -1788,3 +1788,11 @@ evaluation programme.
   July, so its files were left as they are rather than edited after the fact. Worth remembering
   if anyone asks about that slide against the current numbers.
 - Rebuilt the progress-draft docx and pdf from the updated chapter.
+- Watched the film frame by frame at last, one screenshot per scene, and it earned its keep. The
+  typing animation stepped two characters at a time and stopped short on odd-length strings, so
+  the generated question was displayed without its question mark, on the one scene whose whole
+  point is the question. It now always lands on the full string. The evidence dashboard broke
+  four cards over two, leaving a hole in the grid, and is now a balanced three by three. The
+  first-lesson scene was the only one carrying no visual at all: it now shows the retraction
+  itself, a struck-through 100 percent beside the honest 99 percent, which tells that story
+  faster than the paragraph did and reads shorter.
