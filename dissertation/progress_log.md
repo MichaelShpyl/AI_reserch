@@ -1726,3 +1726,12 @@ evaluation programme.
 - A four-lens audit workflow (numbers against result files, general-audience clarity, writing
   rules, code correctness) ran over the finished page, with two adversarial verifiers per
   concrete claim before any finding was acted on.
+- Audit round two (numbers lens, adversarially verified) caught the demo asserting the
+  opposite of the project's own finding: the blindfold-test scene said an empty question
+  shows no gap, when empty questions faking large gaps is the reason the gate exists. The
+  sentence now credits self-policing to leaky questions and hands empty ones to the gate.
+  The same pass caught the evidence card pairing the ungated v4 score with a fully-clean
+  caption; the card now shows the gated run (85 percent of the ceiling, 0.26 of 0.30, every
+  question checked clean). Two smaller rewords followed: the p = 0.0003 sentence now names
+  the paired-essay test it comes from, and the judge-scene wording no longer implies every
+  correlation used exactly sixty questions.

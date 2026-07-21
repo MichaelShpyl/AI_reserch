@@ -860,8 +860,9 @@ function buildSimScene(){
     <p class="sub">Both answer the same question, and each answer is scored on how closely it
     matches the essay's actual argument. The gap per question is small, but measured over
     hundreds of questions it reliably separates questions that need the essay from questions
-    anyone could answer. An empty question shows no gap at all, which is how the metric polices
-    itself. No human judging needed, and nothing to flatter.</p>
+    anyone could answer. A question that gives the essay's content away shows no gap at all,
+    so leaks expose themselves. Empty questions are the opposite trap: they can fake a gap,
+    and that is what the gate below is for. No human judging needed, and nothing to flatter.</p>
     <div class="qcard badq" style="font-size:.95rem"><span>Which of the following statements is correct?</span>
       <div class="stamp">rejected</div></div>
     <p class="sub gatecap">One early model learned to game this test with empty questions like the
@@ -889,10 +890,10 @@ function buildLaptopScene(){
         <div class="big num" style="font-size:2rem; color:var(--rust)">5</div>
         <p class="sub" style="margin-top:.2rem; font-size:.85rem">of the 29 essays both covered</p></div>
     </div>
-    <p class="sub">Thirty essays, ${R.scaled.questions} questions. A split this uneven would
-    happen by luck about three times in ten thousand (p = ${R.scaled.p}). A university can run
-    this kind of verification on ordinary hardware, and student work, which is personal data,
-    <b>never leaves the building</b>.</p>`);
+    <p class="sub">Thirty essays, ${R.scaled.questions} questions. Tested across the paired
+    essays, an advantage this consistent would happen by luck about three times in ten thousand
+    (p = ${R.scaled.p}). A university can run this kind of verification on ordinary hardware,
+    and student work, which is personal data, <b>never leaves the building</b>.</p>`);
   s.addEventListener("scene-on",()=>{
     s.querySelectorAll(".bigbar i").forEach(i=>{ i.style.width="0";
       setTimeout(()=>{ i.style.width=i.dataset.w+"%"; },300); });
@@ -914,8 +915,8 @@ function buildJudgesScene(){
     </div>
     <p class="sub">On this scale +1 would mean a judge's ratings rise with real question power,
     0 means no connection at all, and below 0 means the judge prefers the weaker questions.
-    At ${R.judges.n} questions the three judges broadly track <b>each other</b>, and none of
-    them tracks the objective test. They reward how a question looks, not whether it works.
+    Across the ${R.judges.n}-question study the three judges broadly track <b>each other</b>,
+    and none of them tracks the objective test. They reward how a question looks, not whether it works.
     Any evaluation that leans only on AI judges inherits that blind spot, which is why every
     score in this project is anchored to a measure the models cannot flatter.</p>`);
   reveal(s, ".judge", [600,1300,2000]);
@@ -929,7 +930,7 @@ function buildDashboardScene(){
       <div class="stat"><div class="v num">0.99</div><div class="k">detection score on matched, audited essays (F1, where 1.00 is perfect)</div></div>
       <div class="stat"><div class="v num">100%</div><div class="k">essays caught from two AI models never seen in training, zero false accusations</div></div>
       <div class="stat"><div class="v num">${R.scaled.v3_vs_commercial}</div><div class="k">essays where the laptop-taught model beat the commercial service (p = ${R.scaled.p}), across ${R.scaled.questions} questions</div></div>
-      <div class="stat"><div class="v num">${Math.round(R.v4.score/R.v4.baseline*100)}%</div><div class="k">of the score ceiling reached by questions built to never give away the essay's content (${R.v4.score.toFixed(2)} of ${R.v4.baseline.toFixed(2)})</div></div>
+      <div class="stat"><div class="v num">${Math.round(R.v4.score/R.v4.baseline*100)}%</div><div class="k">of the score ceiling reached by questions that never give away the essay's content, every one checked clean (${R.v4.score.toFixed(2)} of ${R.v4.baseline.toFixed(2)})</div></div>
       <div class="stat"><div class="v warn num">3</div><div class="k">of this project's own headline numbers caught and retracted by its checks</div></div>
       <div class="stat"><div class="v warn num">0 of 3</div><div class="k">AI judges whose ratings track real question power at ${R.judges.n} questions, the case for measuring instead of trusting</div></div>
     </div>`);
