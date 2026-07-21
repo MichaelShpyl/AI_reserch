@@ -187,13 +187,31 @@ header{
 .duo .half{display:flex; flex-direction:column; align-items:center}
 .duo .half .who{font-weight:650; margin-bottom:.4rem; min-height:3.1em;
   display:flex; flex-direction:column; justify-content:flex-end; text-align:center}
-.bigbar{width:min(280px,80vw); height:16px; background:var(--band); border-radius:8px; overflow:hidden; margin:0 auto}
-.bigbar i{display:block; height:100%; width:0; transition:width 1.4s .4s cubic-bezier(.3,.8,.3,1)}
-.statgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1.1rem; margin-top:2rem; width:min(900px,90vw)}
-.stat{background:var(--page); border:1px solid var(--line); border-radius:.7rem; padding:1rem; box-shadow:var(--shadow)}
-.stat .v{font-family:Consolas,monospace; font-size:1.7rem; font-weight:700; color:var(--teal)}
-.stat .v.warn{color:var(--rust)}
-.stat .k{font-size:.8rem; color:var(--muted); margin-top:.2rem; line-height:1.35}
+.bigbar{width:min(280px,80vw); height:18px; background:var(--band); border-radius:9px; overflow:hidden; margin:0 auto; box-shadow:inset 0 1px 2px rgba(0,0,0,.12)}
+.bigbar i{display:block; height:100%; width:0; border-radius:9px; transition:width 1.4s .4s cubic-bezier(.3,.8,.3,1)}
+.statgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(205px,1fr)); gap:1.15rem; margin-top:2rem; width:min(940px,92vw)}
+.stat{position:relative; background:var(--page); border:1px solid var(--line); border-radius:.8rem;
+  padding:1.3rem 1.15rem 1.1rem; box-shadow:var(--shadow); overflow:hidden; transition:transform .3s, box-shadow .3s}
+.stat::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:var(--teal)}
+.stat.warn::before{background:var(--rust)}
+.stat:hover{transform:translateY(-3px); box-shadow:0 12px 34px rgba(32,38,45,.16)}
+.stat .v{font-family:Consolas,monospace; font-size:2.3rem; font-weight:700; color:var(--teal); line-height:1.05; letter-spacing:-.01em}
+.stat.warn .v, .stat .v.warn{color:var(--rust)}
+.stat .k{font-size:.82rem; color:var(--muted); margin-top:.4rem; line-height:1.4}
+/* fairness reduction grid */
+.fairgrid{width:min(720px,94vw); margin:1.5rem auto .2rem; display:flex; flex-direction:column; gap:.6rem}
+.fairrow{display:grid; grid-template-columns:6.8rem 1fr 5rem 5.4rem; gap:.85rem; align-items:center}
+.fairrow .fl{font-size:.85rem; text-align:right; color:var(--ink)}
+.fairtrack{position:relative; height:18px}
+.fairtrack .pl{position:absolute; top:3px; height:12px; border-radius:6px; width:0;
+  background:color-mix(in srgb, var(--rust) 40%, transparent); transition:width 1s cubic-bezier(.3,.8,.3,1)}
+.fairtrack .hy{position:absolute; top:3px; height:12px; border-radius:6px; width:0;
+  background:var(--teal); box-shadow:0 0 0 1px color-mix(in srgb, var(--teal) 40%, transparent);
+  transition:width 1.2s .25s cubic-bezier(.3,.8,.3,1)}
+.fairnums{font-family:Consolas,monospace; font-size:.82rem; color:var(--muted); white-space:nowrap; text-align:right}
+.fairnums b{color:var(--teal); font-weight:700}
+.fairbadge{font-family:Consolas,monospace; font-weight:700; color:var(--teal); font-size:.9rem; white-space:nowrap}
+.fairlegend{font-size:.76rem; color:var(--muted); margin-top:.55rem; max-width:64ch; margin-left:auto; margin-right:auto}
 .qcard{background:var(--page); border:1.5px solid var(--teal); border-radius:.7rem; padding:1rem 1.2rem;
   max-width:56ch; margin-top:1.4rem; text-align:left; font-size:1.02rem; box-shadow:var(--shadow); position:relative}
 .qcard.badq{border-color:var(--rust)}
@@ -588,6 +606,27 @@ function reveal(node, sel, delays){
     });
   });
 }
+// Count a hero number up from zero on reveal. Reads the final value from the element's own
+// text, so it works whatever the format: "0.99", "100%", "24 of 29", "99.96%".
+function animateCount(scene){
+  scene.querySelectorAll(".count").forEach(elm=>{
+    const raw = elm.dataset.final || elm.textContent;
+    elm.dataset.final = raw;
+    const m = raw.match(/^(\D*?)(\d+(?:\.\d+)?)(.*)$/s);
+    if(!m){ return; }
+    const pre = m[1], numStr = m[2], suf = m[3];
+    const target = parseFloat(numStr);
+    const dec = (numStr.split(".")[1] || "").length;
+    if(REDUCED || target === 0){ elm.textContent = raw; return; }
+    const dur = 950, t0 = performance.now();
+    (function tick(now){
+      const p = Math.min(1, (now - t0) / dur);
+      const e = 1 - Math.pow(1 - p, 3);
+      elm.textContent = pre + (target * e).toFixed(dec) + suf;
+      if(p < 1) requestAnimationFrame(tick);
+    })(t0);
+  });
+}
 
 function buildTitleScene(){
   return el(`<div class="kicker">A working system, shown with its real output</div>
@@ -715,11 +754,11 @@ function buildReadersScene(){
     <div class="duo">
       <div class="half"><div class="who">word-pattern reader</div>
         <div class="bigbar"><i data-w="${(d.transformer*100).toFixed(1)}" style="background:var(--teal)"></i></div>
-        <div class="big num" style="font-size:1.6rem">${(d.transformer*100).toFixed(2)}%</div>
+        <div class="big num count" style="font-size:1.9rem">${(d.transformer*100).toFixed(2)}%</div>
         <p class="sub" style="margin-top:.2rem; font-size:.85rem">a language model trained on the matched corpus</p></div>
       <div class="half"><div class="who">writing-style reader</div>
         <div class="bigbar"><i data-w="${(d.style*100).toFixed(1)}" style="background:var(--teal)"></i></div>
-        <div class="big num" style="font-size:1.6rem">${(d.style*100).toFixed(2)}%</div>
+        <div class="big num count" style="font-size:1.9rem">${(d.style*100).toFixed(2)}%</div>
         <p class="sub" style="margin-top:.2rem; font-size:.85rem">five habit measurements, no neural network needed</p></div>
     </div>
     <p class="sub combined">Combined, deliberately cautiously, into a final probability of
@@ -794,35 +833,47 @@ function buildVerdictScene(){
     <h1>One essay topic, two verdicts, nothing invented</h1>
     <div class="duo">
       <div class="half"><div class="who" style="color:var(--rust)">the AI-written version</div>
-        <div class="big num" style="color:var(--rust)">0.96</div>
+        <div class="big num count" style="color:var(--rust)">0.96</div>
         <p class="sub" style="margin-top:.3rem">flagged, full interview guide generated</p></div>
       <div class="half"><div class="who" style="color:var(--teal)">the real student's essay</div>
-        <div class="big num" style="color:var(--teal)">0.02</div>
+        <div class="big num count" style="color:var(--teal)">0.02</div>
         <p class="sub" style="margin-top:.3rem">not flagged, and the guide says so plainly</p></div>
     </div>
     <p class="sub">A flag opens a conversation. It never convicts.</p>`);
 }
 
 function buildFairnessScene(){
+  const S = 85; // scale: this false-flag % maps to a full track
+  const rows = [
+    ["Reddit posts",   23,  5, "~5× fewer"],
+    ["How-to guides",  41, 10, "~4× fewer"],
+    ["Wikipedia",      40, 12, "~3× fewer"],
+    ["Paper abstracts",79, 61, "1.3× fewer"],
+  ];
   const s = el(`<div class="kicker">Made fairer, on purpose</div>
-    <h1>The failure that matters most is the false accusation</h1>
-    <p class="sub">Point any detector at writing it was not trained on, dense academic abstracts
-    for example, and it wrongly flags humans. This is the failure mode behind the bias reports.</p>
-    <div class="duo">
-      <div class="half"><div class="who">plain detector, on published paper abstracts</div>
-        <div class="bigbar"><i data-w="79" style="background:var(--rust)"></i></div>
-        <div class="big num" style="font-size:2rem; color:var(--rust)">79%</div></div>
-      <div class="half"><div class="who">the hybrid, same texts</div>
-        <div class="bigbar"><i data-w="61" style="background:var(--teal)"></i></div>
-        <div class="big num" style="font-size:2rem; color:var(--teal)">61%</div>
-      </div>
+    <h1>Up to five times fewer false accusations</h1>
+    <p class="sub">The failure that matters most is flagging a real student. Adding the
+    writing-style reader to the word-pattern model cuts wrongful flags of ordinary human writing
+    three to five times over.</p>
+    <div class="fairgrid">${rows.map(r=>`
+      <div class="fairrow">
+        <div class="fl">${r[0]}</div>
+        <div class="fairtrack">
+          <div class="pl" data-w="${(r[1]/S*100).toFixed(1)}"></div>
+          <div class="hy" data-w="${(r[2]/S*100).toFixed(1)}"></div>
+        </div>
+        <div class="fairnums">${r[1]}% &rarr; <b>${r[2]}%</b></div>
+        <div class="fairbadge">${r[3]}</div>
+      </div>`).join("")}
     </div>
-    <p class="sub">falsely flagged human texts, before and after fusing in the writing-style
-    reader. Still far too high to trust outside its training domain, which is why the system
-    treats every flag as a question, never a verdict.</p>`);
+    <p class="fairlegend">Each bar is how often the detector wrongly flags real human writing.
+    Faded rust = the plain model, solid teal = the hybrid. Shorter is better.</p>
+    <p class="sub">Even the hardest case, dense academic paper abstracts, improves, though it stays
+    too high to trust on its own. That is exactly why the system treats every flag as a question
+    that opens a conversation, never a verdict.</p>`);
   s.addEventListener("scene-on",()=>{
-    s.querySelectorAll(".bigbar i").forEach(i=>{ i.style.width="0";
-      setTimeout(()=>{ i.style.width=i.dataset.w+"%"; },300); });
+    s.querySelectorAll(".fairtrack .pl, .fairtrack .hy").forEach(b=>{ b.style.width="0";
+      setTimeout(()=>{ b.style.width=b.dataset.w+"%"; }, 300); });
   });
   return s;
 }
@@ -852,11 +903,11 @@ function buildSimScene(){
     <div class="duo">
       <div class="half"><div class="who">has read the essay</div>
         <div class="bigbar"><i data-w="82.7" style="background:var(--teal)"></i></div>
-        <div class="big num" style="font-size:1.6rem; color:var(--teal)">0.83</div>
+        <div class="big num count" style="font-size:1.9rem; color:var(--teal)">0.83</div>
         <p class="sub" style="margin-top:.2rem; font-size:.85rem">its answers stay close to the essay's actual argument</p></div>
       <div class="half"><div class="who">sees only the question</div>
         <div class="bigbar"><i data-w="77.6" style="background:var(--rust)"></i></div>
-        <div class="big num" style="font-size:1.6rem; color:var(--rust)">0.78</div>
+        <div class="big num count" style="font-size:1.9rem; color:var(--rust)">0.78</div>
         <p class="sub" style="margin-top:.2rem; font-size:.85rem">it can only guess from general knowledge</p></div>
     </div>
     <p class="sub">Both answer the same question, and each answer is scored on how closely it
@@ -885,11 +936,11 @@ function buildLaptopScene(){
     <div class="duo">
       <div class="half"><div class="who">small local model, taught the task on this laptop</div>
         <div class="bigbar"><i data-w="83" style="background:var(--teal)"></i></div>
-        <div class="big num" style="font-size:2rem; color:var(--teal)">24</div>
+        <div class="big num count" style="font-size:2.8rem; color:var(--teal)">24</div>
         <p class="sub" style="margin-top:.2rem; font-size:.85rem">essays where its questions better separated reader from guesser</p></div>
       <div class="half"><div class="who">commercial online AI service, free tier</div>
         <div class="bigbar"><i data-w="17" style="background:var(--rust)"></i></div>
-        <div class="big num" style="font-size:2rem; color:var(--rust)">5</div>
+        <div class="big num count" style="font-size:2.8rem; color:var(--rust)">5</div>
         <p class="sub" style="margin-top:.2rem; font-size:.85rem">of the 29 essays both covered</p></div>
     </div>
     <p class="sub">Thirty essays, ${R.scaled.questions} questions. Tested across the paired
@@ -929,12 +980,12 @@ function buildDashboardScene(){
   return el(`<div class="kicker">The evidence, at a glance</div>
     <h1>Every number here traces to a result file</h1>
     <div class="statgrid">
-      <div class="stat"><div class="v num">0.99</div><div class="k">detection score on matched, audited essays (F1, where 1.00 is perfect)</div></div>
-      <div class="stat"><div class="v num">100%</div><div class="k">essays caught from two AI models never seen in training, zero false accusations</div></div>
-      <div class="stat"><div class="v num">${R.scaled.v3_vs_commercial}</div><div class="k">essays where the laptop-taught model beat the commercial service (p = ${R.scaled.p}), across ${R.scaled.questions} questions</div></div>
-      <div class="stat"><div class="v num">${Math.round(R.v4.score/R.v4.baseline*100)}%</div><div class="k">of the score ceiling reached by questions that never give away the essay's content, every one checked clean (${R.v4.score.toFixed(2)} of ${R.v4.baseline.toFixed(2)})</div></div>
-      <div class="stat"><div class="v warn num">3</div><div class="k">of this project's own headline numbers caught and retracted by its checks</div></div>
-      <div class="stat"><div class="v warn num">0 of 3</div><div class="k">AI judges whose ratings track real question power at ${R.judges.n} questions, the case for measuring instead of trusting</div></div>
+      <div class="stat"><div class="v num count">0.99</div><div class="k">detection score on matched, audited essays (F1, where 1.00 is perfect)</div></div>
+      <div class="stat"><div class="v num count">100%</div><div class="k">essays caught from two AI models never seen in training, zero false accusations</div></div>
+      <div class="stat"><div class="v num count">${R.scaled.v3_vs_commercial}</div><div class="k">essays where the laptop-taught model beat the commercial service (p = ${R.scaled.p}), across ${R.scaled.questions} questions</div></div>
+      <div class="stat"><div class="v num count">${Math.round(R.v4.score/R.v4.baseline*100)}%</div><div class="k">of the score ceiling reached by questions that never give away the essay's content, every one checked clean (${R.v4.score.toFixed(2)} of ${R.v4.baseline.toFixed(2)})</div></div>
+      <div class="stat warn"><div class="v num count">3</div><div class="k">of this project's own headline numbers caught and retracted by its checks</div></div>
+      <div class="stat warn"><div class="v num">0 of 3</div><div class="k">AI judges whose ratings track real question power at ${R.judges.n} questions, the case for measuring instead of trusting</div></div>
     </div>`);
 }
 
@@ -993,6 +1044,7 @@ function go(i){
   SCENES.forEach((sc,k)=>sc.node.classList.toggle("on", k===filmIdx));
   document.querySelectorAll("#dots b").forEach((b,k)=>b.classList.toggle("here",k===filmIdx));
   SCENES[filmIdx].node.dispatchEvent(new Event("scene-on"));
+  animateCount(SCENES[filmIdx].node);
   clearTimeout(filmTimer); cancelAnimationFrame(rafBar);
   filmStart=performance.now(); filmPaused=false;
   const dur=SCENES[filmIdx].dur*1000;
