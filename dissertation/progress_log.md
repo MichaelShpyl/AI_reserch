@@ -1735,3 +1735,22 @@ evaluation programme.
   question checked clean). Two smaller rewords followed: the p = 0.0003 sentence now names
   the paired-essay test it comes from, and the judge-scene wording no longer implies every
   correlation used exactly sixty questions.
+
+### Pacing pass on the film (21 July 2026)
+
+- Timed the whole eighteen-scene film against a reading model (words of real prose per scene
+  versus seconds available after the scene's content finishes animating in). The film was
+  text-heavy and under-timed: several scenes asked the viewer to read more than the clock
+  allowed, the worst being the simulation scene at about 156 words of paragraph in fifteen
+  seconds.
+- Fixed it by trimming, not just stretching. Every explanatory paragraph was cut to its
+  essentials (the simulation scene's prose roughly halved, the judge scene's from 88 words to
+  55), so the heading and the visual carry each scene and the paragraph is support. Late-arriving
+  content was brought forward: the "watching it read" beam sweep dropped from 5.2 to 3.6 seconds
+  so its explanation appears at four seconds instead of six, and the step and question reveals in
+  the opening scenes were sped up.
+- Durations were then rebalanced so every scene clears a comfortable on-screen skim: the two
+  densest scenes (simulation, judges) got more air, the lighter ones lost a second. Total runtime
+  is about three and a half minutes, essentially unchanged, but the reading load per scene is now
+  well within what a viewer can take in without pausing. Stepped through all eighteen scenes with
+  no errors and confirmed the auto-advance still runs start to finish.

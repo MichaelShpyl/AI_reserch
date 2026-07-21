@@ -230,7 +230,7 @@ header{
 .minidoc span{border-radius:2px; opacity:.25; transition:opacity .5s, background .5s}
 .minidoc span.read{opacity:1}
 .beam{position:absolute; left:0; right:0; top:-8%; height:6px; border-radius:3px;
-  background:linear-gradient(90deg, transparent, var(--teal), transparent); opacity:0; transition:top 5.2s linear, opacity .5s}
+  background:linear-gradient(90deg, transparent, var(--teal), transparent); opacity:0; transition:top 3.6s linear, opacity .5s}
 .judges{display:flex; gap:1.2rem; margin-top:2rem; flex-wrap:wrap; justify-content:center}
 .judge{background:var(--page); border:1px solid var(--line); border-radius:.7rem; padding:1rem 1.2rem;
   width:200px; box-shadow:var(--shadow)}
@@ -631,10 +631,9 @@ function animateCount(scene){
 function buildTitleScene(){
   return el(`<div class="kicker">A working system, shown with its real output</div>
     <h1>From an accusation nobody can defend to a conversation any lecturer can hold</h1>
-    <p class="sub">An explainable pipeline for academic integrity. It detects likely AI writing,
-    explains every flag in plain language, and turns the flag into interview questions drawn from
-    the student's own claims. Built, trained and evaluated on one ordinary laptop.
-    Nothing in this film is a mock-up.</p>`);
+    <p class="sub">It flags likely AI writing, explains every flag in plain words, and turns it into
+    interview questions drawn from the student's own claims. All of it runs on one ordinary laptop,
+    and everything you are about to see is real output.</p>`);
 }
 
 function buildProblemScene(){
@@ -646,18 +645,18 @@ function buildProblemScene(){
       <span class="q">Which parts?</span><span class="a">no answer</span>
       <span class="q">What do I tell the student?</span><span class="a">no answer</span>
     </div>
-    <p class="sub">Popular detectors return one number and nothing else. They also falsely flag
-    second-language writers <b>six times in ten</b>, against one in twenty for native speakers
-    (Liang and colleagues, 2023). An accusation built on that cannot be defended.</p>`);
-  reveal(s, ".qa span, .sub", [900,900,1900,1900,2900,2900,4200]);
+    <p class="sub">Detectors give one number and nothing else. They also wrongly flag second-language
+    writers <b>six times in ten</b>, against one in twenty for native speakers
+    (Liang and colleagues, 2023).</p>`);
+  reveal(s, ".qa span, .sub", [600,600,1300,1300,2000,2000,2900]);
   return s;
 }
 
 function buildOverviewScene(){
   const s = el(`<div class="kicker">The answer built here</div>
     <h1>Turn the flag into a conversation, in five steps</h1><div class="pipe"></div>
-    <p class="sub">One pipeline, running end to end on a laptop. The rest of this film walks
-    through each step with the system's real output on one essay.</p>`);
+    <p class="sub">One pipeline, end to end on a laptop. The rest of this film walks each step,
+    on the system's real output for one essay.</p>`);
   const steps = [
     ["1 &middot; Detect","two independent readers score the essay and must agree"],
     ["2 &middot; Explain","every flag comes with named, measured reasons"],
@@ -672,9 +671,9 @@ function buildOverviewScene(){
   });
   s.addEventListener("scene-on",()=>{
     s.querySelectorAll(".step").forEach((d,i)=>{ d.classList.remove("on");
-      setTimeout(()=>d.classList.add("on"), 400+i*850); });
+      setTimeout(()=>d.classList.add("on"), 300+i*600); });
     s.querySelectorAll(".arrow").forEach((d,i)=>{ d.classList.remove("on");
-      setTimeout(()=>d.classList.add("on"), 830+i*850); });
+      setTimeout(()=>d.classList.add("on"), 600+i*600); });
   });
   return s;
 }
@@ -682,8 +681,8 @@ function buildOverviewScene(){
 function buildPipelineScene(){
   const s = el(`<div class="kicker">Before any detecting, a fair test</div>
     <h1>Every step closes a shortcut the detector could cheat with</h1><div class="pipe"></div>
-    <p class="sub">If the AI essays were longer, or formatted differently, or on other topics, a
-    detector would learn that instead of learning writing style. Matching removes every shortcut.</p>`);
+    <p class="sub">If the AI essays were longer or on different topics, the detector would learn
+    that instead of writing style. Matching strips away every shortcut.</p>`);
   const steps = [
     ["640 real essays","sampled evenly from a UK student corpus across disciplines and language backgrounds"],
     ["640 AI twins","a local model writes each one to the same topic and length, so length gives nothing away"],
@@ -697,7 +696,7 @@ function buildPipelineScene(){
   });
   s.addEventListener("scene-on",()=>{
     s.querySelectorAll(".step").forEach((d,i)=>{ d.classList.remove("on");
-      setTimeout(()=>d.classList.add("on"), 400+i*900); });
+      setTimeout(()=>d.classList.add("on"), 300+i*620); });
   });
   return s;
 }
@@ -705,11 +704,9 @@ function buildPipelineScene(){
 function buildLessonScene(){
   return el(`<div class="kicker">The first lesson</div>
     <h1>A perfect score is a warning, not a triumph</h1>
-    <p class="sub">The first detector scored 100%. Digging in revealed hidden formatting tags in
-    the human files, nothing to do with writing. Cleaned and retrained, the honest score is
-    <b>99%</b>, and it caught <b>every essay</b> from two commercial AI models it never saw in
-    training, without one false accusation. No number in this project is trusted until the text
-    behind it has been read.</p>`);
+    <p class="sub">The first detector scored a perfect 100%. The cause was hidden formatting in the
+    human files, nothing to do with writing. Cleaned and retrained, it scores an honest <b>99%</b>,
+    and still caught <b>every essay</b> from two unseen AI models with zero false accusations.</p>`);
 }
 
 function buildReadingScene(){
@@ -720,11 +717,10 @@ function buildReadingScene(){
     <div class="minidoc"><div class="beam"></div>${
       sents.map((t,i)=>`<span data-i="${i}">${t.replace(/</g,"&lt;")} </span>`).join("")
     }</div>
-    <p class="sub">The system deletes one sentence at a time and watches the score move. Deleting
-    any single sentence barely moves it: the machine-likeness is spread evenly across the whole
-    essay, and that spread is exactly what "writing style" means. The shading marks the sentences
-    the detector reacted to most.</p>`);
-  reveal(s, ".sub", [6300]);
+    <p class="sub">The system deletes each sentence in turn and watches the score. Removing any one
+    barely moves it: the machine-likeness is spread across the whole essay, and that spread is what
+    "writing style" means. Shading marks the sentences it reacted to most.</p>`);
+  reveal(s, ".sub", [4200]);
   s.addEventListener("scene-on",()=>{
     const beam = s.querySelector(".beam");
     const spans = s.querySelectorAll(".minidoc span");
@@ -740,9 +736,9 @@ function buildReadingScene(){
         if(r<=3) sp.classList.add("heat3");
         else if(r<=10) sp.classList.add("heat2");
         else if(r<=25) sp.classList.add("heat1");
-      }, REDUCED?0:400+i*620);
+      }, REDUCED?0:300+i*400);
     });
-    setTimeout(()=>{ beam.style.opacity="0"; }, 5600);
+    setTimeout(()=>{ beam.style.opacity="0"; }, 3800);
   });
   return s;
 }
@@ -852,9 +848,8 @@ function buildFairnessScene(){
   ];
   const s = el(`<div class="kicker">Made fairer, on purpose</div>
     <h1>Up to five times fewer false accusations</h1>
-    <p class="sub">The failure that matters most is flagging a real student. Adding the
-    writing-style reader to the word-pattern model cuts wrongful flags of ordinary human writing
-    three to five times over.</p>
+    <p class="sub">The worst failure is flagging a real student. Adding the writing-style reader
+    cuts wrongful flags of ordinary human writing three to five times over.</p>
     <div class="fairgrid">${rows.map(r=>`
       <div class="fairrow">
         <div class="fl">${r[0]}</div>
@@ -868,9 +863,8 @@ function buildFairnessScene(){
     </div>
     <p class="fairlegend">Each bar is how often the detector wrongly flags real human writing.
     Faded rust = the plain model, solid teal = the hybrid. Shorter is better.</p>
-    <p class="sub">Even the hardest case, dense academic paper abstracts, improves, though it stays
-    too high to trust on its own. That is exactly why the system treats every flag as a question
-    that opens a conversation, never a verdict.</p>`);
+    <p class="sub">Even the hardest case, dense paper abstracts, improves but stays too high to
+    trust alone. So every flag opens a conversation, never a verdict.</p>`);
   s.addEventListener("scene-on",()=>{
     s.querySelectorAll(".fairtrack .pl, .fairtrack .hy").forEach(b=>{ b.style.width="0";
       setTimeout(()=>{ b.style.width=b.dataset.w+"%"; }, 300); });
@@ -885,9 +879,9 @@ function buildQuestionScene(){
     <h1 style="font-size:clamp(1.2rem,2.6vw,1.8rem); max-width:44ch">"${c.claim}"</h1>
     <p class="sub">found in sentences ${c.source_ns.join(", ")} of the submission, quoted verbatim</p>
     <div class="qcard"><span id="typeq"></span><span class="bloom">${q.bloom}</span></div>
-    <p class="sub">The tag on the question marks the level of thinking it demands, here
-    explaining the work in your own words. A knowledgeable outsider cannot answer the question
-    from general knowledge. The real author can. That gap is what the whole system measures.</p>`);
+    <p class="sub">A knowledgeable outsider cannot answer this from general knowledge. The real
+    author can. That gap is what the whole system measures. The tag marks the level of thinking
+    the question asks for.</p>`);
   s.addEventListener("scene-on",()=>{
     const t=s.querySelector("#typeq"); t.textContent="";
     const text=q.q; let i=0;
@@ -910,19 +904,15 @@ function buildSimScene(){
         <div class="big num count" style="font-size:1.9rem; color:var(--rust)">0.78</div>
         <p class="sub" style="margin-top:.2rem; font-size:.85rem">it can only guess from general knowledge</p></div>
     </div>
-    <p class="sub">Both answer the same question, and each answer is scored on how closely it
-    matches the essay's actual argument. The gap per question is small, but measured over
-    hundreds of questions it reliably separates questions that need the essay from questions
-    anyone could answer. A question that gives the essay's content away shows no gap at all,
-    so leaks expose themselves. Empty questions are the opposite trap: they can fake a gap,
-    and that is what the gate below is for. No human judging needed, and nothing to flatter.</p>
+    <p class="sub">Both answer the same question, scored on how close they land to the essay's
+    argument. Over hundreds of questions, the gap between reader and guesser marks which questions
+    truly need the essay.</p>
     <div class="qcard badq" style="font-size:.95rem"><span>Which of the following statements is correct?</span>
       <div class="stamp">rejected</div></div>
-    <p class="sub gatecap">One early model learned to game this test with empty questions like the
-    one above, and for an hour it looked like the project's best result. A well-formedness gate
-    now rejects them before they reach a score or a lecturer. Finding the hole, and closing it,
-    is part of the contribution.</p>`);
-  reveal(s, ".badq, .gatecap", [6800, 7200]);
+    <p class="sub gatecap">One early model gamed this with empty questions like the one above. A
+    gate now rejects them before they reach a score. Finding that hole, and closing it, is part of
+    the contribution.</p>`);
+  reveal(s, ".badq, .gatecap", [4600, 5000]);
   s.addEventListener("scene-on",()=>{
     s.querySelectorAll(".bigbar i").forEach(i=>{ i.style.width="0";
       setTimeout(()=>{ i.style.width=i.dataset.w+"%"; },300); });
@@ -943,10 +933,9 @@ function buildLaptopScene(){
         <div class="big num count" style="font-size:2.8rem; color:var(--rust)">5</div>
         <p class="sub" style="margin-top:.2rem; font-size:.85rem">of the 29 essays both covered</p></div>
     </div>
-    <p class="sub">Thirty essays, ${R.scaled.questions} questions. Tested across the paired
-    essays, an advantage this consistent would happen by luck about three times in ten thousand
-    (p = ${R.scaled.p}). A university can run this kind of verification on ordinary hardware,
-    and student work, which is personal data, <b>never leaves the building</b>.</p>`);
+    <p class="sub">Thirty essays, ${R.scaled.questions} questions, and an advantage this consistent
+    would happen by luck about three times in ten thousand (p = ${R.scaled.p}). It all runs on
+    ordinary hardware, so student work <b>never leaves the building</b>.</p>`);
   s.addEventListener("scene-on",()=>{
     s.querySelectorAll(".bigbar i").forEach(i=>{ i.style.width="0";
       setTimeout(()=>{ i.style.width=i.dataset.w+"%"; },300); });
@@ -966,12 +955,10 @@ function buildJudgesScene(){
       <div class="judge"><div class="jn">Judge: Gemini</div><div class="corr num">${a.gemini.toFixed(2)}</div>
         <div class="jk">correlation with the objective measure</div></div>
     </div>
-    <p class="sub">On this scale +1 would mean a judge's ratings rise with real question power,
-    0 means no connection at all, and below 0 means the judge prefers the weaker questions.
-    Across the ${R.judges.n}-question study the three judges broadly track <b>each other</b>,
-    and none of them tracks the objective test. They reward how a question looks, not whether it works.
-    Any evaluation that leans only on AI judges inherits that blind spot, which is why every
-    score in this project is anchored to a measure the models cannot flatter.</p>`);
+    <p class="sub">On this scale +1 rewards the stronger questions, 0 means no link, below 0 means
+    the judge prefers the weaker ones. All three agree with <b>each other</b> yet none tracks the
+    objective test: they rate how a question looks, not whether it works. So every score here is
+    anchored to a measure they cannot flatter.</p>`);
   reveal(s, ".judge", [600,1300,2000]);
   return s;
 }
@@ -992,9 +979,8 @@ function buildDashboardScene(){
 function buildRuleScene(){
   return el(`<div class="kicker">The rule that ran through everything</div>
     <h1>Never trust a score you cannot explain, and never trust one you have not tried to break</h1>
-    <p class="sub">That rule caught three of this project's own headline numbers. Each time, the
-    finding that replaced the headline was more useful and easier to defend. What survived is in
-    this film, and every figure traces to a result file.</p>`);
+    <p class="sub">That rule caught three of this project's own headline numbers. Each time, what
+    replaced the headline was more useful and easier to defend.</p>`);
 }
 
 function buildClosingScene(){
@@ -1009,22 +995,22 @@ function buildClosingScene(){
 }
 
 const SCENES = [
- {dur:9,  build: buildTitleScene},
- {dur:12, build: buildProblemScene},
- {dur:11, build: buildOverviewScene},
- {dur:12, build: buildPipelineScene},
+ {dur:10, build: buildTitleScene},
+ {dur:11, build: buildProblemScene},
+ {dur:10, build: buildOverviewScene},
+ {dur:11, build: buildPipelineScene},
  {dur:11, build: buildLessonScene},
- {dur:13, build: buildReadingScene},
- {dur:11, build: buildReadersScene},
- {dur:12, build: buildCardScene},
- {dur:13, build: buildSignsScene},
+ {dur:14, build: buildReadingScene},
+ {dur:12, build: buildReadersScene},
+ {dur:11, build: buildCardScene},
+ {dur:12, build: buildSignsScene},
  {dur:9,  build: buildVerdictScene},
- {dur:11, build: buildFairnessScene},
- {dur:13, build: buildQuestionScene},
- {dur:15, build: buildSimScene},
+ {dur:13, build: buildFairnessScene},
+ {dur:14, build: buildQuestionScene},
+ {dur:17, build: buildSimScene},
  {dur:12, build: buildLaptopScene},
- {dur:12, build: buildJudgesScene},
- {dur:13, build: buildDashboardScene},
+ {dur:14, build: buildJudgesScene},
+ {dur:12, build: buildDashboardScene},
  {dur:9,  build: buildRuleScene},
  {dur:10, build: buildClosingScene},
 ];
