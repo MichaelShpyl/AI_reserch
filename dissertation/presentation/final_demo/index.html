@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification Interview Guide, a working demonstration</title>
+<style>
+:root{
+  --paper:#fbfaf8; --page:#ffffff; --ink:#20262d; --muted:#5b6770;
+  --teal:#2b6777; --teal-soft:#dce9ec; --rust:#a63d2e; --amber:#d98e3b;
+  --band:#e6e9ea; --line:#d8dcdf; --good:#2b6777; --bad:#a63d2e;
+  --shadow:0 1px 2px rgba(32,38,45,.08), 0 8px 28px rgba(32,38,45,.09);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --paper:#151a20; --page:#1d232b; --ink:#e8e6e1; --muted:#9aa4ad;
+    --teal:#7db4c2; --teal-soft:#23343b; --rust:#d98873; --amber:#e0a663;
+    --band:#2a323b; --line:#333c46; --good:#7db4c2; --bad:#d98873;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 28px rgba(0,0,0,.35); }
+}
+:root[data-theme="dark"]{ --paper:#151a20; --page:#1d232b; --ink:#e8e6e1; --muted:#9aa4ad;
+  --teal:#7db4c2; --teal-soft:#23343b; --rust:#d98873; --amber:#e0a663;
+  --band:#2a323b; --line:#333c46; --good:#7db4c2; --bad:#d98873;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 28px rgba(0,0,0,.35); }
+:root[data-theme="light"]{ --paper:#fbfaf8; --page:#ffffff; --ink:#20262d; --muted:#5b6770;
+  --teal:#2b6777; --teal-soft:#dce9ec; --rust:#a63d2e; --amber:#d98e3b;
+  --band:#e6e9ea; --line:#d8dcdf; --good:#2b6777; --bad:#a63d2e;
+  --shadow:0 1px 2px rgba(32,38,45,.08), 0 8px 28px rgba(32,38,45,.09); }
+
+*{box-sizing:border-box; margin:0}
+html,body{height:100%}
+body{
+  font-family:"Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;
+  background:var(--paper); color:var(--ink);
+  font-size:16px; line-height:1.55;
+}
+button{font:inherit; cursor:pointer; border:none; background:none; color:inherit}
+.num{font-family:Consolas,ui-monospace,monospace; font-variant-numeric:tabular-nums}
+
+/* ---------- top bar ---------- */
+header{
+  position:sticky; top:0; z-index:40; display:flex; align-items:center; gap:1.5rem;
+  padding:.65rem 1.4rem; background:var(--paper); border-bottom:1px solid var(--line);
+}
+.wordmark{font-weight:650; letter-spacing:.01em}
+.wordmark small{display:block; font-weight:400; font-size:.72rem; color:var(--muted); letter-spacing:.06em; text-transform:uppercase}
+.tabs{display:flex; gap:.25rem; margin-left:auto; background:var(--band); border-radius:.55rem; padding:.2rem}
+.tabs button{padding:.35rem 1rem; border-radius:.4rem; color:var(--muted); font-weight:600; font-size:.9rem}
+.tabs button[aria-selected="true"]{background:var(--page); color:var(--ink); box-shadow:var(--shadow)}
+
+/* ---------- walkthrough layout ---------- */
+#walkthrough{max-width:1280px; margin:0 auto; padding:1.4rem}
+.intro{max-width:68ch; margin:.4rem auto 1.1rem; text-align:center; color:var(--muted)}
+.intro b{color:var(--ink)}
+.twin-switch{display:flex; justify-content:center; gap:.6rem; margin:0 0 1.2rem}
+.twin-switch button{
+  padding:.55rem 1.2rem; border-radius:.6rem; border:1.5px solid var(--line);
+  font-weight:600; background:var(--page);
+}
+.twin-switch button[aria-pressed="true"]{border-color:var(--teal); color:var(--teal); background:var(--teal-soft)}
+
+.stage{display:grid; grid-template-columns: minmax(340px,1fr) minmax(420px,1.15fr); gap:1.6rem; align-items:start}
+@media (max-width:960px){ .stage{grid-template-columns:1fr} }
+
+/* the document */
+.doclegend{display:flex; gap:1.1rem; flex-wrap:wrap; font-size:.75rem; color:var(--muted); margin:0 0 .5rem .2rem}
+.doclegend span{display:inline-flex; align-items:center; gap:.35rem}
+.sw{display:inline-block; width:1em; height:1em; border-radius:3px}
+.sw.heat{background:color-mix(in srgb, var(--rust) 20%, transparent)}
+.sw.phrsw{border-bottom:2.5px solid var(--amber); height:.8em; background:none; border-radius:0}
+.sw.cite{background:color-mix(in srgb, var(--teal) 24%, transparent)}
+.doc{
+  background:var(--page); border:1px solid var(--line); border-radius:.35rem;
+  box-shadow:var(--shadow); padding:2.2rem 2.4rem; max-height:78vh; overflow-y:auto;
+}
+.doc h3{font-family:Cambria,Georgia,serif; font-size:1.05rem; margin-bottom:1rem; color:var(--muted); font-weight:600}
+.doc .body{font-family:Cambria,Georgia,serif; font-size:.95rem; line-height:1.75; text-align:justify; hyphens:auto}
+.doc .body span{border-radius:2px; transition:background .35s, box-shadow .35s}
+.heat1{background:color-mix(in srgb, var(--rust) 7%, transparent)}
+.heat2{background:color-mix(in srgb, var(--rust) 13%, transparent)}
+.heat3{background:color-mix(in srgb, var(--rust) 21%, transparent)}
+.phr{font-style:normal; border-bottom:2.5px solid var(--amber); padding-bottom:1px}
+.phr.on{background:color-mix(in srgb, var(--amber) 32%, transparent)}
+.doc .body span.cited{background:var(--teal-soft); box-shadow:0 0 0 2px var(--teal-soft)}
+.doc .body span.cited-strong{background:color-mix(in srgb, var(--teal) 24%, transparent)}
+.doc .body span.flash{animation:flashbg 1.8s ease-out}
+@keyframes flashbg{0%{background:color-mix(in srgb, var(--amber) 45%, transparent)}100%{}}
+
+/* analysis rail */
+.rail{display:flex; flex-direction:column; gap:1.1rem}
+.panel{background:var(--page); border:1px solid var(--line); border-radius:.7rem; box-shadow:var(--shadow); padding:1.1rem 1.3rem}
+.panel .eyebrow{font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:.55rem}
+.panel h2{font-size:1.02rem; font-weight:650; margin-bottom:.3rem}
+.how{font-size:.79rem; color:var(--muted); margin-top:.7rem; padding-top:.55rem; border-top:1px dashed var(--line); line-height:1.5}
+.how b{color:var(--ink); font-weight:600}
+
+/* stage 1: dial */
+.detect{display:flex; gap:1.4rem; align-items:center}
+.dial{width:132px; height:132px; flex:none}
+.dial .track{stroke:var(--band)}
+.dial .arc{transition:stroke-dashoffset 1.4s cubic-bezier(.3,.8,.3,1), stroke .4s}
+.dial text{font-family:Consolas,monospace; fill:var(--ink)}
+.verdict{font-weight:700; font-size:1.12rem}
+.verdict.flag{color:var(--bad)} .verdict.clear{color:var(--good)}
+.components{margin-top:.5rem; display:grid; gap:.3rem; font-size:.83rem; color:var(--muted)}
+.cbar{height:6px; border-radius:3px; background:var(--band); overflow:hidden}
+.cbar i{display:block; height:100%; background:var(--teal); width:0; transition:width 1.2s .3s ease}
+
+/* stage 2: habit strips */
+.strip{display:grid; grid-template-columns: 9.5rem 1fr auto; gap:.8rem; align-items:center; padding:.42rem 0}
+.strip .lab{font-size:.86rem; text-align:right; color:var(--ink)}
+.strip .lane{position:relative; height:22px}
+.strip .bandbar{position:absolute; top:6px; height:10px; background:var(--band); border-radius:5px}
+.strip .med{position:absolute; top:2px; width:2px; height:18px; background:var(--muted)}
+.strip .dot{position:absolute; top:3px; width:16px; height:16px; border-radius:50%;
+  border:2.5px solid var(--page); box-shadow:0 0 0 1px var(--line);
+  left:0; transition:left 1.1s cubic-bezier(.3,.8,.3,1)}
+.strip .val{font-size:.76rem; color:var(--muted); white-space:nowrap}
+.legend{font-size:.76rem; color:var(--muted); margin-top:.5rem}
+.legend i{display:inline-block; width:.75em; height:.75em; border-radius:50%; vertical-align:-.08em}
+
+/* stage 3: signs in the text */
+.signblock{margin-top:.8rem}
+.signblock .bt{font-size:.85rem; font-weight:650; margin-bottom:.4rem}
+.chips{display:flex; flex-wrap:wrap; gap:.45rem}
+.chip{border:1.5px solid var(--line); border-radius:1.1rem; padding:.28rem .8rem; font-size:.82rem;
+  background:var(--page); transition:border-color .25s}
+.chip b{color:var(--rust); font-weight:700}
+.chip small{color:var(--muted)}
+.chip[aria-pressed="true"]{border-color:var(--amber); background:color-mix(in srgb, var(--amber) 12%, transparent)}
+.skyrow{display:grid; grid-template-columns:8.2rem 1fr auto; gap:.7rem; align-items:center; margin:.3rem 0}
+.skyrow .lab{font-size:.8rem; text-align:right; color:var(--muted)}
+.sky{display:flex; align-items:flex-end; gap:1px; height:40px}
+.sky i{flex:1; min-width:1px; border-radius:1px 1px 0 0}
+.sky.ai i{background:var(--amber)} .sky.hu i{background:var(--teal); opacity:.85}
+.skyrow .val{font-size:.75rem; color:var(--muted); white-space:nowrap}
+.slink{cursor:pointer; color:var(--teal); text-decoration:underline dotted; text-underline-offset:2px}
+.signnote{font-size:.83rem; color:var(--muted); line-height:1.55; margin-top:.3rem}
+.signnote b{color:var(--ink)}
+
+/* stage 4: claims and questions */
+.claim{border:1.5px solid var(--line); border-radius:.6rem; padding:.75rem .9rem; margin-top:.6rem; transition:border-color .3s}
+.claim:hover, .claim.open{border-color:var(--teal)}
+.claim .ctext{font-weight:600; font-size:.92rem; cursor:pointer}
+.claim .src{font-size:.76rem; color:var(--muted); margin-top:.15rem}
+.claim ul{list-style:none; margin-top:.55rem; display:none}
+.claim.open ul{display:block}
+.claim li{padding:.45rem .0rem .45rem .9rem; border-left:2.5px solid var(--teal-soft); margin:.35rem 0; font-size:.88rem}
+.bloom{display:inline-block; font-size:.66rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  padding:.1rem .5rem; border-radius:.7rem; margin-left:.45rem; vertical-align:.08em;
+  background:var(--teal-soft); color:var(--teal)}
+.notflagged{border-left:3px solid var(--good); padding:.6rem .9rem; background:var(--teal-soft);
+  border-radius:.4rem; font-size:.9rem; margin-top:.6rem}
+
+/* ---------- film mode ---------- */
+#film{position:fixed; inset:0; top:52px; background:var(--paper); display:none; overflow:hidden}
+#film.on{display:block}
+#film::before{content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse 90% 70% at 50% 38%, transparent 55%, color-mix(in srgb, var(--ink) 4%, transparent))}
+.scene{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:4vh 7vw; text-align:center; opacity:0; transform:translateY(10px);
+  transition:opacity .8s, transform .8s; pointer-events:none; overflow-y:auto}
+.scene.on{opacity:1; transform:none; pointer-events:auto}
+.scene .kicker{font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); font-weight:700; margin-bottom:1rem}
+.scene h1{font-family:Cambria,Georgia,serif; font-weight:700;
+  font-size:clamp(1.7rem, 4.2vw, 3.1rem); line-height:1.16; max-width:26ch; text-wrap:balance}
+.scene .sub{margin-top:1.1rem; font-size:clamp(.95rem,1.55vw,1.18rem); color:var(--muted); max-width:64ch; text-wrap:balance; line-height:1.6}
+.scene .sub b{color:var(--ink)}
+.scene .big{font-family:Consolas,monospace; font-size:clamp(2.6rem,7vw,5rem); font-weight:700}
+.reveal{opacity:0; transform:translateY(12px); transition:opacity .7s, transform .7s}
+.reveal.on{opacity:1; transform:none}
+.filmbar{position:absolute; left:0; right:0; bottom:0; height:4px; background:var(--band)}
+.filmbar i{display:block; height:100%; width:0; background:var(--teal)}
+.filmhint{position:absolute; bottom:14px; right:18px; font-size:.75rem; color:var(--muted)}
+.dots{position:absolute; bottom:12px; left:18px; display:flex; gap:6px; z-index:5}
+.dots b{width:8px; height:8px; border-radius:50%; background:var(--band); cursor:pointer}
+.dots b.here{background:var(--teal)}
+.pipe{display:flex; gap:.9rem; margin-top:2rem; flex-wrap:wrap; justify-content:center; align-items:stretch}
+.pipe .step{border:1.5px solid var(--line); background:var(--page); border-radius:.7rem; padding:.9rem 1.05rem;
+  width:176px; text-align:left; opacity:0; transform:translateY(14px); transition:opacity .6s, transform .6s, border-color .4s}
+.pipe .step.on{opacity:1; transform:none; border-color:var(--teal)}
+.pipe .step b{display:block; font-size:.85rem; color:var(--teal); margin-bottom:.25rem}
+.pipe .step span{font-size:.78rem; color:var(--muted); line-height:1.4; display:block}
+.pipe .arrow{align-self:center; color:var(--muted); font-size:1.2rem; opacity:0; transition:opacity .6s}
+.pipe .arrow.on{opacity:.8}
+.duo{display:flex; gap:3rem; margin-top:2.2rem; flex-wrap:wrap; justify-content:center}
+.duo .half{min-width:230px; max-width:330px}
+.duo .half .who{font-weight:650; margin-bottom:.4rem}
+.bigbar{width:min(280px,80vw); height:16px; background:var(--band); border-radius:8px; overflow:hidden; margin:0 auto}
+.bigbar i{display:block; height:100%; width:0; transition:width 1.4s .4s cubic-bezier(.3,.8,.3,1)}
+.statgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1.1rem; margin-top:2rem; width:min(900px,90vw)}
+.stat{background:var(--page); border:1px solid var(--line); border-radius:.7rem; padding:1rem; box-shadow:var(--shadow)}
+.stat .v{font-family:Consolas,monospace; font-size:1.7rem; font-weight:700; color:var(--teal)}
+.stat .v.warn{color:var(--rust)}
+.stat .k{font-size:.8rem; color:var(--muted); margin-top:.2rem; line-height:1.35}
+.qcard{background:var(--page); border:1.5px solid var(--teal); border-radius:.7rem; padding:1rem 1.2rem;
+  max-width:56ch; margin-top:1.4rem; text-align:left; font-size:1.02rem; box-shadow:var(--shadow); position:relative}
+.qcard.badq{border-color:var(--rust)}
+.stamp{position:absolute; top:-14px; right:-10px; transform:rotate(8deg); border:2.5px solid var(--rust);
+  color:var(--rust); font-weight:800; letter-spacing:.1em; font-size:.8rem; padding:.15rem .6rem;
+  border-radius:.3rem; background:var(--page)}
+.blackbox{margin-top:1.8rem; background:#14181d; color:#e8e6e1; border-radius:.8rem;
+  padding:1.6rem 2.6rem; box-shadow:var(--shadow); border:1px solid #333}
+.blackbox .big{color:#e0a663}
+.qa{display:grid; grid-template-columns:auto auto; gap:.3rem 1.2rem; margin-top:1.6rem; text-align:left; font-size:clamp(.9rem,1.5vw,1.1rem)}
+.qa .q{font-weight:600}
+.qa .a{color:var(--muted); font-style:italic}
+.minidoc{width:min(660px,92vw); text-align:left; font-family:Cambria,Georgia,serif; font-size:.9rem;
+  line-height:1.7; margin-top:1.6rem; background:var(--page); border:1px solid var(--line);
+  border-radius:.4rem; padding:1.4rem 1.7rem; box-shadow:var(--shadow); position:relative; overflow:hidden}
+.minidoc span{border-radius:2px; opacity:.25; transition:opacity .5s, background .5s}
+.minidoc span.read{opacity:1}
+.beam{position:absolute; left:0; right:0; top:-8%; height:6px; border-radius:3px;
+  background:linear-gradient(90deg, transparent, var(--teal), transparent); opacity:0; transition:top 5.2s linear, opacity .5s}
+.judges{display:flex; gap:1.2rem; margin-top:2rem; flex-wrap:wrap; justify-content:center}
+.judge{background:var(--page); border:1px solid var(--line); border-radius:.7rem; padding:1rem 1.2rem;
+  width:200px; box-shadow:var(--shadow)}
+.judge .jn{font-weight:650; margin-bottom:.35rem}
+.judge .corr{font-family:Consolas,monospace; font-size:1.5rem; font-weight:700; color:var(--rust)}
+.judge .jk{font-size:.75rem; color:var(--muted); margin-top:.2rem; line-height:1.35}
+.credits{margin-top:2.2rem; font-size:.9rem; color:var(--muted); line-height:1.8}
+.credits b{color:var(--ink); font-weight:600}
+.signcols{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.4rem; margin-top:2rem; width:min(980px,92vw); text-align:left}
+.signcol{background:var(--page); border:1px solid var(--line); border-radius:.7rem; padding:1.1rem 1.3rem; box-shadow:var(--shadow)}
+.signcol .t{font-weight:650; margin-bottom:.6rem; font-size:.95rem}
+.cnt{display:grid; grid-template-columns:auto 1fr; gap:.25rem .8rem; font-size:.9rem; align-items:baseline}
+.cnt .w{font-family:Cambria,Georgia,serif; font-style:italic}
+.cnt .n{font-family:Consolas,monospace; font-weight:700; color:var(--rust)}
+.cnt .n small{color:var(--muted); font-weight:400; font-family:inherit}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important; animation:none !important}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wordmark">Verification Interview Guide
+    <small>working demonstration, real models, real output</small></div>
+  <nav class="tabs" role="tablist">
+    <button id="tab-walk" role="tab" aria-selected="true">Walkthrough</button>
+    <button id="tab-film" role="tab" aria-selected="false">Play the story</button>
+  </nav>
+</header>
+
+<main id="walkthrough">
+  <p class="intro">A lecturer receives the same essay twice: an <b>AI-written version</b> and the
+  <b>real student's essay</b>. Pick one and watch it move through the four steps that build a
+  lecturer's interview guide. Everything on this page is live output from the trained system,
+  and every mark in the document is measured, not guessed.</p>
+  <div class="twin-switch">
+    <button id="pick-ai" aria-pressed="true">Analyse the AI-written version</button>
+    <button id="pick-human" aria-pressed="false">Analyse the real student's essay</button>
+  </div>
+
+  <div class="stage">
+    <div>
+      <div class="doclegend" id="doclegend">
+        <span id="lg-heat"><i class="sw heat"></i> sentences that pushed the detector hardest</span>
+        <span><i class="sw phrsw"></i> phrases the AI leans on</span>
+        <span><i class="sw cite"></i> sentences a claim cites</span>
+      </div>
+      <section class="doc" aria-label="the submission">
+        <h3 id="doc-title"></h3>
+        <div class="body" id="doc-body"></div>
+      </section>
+    </div>
+
+    <section class="rail">
+      <div class="panel">
+        <div class="eyebrow">Step 1 of 4, detection</div>
+        <div class="detect">
+          <svg class="dial" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="track" cx="60" cy="60" r="50" fill="none" stroke-width="11"/>
+            <circle class="arc" id="arc" cx="60" cy="60" r="50" fill="none" stroke-width="11"
+              stroke-linecap="round" transform="rotate(-90 60 60)"/>
+            <text id="dial-num" x="60" y="58" text-anchor="middle" font-size="21" font-weight="700">0.00</text>
+            <text x="60" y="76" text-anchor="middle" font-size="9" fill="var(--muted)">probability of AI</text>
+          </svg>
+          <div>
+            <div class="verdict" id="verdict"></div>
+            <div class="components">
+              <div>word-pattern reader <span class="num" id="c1v"></span><div class="cbar"><i id="c1"></i></div></div>
+              <div>writing-style reader <span class="num" id="c2v"></span><div class="cbar"><i id="c2"></i></div></div>
+            </div>
+          </div>
+        </div>
+        <p class="how"><b>How this happens:</b> two independent readers score the essay. One is a
+        language model trained on matched pairs of real and AI-written essays to recognise
+        machine word patterns. The other measures writing habits with formulas anyone can re-run.
+        A small combiner turns the pair into one probability, and it only reads high when both
+        agree.</p>
+      </div>
+
+      <div class="panel">
+        <div class="eyebrow">Step 2 of 4, five measured habits</div>
+        <h2>This essay's writing habits, against typical student writing</h2>
+        <div id="strips"></div>
+        <p class="legend">grey band = the middle 80% of real student essays &nbsp;|&nbsp;
+          line = typical &nbsp;|&nbsp; dot = this essay,
+          <i style="background:var(--amber)"></i> pushed toward AI,
+          <i style="background:var(--teal)"></i> pushed toward human.
+          For every habit the question is the same: does the dot sit inside the band of
+          normal student writing?</p>
+        <p class="how"><b>How this happens:</b> each habit is a simple measurement of the text,
+        for example how varied the sentence lengths are, or how predictable each next word is.
+        The same measurements were taken on hundreds of real student essays, so the grey band
+        shows where students actually sit and the dot shows where this essay sits.</p>
+      </div>
+
+      <div class="panel">
+        <div class="eyebrow">Step 3 of 4, the signs in the text itself</div>
+        <h2 id="signs-title"></h2>
+        <div class="signblock">
+          <div class="bt">Phrases this writer leans on</div>
+          <div class="chips" id="phrase-chips"></div>
+          <p class="signnote" id="phrase-note"></p>
+        </div>
+        <div class="signblock">
+          <div class="bt">The rhythm of the sentences</div>
+          <div class="skyrow"><div class="lab">AI version</div><div class="sky ai" id="sky-ai"></div><div class="val num" id="sky-ai-val"></div></div>
+          <div class="skyrow"><div class="lab">student's essay</div><div class="sky hu" id="sky-hu"></div><div class="val num" id="sky-hu-val"></div></div>
+          <p class="signnote">Each bar is one sentence, its height the sentence's length. Real
+          writing speeds up and slows down; the AI version keeps a steady, even pace.</p>
+        </div>
+        <div class="signblock" id="signal-block">
+          <div class="bt">Where the detector's signal sits</div>
+          <p class="signnote" id="signal-note"></p>
+        </div>
+        <p class="how"><b>How this happens:</b> the system deletes one sentence at a time and
+        watches the detector's score move, so the shaded sentences are the ones the detector
+        itself reacted to. The phrase counts compare this essay against its matched twin, the
+        same topic and length written by the other author.</p>
+      </div>
+
+      <div class="panel">
+        <div class="eyebrow">Step 4 of 4, claims and questions</div>
+        <h2 id="claims-title"></h2>
+        <div id="claims"></div>
+        <p class="how"><b>How this happens:</b> a model trained on annotated argument essays finds
+        the sentences where the student makes a claim, and keeps their sentence numbers so nothing
+        is ever invented. The questions come from a second model, taught this exact task on this
+        laptop (the technical term is fine-tuning). Every question is checked for form and
+        labelled with the level of thinking it demands. The author of the essay can answer them
+        from memory. Someone who pasted the essay cannot.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div id="film" aria-label="the story, auto-playing">
+  <div id="scenes"></div>
+  <div class="dots" id="dots"></div>
+  <div class="filmbar"><i id="filmbar"></i></div>
+  <div class="filmhint">space pauses &middot; arrows move &middot; R restarts &middot; click a dot to jump</div>
+</div>
+
+<script src="data.js"></script>
+<script>
+"use strict";
+const $ = (s)=>document.querySelector(s);
+const CIRC = 2*Math.PI*50;
+const PHRASES = ["meanwhile","highlights the","furthermore","in contrast",
+                 "in conclusion","showcases","nuanced","multidimensional"];
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function fmt(x){
+  const a = Math.abs(x);
+  return a>=10 ? x.toFixed(0) : a>=1 ? x.toFixed(1) : a>=0.1 ? x.toFixed(2) : x.toFixed(3);
+}
+function phraseRe(p){ return new RegExp("\\b("+p.replace(/ /g,"\\s+")+")\\b","gi"); }
+function phraseCount(side,p){
+  const txt = DATA[side].sentences.join(" ");
+  return (txt.match(phraseRe(p))||[]).length;
+}
+function rowVal(side,label){
+  const r = DATA[side].card.rows.find(r=>r.label===label);
+  return r ? r.value : null;
+}
+
+/* ---------------- walkthrough ---------------- */
+let current = "ai";
+
+function renderDoc(kind){
+  const d = DATA[kind];
+  $("#doc-title").textContent = kind==="ai"
+    ? "Submission 3108a, the AI-written version"
+    : "Submission 3108a, the real student's essay";
+  const ranks = kind==="ai" ? d.sent_meta.rank : null;
+  $("#doc-body").innerHTML = d.sentences.map((s,i)=>{
+    let t = s.replace(/</g,"&lt;");
+    PHRASES.forEach(p=>{ t = t.replace(phraseRe(p),'<i class="phr" data-p="'+p+'">$1</i>'); });
+    let cls = "", title = "";
+    if(ranks){
+      const r = ranks[i];
+      if(r<=3){ cls="heat3"; title="one of the 3 sentences that moved the detector most: deleting it lowers the AI score more than deleting any other"; }
+      else if(r<=10){ cls="heat2"; title="among the 10 sentences the detector reacted to most"; }
+      else if(r<=25){ cls="heat1"; title="among the top quarter of sentences by detector reaction"; }
+    }
+    return `<span data-n="${i+1}" class="${cls}"${title?` title="${title}"`:""}>${t} </span>`;
+  }).join("");
+  $("#lg-heat").style.display = kind==="ai" ? "" : "none";
+}
+
+function renderDetect(kind){
+  const d = DATA[kind];
+  const arc = $("#arc");
+  arc.style.stroke = d.prob>0.5 ? "var(--rust)" : "var(--teal)";
+  arc.style.strokeDasharray = CIRC;
+  arc.style.strokeDashoffset = CIRC;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    arc.style.strokeDashoffset = CIRC*(1-d.prob);
+  }));
+  const t0 = performance.now();
+  (function tick(now){
+    const p = REDUCED ? 1 : Math.min(1,(now-t0)/1400);
+    $("#dial-num").textContent = (d.prob*p).toFixed(2);
+    if(p<1) requestAnimationFrame(tick);
+  })(t0);
+  const v = $("#verdict");
+  if(d.prob>0.5){ v.textContent="Flagged as likely AI-generated"; v.className="verdict flag"; }
+  else { v.textContent="Not flagged"; v.className="verdict clear"; }
+  $("#c1").style.width="0"; $("#c2").style.width="0";
+  setTimeout(()=>{ $("#c1").style.width=(d.transformer*100)+"%";
+                   $("#c2").style.width=(d.style*100)+"%"; },60);
+  $("#c1v").textContent=d.transformer.toFixed(4);
+  $("#c2v").textContent=d.style.toFixed(4);
+}
+
+function renderStrips(kind){
+  const rows = DATA[kind].card.rows;
+  const host = $("#strips"); host.innerHTML="";
+  rows.forEach(r=>{
+    const lo = Math.min(r.human_p10, r.value), hi = Math.max(r.human_p90, r.value);
+    const pad = (hi-lo)*0.12 || Math.abs(hi)*0.12 || 1;
+    const a = lo-pad, b = hi+pad, nx = x=>((x-a)/(b-a)*100);
+    const el = document.createElement("div");
+    el.className="strip";
+    el.innerHTML =
+      `<div class="lab">${r.label}</div>
+       <div class="lane">
+         <div class="bandbar" style="left:${nx(r.human_p10)}%; width:${nx(r.human_p90)-nx(r.human_p10)}%"></div>
+         <div class="med" style="left:${nx(r.human_median)}%"></div>
+         <div class="dot" style="background:${r.shap>0?"var(--amber)":"var(--teal)"}"></div>
+       </div>
+       <div class="val num">this essay ${fmt(r.value)} · typical ${fmt(r.human_median)}</div>`;
+    host.appendChild(el);
+    const dot = el.querySelector(".dot");
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      dot.style.left = `calc(${nx(r.value)}% - 8px)`;
+    }));
+  });
+}
+
+function skyline(hostId, words){
+  const host = $(hostId); host.innerHTML="";
+  const mx = 55;
+  words.forEach(w=>{
+    const i=document.createElement("i");
+    i.style.height = Math.max(6, Math.min(100, w/mx*100))+"%";
+    host.appendChild(i);
+  });
+}
+
+function renderSigns(kind){
+  const twin = kind==="ai" ? "human" : "ai";
+  $("#signs-title").textContent = kind==="ai"
+    ? "What gives this version away"
+    : "The same checks, run on the real essay";
+  const host = $("#phrase-chips"); host.innerHTML="";
+  const counts = PHRASES.map(p=>({p, here:phraseCount(kind,p), there:phraseCount(twin,p)}))
+    .sort((a,b)=>b.here-a.here);
+  let any=false;
+  counts.forEach(c=>{
+    if(c.here===0) return;
+    any=true;
+    const b=document.createElement("button");
+    b.className="chip"; b.setAttribute("aria-pressed","false");
+    b.innerHTML = `${c.p} <b>&times;${c.here}</b> <small>&middot; ${kind==="ai"?"student":"AI"}: ${c.there}</small>`;
+    b.addEventListener("click",()=>{
+      const on = b.getAttribute("aria-pressed")!=="true";
+      document.querySelectorAll("#phrase-chips .chip").forEach(x=>x.setAttribute("aria-pressed","false"));
+      document.querySelectorAll("#doc-body .phr").forEach(x=>x.classList.remove("on"));
+      if(on){
+        b.setAttribute("aria-pressed","true");
+        const marks = document.querySelectorAll(`#doc-body .phr[data-p="${c.p}"]`);
+        marks.forEach(m=>m.classList.add("on"));
+        if(marks[0]) marks[0].scrollIntoView({behavior: REDUCED?"auto":"smooth", block:"center"});
+      }
+    });
+    host.appendChild(b);
+  });
+  $("#phrase-note").textContent = kind==="ai"
+    ? "Counted live from the two documents. Click a phrase to light up every place it appears. "+
+      "The real student's essay, same topic and length, uses almost none of them."
+    : (any ? "The student uses few of the AI's favourite phrases."
+           : "None of the AI version's favourite phrases appears in the student's essay. "+
+             "Click back to the AI version to see the contrast.");
+  skyline("#sky-ai", DATA.ai.sent_meta.words);
+  skyline("#sky-hu", DATA.human.sent_meta.words);
+  const sa=rowVal("ai","sentence variation"), sh=rowVal("human","sentence variation");
+  $("#sky-ai-val").textContent = sa!=null ? "variation "+fmt(sa) : "";
+  $("#sky-hu-val").textContent = sh!=null ? "variation "+fmt(sh) : "";
+  const sig = $("#signal-note");
+  if(kind==="ai"){
+    const top = DATA.ai.sent_meta.top;
+    sig.innerHTML = "There is <b>no single guilty sentence</b>. Deleting any one sentence barely "+
+      "moves the verdict, because the machine-likeness is spread across all of them, and that is "+
+      "exactly what writing style means. The sentences the detector reacted to most are "+
+      top.map(t=>`<span class="slink" data-n="${t.n}">sentence ${t.n}</span>`).join(", ")+
+      " (shaded in the document).";
+    sig.querySelectorAll(".slink").forEach(l=>l.addEventListener("click",()=>{
+      const s=$(`#doc-body span[data-n="${l.dataset.n}"]`);
+      if(s){ s.scrollIntoView({behavior: REDUCED?"auto":"smooth", block:"center"});
+             s.classList.remove("flash"); void s.offsetWidth; s.classList.add("flash"); }
+    }));
+  } else {
+    sig.innerHTML = "No sentence in this essay pushes toward AI strongly enough to mark. On this "+
+      "text the detector is as confident as it ever gets that the writing is human.";
+  }
+}
+
+function renderClaims(kind){
+  const d = DATA[kind];
+  const host = $("#claims"); host.innerHTML="";
+  $("#claims-title").textContent = d.prob>0.5
+    ? "The student's own claims, and questions only the author answers well"
+    : "No interview is suggested for this submission";
+  if(d.prob<=0.5){
+    const note=document.createElement("div");
+    note.className="notflagged";
+    note.textContent="This submission is not flagged, so the guide says plainly that no "+
+      "verification interview is needed. The claims below are still extracted, as a contrast "+
+      "example of what the system would have asked.";
+    host.appendChild(note);
+  }
+  d.claims.forEach((c)=>{
+    const el=document.createElement("div"); el.className="claim";
+    el.innerHTML =
+      `<div class="ctext">${c.claim}</div>
+       <div class="src">from sentences ${c.source_ns.join(", ")} of the submission, quoted verbatim in the guide</div>
+       <ul>${c.questions.map(q=>
+          `<li>${q.q}<span class="bloom">${q.bloom}</span></li>`).join("")}</ul>`;
+    host.appendChild(el);
+    const light = on=>{
+      c.source_ns.forEach(n=>{
+        const s=$(`#doc-body span[data-n="${n}"]`);
+        if(s) s.classList.toggle("cited", on);
+      });
+    };
+    el.addEventListener("mouseenter",()=>light(true));
+    el.addEventListener("mouseleave",()=>{ if(!el.classList.contains("open")) light(false); });
+    el.querySelector(".ctext").addEventListener("click",()=>{
+      document.querySelectorAll(".claim.open").forEach(o=>{ if(o!==el) o.classList.remove("open"); });
+      el.classList.toggle("open");
+      document.querySelectorAll("#doc-body span").forEach(s=>s.classList.remove("cited","cited-strong"));
+      if(el.classList.contains("open")){
+        c.source_ns.forEach(n=>{
+          const s=$(`#doc-body span[data-n="${n}"]`);
+          if(s){ s.classList.add("cited-strong"); }
+        });
+        const first=$(`#doc-body span[data-n="${c.source_ns[0]}"]`);
+        if(first) first.scrollIntoView({behavior: REDUCED?"auto":"smooth", block:"center"});
+      }
+    });
+  });
+}
+
+function show(kind){
+  current=kind;
+  $("#pick-ai").setAttribute("aria-pressed", kind==="ai");
+  $("#pick-human").setAttribute("aria-pressed", kind==="human");
+  renderDoc(kind); renderDetect(kind); renderStrips(kind); renderSigns(kind); renderClaims(kind);
+}
+$("#pick-ai").addEventListener("click",()=>show("ai"));
+$("#pick-human").addEventListener("click",()=>show("human"));
+
+/* ---------------- film mode ---------------- */
+const R = DATA.results;
+
+function el(html){ const d=document.createElement("div"); d.className="scene"; d.innerHTML=html; return d; }
+function reveal(node, sel, delays){
+  node.querySelectorAll(sel).forEach((x,i)=>{
+    x.classList.add("reveal");
+    node.addEventListener("scene-on",()=>{
+      x.classList.remove("on");
+      setTimeout(()=>x.classList.add("on"), delays[i] ?? (600+i*800));
+    });
+  });
+}
+
+function buildTitleScene(){
+  return el(`<div class="kicker">A working system, shown with its real output</div>
+    <h1>From an accusation nobody can defend to a conversation any lecturer can hold</h1>
+    <p class="sub">An explainable pipeline for academic integrity. It detects likely AI writing,
+    explains every flag in plain language, and turns the flag into interview questions drawn from
+    the student's own claims. Built, trained and evaluated on one ordinary laptop.
+    Nothing in this film is a mock-up.</p>`);
+}
+
+function buildProblemScene(){
+  const s = el(`<div class="kicker">The problem</div>
+    <h1>A bare score answers none of the questions that matter</h1>
+    <div class="blackbox"><div class="big num">82% AI</div></div>
+    <div class="qa">
+      <span class="q">Why was it flagged?</span><span class="a">no answer</span>
+      <span class="q">Which parts?</span><span class="a">no answer</span>
+      <span class="q">What do I tell the student?</span><span class="a">no answer</span>
+    </div>
+    <p class="sub">Popular detectors return one number and nothing else. They also falsely flag
+    second-language writers <b>six times in ten</b>, against one in twenty for native speakers
+    (Liang and colleagues, 2023). An accusation built on that cannot be defended.</p>`);
+  reveal(s, ".qa span, .sub", [900,900,1900,1900,2900,2900,4200]);
+  return s;
+}
+
+function buildOverviewScene(){
+  const s = el(`<div class="kicker">The answer built here</div>
+    <h1>Turn the flag into a conversation, in five steps</h1><div class="pipe"></div>
+    <p class="sub">One pipeline, running end to end on a laptop. The rest of this film walks
+    through each step with the system's real output on one essay.</p>`);
+  const steps = [
+    ["1 &middot; Detect","two independent readers score the essay and must agree"],
+    ["2 &middot; Explain","every flag comes with named, measured reasons"],
+    ["3 &middot; Extract claims","the student's own argument, with exact sentence numbers"],
+    ["4 &middot; Ask","questions only the true author answers well"],
+    ["5 &middot; Deliver","a printable interview guide for the conversation"]];
+  const host = s.querySelector(".pipe");
+  steps.forEach(([b,t],i)=>{
+    if(i){ const a=document.createElement("div"); a.className="arrow"; a.textContent="→"; host.appendChild(a); }
+    const d=document.createElement("div"); d.className="step";
+    d.innerHTML=`<b>${b}</b><span>${t}</span>`; host.appendChild(d);
+  });
+  s.addEventListener("scene-on",()=>{
+    s.querySelectorAll(".step").forEach((d,i)=>{ d.classList.remove("on");
+      setTimeout(()=>d.classList.add("on"), 400+i*850); });
+    s.querySelectorAll(".arrow").forEach((d,i)=>{ d.classList.remove("on");
+      setTimeout(()=>d.classList.add("on"), 830+i*850); });
+  });
+  return s;
+}
+
+function buildPipelineScene(){
+  const s = el(`<div class="kicker">Before any detecting, a fair test</div>
+    <h1>Every step closes a shortcut the detector could cheat with</h1><div class="pipe"></div>
+    <p class="sub">If the AI essays were longer, or formatted differently, or on other topics, a
+    detector would learn that instead of learning writing style. Matching removes every shortcut.</p>`);
+  const steps = [
+    ["640 real essays","sampled evenly from a UK student corpus across disciplines and language backgrounds"],
+    ["640 AI twins","a local model writes each one to the same topic and length, so length gives nothing away"],
+    ["Clean both sides","hidden formatting removed identically from both classes"],
+    ["Split by student","the essays that teach the detector and the essays that test it come from different students, so it can never simply remember a writer"],
+    ["1,280 essays","matched so closely that only writing style is left to learn"]];
+  const host = s.querySelector(".pipe");
+  steps.forEach(([b,t])=>{
+    const d=document.createElement("div"); d.className="step";
+    d.innerHTML=`<b>${b}</b><span>${t}</span>`; host.appendChild(d);
+  });
+  s.addEventListener("scene-on",()=>{
+    s.querySelectorAll(".step").forEach((d,i)=>{ d.classList.remove("on");
+      setTimeout(()=>d.classList.add("on"), 400+i*900); });
+  });
+  return s;
+}
+
+function buildLessonScene(){
+  return el(`<div class="kicker">The first lesson</div>
+    <h1>A perfect score is a warning, not a triumph</h1>
+    <p class="sub">The first detector scored 100%. Digging in revealed hidden formatting tags in
+    the human files, nothing to do with writing. Cleaned and retrained, the honest score is
+    <b>99%</b>, and it caught <b>every essay</b> from two commercial AI models it never saw in
+    training, without one false accusation. No number in this project is trusted until the text
+    behind it has been read.</p>`);
+}
+
+function buildReadingScene(){
+  const sents = DATA.ai.sentences.slice(0,8);
+  const ranks = DATA.ai.sent_meta.rank;
+  const s = el(`<div class="kicker">Watching the detector read</div>
+    <h1>No single guilty sentence. The style itself is the evidence.</h1>
+    <div class="minidoc"><div class="beam"></div>${
+      sents.map((t,i)=>`<span data-i="${i}">${t.replace(/</g,"&lt;")} </span>`).join("")
+    }</div>
+    <p class="sub">The system deletes one sentence at a time and watches the score move. Deleting
+    any single sentence barely moves it: the machine-likeness is spread evenly across the whole
+    essay, and that spread is exactly what "writing style" means. The shading marks the sentences
+    the detector reacted to most.</p>`);
+  reveal(s, ".sub", [6300]);
+  s.addEventListener("scene-on",()=>{
+    const beam = s.querySelector(".beam");
+    const spans = s.querySelectorAll(".minidoc span");
+    spans.forEach(sp=>{ sp.classList.remove("read","heat1","heat2","heat3"); });
+    beam.style.transition="none"; beam.style.top="-8%"; beam.style.opacity="0";
+    setTimeout(()=>{
+      beam.style.transition=""; beam.style.opacity="1"; beam.style.top="104%";
+    }, 80);
+    spans.forEach((sp,i)=>{
+      setTimeout(()=>{
+        sp.classList.add("read");
+        const r = ranks[i];
+        if(r<=3) sp.classList.add("heat3");
+        else if(r<=10) sp.classList.add("heat2");
+        else if(r<=25) sp.classList.add("heat1");
+      }, REDUCED?0:400+i*620);
+    });
+    setTimeout(()=>{ beam.style.opacity="0"; }, 5600);
+  });
+  return s;
+}
+
+function buildReadersScene(){
+  const d = DATA.ai;
+  const s = el(`<div class="kicker">Two readers, one verdict</div>
+    <h1>Both readers must agree before anything is flagged</h1>
+    <div class="duo">
+      <div class="half"><div class="who">word-pattern reader</div>
+        <div class="bigbar"><i data-w="${(d.transformer*100).toFixed(1)}" style="background:var(--teal)"></i></div>
+        <div class="big num" style="font-size:1.6rem">${(d.transformer*100).toFixed(2)}%</div>
+        <p class="sub" style="margin-top:.2rem; font-size:.85rem">a language model trained on the matched corpus</p></div>
+      <div class="half"><div class="who">writing-style reader</div>
+        <div class="bigbar"><i data-w="${(d.style*100).toFixed(1)}" style="background:var(--teal)"></i></div>
+        <div class="big num" style="font-size:1.6rem">${(d.style*100).toFixed(2)}%</div>
+        <p class="sub" style="margin-top:.2rem; font-size:.85rem">five habit measurements, no neural network needed</p></div>
+    </div>
+    <p class="sub combined">Combined, deliberately cautiously, into a final probability of
+    <b class="num" style="color:var(--rust)">0.96</b>: flagged. When the readers disagree, the
+    system says so and abstains rather than accuse.</p>`);
+  reveal(s, ".combined", [2600]);
+  s.addEventListener("scene-on",()=>{
+    s.querySelectorAll(".bigbar i").forEach(i=>{ i.style.width="0";
+      setTimeout(()=>{ i.style.width=i.dataset.w+"%"; }, 300); });
+  });
+  return s;
+}
+
+function buildCardScene(){
+  const rows = DATA.ai.card.rows.slice(0,5);
+  const s = el(`<div class="kicker">The explanation a lecturer actually receives</div>
+    <h1>Five named habits, not one bare number</h1>
+    <div class="panel" style="width:min(680px,92vw); text-align:left; margin-top:1.6rem"><div id="film-strips"></div>
+    <p class="legend">grey band = the middle 80% of real student essays; the dot is the flagged
+    essay. Every dot sits outside the band: unusual in five separate, nameable ways.</p></div>`);
+  s.addEventListener("scene-on",()=>{
+    const host = s.querySelector("#film-strips"); host.innerHTML="";
+    rows.forEach((r,idx)=>{
+      const lo=Math.min(r.human_p10,r.value), hi=Math.max(r.human_p90,r.value);
+      const pad=(hi-lo)*0.12||1, a=lo-pad, b=hi+pad, nx=x=>((x-a)/(b-a)*100);
+      const elx=document.createElement("div"); elx.className="strip";
+      elx.innerHTML=`<div class="lab">${r.label}</div>
+        <div class="lane">
+          <div class="bandbar" style="left:${nx(r.human_p10)}%; width:${nx(r.human_p90)-nx(r.human_p10)}%"></div>
+          <div class="med" style="left:${nx(r.human_median)}%"></div>
+          <div class="dot" style="background:var(--amber)"></div></div>
+        <div class="val num">this essay ${fmt(r.value)} · typical ${fmt(r.human_median)}</div>`;
+      host.appendChild(elx);
+      setTimeout(()=>{ elx.querySelector(".dot").style.left=`calc(${nx(r.value)}% - 8px)`; }, 500+idx*700);
+    });
+  });
+  return s;
+}
+
+function buildSignsScene(){
+  const top3 = PHRASES.map(p=>({p, ai:phraseCount("ai",p), hu:phraseCount("human",p)}))
+    .sort((a,b)=>b.ai-a.ai).slice(0,4);
+  const va=rowVal("ai","vocabulary richness"), vh=rowVal("human","vocabulary richness");
+  const sa=rowVal("ai","sentence variation"), sh=rowVal("human","sentence variation");
+  const s = el(`<div class="kicker">What it noticed, in plain sight</div>
+    <h1>The habits that give this essay away</h1>
+    <div class="signcols">
+      <div class="signcol"><div class="t">Favourite phrases</div>
+        <div class="cnt">${top3.map(c=>
+          `<span class="w">${c.p}</span><span class="n">&times;${c.ai} <small>student: ${c.hu}</small></span>`).join("")}
+        </div></div>
+      <div class="signcol"><div class="t">An unnaturally even pace</div>
+        <div class="skyrow" style="grid-template-columns:5.6rem 1fr"><div class="lab">AI version</div><div class="sky ai" id="fs-ai"></div></div>
+        <div class="skyrow" style="grid-template-columns:5.6rem 1fr"><div class="lab">student</div><div class="sky hu" id="fs-hu"></div></div>
+        <p class="signnote">one bar per sentence; variation ${fmt(sa)} against the student's ${fmt(sh)}</p></div>
+      <div class="signcol"><div class="t">A narrower vocabulary</div>
+        <div class="big num" style="font-size:2.1rem; color:var(--rust)">${fmt(va)}</div>
+        <p class="signnote">vocabulary richness, against <b>${fmt(vh)}</b> for the student on the
+        same topic. The AI repeats itself; people wander.</p></div>
+    </div>
+    <p class="sub">Each of these is counted from the text, not guessed. Run the same counts on the
+    real student's essay and they all come out normal.</p>`);
+  s.addEventListener("scene-on",()=>{
+    skyline("#fs-ai", DATA.ai.sent_meta.words);
+    skyline("#fs-hu", DATA.human.sent_meta.words);
+  });
+  return s;
+}
+
+function buildVerdictScene(){
+  return el(`<div class="kicker">The same pipeline, both outcomes</div>
+    <h1>One essay topic, two verdicts, nothing invented</h1>
+    <div class="duo">
+      <div class="half"><div class="who" style="color:var(--rust)">the AI-written version</div>
+        <div class="big num" style="color:var(--rust)">0.96</div>
+        <p class="sub" style="margin-top:.3rem">flagged, full interview guide generated</p></div>
+      <div class="half"><div class="who" style="color:var(--teal)">the real student's essay</div>
+        <div class="big num" style="color:var(--teal)">0.02</div>
+        <p class="sub" style="margin-top:.3rem">not flagged, and the guide says so plainly</p></div>
+    </div>
+    <p class="sub">A flag opens a conversation. It never convicts.</p>`);
+}
+
+function buildFairnessScene(){
+  const s = el(`<div class="kicker">Made fairer, on purpose</div>
+    <h1>The failure that matters most is the false accusation</h1>
+    <p class="sub">Point any detector at writing it was not trained on, dense academic abstracts
+    for example, and it wrongly flags humans. This is the failure mode behind the bias reports.</p>
+    <div class="duo">
+      <div class="half"><div class="who">plain detector, on published paper abstracts</div>
+        <div class="bigbar"><i data-w="79" style="background:var(--rust)"></i></div>
+        <div class="big num" style="font-size:2rem; color:var(--rust)">79%</div></div>
+      <div class="half"><div class="who">the hybrid, same texts</div>
+        <div class="bigbar"><i data-w="61" style="background:var(--teal)"></i></div>
+        <div class="big num" style="font-size:2rem; color:var(--teal)">61%</div>
+      </div>
+    </div>
+    <p class="sub">falsely flagged human texts, before and after fusing in the writing-style
+    reader. Still far too high to trust outside its training domain, which is why the system
+    treats every flag as a question, never a verdict.</p>`);
+  s.addEventListener("scene-on",()=>{
+    s.querySelectorAll(".bigbar i").forEach(i=>{ i.style.width="0";
+      setTimeout(()=>{ i.style.width=i.dataset.w+"%"; },300); });
+  });
+  return s;
+}
+
+function buildQuestionScene(){
+  const c = DATA.ai.claims[0];
+  const q = c.questions[0];
+  const s = el(`<div class="kicker">From the student's own claim to a question only the author answers well</div>
+    <h1 style="font-size:clamp(1.2rem,2.6vw,1.8rem); max-width:44ch">"${c.claim}"</h1>
+    <p class="sub">found in sentences ${c.source_ns.join(", ")} of the submission, quoted verbatim</p>
+    <div class="qcard"><span id="typeq"></span><span class="bloom">${q.bloom}</span></div>
+    <p class="sub">The tag on the question marks the level of thinking it demands, here
+    explaining the work in your own words. A knowledgeable outsider cannot answer the question
+    from general knowledge. The real author can. That gap is what the whole system measures.</p>`);
+  s.addEventListener("scene-on",()=>{
+    const t=s.querySelector("#typeq"); t.textContent="";
+    const text=q.q; let i=0;
+    if(REDUCED){ t.textContent=text; return; }
+    (function type(){ if(i<=text.length){ t.textContent=text.slice(0,i); i+=2; setTimeout(type,26);} })();
+  });
+  return s;
+}
+
+function buildSimScene(){
+  const s = el(`<div class="kicker">Does a question actually work?</div>
+    <h1>Test it on two identical AIs, one of them blindfolded</h1>
+    <div class="duo">
+      <div class="half"><div class="who">has read the essay</div>
+        <div class="bigbar"><i data-w="82.7" style="background:var(--teal)"></i></div>
+        <div class="big num" style="font-size:1.6rem; color:var(--teal)">0.83</div>
+        <p class="sub" style="margin-top:.2rem; font-size:.85rem">its answers stay close to the essay's actual argument</p></div>
+      <div class="half"><div class="who">sees only the question</div>
+        <div class="bigbar"><i data-w="77.6" style="background:var(--rust)"></i></div>
+        <div class="big num" style="font-size:1.6rem; color:var(--rust)">0.78</div>
+        <p class="sub" style="margin-top:.2rem; font-size:.85rem">it can only guess from general knowledge</p></div>
+    </div>
+    <p class="sub">Both answer the same question, and each answer is scored on how closely it
+    matches the essay's actual argument. The gap per question is small, but measured over
+    hundreds of questions it reliably separates questions that need the essay from questions
+    anyone could answer. An empty question shows no gap at all, which is how the metric polices
+    itself. No human judging needed, and nothing to flatter.</p>
+    <div class="qcard badq" style="font-size:.95rem"><span>Which of the following statements is correct?</span>
+      <div class="stamp">rejected</div></div>
+    <p class="sub gatecap">One early model learned to game this test with empty questions like the
+    one above, and for an hour it looked like the project's best result. A well-formedness gate
+    now rejects them before they reach a score or a lecturer. Finding the hole, and closing it,
+    is part of the contribution.</p>`);
+  reveal(s, ".badq, .gatecap", [6800, 7200]);
+  s.addEventListener("scene-on",()=>{
+    s.querySelectorAll(".bigbar i").forEach(i=>{ i.style.width="0";
+      setTimeout(()=>{ i.style.width=i.dataset.w+"%"; },300); });
+  });
+  return s;
+}
+
+function buildLaptopScene(){
+  const s = el(`<div class="kicker">The result that matters for privacy</div>
+    <h1>The laptop beat the commercial service at its own game</h1>
+    <div class="duo">
+      <div class="half"><div class="who">small local model, taught the task on this laptop</div>
+        <div class="bigbar"><i data-w="83" style="background:var(--teal)"></i></div>
+        <div class="big num" style="font-size:2rem; color:var(--teal)">24</div>
+        <p class="sub" style="margin-top:.2rem; font-size:.85rem">essays where its questions better separated reader from guesser</p></div>
+      <div class="half"><div class="who">commercial online AI service, free tier</div>
+        <div class="bigbar"><i data-w="17" style="background:var(--rust)"></i></div>
+        <div class="big num" style="font-size:2rem; color:var(--rust)">5</div>
+        <p class="sub" style="margin-top:.2rem; font-size:.85rem">of the 29 essays both covered</p></div>
+    </div>
+    <p class="sub">Thirty essays, ${R.scaled.questions} questions. A split this uneven would
+    happen by luck about three times in ten thousand (p = ${R.scaled.p}). A university can run
+    this kind of verification on ordinary hardware, and student work, which is personal data,
+    <b>never leaves the building</b>.</p>`);
+  s.addEventListener("scene-on",()=>{
+    s.querySelectorAll(".bigbar i").forEach(i=>{ i.style.width="0";
+      setTimeout(()=>{ i.style.width=i.dataset.w+"%"; },300); });
+  });
+  return s;
+}
+
+function buildJudgesScene(){
+  const a = R.judges.anchors;
+  const s = el(`<div class="kicker">A warning about AI judging AI</div>
+    <h1>Three AI judges praised the wrong questions</h1>
+    <div class="judges">
+      <div class="judge"><div class="jn">Judge: Claude</div><div class="corr num">${a.claude.toFixed(2)}</div>
+        <div class="jk">correlation with the objective measure</div></div>
+      <div class="judge"><div class="jn">Judge: GPT</div><div class="corr num">${a.gpt.toFixed(2)}</div>
+        <div class="jk">correlation with the objective measure</div></div>
+      <div class="judge"><div class="jn">Judge: Gemini</div><div class="corr num">${a.gemini.toFixed(2)}</div>
+        <div class="jk">correlation with the objective measure</div></div>
+    </div>
+    <p class="sub">On this scale +1 would mean a judge's ratings rise with real question power,
+    0 means no connection at all, and below 0 means the judge prefers the weaker questions.
+    At ${R.judges.n} questions the three judges broadly track <b>each other</b>, and none of
+    them tracks the objective test. They reward how a question looks, not whether it works.
+    Any evaluation that leans only on AI judges inherits that blind spot, which is why every
+    score in this project is anchored to a measure the models cannot flatter.</p>`);
+  reveal(s, ".judge", [600,1300,2000]);
+  return s;
+}
+
+function buildDashboardScene(){
+  return el(`<div class="kicker">The evidence, at a glance</div>
+    <h1>Every number here traces to a result file</h1>
+    <div class="statgrid">
+      <div class="stat"><div class="v num">0.99</div><div class="k">detection score on matched, audited essays (F1, where 1.00 is perfect)</div></div>
+      <div class="stat"><div class="v num">100%</div><div class="k">essays caught from two AI models never seen in training, zero false accusations</div></div>
+      <div class="stat"><div class="v num">${R.scaled.v3_vs_commercial}</div><div class="k">essays where the laptop-taught model beat the commercial service (p = ${R.scaled.p}), across ${R.scaled.questions} questions</div></div>
+      <div class="stat"><div class="v num">${Math.round(R.v4.score/R.v4.baseline*100)}%</div><div class="k">of the score ceiling reached by questions built to never give away the essay's content (${R.v4.score.toFixed(2)} of ${R.v4.baseline.toFixed(2)})</div></div>
+      <div class="stat"><div class="v warn num">3</div><div class="k">of this project's own headline numbers caught and retracted by its checks</div></div>
+      <div class="stat"><div class="v warn num">0 of 3</div><div class="k">AI judges whose ratings track real question power at ${R.judges.n} questions, the case for measuring instead of trusting</div></div>
+    </div>`);
+}
+
+function buildRuleScene(){
+  return el(`<div class="kicker">The rule that ran through everything</div>
+    <h1>Never trust a score you cannot explain, and never trust one you have not tried to break</h1>
+    <p class="sub">That rule caught three of this project's own headline numbers. Each time, the
+    finding that replaced the headline was more useful and easier to defend. What survived is in
+    this film, and every figure traces to a result file.</p>`);
+}
+
+function buildClosingScene(){
+  return el(`<div class="kicker">The point of it all</div>
+    <h1>Evidence for a conversation, not an accusation</h1>
+    <div class="credits">
+      <b>Mykhailo Shpyl</b><br>
+      MSc Artificial Intelligence and Big Data Analytics<br>
+      Atlantic Technological University &middot; Supervisor: Dr. Vini Vijayan<br>
+      detector, explanations, claims, questions and evaluation all run on one 8 GB laptop
+    </div>`);
+}
+
+const SCENES = [
+ {dur:9,  build: buildTitleScene},
+ {dur:12, build: buildProblemScene},
+ {dur:11, build: buildOverviewScene},
+ {dur:12, build: buildPipelineScene},
+ {dur:11, build: buildLessonScene},
+ {dur:13, build: buildReadingScene},
+ {dur:11, build: buildReadersScene},
+ {dur:12, build: buildCardScene},
+ {dur:13, build: buildSignsScene},
+ {dur:9,  build: buildVerdictScene},
+ {dur:11, build: buildFairnessScene},
+ {dur:13, build: buildQuestionScene},
+ {dur:15, build: buildSimScene},
+ {dur:12, build: buildLaptopScene},
+ {dur:12, build: buildJudgesScene},
+ {dur:13, build: buildDashboardScene},
+ {dur:9,  build: buildRuleScene},
+ {dur:10, build: buildClosingScene},
+];
+
+/* film engine */
+let filmIdx=0, filmTimer=null, filmStart=0, filmPaused=false, filmBuilt=false, rafBar=null;
+function buildFilm(){
+  const host=$("#scenes");
+  SCENES.forEach((sc)=>{ const node = sc.build(); host.appendChild(node); sc.node=node; });
+  const dots=$("#dots");
+  SCENES.forEach((_,i)=>{ const b=document.createElement("b");
+    b.addEventListener("click",()=>go(i)); dots.appendChild(b); });
+  filmBuilt=true;
+}
+function go(i){
+  filmIdx=(i+SCENES.length)%SCENES.length;
+  SCENES.forEach((sc,k)=>sc.node.classList.toggle("on", k===filmIdx));
+  document.querySelectorAll("#dots b").forEach((b,k)=>b.classList.toggle("here",k===filmIdx));
+  SCENES[filmIdx].node.dispatchEvent(new Event("scene-on"));
+  clearTimeout(filmTimer); cancelAnimationFrame(rafBar);
+  filmStart=performance.now(); filmPaused=false;
+  const dur=SCENES[filmIdx].dur*1000;
+  if(!REDUCED){
+    filmTimer=setTimeout(()=>go(filmIdx+1), dur);
+    (function bar(now){
+      if(filmPaused) return;
+      $("#filmbar").style.width=Math.min(100,(now-filmStart)/dur*100)+"%";
+      rafBar=requestAnimationFrame(bar);
+    })(filmStart);
+  }
+}
+function pauseToggle(){
+  if(filmPaused){ go(filmIdx); }
+  else { filmPaused=true; clearTimeout(filmTimer); cancelAnimationFrame(rafBar); }
+}
+document.addEventListener("keydown",e=>{
+  if(!$("#film").classList.contains("on")) return;
+  if(e.code==="Space"){ e.preventDefault(); pauseToggle(); }
+  if(e.code==="ArrowRight") go(filmIdx+1);
+  if(e.code==="ArrowLeft") go(filmIdx-1);
+  if(e.code==="KeyR") go(0);
+});
+
+/* tabs */
+function setMode(mode){
+  const film = mode==="film";
+  $("#film").classList.toggle("on", film);
+  $("#walkthrough").style.display = film ? "none" : "";
+  $("#tab-walk").setAttribute("aria-selected", !film);
+  $("#tab-film").setAttribute("aria-selected", film);
+  if(film){ if(!filmBuilt) buildFilm(); go(0); }
+  else { clearTimeout(filmTimer); cancelAnimationFrame(rafBar); }
+}
+$("#tab-walk").addEventListener("click",()=>setMode("walk"));
+$("#tab-film").addEventListener("click",()=>setMode("film"));
+
+show("ai");
+</script>
+</body>
+</html>

@@ -62,6 +62,7 @@ dissertation/meetings/*.docx
 
 # ---- Generated dissertation document (regenerate with dissertation/docgen) ----
 dissertation/Dissertation_*.docx
+dissertation/Dissertation_*.pdf
 dissertation/docgen/node_modules/
 # Generated paper draft (source is dissertation/aics_paper_draft.md)
 dissertation/aics_paper_draft.docx
@@ -78,3 +79,7 @@ logs/
 Thumbs.db
 .vscode/
 .idea/
+
+# ---- Final demo data (embeds BAWE-derived essay text, never commit) ----
+dissertation/presentation/final_demo/data.js
+dissertation/presentation/final_demo/demo_sent_meta.json

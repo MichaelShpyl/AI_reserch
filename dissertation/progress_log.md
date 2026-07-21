@@ -1700,3 +1700,29 @@ evaluation programme.
   who agree in rank can still produce a negative interval alpha). All pass in a fraction of a
   second, so they can run before every commit.
 - requirements-dev gains pytest and the two PDF libraries the figure and checking scripts import.
+
+### The final demo learns to show its evidence (20 July 2026, evening)
+
+- The presentation demo (dissertation/presentation/final_demo/) went through a full rebuild
+  around one idea: every mark on screen must be measured, not decorative. A background run of
+  the occlusion module scored both demo essays sentence by sentence, and the result went into
+  the document view as three kinds of marks: heat shading on the sentences the detector reacted
+  to most, amber underlines on the phrases the AI leans on, and teal highlights where a claim
+  cites its sentences. The phrase counts are computed live in the page from the two documents
+  (meanwhile 13 to 0 against the human twin, highlights-the 7 to 0, furthermore 6 to 0), so the
+  chips can never drift from the text.
+- The occlusion numbers told their own story: the AI essay's largest single-sentence drop is
+  0.009 of a 7.85 log-odds total. No guilty sentence, the style is spread across all of them.
+  The demo now says exactly that instead of pretending single sentences convict.
+- Each walkthrough panel gained a plain-language "how this happens" footer, and a sentence-rhythm
+  skyline (one bar per sentence) makes the even-pace habit visible without any numbers.
+- The film mode grew from ten scenes to eighteen: the bare-score problem, the five-step answer,
+  the fair corpus, the perfect-score lesson, watching the detector read (a beam sweep over real
+  sentences), the two readers agreeing, the habit card, the giveaway signs, both verdicts,
+  fairness, claim to question, the blindfold test with its real 0.83 against 0.78 similarity
+  levels and the rejected trick question, laptop versus API, the judge warning, the dashboard,
+  the rule, and a closing credit card. About three and a quarter minutes on auto-play, written
+  to be understood with the sound off.
+- A four-lens audit workflow (numbers against result files, general-audience clarity, writing
+  rules, code correctness) ran over the finished page, with two adversarial verifiers per
+  concrete claim before any finding was acted on.
