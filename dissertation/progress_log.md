@@ -1834,3 +1834,15 @@ evaluation programme.
   measure is the harder failure to notice.
 - The references gained a short note on the confirmed-authors-plus-et-al policy, which was recorded
   in the working notes but never stated in the document itself.
+
+### Deck for the 4 August supervisor meeting
+
+- Nine slides, built to show progress and to force two decisions rather than to narrate. Status,
+  what moved since the last meeting, the template defects and their fixes side by side, the six
+  headline results (three achievements in teal, three honest limits in rust), the two decisions,
+  the risks with what I am doing about each, the week-by-week run-in to submission, and a close.
+- The two decisions are put plainly with my own recommendation attached, because both are running
+  out of time. The validation study cannot realistically be run, analysed and written up in four
+  weeks, ethics included, so I propose keeping it as the primary future work rather than risking
+  the write-up. On v3 against v4, without the human study to settle it, I lean to shipping v3 and
+  reporting v4 as the measured alternative, since v3 is what a lecturer can read aloud.
