@@ -39,7 +39,9 @@ the result as the stronger evidence, because a false-positive rate measured on h
 be a generator artefact. The detector still catches the machine text well in every domain (86 to
 98 percent). The failures are on the human side. The detector wrongly flags genuine human writing
 as AI at high rates on the more formal domains: 79 percent on arXiv abstracts, about 40 percent on
-Wikipedia and WikiHow, 30 percent on peer-review, and 23 percent on Reddit (Figure 6.3).
+Wikipedia and WikiHow, 30 percent on peer-review, and 23 percent on Reddit (Figure 6.3). Figure 6.2
+puts the three settings together, so the in-domain score, the transfer across generators and the
+drop across domains can be compared on one axis.
 
 ![Figure 6.2: The in-domain score does not transfer everywhere. F1 stays high across generators on essays but falls on out-of-domain human and AI text.](../figures/fig_m4_transfer_gap.png)
 
@@ -101,7 +103,7 @@ no resolution. Whether balancing helps or hurts can only be measured where the t
 So I ran the same two models where the task is hard: the cross-domain sample from Section 6.3,
 identical texts, identical seed (`src/detection/dist_crossdomain.py`,
 `outputs/dist_crossdomain.json`). Here the control finally has resolution, and it splits cleanly
-in two (Figure 6.8). On overall skill the mixes still do not differ: accuracy 0.801 against
+in two (Figure 6.5). On overall skill the mixes still do not differ: accuracy 0.801 against
 0.800, and on the same texts each model uniquely gets about as many right as the other (118
 against 115, McNemar p = 0.90). On false accusations they do differ. The balanced model wrongly
 flags 20.1 percent of the out-of-domain human texts against the natural model's 16.7, and the
@@ -117,7 +119,7 @@ to accuse, which is the direction this dissertation cares most about. A deployme
 a curated mix should re-check its false-positive behaviour on unfamiliar text rather than assume
 balance is automatically the safer choice.
 
-![Figure 6.8: The training-distribution control repeated on the hard task. Per-domain human false-positive rates for the balanced and natural training mixes on the identical cross-domain sample. Overall accuracy is tied (p = 0.90), but the balanced mix false-flags more human text (0.201 vs 0.167, McNemar p < 0.001), most visibly on WikiHow and Wikipedia.](../figures/fig_dist_crossdomain.png)
+![Figure 6.5: The training-distribution control repeated on the hard task. Per-domain human false-positive rates for the balanced and natural training mixes on the identical cross-domain sample. Overall accuracy is tied (p = 0.90), but the balanced mix false-flags more human text (0.201 vs 0.167, McNemar p < 0.001), most visibly on WikiHow and Wikipedia.](../figures/fig_dist_crossdomain.png)
 
 ## 6.7 The hybrid detector
 
@@ -138,7 +140,7 @@ Perplexity enters the feature model as its strongest single feature, first of tw
 absolute SHAP. That matches the literature's regard for it, and it completes the feature set the
 scope specified.
 
-Out of domain the fusion matters (Figure 6.5). On the same cross-domain sample as Section 6.3, the
+Out of domain the fusion matters (Figure 6.6). On the same cross-domain sample as Section 6.3, the
 three arms have almost identical F1 (transformer 0.790, hybrid 0.791), but they make completely
 different errors. The transformer over-flags humans, with recall 0.93 at precision 0.69, the
 false-accusation profile from Section 6.3. The style-plus-perplexity model errs the other way,
@@ -151,7 +153,7 @@ fixed. The style features drive the improvement, because hand-crafted features g
 registers while the transformer's learned representation of "human" stays anchored to student
 essays.
 
-![Figure 6.5: The hybrid detector. In-domain (left) every arm is at the ceiling and the differences are within noise. Out of domain (right) the fusion barely moves F1 but changes the error mix. The human false-positive rate, the failure described in Section 6.3, falls in every domain, by three to eight times in four of the five.](../figures/fig_hybrid_fusion.png)
+![Figure 6.6: The hybrid detector. In-domain (left) every arm is at the ceiling and the differences are within noise. Out of domain (right) the fusion barely moves F1 but changes the error mix. The human false-positive rate, the failure described in Section 6.3, falls in every domain, by three to eight times in four of the five.](../figures/fig_hybrid_fusion.png)
 
 This connects back to the mitigation plan in Section 6.4. Fusion does not solve domain shift, and
 the headline F1 barely moves, so it is not a robustness cure. It redistributes the remaining
@@ -167,7 +169,7 @@ measures what that buys. On the same cross-domain sample as Section 6.7, keeping
 hybrid probabilities this time, I swept bands from none to 0.2-0.8
 (`src/detection/abstain_band.py`, `outputs/abstain_band.json`).
 
-Part of the answer matches the proposal (Figure 6.6). Accuracy among the texts the system still
+Part of the answer matches the proposal (Figure 6.7). Accuracy among the texts the system still
 judges climbs steadily, from 0.79 with no band to 0.88 when the widest band declines 28.5 percent
 of texts. Abstention does concentrate the detector's verdicts on cases it gets right. But the
 human false-positive rate among judged texts barely moves. It sits near 0.19 across the whole
@@ -176,7 +178,7 @@ confident errors, mostly the dense arXiv abstracts that the detector scores as m
 conviction, so an uncertainty band never sees them. I had expected the band to cut false
 accusations, and the sweep shows it does not.
 
-![Figure 6.6: The abstain band swept from none to 0.2-0.8 on the cross-domain sample. Accuracy on the judged texts rises steadily, but the human false-positive rate barely moves, because the surviving false accusations are confident errors that fall outside any uncertainty band.](../figures/fig_abstain_band.png)
+![Figure 6.7: The abstain band swept from none to 0.2-0.8 on the cross-domain sample. Accuracy on the judged texts rises steadily, but the human false-positive rate barely moves, because the surviving false accusations are confident errors that fall outside any uncertainty band.](../figures/fig_abstain_band.png)
 
 This updates the mitigation plan. Abstention is worth deploying, since a quarter of verdicts
 withheld buys nine points of accuracy. It does not fix the fairness problem. The confidently wrong
@@ -209,5 +211,7 @@ accusing, now measured on its other side. A detector tuned to protect unusual hu
 extend some of that protection to a generator whose style drifts toward human. For deployment the
 conclusion matches Section 6.8's. The fusion sets the right default, and the question stage exists
 because no threshold can be both safe for humans and airtight against every generator at once.
+Figure 6.8 shows the per-domain false-positive rates for the two training mixes side by side, where
+the cost of the balanced mix falls most visibly on WikiHow and Wikipedia.
 
-![Figure 6.7: Unseen commercial generators produced with the home corpus recipe. The transformer flags every AI essay from both new generators and no human sources; the hybrid trades 35 percent of Gemini recall for the false-accusation protection measured in Section 6.7.](../figures/fig_multigen_detection.png)
+![Figure 6.8: Unseen commercial generators produced with the home corpus recipe. The transformer flags every AI essay from both new generators and no human sources; the hybrid trades 35 percent of Gemini recall for the false-accusation protection measured in Section 6.7.](../figures/fig_multigen_detection.png)

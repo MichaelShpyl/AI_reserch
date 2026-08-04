@@ -83,7 +83,8 @@ difference, so "fnote" was carrying nothing and the headline stands without it. 
 evidence comes from a stricter test. A model that is allowed to use only
 function words (the, and, because, therefore, and the like, which carry no topic information at
 all, and no markup) still reaches 99.5 percent. Topic cannot explain that, and neither can a
-leftover tag. The remaining signal is writing style.
+leftover tag. The remaining signal is writing style. Figure 3.1 sets the three tests side by side,
+so the size of the markup artefact and the size of what survives cleaning can be read off directly.
 
 ![Figure 3.1: What each signal achieves on its own. A markup-only rule already scores 92.5 percent on the raw text, so the artefact is large. After cleaning, a simple model still separates the classes, and a function-words-only model still reaches 99.5 percent; the residual signal is writing style.](../figures/fig_audit_separability.png)
 
@@ -92,7 +93,8 @@ the words that push each way. The AI-leaning terms are the familiar large-model 
 conclusion", "nuanced", "essential", "highlights", "insights", "complex", "significant". The
 human-leaning terms are blunter connectives: "therefore", "because", "so", "thus", "very".
 That matches what the stylometric features already showed, that human writing here varies more
-and the AI writing is smoother and more uniform.
+and the AI writing is smoother and more uniform. Figure 3.2 lists the strongest words on each
+side, and these are the same word lists the explainability layer works from in Chapter 5.
 
 ![Figure 3.2: The words the cleaned-text model keys on. The AI side is the familiar large-model register; the human side is blunter argument connectives. These word lists feed the explainability layer.](../figures/fig_audit_top_features.png)
 
@@ -103,7 +105,7 @@ the ceiling, as I had hoped it would. Test accuracy is 0.99, precision 0.98, rec
 F1 0.990, with a confusion matrix of [[98, 2], [0, 100]]. Two human essays are flagged as AI
 and no AI essay is missed. The test set is small (100 human and 100 AI essays), so I put a
 number on that uncertainty. A 95% bootstrap confidence interval on the F1 is about [0.97, 1.00]
-(`src/evaluation/confidence.py`, Figure 3.5), and one extra misclassification moves the F1 by
+(`src/evaluation/confidence.py`, Figure 3.4), and one extra misclassification moves the F1 by
 roughly 0.005, so the headline should be read as "about 0.99" rather than an exact value. The
 full-document linear probe still scores 1.00 on the same cleaned text while DeBERTa makes two
 mistakes, which fits the fact that the transformer only reads the opening 512 tokens and the
@@ -113,20 +115,21 @@ On fairness, the human false-positive rate is 2 of 50 native writers (0.04) and 
 non-native writers (0.00). With only 50 humans per group, one essay is worth 0.02, so this is
 not enough to establish a fairness gap, and I treat it as indicative only. The stronger fairness
 evidence is the cross-domain result in Chapter 6, where the human false-positive rate is measured
-on far more text and shows the real bias mechanism.
+on far more text and shows the real bias mechanism. Figure 3.3 gives the confusion matrix behind
+these counts, showing which two human essays were flagged and that no AI essay was missed.
 
 ![Figure 3.3: DeBERTa on the held-out test set after the markup was removed. Two human essays are flagged as AI and no AI essay is missed (F1 0.990).](../figures/fig_detector_confusion.png)
 
 RoBERTa, trained the same way on the cleaned corpus, lands in the same place: F1 0.995, a
 confusion matrix of [[99, 1], [0, 100]], native false-positive rate 0.02. Its only difference
 from DeBERTa is one human essay flipping, and the two confidence intervals overlap almost
-completely (Figure 3.5). On this 200-essay test set 0.990 and 0.995 are statistically
+completely (Figure 3.4). On this 200-essay test set 0.990 and 0.995 are statistically
 indistinguishable, so I do not read anything into the gap. Both architectures also make the
 same kind of mistake: every error is a human essay flagged as AI, and no AI essay is missed.
 That shared, one-sided error pattern matters more than the near-identical scores, because it
 indicates that the residual signal is a real style difference and not a quirk of one model.
 
-![Figure 3.5: Test F1 with 95% bootstrap confidence intervals. The in-domain detectors (DeBERTa, RoBERTa, stylometric) have heavily overlapping intervals on n=200, so their differences are within sampling noise; the M4 transfer results have tight intervals on much larger samples.](../figures/fig_confidence_intervals.png)
+![Figure 3.4: Test F1 with 95% bootstrap confidence intervals. The in-domain detectors (DeBERTa, RoBERTa, stylometric) have heavily overlapping intervals on n=200, so their differences are within sampling noise; the M4 transfer results have tight intervals on much larger samples.](../figures/fig_confidence_intervals.png)
 
 The cleaned F1 of 0.990 is the number I report; the raw 1.000 is kept only to show how large
 the artefact was. Either way the in-domain task is easy, and the literature agrees:
@@ -159,7 +162,7 @@ American (about 2.4 American spellings per thousand words). This tell is real bu
 is a generator-locale artefact rather than deep evidence of AI authorship, and it would shrink
 if I prompted the model to write British English, a fix I will try. Formality differs as well:
 the human essays use about three times as many contractions. None of these on its own is
-decisive, but they stack. A 2D picture of the essays in pure style space (Figure 3.4,
+decisive, but they stack. A 2D picture of the essays in pure style space (Figure 3.5,
 function words only) shows two clouds that barely touch. Given how easy the setting is, 0.99
 is the expected result, not evidence of a hidden error.
 
@@ -171,7 +174,7 @@ model stays at 1.00. The locale and formality tells are real, then, but the sepa
 not rest on them; the distributional style signal is there with or without them. I keep the
 locale point as a caveat and a planned fix, not as the explanation for the score.
 
-![Figure 3.4: Every essay placed by its function-word style alone, with all topic words removed. Human and AI fall into two separate clouds, so a single generator in one domain is easy to separate.](../figures/fig_why_style_clusters.png)
+![Figure 3.5: Every essay placed by its function-word style alone, with all topic words removed. Human and AI fall into two separate clouds, so a single generator in one domain is easy to separate.](../figures/fig_why_style_clusters.png)
 
 The closest call came out reassuring. The human essay the model rates most AI-like scores 0.43
 on the AI scale, so it is still correctly called human. The borderline cases are a small mix

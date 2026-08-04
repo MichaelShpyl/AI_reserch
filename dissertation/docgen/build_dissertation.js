@@ -63,6 +63,9 @@ function imageParagraphs(altAndPath) {
       altText: { title: altAndPath.file, description: altAndPath.caption, name: altAndPath.file },
     })],
   });
+  // The caption already begins "Figure N.M: ...", so split the label off for the front-matter list.
+  const m = altAndPath.caption.match(/^(Figure\s+[0-9]+\.[0-9]+):\s*(.+)$/s);
+  if (m) CAPTIONS.figures.push([m[1], m[2]]);
   const cap = new Paragraph({
     alignment: AlignmentType.CENTER,
     spacing: { after: 200 },
@@ -75,10 +78,61 @@ function imageParagraphs(altAndPath) {
 // The chapter markdown is hard-wrapped, so consecutive non-blank text lines belong to one
 // logical paragraph (or list item) and must be joined until a blank line or a structural
 // element (heading, bullet, image) ends it.
+// Captions are numbered across the whole document, in reading order, and collected here so the
+// front-matter lists are generated rather than hand-maintained. A hand-kept list silently went
+// three figures stale, so nothing in the front matter is typed by hand any more.
+const CAPTIONS = { figures: [], tables: [], listings: [] };
+
+const capBorder = { style: BorderStyle.SINGLE, size: 1, color: "CCCCCC" };
+const capBorders = { top: capBorder, bottom: capBorder, left: capBorder, right: capBorder };
+
+function captionParagraph(label, text) {
+  return new Paragraph({
+    alignment: AlignmentType.CENTER, spacing: { before: 80, after: 200 },
+    children: [t(label + "  ", { bold: true, size: 20, color: "52616B" }),
+      ...inlineRuns(text, { italics: true, size: 20, color: "52616B" })],
+  });
+}
+
+// A markdown pipe table becomes a real Word table with a shaded header row and a numbered caption.
+function tableParagraphs(rows, caption) {
+  const widths = rows[0].map(() => Math.floor(9026 / rows[0].length));
+  const cell = (txt, head) => new TableCell({
+    borders: capBorders, width: { size: widths[0], type: WidthType.DXA },
+    shading: head ? { fill: "D5E8F0", type: ShadingType.CLEAR } : undefined,
+    verticalAlign: VerticalAlign.CENTER,
+    margins: { top: 60, bottom: 60, left: 100, right: 100 },
+    children: [new Paragraph({ spacing: { after: 0 }, children: inlineRuns(txt, { size: 20, bold: head }) })],
+  });
+  const table = new Table({
+    width: { size: 9026, type: WidthType.DXA }, columnWidths: widths,
+    rows: rows.map((r, i) => new TableRow({ tableHeader: i === 0,
+      children: r.map(c => cell(c, i === 0)) })),
+  });
+  const n = CAPTIONS.tables.length + 1;
+  const label = "Table " + n;
+  CAPTIONS.tables.push([label, caption]);
+  // Table captions sit above the table; figure captions sit below the figure.
+  return [captionParagraph(label, caption), table, new Paragraph({ spacing: { after: 160 }, children: [] })];
+}
+
+// A fenced code block becomes monospaced, unjustified, line-preserving text with a caption.
+function codeParagraphs(lines, caption) {
+  const n = CAPTIONS.listings.length + 1;
+  const label = "Code Listing " + n;
+  CAPTIONS.listings.push([label, caption]);
+  const paras = lines.map(l => new Paragraph({
+    spacing: { after: 0, line: 240 }, alignment: AlignmentType.LEFT,
+    children: [new TextRun({ text: l.length ? l : " ", font: "Consolas", size: 18, color: INK })],
+  }));
+  return [...paras, captionParagraph(label, caption)];
+}
+
 function parseChapter(md) {
   const lines = md.split(/\r?\n/);
   const out = [];
   let buf = "", mode = null;  // mode: 'para' | 'bullet' | 'num'
+  let tableRows = null, codeLines = null;
 
   const flush = () => {
     const text = buf.trim();
@@ -98,8 +152,40 @@ function parseChapter(md) {
     mode = null;
   };
 
+  // Caption for the next table or listing, set by a "Table:" / "Listing:" line in the markdown.
+  let pendingCaption = null;
+
   for (const raw of lines) {
     const line = raw.replace(/\s+$/, "");
+
+    // Fenced code blocks come first: blank lines and indentation inside them must survive.
+    if (/^```/.test(line.trim())) {
+      if (codeLines === null) { flush(); codeLines = []; }
+      else {
+        out.push(...codeParagraphs(codeLines, pendingCaption || "Code listing"));
+        codeLines = null; pendingCaption = null;
+      }
+      continue;
+    }
+    if (codeLines !== null) { codeLines.push(raw.replace(/\t/g, "    ")); continue; }
+
+    // Pipe tables: collect contiguous rows, drop the |---|---| separator.
+    if (/^\s*\|.*\|\s*$/.test(line)) {
+      flush();
+      const cells = line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map(c => c.trim());
+      if (!cells.every(c => /^:?-{2,}:?$/.test(c))) {
+        (tableRows = tableRows || []).push(cells);
+      }
+      continue;
+    }
+    if (tableRows) {
+      out.push(...tableParagraphs(tableRows, pendingCaption || "Table"));
+      tableRows = null; pendingCaption = null;
+    }
+
+    const capLine = line.match(/^(?:Table|Listing):\s*(.+)$/);
+    if (capLine) { flush(); pendingCaption = capLine[1].trim(); continue; }
+
     if (line.trim() === "") { flush(); continue; }
     if (line.startsWith(">")) { flush(); continue; }   // drop draft-note banners
     const img = line.match(/^!\[(.+?)\]\((.+?)\)$/);
@@ -132,6 +218,8 @@ function parseChapter(md) {
       buf += (buf ? " " : "") + line.trim();
     }
   }
+  if (tableRows) out.push(...tableParagraphs(tableRows, pendingCaption || "Table"));
+  if (codeLines) out.push(...codeParagraphs(codeLines, pendingCaption || "Code listing"));
   flush();
   return out;
 }
@@ -233,49 +321,28 @@ const acronymsTable = new Table({
 });
 const acronyms = [h1("Acronyms"), acronymsTable, new Paragraph({ spacing: { after: 100 }, children: [] })];
 
-// ---- Table of Figures (manual list; the detector chapter figures) ----
-const FIGURE_LIST = [
-  ["Figure 3.1", "What each detection signal achieves on its own"],
-  ["Figure 3.2", "The words the cleaned-text model keys on (style, not topic)"],
-  ["Figure 3.3", "DeBERTa on the held-out test set after markup removal"],
-  ["Figure 3.4", "Essays in function-word style space: two clusters"],
-  ["Figure 3.5", "Detector F1 with 95% bootstrap confidence intervals"],
-  ["Figure 5.1", "Integrated Gradients token attributions for a matched essay pair"],
-  ["Figure 5.2", "Faithfulness by ablation: the signal is diffuse"],
-  ["Figure 5.3", "SHAP on the stylometric detector (feature-level explanation)"],
-  ["Figure 5.4", "Final-layer attention for the matched essay pair"],
-  ["Figure 5.5", "Attention vs Integrated Gradients on the same faithfulness protocol"],
-  ["Figure 6.1", "Transfer to unseen generators on essays"],
-  ["Figure 6.2", "In-domain vs cross-generator vs cross-domain F1"],
-  ["Figure 6.3", "Cross-domain failure modes by domain"],
-  ["Figure 6.4", "Training-distribution control: balanced vs natural writer mix"],
-  ["Figure 6.5", "The hybrid detector: ceiling in-domain, fewer false accusations out of domain"],
-  ["Figure 6.6", "The abstain band, priced: accuracy rises, confident errors remain"],
-  ["Figure 6.7", "Unseen commercial generators on the home recipe: the fusion trade measured"],
-  ["Figure 7.1", "Bloom's-level classification: trained BERT vs the keyword heuristic"],
-  ["Figure 7.2", "Argument-component extraction: strict span F1 on Persuasive Essays"],
-  ["Figure 7.3", "Relation classification: supports-links learned, attacks starved"],
-  ["Figure 7.4", "QLoRA fine-tune vs base Qwen 3B: discrimination on the same claims"],
-  ["Figure 7.5", "The assembled Verification Interview Guide (first page)"],
-  ["Figure 8.1", "Discrimination simulation: claim-grounded vs generic questions"],
-  ["Figure 8.2", "Commercial vs local question generation, balanced across essays"],
-  ["Figure 8.3", "Four question writers on one fixed claim set (like-for-like)"],
-  ["Figure 8.4", "Question-quality audit: the fine-tune's discrimination score is an artifact"],
-  ["Figure 8.5", "Fixing the fine-tune: v2 on open-ended data (real but modest gain)"],
-  ["Figure 8.6", "The data-format experiment complete: base, v1, v2, v3 on the same claims"],
-  ["Figure 8.7", "The fixed-claim comparison at thirty essays with the working v3 backend"],
-];
-const tableOfFigures = [
-  h1("Table of Figures"),
-  ...FIGURE_LIST.map(([n, c]) => new Paragraph({ spacing: { after: 80 },
-    children: [t(n + "   ", { bold: true, size: 22 }), t(c, { size: 22 })] })),
-];
+// ---- Front-matter lists, generated from what the chapters actually contain ----
+// Built after the chapters are parsed, so these can never drift from the document again.
+function captionList(heading, entries, emptyNote) {
+  const out = [h1(heading)];
+  if (!entries.length) {
+    out.push(new Paragraph({ spacing: { after: 120 },
+      children: [t(emptyNote, { italics: true, size: 22, color: "52616B" })] }));
+    return out;
+  }
+  for (const [n, c] of entries) {
+    const short = c.length > 110 ? c.slice(0, 107).replace(/[\s,;.]+$/, "") + "..." : c;
+    out.push(new Paragraph({ spacing: { after: 80 },
+      children: [t(n + "   ", { bold: true, size: 22 }), ...inlineRuns(short, { size: 22 })] }));
+  }
+  return out;
+}
 
 const abstract = [
   h1("Abstract"),
-  body("Universities increasingly rely on automatic detectors to judge whether student work was written with generative AI. Most return a single percentage with nothing behind it. A lecturer cannot defend that number if a student challenges it, and it says nothing about whether the student understands the work they submitted. This dissertation builds a different kind of tool: a pipeline that detects likely AI text, explains each decision in plain language, finds the claims a flagged submission makes, and writes verification questions tied to those claims, so the lecturer can check understanding in a short conversation instead of relying on an accusation. Every stage runs on one consumer laptop, so student work never has to leave the institution."),
-  body("The detector was trained on 640 human essays from the British Academic Written English corpus paired with 640 length-matched and topic-matched AI essays generated locally. A first version scored perfectly, and that score turned out to be false: an audit traced it to formatting markup leaked into the corpus, and after cleaning, the honest F1 is 0.99. The cleaned model catches 100 percent of test essays written by two commercial generators it never saw in training, without falsely flagging any of the matching human essays. On human writing from unfamiliar domains its false-positive rate rises sharply, so a hybrid version fuses the transformer with stylometric features and cuts those false flags three to eight times. The explanations behind each flag are tested rather than assumed: token-level attribution methods fail a faithfulness test that feature-level SHAP passes, so the feature account is the one a lecturer sees."),
-  body("Question quality is measured with a judge-free simulation: a question is worth asking if a model that has read the essay answers it much better than a model that has not. The main comparison holds the claim set fixed across four question writers and thirty essays, 901 questions in all. A QLoRA fine-tune of a 3B model, trained on one 8 GB laptop, writes the best questions: it more than doubles its own base model (p < 0.0001) and beats the free commercial tier on 24 of the 29 essays both cover (p = 0.0003), with every question well-formed. A final experiment explains the one number no grounded writer had beaten: questions phrased to anchor a claim without naming its content close most of the gap to the generic-question ceiling, showing that gap to be the price of specificity, and a generation-time gate makes the behaviour uniform. How that result was reached is part of the contribution. An earlier fine-tune's apparent win was an artifact of degenerate output gaming the metric and was retracted, and a three-judge LLM panel, rerun at sixty questions, ranks questions against the objective measure, so neither judge ratings nor raw scores are trusted unchecked anywhere in this pipeline. This document is a working draft for supervisor review and will be revised before final submission."),
+  body("Universities increasingly use automatic detectors to judge whether student work was written with generative AI. Most return one percentage with nothing behind it: a lecturer cannot defend it if challenged, and it says nothing about whether the student understands what they submitted. This dissertation builds a pipeline that detects likely AI text, explains the decision in plain language, extracts the submission's own claims, and writes verification questions from them, so understanding is checked in conversation rather than by accusation. It runs on one laptop, so student work never leaves the institution."),
+  body("The detector was trained on 640 essays from the British Academic Written English corpus paired with 640 topic-matched and length-matched AI essays. A first version scored perfectly; an audit traced that to formatting markup, and the honest F1 after cleaning is 0.99. It catches every test essay from two unseen generators without falsely flagging their human counterparts, but on unfamiliar human writing false positives rise sharply, so fusing it with stylometric features cuts them three to eight times. Token-level attribution fails a faithfulness test that SHAP passes."),
+  body("Question quality is measured without a judge: a question works if a model that has read the essay answers it far better than one that has not. Across thirty essays and 901 questions, a QLoRA fine-tune of a 3B model on one 8 GB laptop beat the free commercial tier on 24 of 29 shared essays (p = 0.0003). Three of this project's own headline numbers were retracted by its own checks."),
 ];
 
 const toc = [
@@ -337,7 +404,10 @@ const doc = new Document({
     },
     children: [
       ...titlePage1, ...titlePage2, ...declaration, ...acknowledgements, ...abstract,
-      ...acronyms, ...toc, ...tableOfFigures,
+      ...acronyms, ...toc,
+      ...captionList("Table of Figures", CAPTIONS.figures, "No figures."),
+      ...captionList("Table of Tables", CAPTIONS.tables, "No tables."),
+      ...captionList("Table of Code Listings", CAPTIONS.listings, "No code listings."),
       ...ch1, ...ch2, ...ch3, ...ch4, ...ch5, ...ch6, ...ch7, ...ch8, ...ch9, ...ch10, ...ch11, ...ch12,
     ],
   }],

@@ -150,7 +150,13 @@ def check_citations() -> int:
     for e in sorted(entries):
         if e not in cited:
             print(f"  [warn] reference never cited in text: {e[0]} ({e[1]})")
-    print(f"  {len(cited)} distinct citations, {len(entries)} entries")
+    # Alphabetical order of the reference list, case-insensitively (one entry was misfiled).
+    surnames = re.findall(r"^([A-Z][A-Za-z'\-]+),", refs, re.M)
+    for a, b in zip(surnames, surnames[1:]):
+        if a.lower() > b.lower():
+            print(f"  [FAIL] references out of alphabetical order: {a} before {b}")
+            bad += 1
+    print(f"  {len(cited)} distinct citations, {len(entries)} entries, alphabetical order checked")
     return bad
 
 
@@ -168,7 +174,21 @@ def check_figures() -> int:
             if m not in captions:
                 print(f"  [FAIL] {f.name}: mentions Figure {m} but no caption")
                 bad += 1
-    print("  figure numbering checked across all chapters")
+        # Figures must be numbered in the order they appear: two chapters had them swapped, and
+        # the built Table of Figures is generated in reading order, so it exposes any mismatch.
+        key = lambda s: [int(p) for p in s.split(".")]
+        if captions != sorted(captions, key=key):
+            print(f"  [FAIL] {f.name}: figures out of order: {' '.join(captions)}")
+            bad += 1
+        # Every captioned figure must be referred to somewhere in the body text: the template
+        # requires it. Count any prose mention, not only the parenthesised form, and ignore the
+        # caption line itself.
+        prose = "\n".join(l for l in text.splitlines() if not l.startswith("!["))
+        for c in captions:
+            if not re.search(r"Figure " + re.escape(c) + r"\b", prose):
+                print(f"  [FAIL] {f.name}: Figure {c} is never referred to in the body text")
+                bad += 1
+    print("  figure numbering, ordering and cross-references checked across all chapters")
     return bad
 
 

@@ -35,6 +35,8 @@ essay title, keywords extracted from the human source, and the target length.
 
 ## Appendix B: model and training configurations
 
+Table: Model and training configuration for every trained component, with the settings needed to reproduce each run.
+
 | Component | Model | Key settings |
 |---|---|---|
 | Detector (transformer) | DeBERTa-v3-base | 3 epochs, lr 2e-5, batch 4 x accum 4, max 512 tokens, fp16, seed 42, student-level splits |
@@ -52,6 +54,8 @@ Each experiment writes its full result to a JSON file under `outputs/`. All the 
 this document trace back to one of those files.
 
 ## Appendix C: repository map
+
+Listing: Layout of the source tree, showing where each pipeline stage is implemented.
 
 ```
 src/

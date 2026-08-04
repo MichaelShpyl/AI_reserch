@@ -1796,3 +1796,29 @@ evaluation programme.
   first-lesson scene was the only one carrying no visual at all: it now shows the retraction
   itself, a struck-through 100 percent beside the honest 99 percent, which tells that story
   faster than the paragraph did and reads shorter.
+
+### Template conformance pass, and the front matter stops drifting (3 August 2026)
+
+- Checked the document against the official ATU template rather than against memory, and it was
+  failing several formal requirements. The abstract was 482 words against a hard 250-word cap; it
+  is rewritten at 250 and still carries the corpus, the retracted perfect score, the honest F1, the
+  fusion trade, the faithfulness result and the fixed-claim comparison.
+- The builder had no handling for markdown tables or fenced code at all, so Appendix B's model and
+  training configuration rendered in the .docx as a single run of pipe characters, and Appendix C's
+  repository map collapsed to one line with every indent lost. Both now render properly: tables
+  become real Word tables with a shaded header and a numbered caption above them, code listings
+  keep their indentation in Consolas with a caption below.
+- The Table of Figures was a hand-maintained list and had gone three figures stale (5.6, 6.8 and
+  8.8 were missing). Nothing in the front matter is typed by hand any more: the figure, table and
+  code-listing lists are all generated from what the chapters actually contain, in reading order,
+  so they cannot drift again. The template's Table of Tables and Table of Code Listings, neither of
+  which existed before, are now produced from the same source.
+- Two chapters numbered their figures out of order (Chapter 3 had 3.5 before 3.4, Chapter 6 had 6.8
+  before 6.5). Both renumbered into appearance order, with every in-text reference moved with them.
+- One cross-reference pointed at the wrong figure: the QLoRA fine-tune result in Section 7.4 cited
+  Figure 7.3, the relation classifier, instead of Figure 7.4. Six figures had no body-text
+  reference at all, which the template explicitly requires; each now has one.
+- The reference list had Anderson and Krathwohl filed after Cotton. Fixed, and the audit script
+  gained three new checks so none of this can regress: alphabetical ordering of the references,
+  figure numbering in appearance order, and a body-text reference for every captioned figure. The
+  audit runs ALL CLEAN with the stricter checks in place.

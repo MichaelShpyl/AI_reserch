@@ -200,7 +200,7 @@ and scoring loads the embedding model last.
 On the raw metric the fine-tune looks like a clear success. The base model's questions score a mean
 discrimination of 0.033 (95 percent CI 0.015 to 0.051); the fine-tuned model's score 0.154 (95
 percent CI 0.085 to 0.227), with a Mann-Whitney p of 0.007 and confidence intervals that do not
-overlap (Figure 7.3). Taken at face value that is roughly a five-fold gain, and the same 0.15 shows
+overlap (Figure 7.4). Taken at face value that is roughly a five-fold gain, and the same 0.15 shows
 up again at essay scale in Section 8.8.
 
 ![Figure 7.4: The QLoRA fine-tune of Qwen2.5 3B against its own base model on the same 18 claims, mean discrimination with 95 percent bootstrap intervals. The raw score rises from 0.033 to 0.154, but the quality audit in Section 8.9 shows this rise to be an artifact of degenerate output rather than better questions.](../figures/fig_finetune_eval.png)

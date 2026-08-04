@@ -2,9 +2,9 @@
 
 Alsop, S. and Nesi, H. (2009). Issues in the Development of the British Academic Written English (BAWE) Corpus. Corpora, 4(1), pp. 71 to 83.
 
-Cotton, D. R. E., Cotton, P. A. and Shipway, J. R. (2024). Chatting and Cheating: Ensuring Academic Integrity in the Era of ChatGPT. Innovations in Education and Teaching International, 61(2), pp. 228 to 239.
-
 Anderson, L. W. and Krathwohl, D. R. (2001). A Taxonomy for Learning, Teaching, and Assessing: A Revision of Bloom's Taxonomy of Educational Objectives. Longman, New York.
+
+Cotton, D. R. E., Cotton, P. A. and Shipway, J. R. (2024). Chatting and Cheating: Ensuring Academic Integrity in the Era of ChatGPT. Innovations in Education and Teaching International, 61(2), pp. 228 to 239.
 
 Dettmers, T., Pagnoni, A., Holtzman, A. and Zettlemoyer, L. (2023). QLoRA: Efficient Finetuning of Quantized LLMs. In Advances in Neural Information Processing Systems 36 (NeurIPS 2023). arXiv:2305.14314.
 
