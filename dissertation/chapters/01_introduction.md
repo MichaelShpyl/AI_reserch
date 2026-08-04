@@ -152,8 +152,9 @@ Chapter 3 sets out the detection methodology and the first results, including th
 construction of the matched AI essays, and the audit that found and removed a corpus artefact
 behind an initially perfect score.
 
-Chapter 4 describes the implementation of the components built so far, with the engineering
-decisions that the 8 GB laptop budget forced.
+Chapter 4 sets out the research approach, the ethical and licensing position, and the
+implementation of the components, with the engineering decisions that the 8 GB laptop budget
+forced.
 
 Chapter 5 explains the detector's decisions and tests whether those explanations are faithful,
 comparing token-level attributions on the transformer against SHAP over the stylometric features.

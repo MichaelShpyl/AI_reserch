@@ -1846,3 +1846,26 @@ evaluation programme.
   weeks, ethics included, so I propose keeping it as the primary future work rather than risking
   the write-up. On v3 against v4, without the human study to settle it, I lean to shipping v3 and
   reporting v4 as the measured alternative, since v3 is what a lecturer can read aloud.
+
+### The methodology account the document never had (3 August 2026, later)
+
+- The audit's methodology lens flagged that there is no identifiable research-design account and no
+  ethics statement anywhere in twelve chapters, and Chapter 4 was the thinnest in the document at
+  1,241 words. Both are things an MSc examiner looks for by default, so this was worth fixing
+  before anything cosmetic.
+- Chapter 4 is now "Methodology and implementation". Two new sections open it and the existing
+  eight are renumbered behind them, with the one internal cross-reference moved to match and
+  Chapter 1's outline sentence updated.
+- Section 4.1 states the approach honestly: this project builds an artefact and measures it,
+  because the research question asks whether such a pipeline can be designed rather than whether a
+  hypothesis holds over a population. It then names the three commitments that actually shaped the
+  work and what each cost, anchoring every automatic score to something the scored models cannot
+  influence, comparing like for like with the task held fixed, and building the corpus to remove
+  shortcuts rather than to flatter the detector. The three retracted headline numbers are used as
+  the evidence for why the first commitment exists.
+- Section 4.2 is the ethics and licensing position, which had only ever been recorded in the
+  declaration and the working notes: no human participants and why that was chosen, the
+  non-commercial BAWE licence and the decision to compute over the text rather than republish it,
+  the personal-data argument for the local-only design, and the design stance that a flag opens a
+  conversation rather than closing one.
+- Chapter 4 goes from 1,241 to 2,034 words. The body is 27,489 words. Audit ALL CLEAN.

@@ -1,6 +1,72 @@
-# Chapter 4: Implementation
+# Chapter 4: Methodology and implementation
 
-## 4.1 Environment and reproducibility
+## 4.1 Research approach
+
+This project builds an artefact and then measures it. That choice follows from the research
+question, which asks whether a pipeline of this kind can be designed at all and how far a local
+model can go, not whether a stated hypothesis holds across a population. So the work proceeds in
+the order build, measure, then decide what the measurement licenses me to say. Every component in
+Chapter 1's scope was built, and none was carried forward on the strength of an argument that it
+ought to work.
+
+Three commitments shape the method, and each of them cost something.
+
+The first is that no component is accepted on a number alone. Every automatic score in this
+dissertation is anchored to something the models being scored cannot influence. Question quality is
+measured by a simulation whose outcome depends on the source text rather than on anyone's opinion,
+and the LLM judges are then checked against that simulation instead of being trusted on their own
+(Section 8.7). The reason for the commitment is on the record in this document three times over: a
+detector that scored perfectly turned out to be reading formatting rather than writing, a fine-tune
+that beat everything turned out to be producing unusable questions, and a judge panel that agreed
+with itself turned out to disagree with the measurement. Each was caught by a check, and each check
+is described where it applies rather than gathered into a methods appendix, because the point is
+that the checking is part of the work rather than a stage at the end.
+
+The second is that comparisons are made like for like. When the question-generation backends were
+first compared, each chose its own claims, and the commercial model held a small advantage. Holding
+the claim set fixed across every writer removed most of that advantage and showed it to have been
+claim selection rather than question writing (Section 8.8). The general lesson governs the whole
+evaluation: where two systems are compared, the task is held identical and only the system varies.
+
+The third is that the corpus is constructed to remove shortcuts rather than to flatter the
+detector. The AI essays are matched to the human ones on topic and length, the same cleaning is
+applied to both classes, and the splits are made at writer level so no author appears on both sides
+of a split. Sections 4.5 to 4.7 give the detail. A detector that separates two classes because one
+is longer, or because one carries markup the other does not, has learned nothing about writing, and
+Section 4.9 is the account of exactly that failure being found and removed.
+
+Where a design decision was forced rather than chosen, the chapter says so. The 8 GB memory budget
+is the clearest case: it ruled out fine-tuning an 8B model, and the smaller model that replaced it
+was approved on measured evidence rather than preference.
+
+## 4.2 Ethics, data and licensing
+
+The study involves no human participants. That was a deliberate scope decision taken with my
+supervisor, and it is the reason no ethics approval was required. It also has a methodological
+cost, which Chapter 9 states plainly: question quality rests on a simulation rather than on
+students, so the discrimination scores are proxies and the classroom study is the first item of
+future work.
+
+Every dataset is public and openly licensed. BAWE is used under CC BY-NC-SA 3.0 for
+non-commercial research. Its essays are real student work, so although the corpus is published, I
+treat the text as material to compute over rather than to republish: no essay text is committed to
+the repository, and the appendices quote only short illustrative fragments. The AI counterparts
+were generated locally, so producing the matched corpus sent no student writing to any third party.
+
+That constraint shaped the system as well as the study. Because a submission is personal data, the
+pipeline was built to run end to end on one machine, and the local-versus-commercial comparison in
+Chapter 8 is what makes that practical rather than merely preferable. An institution can run the
+whole process on hardware it already owns.
+
+The last ethical point is about what the output is allowed to be. A detector that falsely flags
+human academic writing 79 percent of the time in an unfamiliar domain (Section 6.3) cannot be the
+end of a disciplinary process, and the literature reports the same failure landing unevenly on
+second-language writers. The design answer runs through the whole pipeline: a flag opens a
+conversation and never closes one. The guide is written as evidence for a discussion with the
+student, every question is traceable to sentences the student wrote, and the system offers no
+verdict of its own.
+
+## 4.3 Environment and reproducibility
 
 The whole project runs on my own laptop. After Meeting 3 it became clear that no ATU HPC or
 cloud would be available, so every part has to fit a single RTX 4060 with 8 GB of VRAM, or fall
@@ -18,7 +84,7 @@ terminal session, so they keep running if the session that started them closes. 
 a small detail, but it cost me two failed generation runs before I worked it out, and it is now
 the standard way I start anything that takes more than a few minutes.
 
-## 4.2 Data acquisition and cleaning
+## 4.4 Data acquisition and cleaning
 
 The human side of the corpus comes from the British Academic Written English (BAWE) collection
 (Alsop and Nesi, 2009), which I downloaded from the Oxford Text Archive. A first script
@@ -27,7 +93,7 @@ the recorded word counts against a plain count of the text files so I know the m
 trustworthy. A second script (`src/data/clean_bawe.py`) produces a cleaned metadata table,
 dropping a row that was labelled twice. Every later step samples from the cleaned table.
 
-## 4.3 Sampling
+## 4.5 Sampling
 
 The sample is drawn by `src/data/build_sample.py`. I stratify evenly across the four broad
 disciplinary groups rather than by named discipline, and I balance native against non-native
@@ -39,7 +105,7 @@ both sides of the split. The result is 640 human essays with a versioned manifes
 status, and split. The reasoning behind the sizes is written up in
 `dissertation/sample_design.md`.
 
-## 4.4 Generating the matched AI essays
+## 4.6 Generating the matched AI essays
 
 `src/generation/generate_ai_essays.py` builds the AI half of the corpus. For each human essay
 it generates one AI essay on the same topic and at the same target length, using Llama 3.1 8B
@@ -64,14 +130,14 @@ percent of AI essays are within 20 percent of their source length. A keyword spo
 confirmed the AI essays stayed on the same topics. The detector needs the two halves to differ
 only in the writing, and on these checks they do.
 
-## 4.5 Building the labelled corpus
+## 4.7 Building the labelled corpus
 
 `src/detection/build_detection_corpus.py` pairs each human essay (label 0) with its matched AI
 essay (label 1), carries the split and metadata across from the manifest, and writes a single
-table of 1,280 rows. The same script has a cleaning mode (described in Section 4.7) that strips
+table of 1,280 rows. The same script has a cleaning mode (described in Section 4.9) that strips
 markup before writing, so the raw and cleaned corpora can be compared directly.
 
-## 4.6 The detector
+## 4.8 The detector
 
 Detector training lives in `src/detection/train_detector.py`, which uses the Hugging Face
 Trainer to fine-tune a transformer to classify human against AI. DeBERTa-v3-base is the primary
@@ -84,7 +150,7 @@ later builds on that breakdown. The stylometric feature extractor
 vocabulary richness, part-of-speech mix, and so on). Those features are fused with the
 transformer into the hybrid detector in Section 6.7 (`src/detection/hybrid_fusion.py`).
 
-## 4.7 The audit and the cleaning step
+## 4.9 The audit and the cleaning step
 
 The first detector scored a perfect 100 percent, which I did not trust. Before accepting it I
 ran an audit, implemented in three small scripts, and I count those scripts as part of the
@@ -106,7 +172,7 @@ that no AI essay had, and that this shortcut accounted for a large part of the p
 The cleaning step removes the shortcut. The detector is then retrained on the cleaned corpus,
 and the retrained score is the headline figure I report.
 
-## 4.8 Engineering notes and lessons
+## 4.10 Engineering notes and lessons
 
 A couple of practical points from this phase belong in the methodology. One is launching long
 jobs as detached processes, which is what finally made the overnight generation reliable. The
