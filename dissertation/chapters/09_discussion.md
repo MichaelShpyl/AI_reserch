@@ -19,7 +19,12 @@ not an accusation, and the rest of the design takes the same position.
 Every stage was evaluated, and the evaluations are what make this answer credible. In domain the
 detection is excellent, an F1 of 0.990 with a bootstrap interval of roughly [0.97, 1.00]. The
 detector also transfers across unseen generators at 0.97. Across text domains it degrades to 0.79,
-and it degrades in the direction that matters most, by falsely flagging human academic writing. The
+and it degrades in the direction that matters most, by falsely flagging human academic writing. A
+detector that holds up in the setting it was trained on and falls away outside it is the pattern
+the field already reports, whether the shift comes from paraphrasing (Krishna et al., 2023) or from
+the tools themselves being tested in the wild (Weber-Wulff et al., 2023). The contribution here is
+not that the drop happens but that it is measured per domain and priced, so a deployment decision
+can be made with the number in front of it. The
 explanation layer went through the same scrutiny. All three token-level methods, attention included,
 fail a faithfulness test that the feature-level SHAP account passes, so the lecturer sees the
 feature account.
@@ -30,7 +35,11 @@ of 30 essays) and beats the free-tier commercial model on the 29 essays both cov
 p = 0.0003, higher on 24 of 29), with every question well-formed. I make that claim after retracting
 two weaker forms of it. On this evidence the answer to "can locally fine-tuned open models match
 commercial LLMs at this task" is yes, and on the fixed task the fine-tuned local model does better
-than the free commercial tier.
+than the free commercial tier. That direction agrees with Oketch et al. (2025), who report open
+models reaching comparable performance to closed ones at lower cost on annotation-style tasks. The
+result here is narrower, one task and one free-tier commercial arm, but it points the same way and
+carries the same practical consequence for an institution weighing an API subscription against a
+machine it already owns.
 
 Getting there depended on holding the task fixed, and that dependence is a finding in itself. When
 each backend chose its own claims, the commercial model held a small significant edge (paired
@@ -59,7 +68,9 @@ source-aware and source-blind answers diverge at random.
 
 The second case was the judge panel. Three commercial judges, the validation the scope called for,
 produced ratings that neither agree with each other (Krippendorff's alpha of -0.25) nor track the
-objective measure. Rerunning the panel at sixty questions made the verdict firmer. At sixty all
+objective measure. That LLM judges carry position, verbosity and self-enhancement biases is
+documented (Zheng et al., 2023); what this study adds is a case where the panel agrees with itself
+and still points away from the measured truth, which is the harder failure to notice. Rerunning the panel at sixty questions made the verdict firmer. At sixty all
 three judges agree with each other in rank, none correlates positively with the simulation, and
 the two funded ones anti-correlate significantly. Rubric ratings measure how good a question looks. The panel study stands as a
 replicated negative result.
@@ -73,15 +84,19 @@ than left as advice. Every automatic score is anchored to something it cannot ga
 anchored to the simulation. The simulation is gated for well-formedness, and the degeneracy rate is
 reported next to every score. No design decision was delegated to a single number. That posture was
 demonstrated three times on the project's own results, and I would argue it is as much a
-contribution as any component, since the field's detector vendors do not practise it.
+contribution as any component. Weber-Wulff et al. (2023) tested fourteen detection tools that
+universities license and found them neither accurate nor reliable, and none of them exposes the
+kind of internal check described here.
 
 ## 9.3 Fairness and verification
 
-The fairness evidence influenced the design more than any other single result. The literature
-reports that detectors flag non-native English writers at wildly disproportionate rates, and my own
-robustness tests reproduced the mechanism behind that pattern at domain level. Human arXiv abstracts
-were falsely flagged 79 percent of the time, because dense academic prose looks, to these features,
-like machine text. A detector with that failure mode cannot be the end of any fair process. The
+The fairness evidence influenced the design more than any other single result. Liang et al. (2023)
+found that detectors flag non-native English writers at wildly disproportionate rates, 61.3 percent
+against 5.1 percent for native writers, and my own robustness tests reproduced the mechanism behind
+that pattern at domain level. Human arXiv abstracts were falsely flagged 79 percent of the time,
+because dense academic prose looks, to these features, like machine text. The trigger in both cases
+is the same. Text that is fluent but low in variation reads as machine-written, whether it comes
+from a second-language writer or from a discipline whose register is dense by convention. A detector with that failure mode cannot be the end of any fair process. The
 pipeline therefore treats detection as the opening of a conversation and moves the evidential weight
 to verification. The questions are ones a student who wrote and understood the work can answer and
 an impostor cannot. Each question is traceable to exact sentences of the submission, so nothing is

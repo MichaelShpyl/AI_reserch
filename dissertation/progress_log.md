@@ -1822,3 +1822,15 @@ evaluation programme.
   gained three new checks so none of this can regress: alphabetical ordering of the references,
   figure numbering in appearance order, and a body-text reference for every captioned figure. The
   audit runs ALL CLEAN with the stricter checks in place.
+- Acted on the examiner audit's strongest finding: Chapters 9 and 10 contained no citations at all,
+  so the findings never returned to the literature reviewed in Chapter 2, which is an explicit
+  marking criterion. Six anchors added, all to references already in the list and already verified.
+  The fairness discussion now carries Liang et al.'s 61.3 against 5.1 percent alongside this
+  project's own 79 percent arXiv rate and names the shared trigger. The cross-domain drop is set
+  against Krishna et al. and Weber-Wulff et al. The local-versus-commercial result is set against
+  Oketch et al., agreeing in direction while stating plainly that this evidence is narrower. The
+  judge-panel result is set against Zheng et al., with the distinction that matters: the known
+  biases are documented, whereas a panel that agrees with itself and still points away from the
+  measure is the harder failure to notice.
+- The references gained a short note on the confirmed-authors-plus-et-al policy, which was recorded
+  in the working notes but never stated in the document itself.

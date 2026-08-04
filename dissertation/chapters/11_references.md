@@ -1,5 +1,9 @@
 # References
 
+Every entry below was checked against its primary source before use. Where a full author list could
+not be confirmed from that primary source, the entry gives the confirmed authors followed by "et
+al." rather than guessing at the remainder.
+
 Alsop, S. and Nesi, H. (2009). Issues in the Development of the British Academic Written English (BAWE) Corpus. Corpora, 4(1), pp. 71 to 83.
 
 Anderson, L. W. and Krathwohl, D. R. (2001). A Taxonomy for Learning, Teaching, and Assessing: A Revision of Bloom's Taxonomy of Educational Objectives. Longman, New York.

@@ -47,7 +47,7 @@ demonstration of how it can be gamed, and a resolution of its stubbornest number
 experiment showed the generic-baseline gap to be mostly the price of naming the claim's content. The discrimination simulation measures whether a question
 needs the source. Contentless questions defeat it, and the well-formedness gate closes that hole.
 The discovery and the gate together are a methods contribution to an evaluation literature that
-leans heavily on LLM judges.
+leans heavily on LLM judges (Zheng et al., 2023).
 
 Eighth, a replicated negative result on those judges. At twelve questions, three commercial judges
 neither agreed with each other nor tracked the objective measure. Rerun at sixty questions, all
