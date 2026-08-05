@@ -1922,3 +1922,45 @@ evaluation programme.
   every list, because a blank file carries no numbering definitions. It now starts from pandoc's
   own default reference document and restyles that, so all of pandoc's list and numbering
   machinery survives. Bullets confirmed back in the rebuilt guide.
+
+### The literature review expands, on verified ground (4 August 2026)
+
+- Ran eight parallel searches, one per weak theme, with the instruction to open each paper's primary
+  page and copy the metadata rather than recall it. That produced 53 unique candidates. I then
+  verified every arXiv-carrying one myself against the arXiv API, comparing the returned title and
+  author list with the claim: 39 of 39 passed. The eight already in the reference list were dropped
+  as duplicates, leaving 31 genuinely new and checked.
+- Verification earned its keep immediately. Four attributions in my own draft prose were wrong and
+  were corrected against the API before they reached the document: Ipeirotis and Peng became
+  Ipeirotis and Rizakos, Church and Sen became Church et al., and Beale and Delphino are both
+  single-author papers I had written as "et al.".
+- Chapter 2 goes from 2,056 to 3,415 words, and the growth is concentrated where the review was
+  thinnest against the weight it had to carry.
+  - 2.8, the section underpinning the largest chapter, was 145 words and is now the fullest. It
+    separates the three answers the field gives (reference-based, answerability, LLM judge) and
+    reports that Nguyen et al. found reference-based metrics grading a second human-written
+    question no better than machine output, which disproves the metric rather than the question.
+    The important find is Liusie et al. (2022): multiple-choice systems answer better than chance
+    with no passage at all, by falling back on world knowledge, and they propose measures of how
+    much the context actually matters. That is a published precedent for this project's own
+    discrimination simulation, so the section now says so plainly rather than presenting the idea
+    as novel. On the judge side, Feuer et al. find judge preferences do not track concrete
+    measures, and Norman et al. name the exact failure this project reproduces at small scale:
+    reliability without validity, a judge that agrees with itself and not with the truth.
+  - 2.3 finally has the hybrid precedent that litreview_sources.md has been asking for since July.
+    Kumarage et al. fuse a stylometric vector with a fine-tuned model's embedding using feature
+    families close to these, and Binoculars supplies the false-positive bar (over 90 percent
+    detection at 0.01 percent FPR) that makes the cross-domain rates in Chapter 6 look as serious
+    as they are.
+  - 2.9 gives the Liang design properly, including the detail that enriching word choice cut the
+    false-positive rate from 61.22 to 11.77 percent, which shows the detectors were reading
+    constrained expression rather than machine authorship. It adds Gorichanaz's study of students
+    who were accused, mostly falsely, and had to prove their own authorship. That paper shaped the
+    output more than any technical result.
+  - 2.5 gains the LLM argument-mining survey and two papers on what small and open models can do,
+    which is the relevant question under an 8 GB budget. 2.10 gains work automating the oral
+    assessment itself, which marks this project's boundary: it prepares a human conversation and
+    stops.
+- References go from 41 to 60, all cited, alphabetical order verified. The audit's ordering check
+  caught the new entries being appended after Zheng instead of merged, which is exactly the class
+  of error it was added for. Audit ALL CLEAN. Body is 29,260 words.
