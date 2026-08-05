@@ -1869,3 +1869,22 @@ evaluation programme.
   the personal-data argument for the local-only design, and the design stance that a flag opens a
   conversation rather than closing one.
 - Chapter 4 goes from 1,241 to 2,034 words. The body is 27,489 words. Audit ALL CLEAN.
+
+### A third demo mode: watching a lecturer actually use it (4 August 2026)
+
+- Vini asked in supervision for a screen-recorded demonstration so she can see the system running,
+  and the request was for the real interaction rather than a narrated tour. The demo now has three
+  modes: explore it yourself, watch a lecturer use it, and play the story.
+- The new mode is a simulated session driven by a synthetic cursor. It moves, clicks with a ripple,
+  presses buttons, hovers, and types at human speed into a note field. Eleven steps: open the
+  flagged list, select the submission, run the check, read the verdict and the five named habits,
+  open the claims with their sentence numbers, hover to light up the exact cited sentences, tick
+  the two questions she will actually ask, type her own note, generate the guide, then run the
+  human-written submission and watch it come back not flagged.
+- The provenance step initially showed only the opening of the essay, so of the three sentences the
+  claim cites only the first was visible. It now builds the excerpt from the cited sentences
+  themselves with one sentence of context each and an ellipsis where it jumps, so all three
+  highlights land.
+- Everything on screen is the real 3108a pair and the real card rows, claims, questions and scores
+  from data.js. The window chrome and the note are the only invented parts, and they are the parts
+  that are obviously interface rather than result.

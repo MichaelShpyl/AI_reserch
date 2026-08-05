@@ -265,6 +265,72 @@ header{
   .qa{margin-top:1.1rem}
   .credits{margin-top:1.5rem}
 }
+/* ---------- lecturer simulation: a real screen, driven by a synthetic cursor ---------- */
+#sim{position:fixed; inset:0; top:52px; background:var(--paper); display:none; overflow:hidden}
+#sim.on{display:block}
+.simstage{position:absolute; inset:0; display:flex; flex-direction:column; padding:1.1rem 1.4rem 2.4rem}
+.simnarr{text-align:center; font-size:.95rem; color:var(--muted); min-height:1.5rem; margin-bottom:.7rem;
+  transition:opacity .35s}
+.simnarr b{color:var(--ink)}
+/* the fake application window */
+.app{flex:1; display:flex; flex-direction:column; background:var(--page); border:1px solid var(--line);
+  border-radius:.6rem; box-shadow:0 18px 50px rgba(32,38,45,.13); overflow:hidden; min-height:0}
+.appbar{display:flex; align-items:center; gap:.5rem; padding:.5rem .8rem; background:var(--band);
+  border-bottom:1px solid var(--line); flex:none}
+.dot3{display:flex; gap:.35rem}
+.dot3 i{width:10px; height:10px; border-radius:50%; background:var(--line)}
+.appttl{font-size:.8rem; color:var(--muted); font-weight:600; letter-spacing:.02em}
+.appbody{flex:1; display:grid; grid-template-columns:212px 1fr; min-height:0}
+.side{border-right:1px solid var(--line); padding:.7rem .55rem; overflow:hidden; background:var(--paper)}
+.side .sh{font-size:.66rem; text-transform:uppercase; letter-spacing:.09em; color:var(--muted);
+  font-weight:700; margin:.2rem .35rem .5rem}
+.subrow{display:flex; align-items:center; gap:.5rem; padding:.42rem .5rem; border-radius:.38rem;
+  font-size:.82rem; color:var(--ink); transition:background .25s}
+.subrow .pill{width:8px; height:8px; border-radius:50%; background:var(--line); flex:none}
+.subrow.sel{background:var(--teal-soft)}
+.subrow.flag .pill{background:var(--rust)} .subrow.ok .pill{background:var(--teal)}
+.main{padding:1rem 1.2rem; overflow:hidden; display:flex; flex-direction:column; min-height:0}
+.mrow{display:flex; align-items:center; gap:.7rem; margin-bottom:.7rem; flex:none}
+.mtitle{font-weight:650; font-size:.98rem}
+.btn{border:1.5px solid var(--line); background:var(--page); border-radius:.42rem; padding:.38rem .85rem;
+  font-size:.82rem; font-weight:600; color:var(--ink); transition:background .2s, border-color .2s, transform .1s}
+.btn.primary{background:var(--teal); border-color:var(--teal); color:#fff}
+.btn.press{transform:scale(.96)}
+.btn[disabled]{opacity:.45}
+.simdoc{flex:1; overflow:hidden; font-family:Cambria,Georgia,serif; font-size:.8rem; line-height:1.6;
+  color:var(--ink); border:1px solid var(--line); border-radius:.4rem; padding:.8rem .95rem; background:var(--page)}
+.simdoc span{border-radius:2px}
+.panelwrap{display:grid; grid-template-columns:1fr 1fr; gap:.9rem; flex:1; min-height:0}
+.simpanel{border:1px solid var(--line); border-radius:.5rem; padding:.75rem .85rem; overflow:hidden;
+  opacity:0; transform:translateY(10px); transition:opacity .5s, transform .5s; background:var(--page)}
+.simpanel.on{opacity:1; transform:none}
+.simpanel h4{font-size:.83rem; font-weight:700; margin-bottom:.45rem; color:var(--teal)}
+.verdictbig{font-size:1.5rem; font-weight:800; font-family:Consolas,monospace}
+.verdictbig.flag{color:var(--rust)} .verdictbig.ok{color:var(--teal)}
+.simq{font-size:.78rem; padding:.4rem .5rem; border-left:2.5px solid var(--teal-soft); margin:.3rem 0;
+  opacity:0; transform:translateX(-6px); transition:opacity .4s, transform .4s}
+.simq.on{opacity:1; transform:none}
+.simq .tick{color:var(--teal); font-weight:800; margin-right:.3rem; opacity:0; transition:opacity .3s}
+.simq.picked .tick{opacity:1}
+.simq.picked{background:color-mix(in srgb, var(--teal) 8%, transparent); border-left-color:var(--teal)}
+.notebox{border:1.5px solid var(--line); border-radius:.4rem; padding:.45rem .6rem; font-size:.79rem;
+  min-height:2.1rem; color:var(--ink); background:var(--page)}
+.notebox.focus{border-color:var(--teal); box-shadow:0 0 0 3px color-mix(in srgb, var(--teal) 14%, transparent)}
+.caret{display:inline-block; width:1px; background:var(--ink); margin-left:1px;
+  animation:blink 1s step-end infinite; vertical-align:-2px; height:.95em}
+@keyframes blink{50%{opacity:0}}
+/* the synthetic cursor */
+#cursor{position:absolute; left:0; top:0; width:22px; height:22px; z-index:60; pointer-events:none;
+  opacity:0; transition:opacity .3s}
+#cursor.on{opacity:1}
+#cursor svg{filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.ripple{position:absolute; width:14px; height:14px; border-radius:50%; z-index:59; pointer-events:none;
+  border:2px solid var(--teal); transform:translate(-50%,-50%) scale(.4); opacity:.9;
+  animation:rip .55s ease-out forwards}
+@keyframes rip{to{transform:translate(-50%,-50%) scale(3.2); opacity:0}}
+.simhint{position:absolute; bottom:12px; right:18px; font-size:.75rem; color:var(--muted)}
+.simbar{position:absolute; left:0; right:0; bottom:0; height:4px; background:var(--band)}
+.simbar i{display:block; height:100%; width:0; background:var(--teal); transition:width .4s linear}
 @media (prefers-reduced-motion: reduce){
   *{transition:none !important; animation:none !important}
 }
@@ -275,7 +341,8 @@ header{
   <div class="wordmark">Verification Interview Guide
     <small>working demonstration, real models, real output</small></div>
   <nav class="tabs" role="tablist">
-    <button id="tab-walk" role="tab" aria-selected="true">Walkthrough</button>
+    <button id="tab-walk" role="tab" aria-selected="true">Explore it yourself</button>
+    <button id="tab-sim" role="tab" aria-selected="false">Watch a lecturer use it</button>
     <button id="tab-film" role="tab" aria-selected="false">Play the story</button>
   </nav>
 </header>
@@ -384,6 +451,39 @@ header{
     </section>
   </div>
 </main>
+
+<div id="sim" aria-label="a lecturer using the system">
+  <div class="simstage">
+    <p class="simnarr" id="simnarr"></p>
+    <div class="app">
+      <div class="appbar">
+        <div class="dot3"><i></i><i></i><i></i></div>
+        <div class="appttl">Verification Interview Guide &mdash; ENG2041 Comparative Literature, semester 2</div>
+      </div>
+      <div class="appbody">
+        <div class="side">
+          <div class="sh">Submissions flagged for review</div>
+          <div id="sublist"></div>
+        </div>
+        <div class="main">
+          <div class="mrow">
+            <div class="mtitle" id="simmain-title">Select a submission</div>
+            <div style="margin-left:auto; display:flex; gap:.5rem">
+              <button class="btn" id="btn-check">Run check</button>
+              <button class="btn primary" id="btn-guide" disabled>Create interview guide</button>
+            </div>
+          </div>
+          <div id="simstage-body" style="flex:1; min-height:0; display:flex; flex-direction:column"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="cursor"><svg width="22" height="22" viewBox="0 0 22 22">
+    <path d="M2 2 L2 16 L6 12.5 L9 19 L12 17.5 L9 11.5 L14.5 11.5 Z"
+      fill="#fff" stroke="#20262d" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+  <div class="simbar"><i id="simbar"></i></div>
+  <div class="simhint">a simulated session, running on the real system's output</div>
+</div>
 
 <div id="film" aria-label="the story, auto-playing">
   <div id="scenes"></div>
@@ -1088,18 +1188,308 @@ document.addEventListener("keydown",e=>{
   if(e.code==="KeyR") go(0);
 });
 
+/* ---------------- lecturer simulation ---------------- */
+/* A synthetic cursor drives the real UI: it moves, clicks, types and waits, so the recording
+   shows the actual sequence of actions a lecturer performs rather than describing them. */
+const SUBS = [
+  {id:"3108a", name:"3108a  Comparative essay", state:"flag"},
+  {id:"2971c", name:"2971c  Austen and genre", state:"ok"},
+  {id:"3044b", name:"3044b  Dickinson close reading", state:"ok"},
+];
+let simTimer=null, simRunning=false, simStep=0, simBuilt=false;
+
+function narrate(t){ const n=$("#simnarr"); n.style.opacity=0;
+  setTimeout(()=>{ n.innerHTML=t; n.style.opacity=1; }, 180); }
+
+function cursorTo(x, y, ms=700){
+  return new Promise(res=>{
+    const c=$("#cursor"); c.classList.add("on");
+    c.style.transition = REDUCED ? "none" : `transform ${ms}ms cubic-bezier(.33,.72,.36,1)`;
+    c.style.transform = `translate(${x}px, ${y}px)`;
+    setTimeout(res, REDUCED?0:ms);
+  });
+}
+function centreOf(sel){
+  const host=$("#sim").getBoundingClientRect();
+  const r=(typeof sel==="string"?$(sel):sel).getBoundingClientRect();
+  return [r.left-host.left+r.width/2-4, r.top-host.top+r.height/2-4];
+}
+async function moveTo(sel, ms=700){ const [x,y]=centreOf(sel); await cursorTo(x,y,ms); }
+function ripple(){
+  const c=$("#cursor"); const m=/translate\(([-\d.]+)px, ([-\d.]+)px\)/.exec(c.style.transform||"");
+  if(!m) return;
+  const r=document.createElement("div"); r.className="ripple";
+  r.style.left=(parseFloat(m[1])+4)+"px"; r.style.top=(parseFloat(m[2])+4)+"px";
+  $("#sim").appendChild(r); setTimeout(()=>r.remove(), 600);
+}
+function wait(ms){ return new Promise(r=>setTimeout(r, REDUCED?0:ms)); }
+async function clickAt(sel, ms=700){
+  await moveTo(sel, ms);
+  const el = typeof sel==="string" ? $(sel) : sel;
+  ripple();
+  if(el && el.classList.contains("btn")){ el.classList.add("press"); setTimeout(()=>el.classList.remove("press"),140); }
+  await wait(260);
+}
+async function typeInto(sel, text, speed=42){
+  const box = typeof sel==="string" ? $(sel) : sel;
+  box.classList.add("focus"); box.innerHTML='<span class="caret"></span>';
+  for(let i=1;i<=text.length;i++){
+    box.innerHTML = text.slice(0,i).replace(/</g,"&lt;") + '<span class="caret"></span>';
+    await wait(REDUCED?0:speed);
+  }
+  box.innerHTML = text.replace(/</g,"&lt;");
+  box.classList.remove("focus");
+}
+
+// Show the sentences a claim actually cites, with a little context, and an ellipsis where the
+// excerpt jumps. Showing only the opening of the essay would hide most of the provenance.
+function citedExcerpt(ns){
+  const S = DATA.ai.sentences;
+  const keep = new Set();
+  ns.forEach(n => { keep.add(n); if (n + 1 <= S.length) keep.add(n + 1); });
+  const order = [...keep].sort((a, b) => a - b);
+  let out = "", prev = 0;
+  for (const n of order) {
+    if (prev && n > prev + 1) out += '<span style="color:var(--muted)"> [...] </span>';
+    out += `<span data-n="${n}">${(S[n-1]||"").replace(/</g,"&lt;")} </span>`;
+    prev = n;
+  }
+  return out;
+}
+
+function buildSim(){
+  const host=$("#sublist"); host.innerHTML="";
+  SUBS.forEach(s=>{
+    const d=document.createElement("div");
+    d.className="subrow "+(s.state==="flag"?"flag":"ok");
+    d.id="sub-"+s.id;
+    d.innerHTML=`<span class="pill"></span><span>${s.name}</span>`;
+    host.appendChild(d);
+  });
+  simBuilt=true;
+}
+
+const SIM_STEPS = [
+  // 1. arrive
+  async () => {
+    narrate("A lecturer opens the module's flagged submissions. Three came back from the batch check.");
+    $("#simstage-body").innerHTML = `<div class="simdoc" style="display:flex; align-items:center;
+      justify-content:center; color:var(--muted); font-family:inherit; font-size:.85rem">
+      Select a submission on the left to begin.</div>`;
+    $("#cursor").classList.add("on");
+    await cursorTo(120, 340, 10);
+    await wait(1400);
+  },
+  // 2. pick the submission
+  async () => {
+    narrate("She opens the one the batch check flagged.");
+    await clickAt("#sub-3108a", 900);
+    $("#sub-3108a").classList.add("sel");
+    $("#simmain-title").textContent = "Submission 3108a  ·  Comparative essay  ·  1,482 words";
+    const sents = DATA.ai.sentences.slice(0, 14)
+      .map((t,i)=>`<span data-n="${i+1}">${t.replace(/</g,"&lt;")} </span>`).join("");
+    $("#simstage-body").innerHTML = `<div class="simdoc" id="sd">${sents}</div>`;
+    await wait(1500);
+  },
+  // 3. run the check
+  async () => {
+    narrate("She runs the check. Nothing has been sent anywhere: the models are on this machine.");
+    await clickAt("#btn-check", 800);
+    $("#btn-check").textContent = "Checking...";
+    await wait(1300);
+    $("#btn-check").textContent = "Run check";
+    $("#btn-guide").removeAttribute("disabled");
+    $("#simstage-body").innerHTML = `
+      <div class="panelwrap">
+        <div class="simpanel" id="p1"><h4>1 · Detection</h4>
+          <div class="verdictbig flag">0.96 &nbsp;<span style="font-size:.8rem; font-weight:600">flagged</span></div>
+          <p style="font-size:.76rem; color:var(--muted); margin-top:.35rem">
+            word-pattern reader 99.96%<br>writing-style reader 99.85%<br>
+            Both readers agree, so the flag stands.</p></div>
+        <div class="simpanel" id="p2"><h4>2 · Why, in plain words</h4>
+          <div id="simstrips"></div></div>
+      </div>`;
+    const rows = DATA.ai.card.rows.slice(0,5);
+    const h=$("#simstrips");
+    rows.forEach(r=>{
+      const lo=Math.min(r.human_p10,r.value), hi=Math.max(r.human_p90,r.value);
+      const pad=(hi-lo)*0.12||1, a=lo-pad, b=hi+pad, nx=x=>((x-a)/(b-a)*100);
+      const e=document.createElement("div"); e.className="strip";
+      e.style.gridTemplateColumns="7.4rem 1fr auto";
+      e.innerHTML=`<div class="lab" style="font-size:.74rem">${r.label}</div>
+        <div class="lane"><div class="bandbar" style="left:${nx(r.human_p10)}%; width:${nx(r.human_p90)-nx(r.human_p10)}%"></div>
+        <div class="med" style="left:${nx(r.human_median)}%"></div>
+        <div class="dot" style="background:var(--amber); left:calc(${nx(r.value)}% - 8px)"></div></div>
+        <div class="val num" style="font-size:.7rem">${fmt(r.value)} vs ${fmt(r.human_median)}</div>`;
+      h.appendChild(e);
+    });
+    setTimeout(()=>$("#p1").classList.add("on"), 120);
+    setTimeout(()=>$("#p2").classList.add("on"), 900);
+    await wait(3200);
+  },
+  // 4. read the explanation
+  async () => {
+    narrate("The flag arrives with named reasons. Every habit sits outside the range of real student writing.");
+    await moveTo("#p2", 800);
+    await wait(2600);
+  },
+  // 5. claims and provenance
+  async () => {
+    narrate("She opens the student's own claims. Each one carries the sentence numbers it came from.");
+    await clickAt("#btn-guide", 900);
+    const c = DATA.ai.claims[0];
+    $("#simstage-body").innerHTML = `
+      <div class="panelwrap" style="grid-template-columns:1fr 1fr">
+        <div class="simpanel on" id="p3"><h4>3 · The student's claim</h4>
+          <p style="font-size:.8rem; font-weight:600; line-height:1.45">${c.claim}</p>
+          <p style="font-size:.72rem; color:var(--muted); margin-top:.4rem">
+            from sentences ${c.source_ns.join(", ")}, quoted verbatim in the guide</p>
+          <div class="simdoc" style="margin-top:.5rem; max-height:7.5rem; font-size:.72rem" id="sd2">
+            ${citedExcerpt(c.source_ns)}
+          </div></div>
+        <div class="simpanel" id="p4"><h4>4 · Questions only the author answers well</h4>
+          <div id="simqs"></div>
+          <div style="margin-top:.55rem">
+            <div style="font-size:.7rem; color:var(--muted); margin-bottom:.25rem">Note for the interview</div>
+            <div class="notebox" id="simnote"></div>
+          </div></div>
+      </div>`;
+    const qs = DATA.ai.claims[0].questions.slice(0,3);
+    const h=$("#simqs");
+    qs.forEach((q,i)=>{
+      const e=document.createElement("div"); e.className="simq"; e.id="q"+i;
+      e.innerHTML=`<span class="tick">✓</span>${q.q}<span class="bloom" style="font-size:.6rem">${q.bloom}</span>`;
+      h.appendChild(e);
+      setTimeout(()=>e.classList.add("on"), 500+i*420);
+    });
+    setTimeout(()=>$("#p4").classList.add("on"), 300);
+    await wait(2600);
+  },
+  // 6. hover the provenance
+  async () => {
+    narrate("Hovering a claim lights up the exact sentences behind it, so nothing in the guide is invented.");
+    await moveTo("#p3", 700);
+    DATA.ai.claims[0].source_ns.forEach(n=>{
+      const s=$(`#sd2 span[data-n="${n}"]`); if(s) s.classList.add("cited-strong");
+    });
+    await wait(2400);
+  },
+  // 7. choose questions
+  async () => {
+    narrate("She picks the two she will actually ask.");
+    await clickAt("#q0", 750); $("#q0").classList.add("picked");
+    await wait(500);
+    await clickAt("#q2", 650); $("#q2").classList.add("picked");
+    await wait(1400);
+  },
+  // 8. type a note
+  async () => {
+    narrate("She adds her own note. The lecturer stays in charge of the conversation.");
+    await clickAt("#simnote", 750);
+    await typeInto("#simnote", "Ask about the Othello reading first, it is the weakest section.");
+    await wait(1500);
+  },
+  // 9. generate
+  async () => {
+    narrate("She generates the guide. It prints as one page she can take into the meeting.");
+    await clickAt("#btn-guide", 800);
+    $("#btn-guide").textContent = "Creating...";
+    await wait(1200);
+    $("#btn-guide").textContent = "Create interview guide";
+    $("#simstage-body").innerHTML = `
+      <div style="flex:1; display:flex; align-items:center; justify-content:center; gap:2rem">
+        <img src="../../figures/fig_guide_page1.png" alt="the generated Verification Interview Guide"
+             style="max-height:100%; max-width:44%; border:1px solid var(--line); border-radius:.35rem;
+                    box-shadow:0 10px 30px rgba(32,38,45,.16)">
+        <div style="max-width:26rem">
+          <div style="font-weight:700; font-size:1rem; margin-bottom:.5rem">Verification Interview Guide</div>
+          <p style="font-size:.82rem; color:var(--muted); line-height:1.6">
+            The flag with its named reasons, the student's own claims with sentence numbers, the two
+            chosen questions with their cognitive level, and her note. The first page states plainly
+            that this is evidence for a conversation, not a verdict.</p>
+        </div>
+      </div>`;
+    await wait(3400);
+  },
+  // 10. the honest contrast
+  async () => {
+    narrate("Now the case that matters most: a submission that was <b>not</b> written by AI.");
+    await clickAt("#sub-2971c", 900);
+    $("#sub-3108a").classList.remove("sel"); $("#sub-2971c").classList.add("sel");
+    $("#simmain-title").textContent = "Submission 2971c  ·  Austen and genre  ·  1,455 words";
+    $("#btn-guide").setAttribute("disabled","");
+    $("#simstage-body").innerHTML = `<div class="simdoc" id="sd3">${
+      DATA.human.sentences.slice(0,12).map(t=>`<span>${t.replace(/</g,"&lt;")} </span>`).join("")}</div>`;
+    await wait(1600);
+    await clickAt("#btn-check", 800);
+    $("#btn-check").textContent = "Checking...";
+    await wait(1200);
+    $("#btn-check").textContent = "Run check";
+    $("#simstage-body").innerHTML = `
+      <div class="panelwrap" style="grid-template-columns:1fr">
+        <div class="simpanel on" style="max-width:34rem"><h4>Detection</h4>
+          <div class="verdictbig ok">0.02 &nbsp;<span style="font-size:.8rem; font-weight:600">not flagged</span></div>
+          <p style="font-size:.79rem; color:var(--muted); margin-top:.5rem; line-height:1.55">
+            No interview is suggested. The guide says so in plain words rather than leaving the
+            lecturer to interpret a number, and no questions are generated.</p></div>
+      </div>`;
+    await wait(3000);
+  },
+  // 11. close
+  async () => {
+    narrate("Two submissions, two outcomes, about a minute of work. A flag opens a conversation; it never convicts.");
+    $("#cursor").classList.remove("on");
+    await wait(3600);
+  },
+];
+
+async function runSim(from=0){
+  if(!simBuilt) buildSim();
+  simRunning=true; simStep=from;
+  for(let i=from; i<SIM_STEPS.length && simRunning; i++){
+    simStep=i;
+    $("#simbar").style.width = ((i)/SIM_STEPS.length*100)+"%";
+    await SIM_STEPS[i]();
+  }
+  if(simRunning){
+    $("#simbar").style.width="100%";
+    await wait(1200);
+    if(simRunning && $("#sim").classList.contains("on")) resetSim(true);
+  }
+}
+function resetSim(replay){
+  simRunning=false; clearTimeout(simTimer);
+  $("#sublist").innerHTML=""; simBuilt=false;
+  $("#simmain-title").textContent="Select a submission";
+  $("#btn-guide").setAttribute("disabled",""); $("#btn-check").textContent="Run check";
+  $("#simbar").style.width="0";
+  $("#cursor").classList.remove("on"); $("#cursor").style.transition="none";
+  $("#cursor").style.transform="translate(120px, 340px)";
+  if(replay) setTimeout(()=>runSim(0), 400);
+}
+
 /* tabs */
 function setMode(mode){
-  const film = mode==="film";
+  const film = mode==="film", sim = mode==="sim";
   $("#film").classList.toggle("on", film);
-  $("#walkthrough").style.display = film ? "none" : "";
-  $("#tab-walk").setAttribute("aria-selected", !film);
+  $("#sim").classList.toggle("on", sim);
+  $("#walkthrough").style.display = (film||sim) ? "none" : "";
+  $("#tab-walk").setAttribute("aria-selected", mode==="walk");
+  $("#tab-sim").setAttribute("aria-selected", sim);
   $("#tab-film").setAttribute("aria-selected", film);
+  // leaving a mode always stops it, so two simulations never run at once
+  if(!film){ clearTimeout(filmTimer); cancelAnimationFrame(rafBar); }
+  if(!sim){ simRunning=false; clearTimeout(simTimer); }
   if(film){ if(!filmBuilt) buildFilm(); go(0); }
-  else { clearTimeout(filmTimer); cancelAnimationFrame(rafBar); }
+  if(sim){ resetSim(false); setTimeout(()=>runSim(0), 250); }
 }
 $("#tab-walk").addEventListener("click",()=>setMode("walk"));
+$("#tab-sim").addEventListener("click",()=>setMode("sim"));
 $("#tab-film").addEventListener("click",()=>setMode("film"));
+document.addEventListener("keydown",e=>{
+  if(!$("#sim").classList.contains("on")) return;
+  if(e.code==="KeyR"){ resetSim(true); }
+});
 
 show("ai");
 </script>
