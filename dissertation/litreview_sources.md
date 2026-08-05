@@ -34,7 +34,7 @@
 
 ## Stylometric features
 - (Liang et al. 2023, below, gives the perplexity/linguistic-variability evidence used here.)
-- To add: a dedicated stylometry/burstiness paper and a hybrid stylometric-plus-transformer detector.
+- DONE (4 Aug 2026): Kumarage et al. 2023 supplies the hybrid stylometric-plus-transformer precedent; Opara 2024 the dedicated stylometry paper; Hans et al. 2024 the perplexity bar.
 
 ## Explainability and faithfulness
 - **Lundberg, Lee (2017).** A Unified Approach to Interpreting Model Predictions (SHAP). NeurIPS 2017,
@@ -125,3 +125,29 @@ Each entry below was verified by locating the actual publication before it enter
 - Devlin et al. (2019), BERT. Verified: ACL Anthology N19-1423, NAACL-HLT 2019, pp. 4171 to 4186.
 - Alsop and Nesi (2009), the BAWE corpus article. Verified: CrossRef metadata for DOI 10.3366/E1749503209000227, Corpora 4(1), pp. 71 to 83. The dataset itself is OTA record 2539 (Nesi, Gardner, Thompson, Wickens; CC BY-NC-SA 3.0).
 - Nussbaum et al. (2024), Nomic Embed. Verified: arXiv:2402.01613 (later published in TMLR 02/2025; the arXiv preprint is cited).
+
+## Expansion pass, 4 August 2026 (all verified against the arXiv API before use)
+
+Method: each candidate's arXiv id was queried against export.arxiv.org and the returned title and
+author list compared with the claimed entry. 39 of 39 arXiv candidates passed; 8 were already in
+the reference list. Four author attributions in draft prose were corrected as a result.
+
+- **Abkenar et al. (2024).** Assessing Open-Source Large Language Models on Argumentation Mining Subtasks. arXiv:2411.05639.
+- **Beale et al. (2025).** Adapting University Policies for Generative AI: Opportunities, Challenges, and Policy Solutions in Higher Education. arXiv:2506.22231.
+- **Church et al. (2025).** Using LLMs to support assessment of student work in higher education: a viva voce simulator. arXiv:2511.05530.
+- **Delphino et al. (2025).** Assessing the Prevalence of AI-assisted Cheating in Programming Courses: A Pilot Study. arXiv:2507.06438.
+- **Dik et al. (2025).** Assessing GPTZero's Accuracy in Identifying AI vs. Human-Written Essays. arXiv:2506.23517.
+- **Favero et al. (2025).** Leveraging Small LLMs for Argument Mining in Education: Argument Component Identification, Classification, and Assessment. arXiv:2502.14389.
+- **Feuer et al. (2024).** Style Outweighs Substance: Failure Modes of LLM Judges in Alignment Benchmarking. arXiv:2409.15268.
+- **Fu et al. (2024).** QGEval: Benchmarking Multi-dimensional Evaluation for Question Generation. arXiv:2406.05707.
+- **Gorichanaz et al. (2023).** Accused: How students respond to allegations of using ChatGPT on assessments. arXiv:2308.16374.
+- **Hans et al. (2024).** Spotting LLMs With Binoculars: Zero-Shot Detection of Machine-Generated Text. arXiv:2401.12070.
+- **Ipeirotis et al. (2026).** Scalable and Personalized Oral Assessments Using Voice AI. arXiv:2603.18221.
+- **Kumarage et al. (2023).** Stylometric Detection of AI-Generated Text in Twitter Timelines. arXiv:2303.03697.
+- **Lee et al. (2025).** Beyond Static Scoring: Enhancing Assessment Validity via AI-Generated Interactive Verification. arXiv:2512.12592.
+- **Li et al. (2025).** Large Language Models in Argument Mining: A Survey. arXiv:2506.16383.
+- **Liusie et al. (2022).** World Knowledge in Multiple Choice Reading Comprehension. arXiv:2211.07040.
+- **Nguyen et al. (2024).** Reference-based Metrics Disprove Themselves in Question Generation. arXiv:2403.12242.
+- **Norman et al. (2026).** Reliability without Validity: A Systematic, Large-Scale Evaluation of LLM-as-a-Judge Models Across Agreement, Consistency, and Bias. arXiv:2606.19544.
+- **Opara et al. (2024).** StyloAI: Distinguishing AI-Generated Content with Stylometric Analysis. arXiv:2405.10129.
+- **Perkins et al. (2024).** GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education. arXiv:2403.19148.
