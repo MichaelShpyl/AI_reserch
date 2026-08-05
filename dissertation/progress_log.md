@@ -2057,3 +2057,19 @@ evaluation programme.
   model-based estimate of context-dependence tracks human behaviour, which is the assumption this
   project's whole evaluation rests on and cannot test for itself.
 - References at 62, all cited, audit ALL CLEAN. Body 30,118 words.
+
+### One-take recording mode for the demonstration video (5 August 2026)
+
+- Vini asked for a screen recording so she can see the system running. Rather than choreograph a
+  live click-through and hope nothing goes wrong on the day, the demo now has a hands-free mode:
+  press P (or open with ?record=1 or #record) and it hides the tab bar, runs the lecturer session
+  end to end, hands over to the eighteen-scene film, and finishes on a closing card before
+  stopping. Nothing to click, so the recording carries no stray cursor or tab switching. About
+  five and a half minutes in total.
+- Three triggers rather than one, because the preview pane used for testing strips both the query
+  string and the hash from a file URL. That is a viewer limitation rather than a bug, but it is
+  exactly the sort of thing that fails in front of an audience, so the keypress is the documented
+  route and the other two are fallbacks.
+- Verified the whole chain: the trigger hides the header and takes both panes full-bleed, the
+  simulation runs, the handover to the film fires, and the closing card renders over everything.
+  The film normally loops, so record mode stops it on the last scene instead.

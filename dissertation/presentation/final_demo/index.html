@@ -1618,6 +1618,8 @@ const SIM_STEPS = [
   },
 ];
 
+let RECORDING = false;   // set by ?record=1: play everything once, then stop
+
 async function runSim(from=0){
   if(!simBuilt) buildSim();
   simRunning=true; simStep=from;
@@ -1629,6 +1631,8 @@ async function runSim(from=0){
   if(simRunning){
     $("#simbar").style.width="100%";
     await wait(1200);
+    // In a recording the session hands over to the film instead of looping forever.
+    if(RECORDING){ simRunning=false; startFilmForRecording(); return; }
     if(simRunning && $("#sim").classList.contains("on")) resetSim(true);
   }
 }
@@ -1664,6 +1668,55 @@ $("#tab-film").addEventListener("click",()=>setMode("film"));
 document.addEventListener("keydown",e=>{
   if(!$("#sim").classList.contains("on")) return;
   if(e.code==="KeyR"){ resetSim(true); }
+});
+
+/* ---------------- one-take recording ----------------
+   Open index.html?record=1 and the page plays the whole demonstration by itself: the lecturer
+   session first, then the film, then a closing card. Nothing to click, so a screen recording
+   catches no stray cursor or tab switching. */
+function startFilmForRecording(){
+  setMode("film");
+  // The film loops by default. Stop it on the last scene and show the end card instead.
+  const total = SCENES.length;
+  const watch = setInterval(()=>{
+    if(filmIdx === total - 1){
+      clearInterval(watch);
+      setTimeout(()=>{ clearTimeout(filmTimer); cancelAnimationFrame(rafBar); showEndCard(); },
+                 SCENES[total-1].dur * 1000);
+    }
+  }, 400);
+}
+
+function showEndCard(){
+  const d = document.createElement("div");
+  d.style.cssText = "position:fixed; inset:0; z-index:200; background:var(--paper); display:flex;"
+    + "flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:.9rem";
+  d.innerHTML = `<div style="font-size:.8rem; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--teal); font-weight:700">End of demonstration</div>
+    <div style="font-family:Cambria,Georgia,serif; font-weight:700; font-size:clamp(1.6rem,3.4vw,2.6rem);
+      max-width:22ch; line-height:1.2">Evidence for a conversation, not an accusation</div>
+    <div style="color:var(--muted); font-size:.95rem; line-height:1.7; margin-top:.4rem">
+      Mykhailo Shpyl &middot; MSc Artificial Intelligence and Big Data Analytics<br>
+      Atlantic Technological University &middot; Supervisor: Dr. Vini Vijayan<br>
+      Every figure on screen was produced by the system running on one 8 GB laptop.</div>`;
+  document.body.appendChild(d);
+}
+
+function startRecording(){
+  if(RECORDING) return;
+  RECORDING = true;
+  document.querySelector("header").style.display = "none";   // no chrome in the recording
+  document.getElementById("sim").style.top = "0";
+  document.getElementById("film").style.top = "0";
+  setMode("sim");
+}
+// Three ways in, because a query string does not survive every way of opening a local file:
+// index.html?record=1, index.html#record, or just press P on the page.
+if(new URLSearchParams(location.search).get("record") === "1" || location.hash === "#record"){
+  startRecording();
+}
+document.addEventListener("keydown", e => {
+  if(e.code === "KeyP" && !RECORDING) startRecording();
 });
 
 show("ai");

@@ -17,15 +17,31 @@ was extracted from the models and result files. Nothing is mocked.
 
 ## Recording the video
 
-1. Open `index.html`, press F11 for fullscreen, pick the theme you want (the page follows the
-   system light or dark setting).
-2. Start a screen recording (Xbox Game Bar is enough: Win+Alt+R).
-3. Click "Play the story". It runs on its own and ends on the credit card.
-4. Stop the recording after the closing scene.
+There is a hands-free mode for this, so the recording contains no cursor wandering and no tab
+clicking. It plays the lecturer session first, then the film, then a closing card, and stops.
 
-For the walkthrough part of a recording, a good route is: AI version, dial and verdict, hover
-two shaded sentences, click the "meanwhile" chip, scroll the rhythm skylines, open the first
-claim, then switch to the real student's essay and let the contrast speak.
+1. Open `index.html` in a browser and press **F11** for fullscreen. The page follows the system
+   light or dark theme, so set that first if you have a preference.
+2. Start a screen recording. On Windows the Xbox Game Bar is enough: **Win+Alt+R**.
+3. Press **P**. Everything plays by itself. Do not touch the mouse or keyboard after this.
+4. When the closing card appears ("End of demonstration"), stop the recording.
+
+Total runtime is roughly five and a half minutes: about two minutes of the lecturer session and
+three and a half of the film.
+
+Three ways to start it, in case one is awkward on the day:
+
+- press **P** on the page (most reliable, works however the file was opened)
+- open `index.html?record=1`
+- open `index.html#record`
+
+The query string and hash are stripped by some embedded viewers, which is why the keypress exists.
+
+### If you would rather drive it yourself
+
+Skip record mode and use the tabs. A good live route: open **Watch a lecturer use it** and let it
+run, then switch to **Explore it yourself** and click a claim to show the provenance highlighting,
+then **Play the story** if there is time.
 
 ## Files
 
