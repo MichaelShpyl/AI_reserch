@@ -30,6 +30,7 @@ CORPUS_TXT = REPO / "data" / "raw" / "bawe" / "download" / "CORPUS_TXT"
 GUIDES = REPO / "outputs" / "verification_guides"
 DETECTOR = REPO / "models" / "detector" / "checkpoint-110"
 BLOOM_MODEL = REPO / "models" / "bloom_classifier"
+REFERENCE_DOCX = Path(__file__).resolve().parent / "guide_reference.docx"
 PANDOC = Path.home() / "AppData" / "Local" / "Pandoc" / "pandoc.exe"
 SOFFICE = Path("C:/Program Files/LibreOffice/program/soffice.exe")
 sys.path.insert(0, str(REPO / "src" / "detection"))
@@ -188,8 +189,14 @@ def render(md_path: Path) -> None:
     if PANDOC.exists():
         # --resource-path lets pandoc find images referenced by bare filename next to the markdown
         # (the per-submission explanation card).
-        subprocess.run([str(PANDOC), str(md_path), "-o", str(docx),
-                        "--resource-path", str(md_path.parent)], check=True, timeout=120)
+        cmd = [str(PANDOC), str(md_path), "-o", str(docx),
+               "--resource-path", str(md_path.parent)]
+        # Without a reference document pandoc styles the guide in its defaults, which set bold in a
+        # heavy slab serif that is hard to read on a laptop. A lecturer reads this in a meeting, so
+        # legibility counts. Regenerate with src/pipeline/make_guide_reference.py.
+        if REFERENCE_DOCX.exists():
+            cmd += ["--reference-doc", str(REFERENCE_DOCX)]
+        subprocess.run(cmd, check=True, timeout=120)
         print(f"Saved {docx.name}")
         if SOFFICE.exists():
             subprocess.run([str(SOFFICE), "--headless",

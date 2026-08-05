@@ -1906,3 +1906,19 @@ evaluation programme.
   the habit card rather than after, so the specific evidence lands before the essay-level summary.
 - The tooltip is clamped to the stage so it cannot run off the edge, and it flips above the
   sentence when there is no room below.
+
+### The lecturer's guide becomes readable (4 August 2026, later)
+
+- The generated guide was going through pandoc with no reference document, so it inherited
+  pandoc's defaults: a serif body and, worse, a bold face that renders as a heavy slab and is
+  genuinely hard to read on a laptop. Since a lecturer reads this document in a meeting, that is a
+  product defect rather than a cosmetic one.
+- Added src/pipeline/make_guide_reference.py, which builds the reference .docx pandoc styles from,
+  and wired assemble_guide.py to pass it with --reference-doc. Body and headings are now one
+  family (Calibri) distinguished by weight, size and colour rather than by switching typeface;
+  bold is pinned to the body face; the opening framing sentence reads as a quiet aside; margins
+  are tightened to 0.75 inch for a better line length.
+- First attempt built the reference from a blank document and silently stripped the bullets off
+  every list, because a blank file carries no numbering definitions. It now starts from pandoc's
+  own default reference document and restyles that, so all of pandoc's list and numbering
+  machinery survives. Bullets confirmed back in the rebuilt guide.

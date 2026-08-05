@@ -13,6 +13,7 @@ This writes src/pipeline/guide_reference.docx. assemble_guide.py passes it to pa
 
 from __future__ import annotations
 
+import subprocess
 from pathlib import Path
 
 from docx import Document
@@ -20,6 +21,7 @@ from docx.enum.text import WD_LINE_SPACING
 from docx.shared import Pt, RGBColor
 
 OUT = Path(__file__).resolve().parent / "guide_reference.docx"
+PANDOC = Path.home() / "AppData" / "Local" / "Pandoc" / "pandoc.exe"
 
 BODY_FONT = "Calibri"
 INK = RGBColor(0x22, 0x28, 0x31)
@@ -52,7 +54,17 @@ def space(style, *, before=0, after=8, line=1.15):
 
 
 def main() -> int:
-    d = Document()
+    # Start from pandoc's OWN default reference document rather than a blank one. A blank document
+    # has no numbering definitions, so restyling it silently stripped the bullets off every list.
+    base = OUT.with_name("_pandoc_default.docx")
+    if PANDOC.exists():
+        with open(base, "wb") as fh:
+            subprocess.run([str(PANDOC), "--print-default-data-file", "reference.docx"],
+                           stdout=fh, check=True, timeout=60)
+        d = Document(str(base))
+    else:
+        print("pandoc not found, falling back to a blank template (lists may lose their bullets)")
+        d = Document()
     st = d.styles
 
     set_font(st["Normal"], size=11)
@@ -98,6 +110,8 @@ def main() -> int:
         sec.top_margin = sec.bottom_margin = Pt(54)
 
     d.save(OUT)
+    if base.exists():
+        base.unlink()
     print("Saved", OUT)
     return 0
 
