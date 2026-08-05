@@ -55,6 +55,18 @@ When it meets human writing that is more formal or more technical, an arXiv abst
 it calls it AI. So the out-of-domain failure is a false-accusation failure, the harm the project
 set out to avoid.
 
+This shape of result is well documented, which is worth saying plainly so the number above is read
+correctly. Dugan et al. (2024), introducing the RAID benchmark, evaluate detectors across
+generators, domains and adversarial edits, and their first finding is that detector accuracy
+"varies substantially depending on the false positive rate": the systems they tested could reach
+the high accuracies quoted in press coverage, but only while accepting a correspondingly high rate
+of false positives. Their own evaluation therefore fixes the threshold for every detector at a 5
+percent false-positive rate before comparing them. Read against that, an in-domain F1 of 0.990 is
+not the interesting number in this chapter, because a headline accuracy quoted without its
+false-positive rate is close to meaningless. The interesting number is the 79 percent of genuine
+human arXiv abstracts this detector flags once it leaves the text type it was trained on, and the
+fact that the harm falls on the human side rather than the machine side.
+
 This connects to the fairness concern from the start of the project. A detector trained on one
 narrow idea of human writing will misjudge writers whose style sits outside that idea. The arXiv
 result shows this most clearly, since formal, dense, careful human prose reads as machine to this

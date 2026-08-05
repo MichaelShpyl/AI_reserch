@@ -26,6 +26,8 @@ DeYoung, J., Jain, S., Rajani, N. F., Lehman, E., Xiong, C., Socher, R. and Wall
 
 Dik, S., Erdem, O. and Dik, M. (2025). Assessing GPTZero's Accuracy in Identifying AI vs. Human-Written Essays. arXiv:2506.23517.
 
+Dugan, L., Hwang, A., Trhlik, F., Ludan, J. M., Zhu, A., et al. (2024). RAID: A Shared Benchmark for Robust Evaluation of Machine-Generated Text Detectors. arXiv:2405.07940.
+
 Favero, L., Pérez-Ortiz, J. A., Käser, T. and Oliver, N. (2025). Leveraging Small LLMs for Argument Mining in Education: Argument Component Identification, Classification, and Assessment. arXiv:2502.14389.
 
 Feuer, B., Goldblum, M., Datta, T., Nambiar, S., Besaleli, R., et al. (2024). Style Outweighs Substance: Failure Modes of LLM Judges in Alignment Benchmarking. arXiv:2409.15268.
@@ -96,9 +98,9 @@ Oketch, K., Lalor, J. P., Yang, Y. and Abbasi, A. (2025). Bridging the LLM Acces
 
 Opara, C. (2024). StyloAI: Distinguishing AI-Generated Content with Stylometric Analysis. In Proceedings of the 25th International Conference on Artificial Intelligence in Education (AIED 2024). arXiv:2405.10129.
 
-Perkins, M., Roe, J., Vu, B. H., Postma, D., Hickerson, D., et al. (2024). GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education. arXiv:2403.19148.
-
 Perkins, M. (2023). Academic Integrity Considerations of AI Large Language Models in the Post-Pandemic Era: ChatGPT and Beyond. Journal of University Teaching and Learning Practice, 20(2), article 07.
+
+Perkins, M., Roe, J., Vu, B. H., Postma, D., Hickerson, D., et al. (2024). GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education. arXiv:2403.19148.
 
 Pietron, M., Olszowski, R. and Gomulka, J. (2024). Efficient Argument Classification with Compact Language Models and ChatGPT-4 Refinements. arXiv:2403.15473.
 
@@ -112,13 +114,15 @@ Stab, C. and Gurevych, I. (2017). Parsing Argumentation Structures in Persuasive
 
 Sundararajan, M., Taly, A. and Yan, Q. (2017). Axiomatic Attribution for Deep Networks. In Proceedings of the 34th International Conference on Machine Learning (ICML 2017), PMLR 70, pp. 3319 to 3328.
 
-Wang, Y., Mansurov, J., Ivanov, P., Su, J., Shelmanov, A., Tsvigun, A., Mohammed Afzal, O., Mahmoud, T., Puccetti, G., Arnold, T., et al. (2024). SemEval-2024 Task 8: Multidomain, Multimodel and Multilingual Machine-Generated Text Detection. In Proceedings of the 18th International Workshop on Semantic Evaluation (SemEval-2024), pp. 2057 to 2079. arXiv:2404.14183.
-
 Wang, Y., Mansurov, J., Ivanov, P., Su, J., Shelmanov, A., Tsvigun, A., et al. (2023). M4: Multi-Generator, Multi-Domain, and Multi-Lingual Black-Box Machine-Generated Text Detection. arXiv:2305.14902.
+
+Wang, Y., Mansurov, J., Ivanov, P., Su, J., Shelmanov, A., Tsvigun, A., Mohammed Afzal, O., Mahmoud, T., Puccetti, G., Arnold, T., et al. (2024). SemEval-2024 Task 8: Multidomain, Multimodel and Multilingual Machine-Generated Text Detection. In Proceedings of the 18th International Workshop on Semantic Evaluation (SemEval-2024), pp. 2057 to 2079. arXiv:2404.14183.
 
 Weber-Wulff, D., Anohina-Naumeca, A., Bjelobaba, S., Foltynek, T., Guerrero-Dib, J., Popoola, O., Sigut, P. and Waddington, L. (2023). Testing of Detection Tools for AI-Generated Text. International Journal for Educational Integrity, 19, article 26.
 
 Wu, J., Yang, S., Zhan, R., Yuan, Y., Chao, L. S. and Wong, D. F. (2025). A Survey on LLM-Generated Text Detection: Necessity, Methods, and Future Directions. Computational Linguistics, 51(1), pp. 275 to 338. arXiv:2310.14724.
+
+Yaacoub, A., Da-Rugna, J. and Assaghir, Z. (2025). Assessing AI-Generated Questions' Alignment with Cognitive Frameworks in Educational Assessment. arXiv:2504.14232.
 
 Yang, A., Yang, B., Zhang, B., Hui, B., Zheng, B., Yu, B., et al. (2024). Qwen2.5 Technical Report. arXiv:2412.15115.
 

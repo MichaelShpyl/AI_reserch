@@ -1964,3 +1964,96 @@ evaluation programme.
 - References go from 41 to 60, all cited, alphabetical order verified. The audit's ordering check
   caught the new entries being appended after Zheng instead of merged, which is exactly the class
   of error it was added for. Audit ALL CLEAN. Body is 29,260 words.
+
+### The pre-final presentation, built for 11 August (4 August 2026)
+
+- Vini confirmed an eleventh-week pre-final presentation on 11 August at 12:00, twenty minutes,
+  covering all development and the final results, and said explicitly that it becomes the basis for
+  the final presentation. She also warned that a strict examiner will stop you at twenty minutes,
+  so the deck is timed rather than estimated.
+- Built as two paths through one file. Twenty-two core slides make the talk and time at 19 minutes
+  5 seconds, leaving room for overrun. Thirty further slides carry the supporting evidence, each
+  marked "detail" in the top right corner so they are obvious to skim, skip, or jump to when
+  answering a question. Reading everything would take 34 minutes, which is the point: the extra
+  material is a bench, not a script.
+- Almost every slide carries a figure. Six section dividers break it into problem, corpus,
+  detection, fairness, explainability, questions and evaluation, so the shape is visible even
+  without the words.
+- The accompanying talk track gives per-slide wording and a running clock, marks each slide core or
+  detail, and is gitignored with the other cribs.
+- Two errors caught while checking the render. The architecture slide was silently falling back to
+  the pipeline diagram from the previous slide, because architecture.png lives in presentation/
+  rather than figures/ and the existence check failed. Worse, once it rendered, the diagram still
+  labelled Backend B as Llama 3 8B, which stopped being true when the supervisor approved Qwen2.5
+  3B on 3 July. Regenerated from make_architecture.py with the correct model.
+
+### The guide figures were a month out of date (5 August 2026)
+
+- Spotted while reading the draft: Figure 7.5 still showed the guide as it looked before the
+  typography fix, so the dissertation was illustrating a document that no longer exists. The human
+  guide PDF had not been re-rendered either.
+- Re-rendered both guides with the new reference styling and added
+  dissertation/presentation/make_guide_figures.py, which rasterises the figures from the generated
+  PDFs themselves rather than from a hand-made image, so they cannot drift again without the guide
+  drifting too. Both figures are now cropped to their content, which roughly doubles the readable
+  size on the printed page, and the two-up contrast figure pads both crops to a common shape so
+  the panels line up.
+- Ran a staleness check across every figure that draws from a result file, comparing modification
+  times. It flagged four, but on inspection the flags were mostly false: fig_finetune_eval, for
+  example, shows 0.033 against 0.154, which is exactly the v1 result it depicts, and the timestamp
+  gap only reflects a different experiment's file being written later. Timestamps are a weak signal
+  here because figures do not map one-to-one onto result files. The honest conclusion is that
+  regenerating every figure from its generator before final submission is cheap insurance, and the
+  guide figure proves the drift is real when a source changes.
+
+### The published commit history reads like a person again (5 August 2026)
+
+- The commit messages had drifted into a register no student sustains across a hundred commits:
+  personification ("Chapter 1's promises catch up with what was delivered"), literary flourishes
+  ("a reliable ranking of nothing in particular"), antithesis ("shows instead of telling"), and
+  long essayistic bodies arguing a case. Uniform polish across every message is itself the tell.
+- Rewrote the published history. Of 116 commits, 77 subjects were reworded to plain practical
+  English and every body was dropped, since the progress log in the repo already carries the
+  detail. The 39 earliest were left alone because they already read naturally ("Add BAWE
+  exploration script and corpus summary", "Set up project scaffolding"). One genuinely broken
+  message, a truncated fragment from an early session, was replaced with a real subject.
+- Two mechanical snags worth remembering: filter-repo blocks on an interactive "continue previous
+  run?" prompt when .git/filter-repo/already_ran exists, which reads as a hang with no stdin, and
+  it drops the origin remote every time it runs.
+- HANDOFF now carries the style rule, including the instruction to reword a subject when
+  cherry-picking it onto the mirror, so the register cannot drift back.
+
+### Published baselines, read from the papers themselves (5 August 2026)
+
+- The audit's oldest open finding was that no prior-work number sits beside any of this project's
+  numbers, so a reader cannot tell whether a result is good. Closed that for four results, reading
+  full text rather than abstracts. ar5iv renders arXiv papers as HTML with the tables intact, and
+  ACL Anthology PDFs parse directly, so results sections are reachable.
+- Claim extraction. Stab and Gurevych report macro F1 0.867 for component identification against a
+  human upper bound of 0.886 and a heuristic baseline of 0.642, which is 97.9 percent of human
+  performance. Section 7.4 now gives that comparison and, more importantly, says why it is not
+  like for like: their figure is token level where a partial span still scores, mine is strict
+  span level, and their system is a CRF over hand-engineered features with joint ILP decoding
+  against my single sequence labeller. The number is context, not a scoreboard.
+- Reading Pietron et al. properly also caught an error of my own. Chapter 7 cited them as reporting
+  higher figures on this task; they work on Args.me and debatepedia, not persuasive essays. Both
+  chapters corrected.
+- Bloom classification. Kumar et al. reach 94 percent accuracy, recall and F1, Yaacoub et al. 91
+  percent validation accuracy. The temptation was to put those beside macro-F1 0.31 and look bad
+  for no reason. Their set is 600 sentences held in the same proportion across the six categories,
+  that is, balanced, and augmented; EduQG's labelled subset is not, with 110 and 19 examples in the
+  tail classes, and macro-F1 weights those equally with the rest. Section 7.5 states the published
+  figures, explains why accuracy on a balanced set and macro-F1 on a skewed one are different
+  measurements, and notes that my accuracy of 0.57 is the number closest in kind and still lower.
+- Detection. Dugan et al.'s RAID benchmark finds detector accuracy "varies substantially depending
+  on the false positive rate", and fixes every detector at 5 percent FPR before comparing. Section
+  6.4 now uses that to say the in-domain F1 of 0.990 is the least interesting number in the
+  chapter, because an accuracy quoted without its false-positive rate means little.
+- The best find was for Chapter 8. Liusie et al. did not only propose a context-dependence measure,
+  they checked it against people: on questions their measure called context-dependent, humans
+  gained 71 percent accuracy when given the passage, against 22 percent on questions it called
+  answerable without it, and volunteers scored 92 percent on the least context-dependent items
+  against 32 percent on the most. Section 8.4 now cites that, because it is direct evidence that a
+  model-based estimate of context-dependence tracks human behaviour, which is the assumption this
+  project's whole evaluation rests on and cannot test for itself.
+- References at 62, all cited, audit ALL CLEAN. Body 30,118 words.

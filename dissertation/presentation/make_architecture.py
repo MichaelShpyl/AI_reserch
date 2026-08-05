@@ -112,7 +112,9 @@ def main() -> None:
             fontsize=7.5, color="#7a8a92")
 
     # Question generation: two backends, compared (a core contribution).
-    sub_pair(xs[4], "A: commercial\nLLM (API)", "B: Llama 3 8B\n(QLoRA)")
+    # Backend B moved from Llama 3 8B to Qwen2.5 3B on the fit-probe evidence, signed off by the
+    # supervisor on 3 July 2026. The diagram carried the old name until the pre-final deck.
+    sub_pair(xs[4], "A: commercial\nLLM (API)", "B: Qwen2.5 3B\n(QLoRA)")
     ax.text(xs[4], ysub + sbh / 2 + 0.15, "two backends", ha="center",
             va="center", fontsize=7.5, color="#7a8a92")
 

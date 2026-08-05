@@ -51,6 +51,25 @@ simulation is a conservative, hard test of essay-specificity. A real student who
 their submission would do worse than the blind model on the grounded questions, so the true picture
 sits somewhere between the two lines in Figure 8.1.
 
+The principle the simulation rests on is not one I invented, and it has been checked against people
+rather than only against models. Liusie et al. (2022) showed that multiple-choice comprehension
+systems given no passage at all still answer well above chance, scoring above 50 percent against a
+25 percent random baseline, because they fall back on world knowledge. They then built two measures
+of how much a question actually depends on its source, one of which, contextual mutual information,
+is close in spirit to the source-aware minus source-blind gap used here. The part that matters most
+for this chapter is what happened when they put those measures in front of human readers. On the
+questions their measure rated as genuinely context-dependent, humans gained 71 percent accuracy
+when the passage was supplied; on the questions it rated as answerable without context, the gain was
+22 percent. Human volunteers also answered the questions the passage-free system found easy, scoring
+92 percent on the least context-dependent items against 32 percent on the most.
+
+That is direct evidence that a model-based estimate of context-dependence tracks what happens when
+real people answer the same questions, which is the assumption this chapter's method needs and
+cannot test for itself. It does not remove the need for the classroom study in Chapter 10, since
+their setting is multiple-choice comprehension rather than verification interviews about a
+student's own writing. But it does mean the measure is standing on something firmer than
+plausibility.
+
 ## 8.5 What this changes
 
 This is the first measured result for the question generation, and it is more useful as a finding

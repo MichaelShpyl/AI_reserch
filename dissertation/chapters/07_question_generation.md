@@ -82,6 +82,24 @@ lower-order versus higher-order split does not rescue the minority side either. 
 (0.86) comes from majority-class bias, since predicting lower-order for everything scores about
 0.85 on this test set.
 
+Published work on this task reports far better figures, and the comparison is worth making
+carefully rather than avoiding. Kumar et al. (2025) reach 94 percent accuracy, recall and F1 with
+an augmented support vector machine, and Yaacoub et al. (2025) report 91 percent validation
+accuracy with DistilBERT. Neither number contradicts mine, because neither measures the same
+thing. Kumar et al. build their six-class set from 600 sentences held "in the same proportion of
+the six categories", that is, deliberately balanced, and use synonym augmentation to enlarge it.
+On a balanced set, accuracy and macro-F1 converge. The Bloom-labelled part of EduQG is not
+balanced: it is what a real educational corpus looks like, with 110 examples in one tail class and
+19 in another. Macro-F1 weights every class equally regardless of size, so those two classes alone
+can hold the score down no matter how well the majority classes are learned, which is exactly the
+pattern in the per-class breakdown above. My own accuracy of 0.57 is the number closest in kind to
+the published ones, and it is still well below them.
+
+The honest conclusion is that this component is limited by label supply rather than by
+architecture, and that the published figures show what becomes possible once the label
+distribution is fixed. Section 7.6 describes the attempt to buy more labels cheaply, and why it
+failed its own validation gate.
+
 ![Figure 7.1: Bloom's-level classification on the EduQG test split. The trained BERT-base doubles the keyword heuristic on macro-F1 (0.31 vs 0.16), but neither model can learn the two smallest classes from 110 and 19 examples.](../figures/fig_bloom_classifier.png)
 
 The component works and clearly beats the transparent baseline, so it replaces the heuristic in the
@@ -121,9 +139,21 @@ span-level (exact boundary and exact type) with seqeval on the held-out test ess
 
 The result is a micro span-F1 of 0.63: premises 0.72, major claims 0.54, claims 0.44 (Figure 7.2).
 Strict matching is a hard yardstick, and the per-class order is the expected one, since claim
-boundaries are the classic ambiguity in this corpus. Dedicated argument-mining architectures with
-CRF decoding or joint relation modelling report higher figures (Pietron et al., 2024), so this is a
-working first version some way short of the state of the art, and I report it as such. For the
+boundaries are the classic ambiguity in this corpus.
+
+Putting that number in context needs care, because the obvious comparison is not like for like.
+Stab and Gurevych (2017), who built this corpus, report a macro F1 of 0.867 for identifying
+argument components, against a human upper bound of 0.886 on the same data and a heuristic
+baseline of 0.642, so their model reaches 97.9 percent of human performance. Two things separate
+that figure from mine. Theirs is measured at token level, where a partially correct span still
+earns credit, while mine requires the exact boundary and the exact type. And their system is a
+CRF with a large hand-engineered feature set followed by joint Integer Linear Programming
+decoding over components and relations, where mine is a single sequence labeller with no joint
+decoding and no feature engineering. The honest reading is that 0.63 under strict matching is a
+working component rather than a competitive one, and that the gap to published work is a matter
+of decoding strategy and evaluation criterion as much as raw quality. What the component has to
+do here is narrower than the benchmark task: it supplies verbatim spans for provenance, and
+Section 7.9 explains how the pipeline compensates where it falls short. For the
 pipeline it opened a design choice, settled with my supervisor and implemented in Section 7.9. The
 trained extractor finds spans in the student's own words. The prompted extractor produces readable
 claim paraphrases with sentence citations. The guide combines them, using the spans for provenance

@@ -117,8 +117,12 @@ The pipeline needs the claims and evidence in a student's essay before it can ge
 grounded in them. The foundational resource is the Persuasive Essays corpus of Stab and Gurevych
 (2017), which annotates argument components (claims, premises) and the relations between them, and
 frames the task as token-level sequence labelling plus relation classification. The argument-mining
-component here follows that setup. More recent work applies transformer ensembles, and even LLM
-refinement, to argument component classification across several corpora (Pietron et al., 2024).
+component here follows that setup. Their own system pairs a CRF over a large hand-engineered
+feature set with Integer Linear Programming that optimises component types and relations jointly,
+and reaches a macro F1 of 0.867 for component identification against a human upper bound of 0.886,
+which is the benchmark Chapter 7 measures itself against. More recent work applies transformer
+ensembles, and LLM refinement, to argument component classification, though on debate corpora such
+as Args.me rather than on persuasive essays (Pietron et al., 2024).
 
 The field has moved quickly since, and Li et al. (2025) survey where large language models now sit
 within it. Two results are directly relevant to the constraint this project works under. Abkenar et
