@@ -1888,3 +1888,21 @@ evaluation programme.
 - Everything on screen is the real 3108a pair and the real card rows, claims, questions and scores
   from data.js. The window chrome and the note are the only invented parts, and they are the parts
   that are obviously interface rather than result.
+
+### The lecturer demo now shows the evidence on the text itself (4 August 2026, later)
+
+- Reworked the simulated session around the thing a lecturer actually does, which is read the
+  flagged work rather than read a score. When the check finishes, the submission comes back with
+  the detector's marks on it: three shading tiers over the sentences the occlusion pass reacted to
+  most (3 strongest, 7 strong, 15 noticeable, the other 75 left clean), with a key in the pane
+  header.
+- The cursor now scrolls the reading pane at reading pace, then hovers individual marked sentences.
+  Each hover opens an explanation card that is built from measured data only: where the sentence
+  sits in the occlusion ranking, which giveaway phrase it uses with the count in this submission
+  against the count in the student's own matched essay, and its length against the essay's
+  unusually even sentence length. Sentence 21 is the good example, rank 2 of 100 and using
+  "furthermore", which appears six times here and never in the human twin.
+- The walkthrough went from eleven steps to fourteen, and the reading and hovering happen before
+  the habit card rather than after, so the specific evidence lands before the essay-level summary.
+- The tooltip is clamped to the stage so it cannot run off the edge, and it flips above the
+  sentence when there is no room below.

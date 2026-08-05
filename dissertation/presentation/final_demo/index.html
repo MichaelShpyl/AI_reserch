@@ -328,6 +328,33 @@ header{
   border:2px solid var(--teal); transform:translate(-50%,-50%) scale(.4); opacity:.9;
   animation:rip .55s ease-out forwards}
 @keyframes rip{to{transform:translate(-50%,-50%) scale(3.2); opacity:0}}
+/* the reading pane: the submission with the detector's marks on it */
+.readwrap{display:grid; grid-template-columns:1.35fr 1fr; gap:.9rem; flex:1; min-height:0}
+.readdoc{position:relative; border:1px solid var(--line); border-radius:.5rem; background:var(--page);
+  overflow:hidden; display:flex; flex-direction:column; min-height:0}
+.readdoc .rhead{flex:none; padding:.45rem .75rem; border-bottom:1px solid var(--line);
+  background:var(--paper); font-size:.7rem; color:var(--muted); font-weight:700;
+  letter-spacing:.06em; text-transform:uppercase; display:flex; align-items:center; gap:.6rem}
+.readdoc .rkey{margin-left:auto; display:flex; gap:.7rem; text-transform:none; letter-spacing:0; font-weight:400}
+.readdoc .rkey i{display:inline-block; width:.8em; height:.8em; border-radius:2px; vertical-align:-.08em; margin-right:.25rem}
+.readbody{flex:1; overflow-y:auto; padding:.85rem 1rem; font-family:Cambria,Georgia,serif;
+  font-size:.79rem; line-height:1.75; text-align:justify}
+.readbody s5{display:inline; border-radius:2px; transition:background .3s, box-shadow .2s}
+.hl3{background:color-mix(in srgb, var(--rust) 26%, transparent); cursor:help}
+.hl2{background:color-mix(in srgb, var(--rust) 15%, transparent); cursor:help}
+.hl1{background:color-mix(in srgb, var(--rust) 7%, transparent); cursor:help}
+.hlnow{box-shadow:0 0 0 2px var(--rust); background:color-mix(in srgb, var(--rust) 34%, transparent)}
+/* the hover explanation */
+.tip{position:absolute; z-index:70; max-width:22rem; background:var(--page); border:1.5px solid var(--rust);
+  border-radius:.45rem; box-shadow:0 12px 34px rgba(32,38,45,.22); padding:.6rem .7rem;
+  font-family:"Segoe UI Variable Text","Segoe UI",system-ui,sans-serif; font-size:.75rem;
+  line-height:1.5; opacity:0; transform:translateY(4px); transition:opacity .25s, transform .25s;
+  pointer-events:none}
+.tip.on{opacity:1; transform:none}
+.tip .tiph{font-weight:700; color:var(--rust); font-size:.72rem; text-transform:uppercase;
+  letter-spacing:.05em; margin-bottom:.25rem}
+.tip .tipr{color:var(--muted); margin-top:.35rem; font-size:.71rem}
+.tip b{color:var(--ink)}
 .simhint{position:absolute; bottom:12px; right:18px; font-size:.75rem; color:var(--muted)}
 .simbar{position:absolute; left:0; right:0; bottom:0; height:4px; background:var(--band)}
 .simbar i{display:block; height:100%; width:0; background:var(--teal); transition:width .4s linear}
@@ -478,6 +505,7 @@ header{
       </div>
     </div>
   </div>
+  <div class="tip" id="simtip"></div>
   <div id="cursor"><svg width="22" height="22" viewBox="0 0 22 22">
     <path d="M2 2 L2 16 L6 12.5 L9 19 L12 17.5 L9 11.5 L14.5 11.5 Z"
       fill="#fff" stroke="#20262d" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
@@ -1269,6 +1297,27 @@ async function typeInto(sel, text, speed=42){
   box.classList.remove("focus");
 }
 
+// ---- per-sentence evidence, so a hover can say WHY a sentence is marked ----
+// Everything here comes from the measured data: the occlusion ranking, the phrase counts against
+// the matched human twin, and the sentence lengths. Nothing is asserted that was not computed.
+function sentenceEvidence(i){
+  const S = DATA.ai.sentences, meta = DATA.ai.sent_meta;
+  const rank = meta.rank[i], words = meta.words[i];
+  const text = S[i] || "";
+  const hits = PHRASES.filter(p => phraseRe(p).test(text));
+  const bits = [];
+  if (rank <= 3)       bits.push(`This is one of the <b>three sentences the detector reacted to most</b> in the whole essay. Removing it moves the score more than removing any other.`);
+  else if (rank <= 10) bits.push(`This sits in the <b>ten sentences the detector reacted to most</b>.`);
+  else                 bits.push(`This is in the <b>top quarter</b> of sentences by how much the detector reacted to it.`);
+  if (hits.length) {
+    const p = hits[0];
+    bits.push(`It uses <b>"${p}"</b>, which appears ${phraseCount("ai", p)} times in this submission and ${phraseCount("human", p)} times in the student's own essay on the same topic.`);
+  }
+  const med = 21;
+  if (Math.abs(words - med) <= 4) bits.push(`At ${words} words it is close to this essay's very even sentence length, which is itself one of the flagged habits.`);
+  return { html: bits.join(" "), rank, words };
+}
+
 // Show the sentences a claim actually cites, with a little context, and an ellipsis where the
 // excerpt jumps. Showing only the opening of the essay would hide most of the provenance.
 function citedExcerpt(ns){
@@ -1283,6 +1332,66 @@ function citedExcerpt(ns){
     prev = n;
   }
   return out;
+}
+
+// The submission rendered with the detector's marks on it, strongest first.
+function markedDoc(){
+  const S = DATA.ai.sentences, rank = DATA.ai.sent_meta.rank;
+  return S.map((t,i)=>{
+    const r = rank[i];
+    const cls = r<=3 ? "hl3" : r<=10 ? "hl2" : r<=25 ? "hl1" : "";
+    return `<s5 data-i="${i}" class="${cls}">${t.replace(/</g,"&lt;")} </s5>`;
+  }).join("");
+}
+
+// Park the tooltip beside a sentence without letting it fall off the pane.
+function showTip(spanEl, i){
+  const tip = $("#simtip"), stage = $("#sim");
+  const ev = sentenceEvidence(i);
+  tip.innerHTML = `<div class="tiph">Why this is marked</div>${ev.html}
+    <div class="tipr">Sentence ${i+1} &middot; ${ev.words} words &middot; reaction rank ${ev.rank} of ${DATA.ai.sentences.length}</div>`;
+  const sr = spanEl.getBoundingClientRect(), br = stage.getBoundingClientRect();
+  tip.style.opacity = 0; tip.classList.add("on");
+  const w = 300;
+  let x = sr.left - br.left + sr.width/2 - w/2;
+  x = Math.max(12, Math.min(x, br.width - w - 12));
+  let y = sr.bottom - br.top + 8;
+  tip.style.left = x+"px"; tip.style.width = w+"px";
+  if (y + tip.offsetHeight > br.height - 20) y = sr.top - br.top - tip.offsetHeight - 8;
+  tip.style.top = y+"px"; tip.style.opacity = "";
+  spanEl.classList.add("hlnow");
+}
+function hideTip(){
+  $("#simtip").classList.remove("on");
+  document.querySelectorAll(".readbody .hlnow").forEach(s=>s.classList.remove("hlnow"));
+}
+
+// A visible, gradual scroll of the reading pane, so the recording shows her reading.
+function scrollRead(to, ms=1400){
+  return new Promise(res=>{
+    const box=$("#readbody"); if(!box) return res();
+    const from=box.scrollTop, dist=to-from, t0=performance.now();
+    if(REDUCED){ box.scrollTop=to; return res(); }
+    (function step(now){
+      const p=Math.min(1,(now-t0)/ms);
+      box.scrollTop = from + dist*(1-Math.pow(1-p,3));
+      if(p<1) requestAnimationFrame(step); else res();
+    })(t0);
+    setTimeout(()=>{ if(Math.abs(box.scrollTop-to)>2) box.scrollTop=to; res(); }, ms+140);
+  });
+}
+async function hoverSentence(i, dwell=2600){
+  const el = document.querySelector(`.readbody s5[data-i="${i}"]`);
+  if(!el) return;
+  const box=$("#readbody");
+  const br=box.getBoundingClientRect(), er=el.getBoundingClientRect();
+  if(er.top < br.top+20 || er.bottom > br.bottom-20){
+    await scrollRead(box.scrollTop + (er.top-br.top) - box.clientHeight/2, 900);
+  }
+  await moveTo(el, 750);
+  showTip(el, i);
+  await wait(dwell);
+  hideTip();
 }
 
 function buildSim(){
@@ -1319,23 +1428,35 @@ const SIM_STEPS = [
     $("#simstage-body").innerHTML = `<div class="simdoc" id="sd">${sents}</div>`;
     await wait(1500);
   },
-  // 3. run the check
+  // 3. run the check, and the text comes back marked
   async () => {
-    narrate("She runs the check. Nothing has been sent anywhere: the models are on this machine.");
+    narrate("She runs the check. Nothing leaves the machine: both models are local.");
     await clickAt("#btn-check", 800);
     $("#btn-check").textContent = "Checking...";
-    await wait(1300);
+    await wait(1400);
     $("#btn-check").textContent = "Run check";
     $("#btn-guide").removeAttribute("disabled");
     $("#simstage-body").innerHTML = `
-      <div class="panelwrap">
-        <div class="simpanel" id="p1"><h4>1 · Detection</h4>
-          <div class="verdictbig flag">0.96 &nbsp;<span style="font-size:.8rem; font-weight:600">flagged</span></div>
-          <p style="font-size:.76rem; color:var(--muted); margin-top:.35rem">
-            word-pattern reader 99.96%<br>writing-style reader 99.85%<br>
-            Both readers agree, so the flag stands.</p></div>
-        <div class="simpanel" id="p2"><h4>2 · Why, in plain words</h4>
-          <div id="simstrips"></div></div>
+      <div class="readwrap">
+        <div class="readdoc">
+          <div class="rhead">The submission, marked
+            <span class="rkey">
+              <span><i class="hl3"></i>strongest</span>
+              <span><i class="hl2"></i>strong</span>
+              <span><i class="hl1"></i>noticeable</span>
+            </span>
+          </div>
+          <div class="readbody" id="readbody">${markedDoc()}</div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:.7rem; min-height:0">
+          <div class="simpanel" id="p1"><h4>Verdict</h4>
+            <div class="verdictbig flag">0.96 &nbsp;<span style="font-size:.8rem; font-weight:600">flagged</span></div>
+            <p style="font-size:.75rem; color:var(--muted); margin-top:.35rem; line-height:1.5">
+              word-pattern reader 99.96%<br>writing-style reader 99.85%<br>
+              Both readers agree, so the flag stands.</p></div>
+          <div class="simpanel" id="p2" style="flex:1; overflow:hidden"><h4>The five habits behind it</h4>
+            <div id="simstrips"></div></div>
+        </div>
       </div>`;
     const rows = DATA.ai.card.rows.slice(0,5);
     const h=$("#simstrips");
@@ -1343,23 +1464,49 @@ const SIM_STEPS = [
       const lo=Math.min(r.human_p10,r.value), hi=Math.max(r.human_p90,r.value);
       const pad=(hi-lo)*0.12||1, a=lo-pad, b=hi+pad, nx=x=>((x-a)/(b-a)*100);
       const e=document.createElement("div"); e.className="strip";
-      e.style.gridTemplateColumns="7.4rem 1fr auto";
-      e.innerHTML=`<div class="lab" style="font-size:.74rem">${r.label}</div>
+      e.style.gridTemplateColumns="6.8rem 1fr auto";
+      e.innerHTML=`<div class="lab" style="font-size:.72rem">${r.label}</div>
         <div class="lane"><div class="bandbar" style="left:${nx(r.human_p10)}%; width:${nx(r.human_p90)-nx(r.human_p10)}%"></div>
         <div class="med" style="left:${nx(r.human_median)}%"></div>
         <div class="dot" style="background:var(--amber); left:calc(${nx(r.value)}% - 8px)"></div></div>
-        <div class="val num" style="font-size:.7rem">${fmt(r.value)} vs ${fmt(r.human_median)}</div>`;
+        <div class="val num" style="font-size:.68rem">${fmt(r.value)} vs ${fmt(r.human_median)}</div>`;
       h.appendChild(e);
     });
     setTimeout(()=>$("#p1").classList.add("on"), 120);
-    setTimeout(()=>$("#p2").classList.add("on"), 900);
-    await wait(3200);
-  },
-  // 4. read the explanation
-  async () => {
-    narrate("The flag arrives with named reasons. Every habit sits outside the range of real student writing.");
-    await moveTo("#p2", 800);
+    setTimeout(()=>$("#p2").classList.add("on"), 800);
     await wait(2600);
+  },
+  // 4. she reads the marked text
+  async () => {
+    narrate("The shading shows where the detector reacted, so she can read the evidence rather than take a number on trust.");
+    await moveTo("#readbody", 900);
+    await scrollRead(260, 1500);
+    await wait(700);
+    await scrollRead(620, 1600);
+    await wait(900);
+  },
+  // 5. hover the strongest sentence
+  async () => {
+    narrate("Hovering any marked sentence says <b>why</b> it is marked.");
+    const top = DATA.ai.sent_meta.top[0].n - 1;
+    await hoverSentence(top, 3200);
+    await wait(500);
+  },
+  // 6. hover a second one, a phrase case
+  async () => {
+    narrate("A second one. The reasons are specific, and she can disagree with any of them.");
+    const rank = DATA.ai.sent_meta.rank;
+    const cand = DATA.ai.sentences.map((t,i)=>({i, r:rank[i],
+        hit: PHRASES.some(p=>phraseRe(p).test(t))}))
+      .filter(x=>x.hit && x.r<=25).sort((a,b)=>a.r-b.r)[0];
+    if(cand) await hoverSentence(cand.i, 3400);
+    await wait(400);
+  },
+  // 7. the habit card
+  async () => {
+    narrate("Beside it, the same evidence at essay level: five named habits, each outside the range of real student writing.");
+    await moveTo("#p2", 800);
+    await wait(2800);
   },
   // 5. claims and provenance
   async () => {
