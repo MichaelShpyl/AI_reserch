@@ -379,7 +379,7 @@ header{
             <circle class="arc" id="arc" cx="60" cy="60" r="50" fill="none" stroke-width="11"
               stroke-linecap="round" transform="rotate(-90 60 60)"/>
             <text id="dial-num" x="60" y="58" text-anchor="middle" font-size="21" font-weight="700">0.00</text>
-            <text x="60" y="76" text-anchor="middle" font-size="9" fill="var(--muted)">probability of AI</text>
+            <text x="60" y="74" text-anchor="middle" font-size="7.4" fill="var(--muted)">probability of AI</text>
           </svg>
           <div>
             <div class="verdict" id="verdict"></div>
@@ -589,6 +589,34 @@ function renderStrips(kind){
   });
 }
 
+// Scroll ONLY the document panel, never the page. scrollIntoView() also scrolls the window to
+// bring the panel into view, which threw the reader back to the top of the page on every click.
+function revealInDoc(el){
+  if(!el) return;
+  const box = document.querySelector(".doc");
+  if(!box) return;
+  // Measure from rects: offsetTop is relative to the nearest positioned ancestor, which is not
+  // necessarily this container, so it silently produced a near-zero target.
+  const br = box.getBoundingClientRect(), er = el.getBoundingClientRect();
+  const target = Math.max(0, box.scrollTop + (er.top - br.top) - box.clientHeight/2 + er.height/2);
+  if(REDUCED){ box.scrollTop = target; return; }
+  // Tween it ourselves. Native smooth scrolling is silently a no-op in some embedded browsers,
+  // which left the reader looking at the top of the essay after every claim click.
+  const from = box.scrollTop, dist = target - from, t0 = performance.now(), ms = 420;
+  cancelAnimationFrame(revealInDoc._raf);
+  clearTimeout(revealInDoc._safety);
+  (function step(now){
+    const p = Math.min(1, (now - t0) / ms);
+    box.scrollTop = from + dist * (1 - Math.pow(1 - p, 3));
+    if(p < 1) revealInDoc._raf = requestAnimationFrame(step);
+  })(t0);
+  // rAF is paused in a background tab, so guarantee the destination either way. Landing there
+  // without the animation is fine; not landing there at all is the bug.
+  revealInDoc._safety = setTimeout(()=>{
+    if(Math.abs(box.scrollTop - target) > 2) box.scrollTop = target;
+  }, ms + 120);
+}
+
 function skyline(hostId, words){
   const host = $(hostId); host.innerHTML="";
   const mx = 55;
@@ -622,7 +650,7 @@ function renderSigns(kind){
         b.setAttribute("aria-pressed","true");
         const marks = document.querySelectorAll(`#doc-body .phr[data-p="${c.p}"]`);
         marks.forEach(m=>m.classList.add("on"));
-        if(marks[0]) marks[0].scrollIntoView({behavior: REDUCED?"auto":"smooth", block:"center"});
+        revealInDoc(marks[0]);
       }
     });
     host.appendChild(b);
@@ -648,7 +676,7 @@ function renderSigns(kind){
       " (shaded in the document).";
     sig.querySelectorAll(".slink").forEach(l=>l.addEventListener("click",()=>{
       const s=$(`#doc-body span[data-n="${l.dataset.n}"]`);
-      if(s){ s.scrollIntoView({behavior: REDUCED?"auto":"smooth", block:"center"});
+      if(s){ revealInDoc(s);
              s.classList.remove("flash"); void s.offsetWidth; s.classList.add("flash"); }
     }));
   } else {
@@ -697,7 +725,7 @@ function renderClaims(kind){
           if(s){ s.classList.add("cited-strong"); }
         });
         const first=$(`#doc-body span[data-n="${c.source_ns[0]}"]`);
-        if(first) first.scrollIntoView({behavior: REDUCED?"auto":"smooth", block:"center"});
+        revealInDoc(first);
       }
     });
   });
