@@ -2073,3 +2073,33 @@ evaluation programme.
 - Verified the whole chain: the trigger hides the header and takes both panes full-bleed, the
   simulation runs, the handover to the film fires, and the closing card renders over everything.
   The film normally loops, so record mode stops it on the last scene instead.
+
+### An interactive app, so anyone can run the pipeline on their own text (7 August 2026)
+
+- Built src/webapp: a local FastAPI service and a single-page UI where you paste a submission and
+  get the whole analysis. It is not another demo over fixed data. It calls the same trained
+  artefacts the results chapters report on, so the app and the dissertation cannot disagree.
+- Performance was the first problem. hybrid_detect() reloads DeBERTa, spaCy, GPT-2, the gradient
+  boosting model and the fuser on every call, which is fine for a batch experiment and unusable for
+  a UI. pipeline_service.py keeps one copy of each model in process behind a lock, so the models
+  load once in about 40 seconds and a detection then takes roughly 1.5 seconds.
+- The page runs the stages in the order they get fast: detection and the habit card come back in a
+  couple of seconds from local models, then the sentence marks, then claims and questions, which
+  need a language model and take about half a minute. Each stage explains itself in a "how this
+  happens" note, and the not-flagged case is handled explicitly rather than left blank.
+- Two real bugs found by testing rather than by reading. The explanation endpoint returned nothing
+  useful because explain_submission names its list "features" and also writes a PNG, so the shape
+  is now normalised in one place instead of the front end knowing about it. Worse, claim provenance
+  came back empty: extract_claims returns source_sentences as {"n", "text"} dicts and zero-indexed,
+  while I had looked for source_ns with 1-based bounds. That silently removed the property the
+  whole design rests on, that a claim can be traced to the student's own sentences.
+- The first bundled example was wrong too: I had extracted the guide markdown rather than the essay,
+  so the app was being tested on a document full of "Source in the submission" markers. The examples
+  now come from the cleaned corpus itself.
+- Correctness check: on the worked pair the app reproduces the reported figures exactly, 0.9572
+  flagged for the AI version and 0.0234 not flagged for the real student's essay, with the same
+  component scores. Submissions under 120 words are refused, because the habit measurements are
+  unstable below that.
+- The AI example ships with the repo since it is machine-written. The human one is BAWE and is
+  gitignored, because that corpus is licensed for research and must not be redistributed. The app
+  says so when the file is absent rather than failing.
