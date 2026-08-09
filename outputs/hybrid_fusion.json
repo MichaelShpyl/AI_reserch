@@ -1,0 +1,91 @@
+{
+  "home_test": {
+    "transformer": {
+      "accuracy": 0.99,
+      "precision": 0.9804,
+      "recall": 1.0,
+      "f1": 0.9901
+    },
+    "style": {
+      "accuracy": 0.985,
+      "precision": 0.9802,
+      "recall": 0.99,
+      "f1": 0.9851
+    },
+    "style_plus_perplexity": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "hybrid": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "perplexity_shap_rank": 1
+  },
+  "cross_domain": {
+    "n": 3000,
+    "overall": {
+      "transformer": {
+        "accuracy": 0.7527,
+        "precision": 0.6867,
+        "recall": 0.9293,
+        "f1": 0.7898
+      },
+      "style_plus_perplexity": {
+        "accuracy": 0.7793,
+        "precision": 0.816,
+        "recall": 0.7213,
+        "f1": 0.7657
+      },
+      "hybrid": {
+        "accuracy": 0.794,
+        "precision": 0.8021,
+        "recall": 0.7807,
+        "f1": 0.7912
+      }
+    },
+    "per_domain": {
+      "arxiv": {
+        "human_FPR_transformer": 0.79,
+        "human_FPR_style": 0.4967,
+        "human_FPR_hybrid": 0.6067,
+        "acc_transformer": 0.5933,
+        "acc_hybrid": 0.6067
+      },
+      "peerread": {
+        "human_FPR_transformer": 0.2967,
+        "human_FPR_style": 0.0767,
+        "human_FPR_hybrid": 0.0867,
+        "acc_transformer": 0.815,
+        "acc_hybrid": 0.8783
+      },
+      "reddit": {
+        "human_FPR_transformer": 0.23,
+        "human_FPR_style": 0.04,
+        "human_FPR_hybrid": 0.0467,
+        "acc_transformer": 0.8667,
+        "acc_hybrid": 0.8583
+      },
+      "wikihow": {
+        "human_FPR_transformer": 0.4067,
+        "human_FPR_style": 0.08,
+        "human_FPR_hybrid": 0.1033,
+        "acc_transformer": 0.7283,
+        "acc_hybrid": 0.7783
+      },
+      "wikipedia": {
+        "human_FPR_transformer": 0.3967,
+        "human_FPR_style": 0.12,
+        "human_FPR_hybrid": 0.12,
+        "acc_transformer": 0.76,
+        "acc_hybrid": 0.8483
+      }
+    }
+  },
+  "fusion": "logistic regression over [P_transformer, P_style+ppl], fitted on the validation split; cross-domain applied zero-shot",
+  "note": "cross-domain sample identical to eval_m4_transfer.py (source, per-domain 300 per class, seed 42, same normalisation)"
+}

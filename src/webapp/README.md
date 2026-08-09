@@ -37,13 +37,24 @@ page says plainly what is missing rather than failing silently.
 2. **Explanation.** The habit card of Section 5.7, in plain sentences and as positions against the
    middle 80 percent of real student essays. This is the account that passed the faithfulness test;
    the word-level highlighting people expect did not, which is why it is not offered.
-3. **Sentence marks.** Sentence-level occlusion (Section 5.8): each sentence is deleted in turn and
+3. **Corpus position.** The same measurements as percentiles against the 640 human essays. The habit
+   card says whether a measurement is outside the normal range; this says by how far.
+4. **Sentence marks.** Sentence-level occlusion (Section 5.8): each sentence is deleted in turn and
    the change in the score is measured, in log-odds because the detector saturates in probability.
    Expect the marks to be spread out. There is no single guilty sentence, and the app does not
-   pretend otherwise.
-4. **Claims and questions.** The claim extractor keeps the sentence numbers each claim came from,
+   pretend otherwise. Click a marked sentence for what is known about it, what that supports, and
+   what to do next. Underneath, the strongest sentences are removed and the rest re-scored, so you
+   can see whether the verdict survives losing its best evidence.
+5. **Claims and questions.** The claim extractor keeps the sentence numbers each claim came from,
    and the quoted text is looked up from the submission rather than echoed by the model, so an
    invented quotation is impossible. Questions are written per claim and tagged with a Bloom level.
+   How many claims, how many questions each, and which backend writes them are all controls on the
+   page.
+
+**Compare two submissions** runs two texts through the same models side by side, with their habits
+and percentiles set against each other. It is the check that makes a flag defensible: if a
+submission you know to be genuine sits at the same extremes as the flagged one, the flag is
+describing the genre rather than the author.
 
 ## Correctness
 
@@ -56,8 +67,15 @@ and reporting them anyway would be the kind of unearned confidence this project 
 
 ## Endpoints
 
-`GET /api/status`, `POST /api/warmup`, `POST /api/detect`, `POST /api/explain`, `POST /api/marks`,
-`POST /api/questions`. Interactive docs at `/api/docs`.
+`GET /api/status`, `POST /api/warmup`, `POST /api/detect`, `POST /api/explain`,
+`POST /api/percentiles`, `POST /api/marks`, `POST /api/counterfactual`, `POST /api/questions`.
+Interactive docs at `/api/docs`.
+
+## Figures
+
+`dissertation/presentation/make_webapp_figures.py` drives a headless Chrome through the whole page
+and writes the screenshots used in Section 4.11. Start this app first, then run it. Scripting the
+capture means the figures cannot quietly go stale when the layout changes.
 
 ## The bundled examples
 

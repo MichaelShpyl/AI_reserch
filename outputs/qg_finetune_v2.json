@@ -1,0 +1,8 @@
+{
+  "base_model": "unsloth/Qwen2.5-3B-Instruct-bnb-4bit",
+  "n_examples": 2600,
+  "data": "SQuAD context->question (open-ended)",
+  "config": "QLoRA r=16 q/k/v/o, 2 epochs, bs1 x grad-accum 8, paged AdamW 8-bit (identical to v1)",
+  "final_loss": 1.2711,
+  "note": "v2: same config as v1, only the training data changed (EduQG -> SQuAD) to fix the multiple-choice degeneracy. Audit the output for degeneracy before trusting any score."
+}

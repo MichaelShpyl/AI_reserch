@@ -1,0 +1,8 @@
+{
+  "base_model": "unsloth/Qwen2.5-3B-Instruct-bnb-4bit",
+  "n_examples": 2600,
+  "data": "EduQG context->question",
+  "config": "QLoRA r=16 q/k/v/o, 2 epochs, bs1 x grad-accum 8, paged AdamW 8-bit",
+  "final_loss": 1.4152,
+  "note": "Backend B on Qwen2.5 3B; supervisor sign-off on the 8B-to-3B scope change relayed 3 July 2026."
+}

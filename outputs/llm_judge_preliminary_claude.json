@@ -1,0 +1,120 @@
+{
+  "provenance": {
+    "judge": "interactive:anthropic:claude-fable-5 (assistant session)",
+    "status": "PRELIMINARY, NOT A JUDGE OF RECORD",
+    "why_preliminary": [
+      "produced inside an interactive assistant session, not by a scripted API call, so it is not reproducible the way the evaluation plan requires",
+      "the rater has prior exposure to this project's discrimination-simulation findings, so its discrimination ratings are not context-free; any correlation with the simulation computed from these ratings is partially circular and must not be reported as validation",
+      "purpose: smoke-test the cross-judge agreement machinery and preview an Anthropic-family judge's behaviour before the funded API run replaces this file's role entirely"
+    ],
+    "superseded": "6 July 2026: the real API judges (anthropic claude-opus-4-8, openai gpt-4o-mini) have run; llm_judge.json is the record. This file remains only as the documented smoke test."
+  },
+  "guide": "3108a_ai",
+  "scores": {
+    "How did you determine that Dickinson's poetry represents a distinct literary genre from Shakespeare's Othello and Austen's Emma? What specific examples or features of each text led you to this conclusion?": {
+      "relevance": 5,
+      "specificity": 4,
+      "discrimination": 3,
+      "cognitive": 4,
+      "mean": 4.0,
+      "rationale": "targets their conclusion but genre distinctness of poetry/drama/novel is textbook knowledge"
+    },
+    "You mentioned that the three texts share commonalities in their exploration of universal themes and ideas. Can you identify one particular theme or idea that is explored in all three texts, and explain how you used evidence from each text to support your argument?": {
+      "relevance": 5,
+      "specificity": 5,
+      "discrimination": 4,
+      "cognitive": 4,
+      "mean": 4.5,
+      "rationale": "demands their chosen theme plus per-text evidence; checkable against the essay"
+    },
+    "How do you think the fact that these three texts represent different literary genres (poetry, drama, prose fiction) affects the way they explore universal themes and ideas? What connections did you make between the genre of a particular text and its exploration of certain themes or ideas?": {
+      "relevance": 5,
+      "specificity": 4,
+      "discrimination": 3,
+      "cognitive": 5,
+      "mean": 4.25,
+      "rationale": "asks for their connections but a knowledgeable non-reader can improvise genre-theme links"
+    },
+    "What specific examples from the texts you analyzed did you use to illustrate how language can convey meaning?": {
+      "relevance": 5,
+      "specificity": 5,
+      "discrimination": 4,
+      "cognitive": 3,
+      "mean": 4.25,
+      "rationale": "pure recall of their own examples; verifiable, but cognitively low"
+    },
+    "How does the metaphor in one of these texts contribute to evoking a sense of longing and yearning, and what makes this relevant to the human experience?": {
+      "relevance": 3,
+      "specificity": 3,
+      "discrimination": 2,
+      "cognitive": 4,
+      "mean": 3.0,
+      "rationale": "names the content in the question; fully answerable from general literary knowledge"
+    },
+    "In your essay, you mentioned that social relationships are often marked by ambiguity and uncertainty. What particular aspect of the texts' use of language led you to make this claim, and how does it relate to your broader argument about the power of language?": {
+      "relevance": 5,
+      "specificity": 5,
+      "discrimination": 4,
+      "cognitive": 5,
+      "mean": 4.75,
+      "rationale": "quotes their essay and demands the reasoning chain to the broader argument"
+    },
+    "How did you decide to use Shakespeare's Othello as an example of a text with historical and cultural context in your essay?": {
+      "relevance": 4,
+      "specificity": 3,
+      "discrimination": 3,
+      "cognitive": 3,
+      "mean": 3.25,
+      "rationale": "'how did you decide' invites a generic answer (Othello is set in Venice)"
+    },
+    "What specific aspects of Dickinson's poetry led you to conclude that it reflects her own experiences as a recluse, and how did this relate to the rest of your argument about the three texts?": {
+      "relevance": 5,
+      "specificity": 4,
+      "discrimination": 3,
+      "cognitive": 4,
+      "mean": 4.0,
+      "rationale": "Dickinson-as-recluse is common knowledge, so generic biography can stand in"
+    },
+    "How do you think the social status of Austen's characters in Emma contributes to the overall theme of historical and cultural context that you were exploring in your essay?": {
+      "relevance": 4,
+      "specificity": 3,
+      "discrimination": 3,
+      "cognitive": 4,
+      "mean": 3.5,
+      "rationale": "broad; generic Austen social-status knowledge suffices"
+    },
+    "How did you decide to use metaphor and symbolism as examples of how Dickinson's poetry conveys meaning and evokes emotions?": {
+      "relevance": 4,
+      "specificity": 3,
+      "discrimination": 3,
+      "cognitive": 3,
+      "mean": 3.25,
+      "rationale": "nearly self-answering: her poetry uses metaphor because it uses metaphor"
+    },
+    "What specific aspects of Shakespeare's Othello led you to choose dramatic intensity and emotional depth as the key features of his style?": {
+      "relevance": 4,
+      "specificity": 4,
+      "discrimination": 3,
+      "cognitive": 4,
+      "mean": 3.75,
+      "rationale": "asks for specifics but stock Othello knowledge (jealousy, intensity) works"
+    },
+    "In your essay, you contrast Austen's subtle and nuanced style with the more expressive styles of Dickinson and Shakespeare. What do you think is the significance of this contrast in terms of how each author approaches their subject matter?": {
+      "relevance": 5,
+      "specificity": 4,
+      "discrimination": 4,
+      "cognitive": 5,
+      "mean": 4.5,
+      "rationale": "their contrast, their significance; harder to improvise convincingly"
+    }
+  },
+  "preview_agreement_with_gemini": {
+    "n": 12,
+    "krippendorff_alpha_interval": -0.397,
+    "spearman_means": {
+      "rho": 0.258,
+      "p": 0.4184
+    },
+    "note": "machinery smoke test only; replace with the funded API judges for the dissertation"
+  }
+}

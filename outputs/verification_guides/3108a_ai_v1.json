@@ -1,0 +1,104 @@
+{
+  "essay_id": "3108a",
+  "source": "ai",
+  "backend": "local:llama3.1:8b",
+  "n_sentences": 100,
+  "claims": [
+    {
+      "claim": "The three texts represent distinct literary genres: poetry, drama, and prose fiction respectively.",
+      "source_sentences": [
+        {
+          "n": 1,
+          "text": "These three texts represent distinct literary genres: poetry, drama, and prose fiction respectively."
+        }
+      ],
+      "questions": [
+        {
+          "question": "How do you think the structural differences between these texts contribute to their classification as distinct literary genres?",
+          "bloom_level": "understand"
+        },
+        {
+          "question": "What specific features of each text lead you to believe that it belongs to a particular genre, and how does this relate to the way readers engage with each type of text?",
+          "bloom_level": "analyse"
+        },
+        {
+          "question": "In what ways do the narrative techniques used in each text reflect the characteristics of its respective genre, and how does this impact the reader's experience?",
+          "bloom_level": "analyse"
+        }
+      ]
+    },
+    {
+      "claim": "These texts demonstrate varying uses of language to convey meaning, including metaphor and symbolism in Dickinson's poetry, dramatic intensity and emotional depth in Shakespeare's dialogue, and subtlety and nuance in Austen's prose.",
+      "source_sentences": [
+        {
+          "n": 21,
+          "text": "Dickinson's poetry relies on metaphor and symbolism to evoke emotions and ideas, whereas Shakespeare's dialogue is characterized by its dramatic intensity and emotional depth."
+        },
+        {
+          "n": 22,
+          "text": "Austen's prose, meanwhile, employs a more subtle and nuanced style to explore the complexities of relationships and social class."
+        }
+      ],
+      "questions": [
+        {
+          "question": "How do you think Dickinson's use of metaphor and symbolism contributes to the overall emotional impact of her poetry?",
+          "bloom_level": "understand"
+        },
+        {
+          "question": "What specific features of Shakespeare's dialogue lead you to describe it as having 'dramatic intensity'?",
+          "bloom_level": "understand"
+        },
+        {
+          "question": "How does Austen's subtle and nuanced prose style allow her to explore complex social issues in a way that might be less effective with more overt language?",
+          "bloom_level": "analyse"
+        }
+      ]
+    },
+    {
+      "claim": "Despite their differences, the three texts share certain commonalities, such as exploring themes of love, relationships, and personal growth.",
+      "source_sentences": [
+        {
+          "n": 28,
+          "text": "Each work explores themes of love, relationships, and personal growth in some way."
+        }
+      ],
+      "questions": [
+        {
+          "question": "How do you think the exploration of love in these texts contributes to their shared themes?",
+          "bloom_level": "understand"
+        },
+        {
+          "question": "Can you give an example from one of the texts that illustrates how personal growth is linked to relationships?",
+          "bloom_level": "apply"
+        },
+        {
+          "question": "What do you believe is the significance of exploring multiple themes simultaneously, rather than focusing on a single theme?",
+          "bloom_level": "understand"
+        }
+      ]
+    },
+    {
+      "claim": "By examining these extracts, we gain a deeper understanding of the ways in which language can be used to convey meaning and evoke emotions.",
+      "source_sentences": [
+        {
+          "n": 32,
+          "text": "By examining these extracts, we gain a deeper understanding of the ways in which language can be used to convey meaning and evoke emotions."
+        }
+      ],
+      "questions": [
+        {
+          "question": "How does the use of the phrase 'convey meaning' relate to the idea that language is not just a neutral tool, but rather an active participant in shaping our understanding?",
+          "bloom_level": "analyse"
+        },
+        {
+          "question": "In what ways do you think the extracts demonstrate the emotional resonance of language, and how does this impact the reader's engagement with the text?",
+          "bloom_level": "analyse"
+        },
+        {
+          "question": "What specific features of the extracts contribute to the claim that they provide a 'deeper' understanding of language, and why are these features effective in achieving this goal?",
+          "bloom_level": "understand"
+        }
+      ]
+    }
+  ]
+}

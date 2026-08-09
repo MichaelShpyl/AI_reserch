@@ -1,0 +1,40 @@
+{
+  "essay_id": "3108a",
+  "source": "ai",
+  "results": {
+    "local": {
+      "backend": "local:llama3.1:8b",
+      "n_claims": 4,
+      "n_questions": 12,
+      "mean_discrimination": 0.0316,
+      "ci95": [
+        -0.0052,
+        0.0827
+      ],
+      "bloom_mix": {
+        "understand": 8,
+        "remember": 1,
+        "analyse": 3
+      },
+      "provenance_ok": true
+    },
+    "commercial": {
+      "backend": "commercial:gemini:gemini-2.5-flash",
+      "n_claims": 4,
+      "n_questions": 12,
+      "mean_discrimination": 0.0217,
+      "ci95": [
+        -0.0017,
+        0.0478
+      ],
+      "bloom_mix": {
+        "analyse": 4,
+        "remember": 3,
+        "understand": 5
+      },
+      "provenance_ok": true
+    }
+  },
+  "skipped": {},
+  "reading": "Same essay, same discrimination scorer; the gap reflects which model generated the questions. Higher mean discrimination is better."
+}

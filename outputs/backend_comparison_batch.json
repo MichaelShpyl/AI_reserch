@@ -1,0 +1,982 @@
+{
+  "essays": {
+    "0165a": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          0.181,
+          -0.0575,
+          -0.0405,
+          -0.0091,
+          0.0854,
+          0.0569,
+          -0.0814,
+          0.0576,
+          -0.0412
+        ],
+        "blooms": [
+          "apply",
+          "understand",
+          "analyse",
+          "understand",
+          "analyse",
+          "analyse",
+          "remember",
+          "analyse",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": 0.0168,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-2.5-flash",
+        "discs": [
+          0.0279,
+          0.0435,
+          0.0282,
+          0.1132,
+          0.051,
+          0.074,
+          0.038,
+          0.0503,
+          0.0683
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "understand",
+          "remember",
+          "understand",
+          "analyse",
+          "remember",
+          "understand",
+          "understand"
+        ],
+        "n_questions": 9,
+        "mean": 0.0549,
+        "provenance_ok": true
+      }
+    },
+    "0033d": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          0.0853,
+          0.0111,
+          0.0575,
+          0.0312,
+          0.0404,
+          -0.0158,
+          0.0054,
+          0.1191,
+          0.0113
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "understand",
+          "understand",
+          "analyse",
+          "analyse",
+          "remember",
+          "understand",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": 0.0384,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-2.5-flash",
+        "discs": [
+          -0.1153,
+          -0.0783,
+          0.1097,
+          0.065,
+          -0.0742,
+          -0.0567,
+          0.027,
+          -0.0073,
+          0.0595
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "remember",
+          "understand",
+          "remember",
+          "analyse",
+          "understand",
+          "understand",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": -0.0078,
+        "provenance_ok": true
+      }
+    },
+    "0393b": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          0.0633,
+          -0.0107,
+          0.0657,
+          0.081,
+          0.2004,
+          0.0667,
+          0.0965,
+          0.0531,
+          0.0628
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "understand",
+          "understand",
+          "remember",
+          "analyse",
+          "understand",
+          "understand",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": 0.0754,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-2.5-flash",
+        "discs": [
+          -0.0084,
+          0.2434,
+          0.1076,
+          -0.003,
+          0.0226,
+          0.0417,
+          0.0591,
+          0.048,
+          0.0713
+        ],
+        "blooms": [
+          "understand",
+          "remember",
+          "analyse",
+          "understand",
+          "understand",
+          "analyse",
+          "remember",
+          "understand",
+          "evaluate"
+        ],
+        "n_questions": 9,
+        "mean": 0.0647,
+        "provenance_ok": true
+      }
+    },
+    "0356e": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          -0.0433,
+          0.0282,
+          0.0146,
+          0.1118,
+          -0.0541,
+          0.0369,
+          0.1549,
+          -0.1074,
+          -0.0082
+        ],
+        "blooms": [
+          "understand",
+          "analyse",
+          "analyse",
+          "understand",
+          "understand",
+          "analyse",
+          "understand",
+          "understand",
+          "understand"
+        ],
+        "n_questions": 9,
+        "mean": 0.0148,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-2.5-flash",
+        "discs": [
+          0.1038,
+          -0.0272,
+          0.0949,
+          0.032,
+          -0.015,
+          0.0094,
+          0.198,
+          -0.0444,
+          -0.0288
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "understand",
+          "remember",
+          "understand",
+          "analyse",
+          "analyse",
+          "understand",
+          "remember"
+        ],
+        "n_questions": 9,
+        "mean": 0.0359,
+        "provenance_ok": true
+      }
+    },
+    "0318c": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          0.0094,
+          0.0626,
+          0.0907,
+          -0.0052,
+          -0.0257,
+          -0.0016,
+          0.0718,
+          -0.011,
+          0.0154
+        ],
+        "blooms": [
+          "understand",
+          "analyse",
+          "analyse",
+          "understand",
+          "analyse",
+          "understand",
+          "apply",
+          "understand",
+          "understand"
+        ],
+        "n_questions": 9,
+        "mean": 0.0229,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-flash-latest",
+        "discs": [
+          0.0324,
+          -0.0166,
+          0.1188,
+          0.2256,
+          0.1782,
+          0.0335,
+          0.0397,
+          0.2221,
+          0.0125
+        ],
+        "blooms": [
+          "evaluate",
+          "remember",
+          "understand",
+          "analyse",
+          "analyse",
+          "understand",
+          "understand",
+          "evaluate",
+          "understand"
+        ],
+        "n_questions": 9,
+        "mean": 0.094,
+        "provenance_ok": true
+      }
+    },
+    "0208b": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          -0.0191,
+          0.0737,
+          -0.0045,
+          0.2603,
+          0.0679,
+          0.1058,
+          0.1245,
+          -0.0841,
+          0.0359
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "evaluate",
+          "understand",
+          "understand",
+          "analyse",
+          "understand",
+          "understand",
+          "evaluate"
+        ],
+        "n_questions": 9,
+        "mean": 0.0623,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-flash-latest",
+        "discs": [
+          0.0212,
+          -0.0725,
+          0.0933,
+          0.0945,
+          0.1054,
+          0.0309,
+          -0.0111,
+          -0.1416,
+          0.138
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "analyse",
+          "understand",
+          "understand",
+          "analyse",
+          "analyse",
+          "understand",
+          "remember"
+        ],
+        "n_questions": 9,
+        "mean": 0.0287,
+        "provenance_ok": true
+      }
+    },
+    "0153a": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          0.2074,
+          0.0018,
+          0.0206,
+          0.1037,
+          0.023,
+          0.0547,
+          0.0731,
+          0.1191,
+          0.081
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "analyse",
+          "understand",
+          "understand",
+          "analyse",
+          "understand",
+          "understand",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": 0.076,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-flash-latest",
+        "discs": [
+          0.0344,
+          -0.015,
+          0.1037,
+          0.0141,
+          0.0504,
+          0.1375,
+          0.0629,
+          -0.0931,
+          0.2447
+        ],
+        "blooms": [
+          "create",
+          "understand",
+          "understand",
+          "understand",
+          "analyse",
+          "create",
+          "understand",
+          "understand",
+          "evaluate"
+        ],
+        "n_questions": 9,
+        "mean": 0.06,
+        "provenance_ok": true
+      }
+    },
+    "6131p": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          -0.0536,
+          0.0503,
+          0.0322,
+          0.1054,
+          0.1936,
+          0.0158,
+          0.0246,
+          -0.0853,
+          0.0557
+        ],
+        "blooms": [
+          "apply",
+          "understand",
+          "analyse",
+          "understand",
+          "understand",
+          "analyse",
+          "apply",
+          "understand",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": 0.0376,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-flash-latest",
+        "discs": [
+          0.0004,
+          0.237,
+          0.0149,
+          0.0845,
+          0.1536,
+          -0.002,
+          0.3242,
+          0.0398,
+          -0.0834
+        ],
+        "blooms": [
+          "understand",
+          "evaluate",
+          "analyse",
+          "understand",
+          "evaluate",
+          "remember",
+          "analyse",
+          "understand",
+          "remember"
+        ],
+        "n_questions": 9,
+        "mean": 0.0854,
+        "provenance_ok": true
+      }
+    },
+    "0133a": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          0.1581,
+          -0.0067,
+          0.1002,
+          0.09,
+          0.0612,
+          0.0358,
+          0.1087,
+          0.1611,
+          0.0379
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "analyse",
+          "evaluate",
+          "understand",
+          "analyse",
+          "understand",
+          "analyse",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": 0.0829,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-flash-latest",
+        "discs": [
+          0.0789,
+          0.0017,
+          0.0568,
+          -0.0401,
+          0.0278,
+          0.305,
+          0.0403,
+          0.0056,
+          0.3953
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "create",
+          "remember",
+          "understand",
+          "understand",
+          "evaluate",
+          "understand",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": 0.0968,
+        "provenance_ok": true
+      }
+    },
+    "6180m": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          0.0575,
+          -0.0527,
+          -0.0264,
+          0.0173,
+          -0.0108,
+          -0.0341,
+          0.006,
+          0.0199,
+          0.0175
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "analyse",
+          "understand",
+          "understand",
+          "analyse",
+          "apply",
+          "understand",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": -0.0006,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-flash-latest",
+        "discs": [
+          0.1458,
+          -0.0051,
+          -0.0292,
+          0.0982,
+          -0.011,
+          0.204,
+          0.3418,
+          -0.0436,
+          0.0592
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "analyse",
+          "understand",
+          "analyse",
+          "understand",
+          "understand",
+          "analyse",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": 0.0845,
+        "provenance_ok": true
+      }
+    },
+    "6001b": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          0.0532,
+          0.2218,
+          0.1541,
+          0.1719,
+          0.138,
+          0.032,
+          0.0516,
+          0.0459,
+          -0.0332
+        ],
+        "blooms": [
+          "create",
+          "understand",
+          "understand",
+          "understand",
+          "analyse",
+          "understand",
+          "understand",
+          "understand",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": 0.0928,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-flash-latest",
+        "discs": [
+          0.2202,
+          0.1729,
+          0.1827,
+          0.009,
+          0.3503,
+          0.0097,
+          0.0568,
+          0.0915,
+          0.1527
+        ],
+        "blooms": [
+          "evaluate",
+          "evaluate",
+          "evaluate",
+          "understand",
+          "evaluate",
+          "analyse",
+          "understand",
+          "remember",
+          "create"
+        ],
+        "n_questions": 9,
+        "mean": 0.1384,
+        "provenance_ok": true
+      }
+    },
+    "0042a": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          0.0015,
+          0.0453,
+          0.0324,
+          0.1348,
+          0.1296,
+          0.0774,
+          0.064,
+          -0.0251,
+          0.1133
+        ],
+        "blooms": [
+          "understand",
+          "understand",
+          "understand",
+          "understand",
+          "understand",
+          "analyse",
+          "understand",
+          "understand",
+          "understand"
+        ],
+        "n_questions": 9,
+        "mean": 0.0637,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-flash-latest",
+        "discs": [
+          0.1793,
+          -0.1165,
+          -0.0666,
+          0.4115,
+          0.0066,
+          0.0452,
+          0.1129,
+          0.2634,
+          0.1433
+        ],
+        "blooms": [
+          "analyse",
+          "evaluate",
+          "analyse",
+          "analyse",
+          "analyse",
+          "analyse",
+          "understand",
+          "analyse",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": 0.1088,
+        "provenance_ok": true
+      }
+    },
+    "0038a": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [],
+        "blooms": [],
+        "n_questions": 0,
+        "mean": null,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-flash-latest",
+        "discs": [
+          -0.0079,
+          0.3363,
+          -0.054,
+          0.029,
+          0.038,
+          0.0082,
+          0.0442,
+          0.0703,
+          0.0293
+        ],
+        "blooms": [
+          "analyse",
+          "evaluate",
+          "understand",
+          "understand",
+          "analyse",
+          "analyse",
+          "analyse",
+          "understand",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": 0.0548,
+        "provenance_ok": true
+      }
+    },
+    "0140d": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          -0.0138,
+          -0.0314,
+          0.0509,
+          0.0075,
+          -0.0107,
+          0.0428,
+          -0.1141,
+          0.066,
+          0.1322
+        ],
+        "blooms": [
+          "apply",
+          "remember",
+          "analyse",
+          "evaluate",
+          "understand",
+          "analyse",
+          "evaluate",
+          "understand",
+          "evaluate"
+        ],
+        "n_questions": 9,
+        "mean": 0.0144,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-flash-latest",
+        "discs": [
+          0.1323,
+          0.0545,
+          0.0268,
+          -0.0708,
+          0.0355,
+          0.3438,
+          0.1238,
+          -0.078,
+          0.0242
+        ],
+        "blooms": [
+          "analyse",
+          "understand",
+          "analyse",
+          "understand",
+          "analyse",
+          "understand",
+          "analyse",
+          "remember",
+          "create"
+        ],
+        "n_questions": 9,
+        "mean": 0.0658,
+        "provenance_ok": true
+      }
+    },
+    "0315a": {
+      "local": {
+        "backend": "local:llama3.1:8b",
+        "discs": [
+          0.0192,
+          -0.0425,
+          0.006,
+          -0.1318,
+          -0.0206,
+          -0.0035,
+          -0.0608,
+          0.1321,
+          0.0641
+        ],
+        "blooms": [
+          "evaluate",
+          "understand",
+          "understand",
+          "understand",
+          "analyse",
+          "evaluate",
+          "understand",
+          "evaluate",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": -0.0042,
+        "provenance_ok": true
+      },
+      "commercial": {
+        "backend": "commercial:gemini:gemini-flash-latest",
+        "discs": [
+          -0.0218,
+          0.2851,
+          0.124,
+          0.3709,
+          0.1262,
+          0.2637,
+          0.2899,
+          0.1957,
+          0.0136
+        ],
+        "blooms": [
+          "evaluate",
+          "understand",
+          "analyse",
+          "understand",
+          "understand",
+          "understand",
+          "understand",
+          "understand",
+          "analyse"
+        ],
+        "n_questions": 9,
+        "mean": 0.183,
+        "provenance_ok": true
+      }
+    }
+  },
+  "config": {
+    "n": 15,
+    "claims": 3,
+    "source": "ai",
+    "commercial": "gemini",
+    "seed": 42,
+    "backends": [
+      "local:llama3.1:8b",
+      "commercial:gemini:gemini-flash-latest"
+    ]
+  },
+  "aggregate": {
+    "local": {
+      "n_essays": 14,
+      "n_questions": 126,
+      "pooled_mean": 0.0424,
+      "pooled_ci95": [
+        0.0301,
+        0.0551
+      ],
+      "per_essay_means": [
+        0.0168,
+        0.0384,
+        0.0754,
+        0.0148,
+        0.0229,
+        0.0623,
+        0.076,
+        0.0376,
+        0.0829,
+        -0.0006,
+        0.0928,
+        0.0637,
+        0.0144,
+        -0.0042
+      ],
+      "bloom_mix": {
+        "apply": 6,
+        "understand": 69,
+        "analyse": 37,
+        "remember": 4,
+        "evaluate": 9,
+        "create": 1
+      }
+    },
+    "commercial": {
+      "n_essays": 15,
+      "n_questions": 135,
+      "pooled_mean": 0.0765,
+      "pooled_ci95": [
+        0.0573,
+        0.0962
+      ],
+      "per_essay_means": [
+        0.0549,
+        -0.0078,
+        0.0647,
+        0.0359,
+        0.094,
+        0.0287,
+        0.06,
+        0.0854,
+        0.0968,
+        0.0845,
+        0.1384,
+        0.1088,
+        0.0548,
+        0.0658,
+        0.183
+      ],
+      "bloom_mix": {
+        "understand": 62,
+        "remember": 15,
+        "analyse": 39,
+        "evaluate": 14,
+        "create": 5
+      }
+    }
+  },
+  "balanced": {
+    "essays": [
+      "0165a",
+      "0033d",
+      "0393b",
+      "0356e",
+      "0318c",
+      "0208b",
+      "0153a",
+      "6131p",
+      "0133a",
+      "6180m",
+      "6001b",
+      "0042a",
+      "0140d",
+      "0315a"
+    ],
+    "excluded": [
+      "0038a"
+    ],
+    "local": {
+      "n_essays": 14,
+      "n_questions": 126,
+      "pooled_mean": 0.0424,
+      "pooled_ci95": [
+        0.0301,
+        0.0551
+      ]
+    },
+    "commercial": {
+      "n_essays": 14,
+      "n_questions": 126,
+      "pooled_mean": 0.0781,
+      "pooled_ci95": [
+        0.0582,
+        0.0977
+      ]
+    },
+    "paired": {
+      "mean_diff_commercial_minus_local": 0.0357,
+      "diff_ci95": [
+        0.0076,
+        0.0667
+      ],
+      "t_p": 0.0395,
+      "wilcoxon_p": 0.0295,
+      "essays_commercial_higher": 10
+    }
+  }
+}

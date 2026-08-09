@@ -1,0 +1,49 @@
+{
+  "n_essays": 50,
+  "ks": [
+    1,
+    2,
+    3,
+    5,
+    8,
+    13,
+    21,
+    34
+  ],
+  "comprehensiveness_top": [
+    0.0068,
+    0.0074,
+    0.0495,
+    0.0586,
+    0.0679,
+    0.0493,
+    0.0635,
+    0.1737
+  ],
+  "comprehensiveness_random": [
+    0.0058,
+    0.0106,
+    0.0158,
+    0.0297,
+    0.0491,
+    0.0315,
+    0.0494,
+    0.1216
+  ],
+  "sufficiency_top": [
+    0.4999,
+    0.5038,
+    0.5058,
+    0.51,
+    0.5195,
+    0.5257,
+    0.5319,
+    0.533
+  ],
+  "summary": {
+    "largest_k": 34,
+    "drop_gap_top_minus_random": 0.0521,
+    "comprehensiveness_ratio_top_over_random": 1.43
+  },
+  "protocol": "identical to integrated_gradients.py (same test sample, seed 42, same k-sweep), so attention, IG and SHAP are comparable on one faithfulness yardstick"
+}

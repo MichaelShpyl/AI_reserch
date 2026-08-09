@@ -1,0 +1,27 @@
+{
+  "model": "microsoft/deberta-v3-base",
+  "data": "Persuasive Essays 2.0 (Stab and Gurevych 2017), official 322/80 split, paragraph-level sequences",
+  "n_test_essays": 80,
+  "span_f1_micro": 0.6299,
+  "per_class": {
+    "Claim": {
+      "precision": 0.383,
+      "recall": 0.516,
+      "f1": 0.44,
+      "support": 304
+    },
+    "MajorClaim": {
+      "precision": 0.459,
+      "recall": 0.654,
+      "f1": 0.539,
+      "support": 153
+    },
+    "Premise": {
+      "precision": 0.653,
+      "recall": 0.811,
+      "f1": 0.723,
+      "support": 809
+    }
+  },
+  "reading": "Strict span-level scores (exact boundary and type match, seqeval). Reference points from the literature: Stab and Gurevych's ILP parser and later BiLSTM/transformer taggers report component F1 in the 0.80s."
+}

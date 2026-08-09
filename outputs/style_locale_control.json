@@ -1,0 +1,17 @@
+{
+  "n_essays": 1280,
+  "essays_changed_by_stripping": 1251,
+  "results": {
+    "function_words_only": {
+      "test_accuracy_original": 0.995,
+      "test_accuracy_locale_removed": 1.0,
+      "drop": -0.005
+    },
+    "tfidf_word_1_2gram": {
+      "test_accuracy_original": 1.0,
+      "test_accuracy_locale_removed": 1.0,
+      "drop": 0.0
+    }
+  },
+  "reading": "Removing British/American spelling variants and contractions barely changes the function-words-only accuracy, so the separability is genuine distributional style, not mainly the locale/formality tell. The locale tell is real but a small, fixable add-on (it would shrink if the generator wrote British English)."
+}

@@ -1,0 +1,192 @@
+{
+  "n": 3000,
+  "sweep": [
+    {
+      "band": [
+        0.5,
+        0.5
+      ],
+      "abstain_rate": 0.0,
+      "accuracy_on_judged": 0.794,
+      "human_FPR_on_judged": 0.1927,
+      "per_domain": {
+        "arxiv": {
+          "abstain_rate": 0.0,
+          "human_FPR": 0.607
+        },
+        "peerread": {
+          "abstain_rate": 0.0,
+          "human_FPR": 0.087
+        },
+        "reddit": {
+          "abstain_rate": 0.0,
+          "human_FPR": 0.047
+        },
+        "wikihow": {
+          "abstain_rate": 0.0,
+          "human_FPR": 0.103
+        },
+        "wikipedia": {
+          "abstain_rate": 0.0,
+          "human_FPR": 0.12
+        }
+      }
+    },
+    {
+      "band": [
+        0.4,
+        0.6
+      ],
+      "abstain_rate": 0.147,
+      "accuracy_on_judged": 0.8413,
+      "human_FPR_on_judged": 0.1975,
+      "per_domain": {
+        "arxiv": {
+          "abstain_rate": 0.187,
+          "human_FPR": 0.719
+        },
+        "peerread": {
+          "abstain_rate": 0.072,
+          "human_FPR": 0.068
+        },
+        "reddit": {
+          "abstain_rate": 0.122,
+          "human_FPR": 0.036
+        },
+        "wikihow": {
+          "abstain_rate": 0.215,
+          "human_FPR": 0.107
+        },
+        "wikipedia": {
+          "abstain_rate": 0.14,
+          "human_FPR": 0.132
+        }
+      }
+    },
+    {
+      "band": [
+        0.35,
+        0.65
+      ],
+      "abstain_rate": 0.2103,
+      "accuracy_on_judged": 0.8552,
+      "human_FPR_on_judged": 0.2007,
+      "per_domain": {
+        "arxiv": {
+          "abstain_rate": 0.245,
+          "human_FPR": 0.73
+        },
+        "peerread": {
+          "abstain_rate": 0.122,
+          "human_FPR": 0.069
+        },
+        "reddit": {
+          "abstain_rate": 0.192,
+          "human_FPR": 0.039
+        },
+        "wikihow": {
+          "abstain_rate": 0.293,
+          "human_FPR": 0.118
+        },
+        "wikipedia": {
+          "abstain_rate": 0.2,
+          "human_FPR": 0.121
+        }
+      }
+    },
+    {
+      "band": [
+        0.3,
+        0.7
+      ],
+      "abstain_rate": 0.2327,
+      "accuracy_on_judged": 0.8614,
+      "human_FPR_on_judged": 0.197,
+      "per_domain": {
+        "arxiv": {
+          "abstain_rate": 0.272,
+          "human_FPR": 0.735
+        },
+        "peerread": {
+          "abstain_rate": 0.143,
+          "human_FPR": 0.063
+        },
+        "reddit": {
+          "abstain_rate": 0.198,
+          "human_FPR": 0.04
+        },
+        "wikihow": {
+          "abstain_rate": 0.308,
+          "human_FPR": 0.121
+        },
+        "wikipedia": {
+          "abstain_rate": 0.242,
+          "human_FPR": 0.112
+        }
+      }
+    },
+    {
+      "band": [
+        0.25,
+        0.75
+      ],
+      "abstain_rate": 0.258,
+      "accuracy_on_judged": 0.872,
+      "human_FPR_on_judged": 0.1853,
+      "per_domain": {
+        "arxiv": {
+          "abstain_rate": 0.297,
+          "human_FPR": 0.729
+        },
+        "peerread": {
+          "abstain_rate": 0.165,
+          "human_FPR": 0.049
+        },
+        "reddit": {
+          "abstain_rate": 0.22,
+          "human_FPR": 0.037
+        },
+        "wikihow": {
+          "abstain_rate": 0.335,
+          "human_FPR": 0.098
+        },
+        "wikipedia": {
+          "abstain_rate": 0.273,
+          "human_FPR": 0.102
+        }
+      }
+    },
+    {
+      "band": [
+        0.2,
+        0.8
+      ],
+      "abstain_rate": 0.2853,
+      "accuracy_on_judged": 0.8787,
+      "human_FPR_on_judged": 0.1794,
+      "per_domain": {
+        "arxiv": {
+          "abstain_rate": 0.323,
+          "human_FPR": 0.728
+        },
+        "peerread": {
+          "abstain_rate": 0.2,
+          "human_FPR": 0.048
+        },
+        "reddit": {
+          "abstain_rate": 0.243,
+          "human_FPR": 0.025
+        },
+        "wikihow": {
+          "abstain_rate": 0.367,
+          "human_FPR": 0.09
+        },
+        "wikipedia": {
+          "abstain_rate": 0.293,
+          "human_FPR": 0.091
+        }
+      }
+    }
+  ],
+  "note": "same cross-domain sample and hybrid as Section 6.7; the band is applied to the hybrid probability; 'judged' texts are those outside the band"
+}

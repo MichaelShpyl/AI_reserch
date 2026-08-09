@@ -1,0 +1,74 @@
+{
+  "locale_spelling": {
+    "british_spellings_per_1k": {
+      "ai": 1.382,
+      "human": 2.253
+    },
+    "american_spellings_per_1k": {
+      "ai": 2.351,
+      "human": 0.77
+    },
+    "contractions_per_1k": {
+      "ai": 0.282,
+      "human": 0.831
+    },
+    "reading": "If human >> AI on British and AI >> human on American, locale spelling is a shallow tell. It is real (UK students vs a US-default model) but would vanish if the generator were prompted in British English."
+  },
+  "self_similarity": {
+    "human": 0.5578,
+    "ai": 0.5964,
+    "reading": "Mean within-class similarity in style space. Higher means a tighter, more uniform cluster. AI essays from one model tend to be more alike in style than human essays, which is why one generator is easy to spot."
+  },
+  "borderline": {
+    "most_AI_like_humans": [
+      {
+        "id": "3012c",
+        "native": false,
+        "p_ai": 0.43
+      },
+      {
+        "id": "0314a",
+        "native": true,
+        "p_ai": 0.293
+      },
+      {
+        "id": "3120a",
+        "native": true,
+        "p_ai": 0.255
+      },
+      {
+        "id": "0137d",
+        "native": true,
+        "p_ai": 0.244
+      },
+      {
+        "id": "0003h",
+        "native": false,
+        "p_ai": 0.236
+      }
+    ],
+    "most_human_like_AI": [
+      {
+        "id": "6998c",
+        "p_ai": 0.495
+      },
+      {
+        "id": "0362c",
+        "p_ai": 0.73
+      },
+      {
+        "id": "0347g",
+        "p_ai": 0.749
+      },
+      {
+        "id": "0238e",
+        "p_ai": 0.82
+      },
+      {
+        "id": "0049c",
+        "p_ai": 0.838
+      }
+    ],
+    "reading": "The closest calls. The most AI-like human essays are the ones to read when characterising errors; they are usually the most polished and formal."
+  }
+}

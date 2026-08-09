@@ -1,0 +1,150 @@
+{
+  "guide": "3108a_ai",
+  "chat_model": "llama3.1:8b",
+  "embed_model": "nomic-embed-text",
+  "n_grounded": 12,
+  "n_generic": 6,
+  "grounded": {
+    "mean_discrimination": 0.0515,
+    "ci95": [
+      0.0112,
+      0.1017
+    ],
+    "mean_sim_aware": 0.8273,
+    "mean_sim_blind": 0.7758
+  },
+  "generic": {
+    "mean_discrimination": 0.3119,
+    "ci95": [
+      0.2683,
+      0.3641
+    ]
+  },
+  "questions": {
+    "grounded": [
+      {
+        "question": "How did you determine that Dickinson's poetry represents a distinct literary genre from Shakespeare's Othello and Austen's Emma? What specific examples or features of each text led you to this conclusion?",
+        "sim_aware": 0.8498,
+        "sim_blind": 0.8,
+        "discrimination": 0.0498,
+        "bloom": "understand"
+      },
+      {
+        "question": "You mentioned that the three texts share commonalities in their exploration of universal themes and ideas. Can you identify one particular theme or idea that is explored in all three texts, and explain how you used evidence from each text to support your argument?",
+        "sim_aware": 0.7682,
+        "sim_blind": 0.7365,
+        "discrimination": 0.0317,
+        "bloom": "understand"
+      },
+      {
+        "question": "How do you think the fact that these three texts represent different literary genres (poetry, drama, prose fiction) affects the way they explore universal themes and ideas? What connections did you make between the genre of a particular text and its exploration of certain themes or ideas?",
+        "sim_aware": 0.8595,
+        "sim_blind": 0.859,
+        "discrimination": 0.0005,
+        "bloom": "understand"
+      },
+      {
+        "question": "What specific examples from the texts you analyzed did you use to illustrate how language can convey meaning?",
+        "sim_aware": 0.9213,
+        "sim_blind": 0.6559,
+        "discrimination": 0.2654,
+        "bloom": "understand"
+      },
+      {
+        "question": "How does the metaphor in one of these texts contribute to evoking a sense of longing and yearning, and what makes this relevant to the human experience?",
+        "sim_aware": 0.8078,
+        "sim_blind": 0.719,
+        "discrimination": 0.0888,
+        "bloom": "analyse"
+      },
+      {
+        "question": "In your essay, you mentioned that social relationships are often marked by ambiguity and uncertainty. What particular aspect of the texts' use of language led you to make this claim, and how does it relate to your broader argument about the power of language?",
+        "sim_aware": 0.926,
+        "sim_blind": 0.8441,
+        "discrimination": 0.0819,
+        "bloom": "analyse"
+      },
+      {
+        "question": "How did you decide to use Shakespeare's Othello as an example of a text with historical and cultural context in your essay?",
+        "sim_aware": 0.8636,
+        "sim_blind": 0.7445,
+        "discrimination": 0.1191,
+        "bloom": "understand"
+      },
+      {
+        "question": "What specific aspects of Dickinson's poetry led you to conclude that it reflects her own experiences as a recluse, and how did this relate to the rest of your argument about the three texts?",
+        "sim_aware": 0.7431,
+        "sim_blind": 0.7272,
+        "discrimination": 0.0159,
+        "bloom": "understand"
+      },
+      {
+        "question": "How do you think the social status of Austen's characters in Emma contributes to the overall theme of historical and cultural context that you were exploring in your essay?",
+        "sim_aware": 0.7963,
+        "sim_blind": 0.7957,
+        "discrimination": 0.0006,
+        "bloom": "understand"
+      },
+      {
+        "question": "How did you decide to use metaphor and symbolism as examples of how Dickinson's poetry conveys meaning and evokes emotions?",
+        "sim_aware": 0.8129,
+        "sim_blind": 0.8514,
+        "discrimination": -0.0385,
+        "bloom": "understand"
+      },
+      {
+        "question": "What specific aspects of Shakespeare's Othello led you to choose dramatic intensity and emotional depth as the key features of his style?",
+        "sim_aware": 0.7759,
+        "sim_blind": 0.7277,
+        "discrimination": 0.0482,
+        "bloom": "understand"
+      },
+      {
+        "question": "In your essay, you contrast Austen's subtle and nuanced style with the more expressive styles of Dickinson and Shakespeare. What do you think is the significance of this contrast in terms of how each author approaches their subject matter?",
+        "sim_aware": 0.8036,
+        "sim_blind": 0.8487,
+        "discrimination": -0.0451,
+        "bloom": "analyse"
+      }
+    ],
+    "generic": [
+      {
+        "question": "What is the main argument of your essay?",
+        "sim_aware": 0.8376,
+        "sim_blind": 0.5622,
+        "discrimination": 0.2754
+      },
+      {
+        "question": "Why did you choose to approach the topic this way?",
+        "sim_aware": 0.885,
+        "sim_blind": 0.4659,
+        "discrimination": 0.4191
+      },
+      {
+        "question": "Explain your reasoning in your own words.",
+        "sim_aware": 0.815,
+        "sim_blind": 0.4555,
+        "discrimination": 0.3594
+      },
+      {
+        "question": "What evidence most strongly supports your conclusion?",
+        "sim_aware": 0.7912,
+        "sim_blind": 0.4985,
+        "discrimination": 0.2927
+      },
+      {
+        "question": "Which part of your essay are you least sure about, and why?",
+        "sim_aware": 0.7413,
+        "sim_blind": 0.5082,
+        "discrimination": 0.2331
+      },
+      {
+        "question": "How would you summarise your essay to someone who has not read it?",
+        "sim_aware": 0.8382,
+        "sim_blind": 0.5468,
+        "discrimination": 0.2915
+      }
+    ]
+  },
+  "reading": "Discrimination = similarity(answer-with-source, source) minus similarity(answer-without-source, source). Higher means the question needs the source. Claim-grounded questions should discriminate more than generic ones."
+}

@@ -1,0 +1,76 @@
+{
+  "probes": [
+    {
+      "model": "unsloth/Meta-Llama-3.1-8B-bnb-4bit",
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "vram_total_gb": 8.0,
+      "config": "4-bit NF4, LoRA r=16 on q/k/v/o, grad checkpointing, PagedAdamW8bit, batch 1",
+      "steps": [
+        {
+          "seq_len": 256,
+          "ok": true,
+          "step_seconds": 5.28,
+          "loss": 0.4166,
+          "peak_vram_allocated_gb": 8.01,
+          "peak_vram_reserved_gb": 8.32
+        },
+        {
+          "seq_len": 512,
+          "ok": true,
+          "step_seconds": 12.26,
+          "loss": 0.1804,
+          "peak_vram_allocated_gb": 8.6,
+          "peak_vram_reserved_gb": 9.3
+        },
+        {
+          "seq_len": 1024,
+          "ok": true,
+          "step_seconds": 214.09,
+          "loss": 0.0747,
+          "peak_vram_allocated_gb": 9.83,
+          "peak_vram_reserved_gb": 10.86
+        }
+      ],
+      "load_seconds": 1367.8,
+      "vram_after_load_gb": 5.31,
+      "trainable_params_millions": 13.6,
+      "verdict": "Training steps completed at seq lens [256, 512, 1024] on 8.0 GB VRAM"
+    },
+    {
+      "model": "unsloth/Qwen2.5-3B-Instruct-bnb-4bit",
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "vram_total_gb": 8.0,
+      "config": "4-bit NF4, LoRA r=16 on q/k/v/o, grad checkpointing, PagedAdamW8bit, batch 1",
+      "steps": [
+        {
+          "seq_len": 256,
+          "ok": true,
+          "step_seconds": 1.46,
+          "loss": 0.5063,
+          "peak_vram_allocated_gb": 3.18,
+          "peak_vram_reserved_gb": 3.69
+        },
+        {
+          "seq_len": 512,
+          "ok": true,
+          "step_seconds": 1.51,
+          "loss": 0.2002,
+          "peak_vram_allocated_gb": 3.85,
+          "peak_vram_reserved_gb": 4.39
+        },
+        {
+          "seq_len": 1024,
+          "ok": true,
+          "step_seconds": 2.79,
+          "loss": 0.0905,
+          "peak_vram_allocated_gb": 5.16,
+          "peak_vram_reserved_gb": 5.89
+        }
+      ],
+      "load_seconds": 642.6,
+      "vram_after_load_gb": 1.91,
+      "trainable_params_millions": 7.4,
+      "verdict": "Training steps completed at seq lens [256, 512, 1024] on 8.0 GB VRAM"
+    }
+  ]
+}

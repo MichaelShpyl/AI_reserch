@@ -1,0 +1,150 @@
+{
+  "guide": "3108a_ai",
+  "chat_model": "llama3.1:8b",
+  "embed_model": "nomic-embed-text",
+  "n_grounded": 12,
+  "n_generic": 6,
+  "grounded": {
+    "mean_discrimination": 0.0305,
+    "ci95": [
+      0.0134,
+      0.0486
+    ],
+    "mean_sim_aware": 0.8002,
+    "mean_sim_blind": 0.7697
+  },
+  "generic": {
+    "mean_discrimination": 0.2881,
+    "ci95": [
+      0.2289,
+      0.3323
+    ]
+  },
+  "questions": {
+    "grounded": [
+      {
+        "question": "How do you think the structural differences between these texts contribute to their classification as distinct literary genres?",
+        "sim_aware": 0.828,
+        "sim_blind": 0.7959,
+        "discrimination": 0.0322,
+        "bloom": "understand"
+      },
+      {
+        "question": "What specific features of each text lead you to believe that it belongs to a particular genre, and how does this relate to the way readers engage with each type of text?",
+        "sim_aware": 0.7843,
+        "sim_blind": 0.7484,
+        "discrimination": 0.0359,
+        "bloom": "analyse"
+      },
+      {
+        "question": "In what ways do the narrative techniques used in each text reflect the characteristics of its respective genre, and how does this impact the reader's experience?",
+        "sim_aware": 0.7251,
+        "sim_blind": 0.6875,
+        "discrimination": 0.0375,
+        "bloom": "analyse"
+      },
+      {
+        "question": "How do you think Dickinson's use of metaphor and symbolism contributes to the overall emotional impact of her poetry?",
+        "sim_aware": 0.802,
+        "sim_blind": 0.7997,
+        "discrimination": 0.0022,
+        "bloom": "understand"
+      },
+      {
+        "question": "What specific features of Shakespeare's dialogue lead you to describe it as having 'dramatic intensity'?",
+        "sim_aware": 0.8222,
+        "sim_blind": 0.8003,
+        "discrimination": 0.0219,
+        "bloom": "understand"
+      },
+      {
+        "question": "How does Austen's subtle and nuanced prose style allow her to explore complex social issues in a way that might be less effective with more overt language?",
+        "sim_aware": 0.817,
+        "sim_blind": 0.8062,
+        "discrimination": 0.0108,
+        "bloom": "analyse"
+      },
+      {
+        "question": "How do you think the exploration of love in these texts contributes to their shared themes?",
+        "sim_aware": 0.8176,
+        "sim_blind": 0.7584,
+        "discrimination": 0.0592,
+        "bloom": "understand"
+      },
+      {
+        "question": "Can you give an example from one of the texts that illustrates how personal growth is linked to relationships?",
+        "sim_aware": 0.7117,
+        "sim_blind": 0.7116,
+        "discrimination": 0.0002,
+        "bloom": "apply"
+      },
+      {
+        "question": "What do you believe is the significance of exploring multiple themes simultaneously, rather than focusing on a single theme?",
+        "sim_aware": 0.8226,
+        "sim_blind": 0.7233,
+        "discrimination": 0.0993,
+        "bloom": "understand"
+      },
+      {
+        "question": "How does the use of the phrase 'convey meaning' relate to the idea that language is not just a neutral tool, but rather an active participant in shaping our understanding?",
+        "sim_aware": 0.8002,
+        "sim_blind": 0.7605,
+        "discrimination": 0.0397,
+        "bloom": "analyse"
+      },
+      {
+        "question": "In what ways do you think the extracts demonstrate the emotional resonance of language, and how does this impact the reader's engagement with the text?",
+        "sim_aware": 0.8245,
+        "sim_blind": 0.8529,
+        "discrimination": -0.0284,
+        "bloom": "analyse"
+      },
+      {
+        "question": "What specific features of the extracts contribute to the claim that they provide a 'deeper' understanding of language, and why are these features effective in achieving this goal?",
+        "sim_aware": 0.8468,
+        "sim_blind": 0.7913,
+        "discrimination": 0.0555,
+        "bloom": "understand"
+      }
+    ],
+    "generic": [
+      {
+        "question": "What is the main argument of your essay?",
+        "sim_aware": 0.8977,
+        "sim_blind": 0.5992,
+        "discrimination": 0.2985
+      },
+      {
+        "question": "Why did you choose to approach the topic this way?",
+        "sim_aware": 0.9175,
+        "sim_blind": 0.5647,
+        "discrimination": 0.3528
+      },
+      {
+        "question": "Explain your reasoning in your own words.",
+        "sim_aware": 0.8811,
+        "sim_blind": 0.5339,
+        "discrimination": 0.3471
+      },
+      {
+        "question": "What evidence most strongly supports your conclusion?",
+        "sim_aware": 0.8516,
+        "sim_blind": 0.5619,
+        "discrimination": 0.2897
+      },
+      {
+        "question": "Which part of your essay are you least sure about, and why?",
+        "sim_aware": 0.7044,
+        "sim_blind": 0.5583,
+        "discrimination": 0.1461
+      },
+      {
+        "question": "How would you summarise your essay to someone who has not read it?",
+        "sim_aware": 0.9275,
+        "sim_blind": 0.6334,
+        "discrimination": 0.2941
+      }
+    ]
+  },
+  "reading": "Discrimination = similarity(answer-with-source, source) minus similarity(answer-without-source, source). Higher means the question needs the source. Claim-grounded questions should discriminate more than generic ones."
+}

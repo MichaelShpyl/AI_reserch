@@ -1,0 +1,80 @@
+{
+  "in_domain_f1": 0.99,
+  "A_cross_generator_essays": {
+    "n": 4800,
+    "overall": {
+      "accuracy": 0.9715,
+      "precision": 0.9524,
+      "recall": 0.9925,
+      "f1": 0.972,
+      "confusion_matrix_[hu,ai]x[pred_hu,pred_ai]": [
+        [
+          2281,
+          119
+        ],
+        [
+          18,
+          2382
+        ]
+      ]
+    },
+    "human_false_positive_rate": 0.0496,
+    "per_generator_detection_rate": {
+      "GPT4": 1.0,
+      "cohere": 1.0,
+      "chatGPT": 1.0,
+      "bloomz": 0.9925,
+      "dolly": 0.9625,
+      "davinci": 1.0
+    },
+    "note": "OUTFOX essays: human essays vs six unseen generators. Same domain type as training (essays), so this isolates cross-generator transfer."
+  },
+  "B_cross_domain": {
+    "n": 3000,
+    "overall": {
+      "accuracy": 0.7527,
+      "precision": 0.6867,
+      "recall": 0.9293,
+      "f1": 0.7898,
+      "confusion_matrix_[hu,ai]x[pred_hu,pred_ai]": [
+        [
+          864,
+          636
+        ],
+        [
+          106,
+          1394
+        ]
+      ]
+    },
+    "per_domain": {
+      "arxiv": {
+        "accuracy": 0.5933,
+        "human_false_positive_rate": 0.79,
+        "machine_detection_rate": 0.9767
+      },
+      "peerread": {
+        "accuracy": 0.815,
+        "human_false_positive_rate": 0.2967,
+        "machine_detection_rate": 0.9267
+      },
+      "reddit": {
+        "accuracy": 0.8667,
+        "human_false_positive_rate": 0.23,
+        "machine_detection_rate": 0.9633
+      },
+      "wikihow": {
+        "accuracy": 0.7283,
+        "human_false_positive_rate": 0.4067,
+        "machine_detection_rate": 0.8633
+      },
+      "wikipedia": {
+        "accuracy": 0.76,
+        "human_false_positive_rate": 0.3967,
+        "machine_detection_rate": 0.9167
+      }
+    },
+    "note": "reddit/wikihow/arxiv/wikipedia/peerread: human web and academic text vs four generators. The real domain-shift test."
+  },
+  "reading": "Compare each F1 to the in-domain F1 (~0.99). Strong cross-generator transfer but weaker cross-domain transfer would mean the detector generalises across models yet is sensitive to the kind of text, which is the honest limitation."
+}

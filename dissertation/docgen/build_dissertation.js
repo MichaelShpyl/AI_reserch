@@ -11,7 +11,7 @@ const path = require("path");
 const {
   Document, Packer, Paragraph, TextRun, ImageRun, AlignmentType, HeadingLevel,
   LevelFormat, TableOfContents, Header, Footer, PageNumber, PageBreak, BorderStyle,
-  Table, TableRow, TableCell, WidthType, ShadingType, VerticalAlign,
+  Table, TableRow, TableCell, WidthType, ShadingType, VerticalAlign, ExternalHyperlink,
 } = require("docx");
 
 const REPO = path.resolve(__dirname, "..", "..");
@@ -28,14 +28,61 @@ const ARIAL = "Calibri";       // body font (template theme minor font)
 const TEAL = "2F5496";         // heading colour (Word default Office blue)
 const INK = "222831";
 
-// ---- inline parsing: **bold** and `code` ----
+// ---- repository linking ----
+// Every file this document names in backticks becomes a live link into the public repository, so an
+// examiner reading a claim can open the code that produced it in one click.
+//
+// The one rule that matters here: a dead link is worse than no link. Some paths the text mentions
+// are deliberately not published (the corpus itself, model checkpoints, the human-essay guide), so
+// the candidate is checked against `git ls-files` before it becomes a link. Anything not actually
+// in the repository is left as plain monospaced text, exactly as it read before.
+const REPO_URL = "https://github.com/MichaelShpyl/AI_reserch";
+const REPO_REF = "main";
+const REPO_TOP = /^(src|tests|config|data|outputs|models|dissertation|notebooks)(\/|$)/;
+
+const TRACKED = new Set();   // every published file path
+const TRACKED_DIRS = new Set();  // every directory that contains at least one published file
+try {
+  const listed = require("child_process")
+    .execSync("git ls-files", { cwd: REPO, encoding: "utf8", maxBuffer: 8 << 20 })
+    .split("\n").map(s => s.trim()).filter(Boolean);
+  for (const f of listed) {
+    TRACKED.add(f);
+    const parts = f.split("/");
+    for (let i = 1; i < parts.length; i++) TRACKED_DIRS.add(parts.slice(0, i).join("/"));
+  }
+} catch (e) {
+  console.warn("git ls-files failed, so no path will be linked:", e.message);
+}
+
+const LINKED = new Map();    // path -> times linked, for the build summary
+const UNLINKED = new Set();  // repo-shaped paths that are not published, for the build summary
+
+function repoLink(pathText) {
+  const clean = pathText.trim().replace(/[.,;:)]+$/, "").replace(/\/$/, "");
+  if (!REPO_TOP.test(clean) || clean.includes(" ")) return null;
+  const isFile = TRACKED.has(clean);
+  const isDir = TRACKED_DIRS.has(clean);
+  if (!isFile && !isDir) { UNLINKED.add(clean); return null; }
+  LINKED.set(clean, (LINKED.get(clean) || 0) + 1);
+  return `${REPO_URL}/${isFile ? "blob" : "tree"}/${REPO_REF}/${clean}`;
+}
+
+// ---- inline parsing: **bold** and `code`, with repo paths becoming hyperlinks ----
 function inlineRuns(text, base = {}) {
   const runs = [];
   let i = 0, buf = "", bold = false, code = false;
+  const mk = (t, isCode, link) => new TextRun({
+    text: t, bold: bold || base.bold, italics: base.italics,
+    font: isCode ? "Consolas" : ARIAL, size: base.size || 24,
+    color: link ? "1F4E5F" : (base.color || INK),
+    underline: link ? {} : undefined,
+  });
   const flush = () => {
-    if (buf) runs.push(new TextRun({ text: buf, bold: bold || base.bold,
-      italics: base.italics, font: code ? "Consolas" : ARIAL,
-      size: base.size || 24, color: base.color || INK }));
+    if (!buf) { buf = ""; return; }
+    const url = code ? repoLink(buf) : null;
+    if (url) runs.push(new ExternalHyperlink({ link: url, children: [mk(buf, true, true)] }));
+    else runs.push(mk(buf, code, false));
     buf = "";
   };
   while (i < text.length) {
@@ -413,4 +460,15 @@ const doc = new Document({
   }],
 });
 
-Packer.toBuffer(doc).then((buf) => { fs.writeFileSync(OUT, buf); console.log("Saved", OUT); });
+Packer.toBuffer(doc).then((buf) => {
+  fs.writeFileSync(OUT, buf);
+  console.log("Saved", OUT);
+  let total = 0;
+  for (const n of LINKED.values()) total += n;
+  console.log(`Repository links: ${total} across ${LINKED.size} distinct paths.`);
+  if (UNLINKED.size) {
+    // Not an error. These are paths the text names that are deliberately unpublished (corpus,
+    // checkpoints) or typos. Printed so a real typo does not sit unnoticed as plain text.
+    console.log(`Not linked (${UNLINKED.size}, left as plain text): ${[...UNLINKED].sort().join(", ")}`);
+  }
+});

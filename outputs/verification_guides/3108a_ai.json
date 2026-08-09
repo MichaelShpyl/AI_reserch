@@ -1,0 +1,266 @@
+{
+  "essay_id": "3108a",
+  "source": "ai",
+  "backend": "local-hf:v3:qg_finetune_qwen3b_v3",
+  "claim_provenance": "prompted phrasing + trained argument spans (approved design)",
+  "n_sentences": 100,
+  "n_dropped_malformed": 0,
+  "claims": [
+    {
+      "claim": "The three texts (Dickinson's poetry, Shakespeare's Othello, and Austen's Emma) represent distinct literary genres but share certain commonalities in their exploration of universal themes and ideas.",
+      "source_sentences": [
+        {
+          "n": 1,
+          "text": "These three texts represent distinct literary genres: poetry, drama, and prose fiction respectively."
+        },
+        {
+          "n": 27,
+          "text": "Despite these differences, all three texts share certain commonalities."
+        },
+        {
+          "n": 31,
+          "text": "These texts represent distinct literary genres but share certain commonalities in their exploration of universal themes and ideas."
+        }
+      ],
+      "argument_spans": [
+        {
+          "type": "Claim",
+          "text": "all three texts share certain commonalities"
+        },
+        {
+          "type": "Claim",
+          "text": "These"
+        },
+        {
+          "type": "Premise",
+          "text": "Whether through their exploration of universal themes and ideas or their treatment of female characters and historical context, these texts continue to inspire and captivate readers today"
+        },
+        {
+          "type": "Claim",
+          "text": "these texts also highlight the significance of literary genres and styles in conveying meaning"
+        }
+      ],
+      "questions": [
+        {
+          "question": "How did you decide which aspects of the texts shared commonalities?",
+          "bloom_level": "understand"
+        },
+        {
+          "question": "What particular themes and ideas in the texts led you to conclude that they share commonalities?",
+          "bloom_level": "understand"
+        },
+        {
+          "question": "In what ways does the connection between these commonalities and the rest of your essay contribute to its overall argument?",
+          "bloom_level": "understand"
+        }
+      ]
+    },
+    {
+      "claim": "Language is used differently across the three texts to convey meaning and evoke emotions, with Dickinson's poetry relying on metaphor and symbolism, Shakespeare's dialogue being dramatic and intense, and Austen's prose being subtle and nuanced.",
+      "source_sentences": [
+        {
+          "n": 21,
+          "text": "Dickinson's poetry relies on metaphor and symbolism to evoke emotions and ideas, whereas Shakespeare's dialogue is characterized by its dramatic intensity and emotional depth."
+        },
+        {
+          "n": 22,
+          "text": "Austen's prose, meanwhile, employs a more subtle and nuanced style to explore the complexities of relationships and social class."
+        },
+        {
+          "n": 25,
+          "text": "Shakespeare's Othello follows a more conventional dramatic structure, with its emphasis on character development and tragic conflict."
+        }
+      ],
+      "argument_spans": [
+        {
+          "type": "Premise",
+          "text": "The dialogue between the two characters is characterized by its intensity and conviction"
+        },
+        {
+          "type": "Premise",
+          "text": "Dickinson's poetry relies on metaphor and symbolism to evoke emotions and ideas, whereas Shakespeare's dialogue is characterized by its dramatic intensity and emotional depth"
+        },
+        {
+          "type": "Premise",
+          "text": "Austen's prose, meanwhile, employs a more subtle and nuanced style to explore the complexities of relationships and social class"
+        },
+        {
+          "type": "Premise",
+          "text": "Shakespeare's Othello follows a more conventional dramatic structure, with its emphasis on character development and tragic conflict"
+        },
+        {
+          "type": "Claim",
+          "text": "Austen's Emma"
+        },
+        {
+          "type": "Premise",
+          "text": "These portrayals highlight the ways in which Austen uses language to explore the complexities of social class"
+        },
+        {
+          "type": "Premise",
+          "text": "Shakespeare's Othello, for example, follows a traditional dramatic structure with its emphasis on character development and tragic conflict"
+        },
+        {
+          "type": "Premise",
+          "text": "Shakespeare's Othello, for example, provides a powerful commentary on the dangers of unchecked jealousy and deceit, while Austen's Emma offers a nuanced exploration of social class and relationships"
+        },
+        {
+          "type": "Premise",
+          "text": "Shakespeare's Othello features a dramatic structure with multiple plot threads and subplots, whereas Austen's Emma follows a more linear narrative with a clear beginning, middle, and end"
+        },
+        {
+          "type": "Claim",
+          "text": "Austen's Emma, meanwhile, portrays a range of characters navigating complex social relationships"
+        }
+      ],
+      "questions": [
+        {
+          "question": "How does the use of metaphor and symbolism in Dickinson's poetry relate to her overall argument about language and meaning in the text?",
+          "bloom_level": "analyse"
+        },
+        {
+          "question": "What choice did you make in connecting Shakespeare's dialogue to his dramatic structure, and why was this a relevant point for your analysis?",
+          "bloom_level": "understand"
+        },
+        {
+          "question": "In what ways do you think Austen's subtle and nuanced prose contributes to our understanding of the complexities of relationships and social class in the text?",
+          "bloom_level": "understand"
+        }
+      ]
+    },
+    {
+      "claim": "The treatment of female characters in the three texts varies significantly, with Dickinson's poetry often featuring women as figures of inspiration and guidance, Shakespeare's Othello featuring a woman who is ultimately destroyed by her husband's jealousy, and Austen's Emma portraying complex and multidimensional female characters.",
+      "source_sentences": [
+        {
+          "n": 44,
+          "text": "Dickinson's poetry often features women as figures of inspiration and guidance, whereas Shakespeare's Othello features a woman who is ultimately destroyed by her husband's jealousy."
+        },
+        {
+          "n": 49,
+          "text": "Austen's Emma, meanwhile, features a range of female characters who are complex and multidimensional."
+        },
+        {
+          "n": 50,
+          "text": "For example, Harriet Smith is portrayed as a young woman struggling to navigate her social relationships, while Emma Woodhouse is depicted as a confident but ultimately flawed protagonist."
+        }
+      ],
+      "argument_spans": [
+        {
+          "type": "Premise",
+          "text": "Austen's Emma, meanwhile, features a more complex narrative with multiple plot threads and subplots"
+        },
+        {
+          "type": "Claim",
+          "text": "Austen's Emma"
+        },
+        {
+          "type": "Premise",
+          "text": "Dickinson's poetry often features women as figures of inspiration and guidance, whereas Shakespeare's Othello features a woman who is ultimately destroyed by her husband's jealousy"
+        },
+        {
+          "type": "Premise",
+          "text": "Austen's Emma, meanwhile, features a range of female characters who are complex and multidimensional"
+        },
+        {
+          "type": "Premise",
+          "text": "Harriet Smith is portrayed as a young woman struggling to navigate her social relationships, while Emma Woodhouse is depicted as a confident but ultimately flawed protagonist"
+        },
+        {
+          "type": "Premise",
+          "text": "Austen's Emma, meanwhile, features a range of characters who are shaped by their social status and class"
+        },
+        {
+          "type": "Premise",
+          "text": "Dickinson's poetry often features women as figures of inspiration and guidance"
+        },
+        {
+          "type": "Premise",
+          "text": "Mr. Elton is portrayed as a man who is obsessed with his own social standing, while Harriet Smith is depicted as a young woman struggling to navigate her social relationships"
+        },
+        {
+          "type": "Premise",
+          "text": "Shakespeare's Othello features a dramatic scene where language is used to manipulate and deceive, whereas Austen's Emma portrays a range of characters navigating complex social relationships"
+        },
+        {
+          "type": "Claim",
+          "text": "Austen's Emma, meanwhile, portrays a range of characters navigating complex social relationships"
+        }
+      ],
+      "questions": [
+        {
+          "question": "How did you decide which aspects of each text's portrayal of female characters were most relevant to your argument?",
+          "bloom_level": "understand"
+        },
+        {
+          "question": "What role does Emma Woodhouse play in Austen's Emma, and how does this character connect to the rest of your essay?",
+          "bloom_level": "analyse"
+        },
+        {
+          "question": "In what ways do you think the portrayal of female characters in Dickinson's poetry differs from the others, and how does this inform your overall argument?",
+          "bloom_level": "analyse"
+        }
+      ]
+    },
+    {
+      "claim": "The three texts demonstrate varying levels of historical and cultural context, with Shakespeare's Othello being set against the backdrop of Venetian society in the early 16th century, Dickinson's poetry reflecting her own experiences as a recluse in rural New England, and Austen's Emma featuring characters shaped by their social status and class.",
+      "source_sentences": [
+        {
+          "n": 53,
+          "text": "Shakespeare's Othello, for example, is set against the backdrop of Venetian society in the early 16th century, while Dickinson's poetry reflects her own experiences as a recluse in rural New England."
+        },
+        {
+          "n": 92,
+          "text": "Shakespeare's Othello is set against the backdrop of Venetian society in the early 16th century, whereas Dickinson's poetry reflects her own experiences as a recluse in rural New England."
+        },
+        {
+          "n": 93,
+          "text": "Austen's Emma, meanwhile, features a range of characters who are shaped by their social status and class."
+        }
+      ],
+      "argument_spans": [
+        {
+          "type": "Claim",
+          "text": "Austen's Emma"
+        },
+        {
+          "type": "Premise",
+          "text": "Austen's Emma, meanwhile, features a range of female characters who are complex and multidimensional"
+        },
+        {
+          "type": "Premise",
+          "text": "Shakespeare's Othello, for example, is set against the backdrop of Venetian society in the early 16th century, while Dickinson's poetry reflects her own experiences as a recluse in rural New England"
+        },
+        {
+          "type": "Premise",
+          "text": "Austen's Emma, meanwhile, features a range of characters who are shaped by their social status and class"
+        },
+        {
+          "type": "Premise",
+          "text": "Shakespeare's Othello features a dramatic scene where language is used to manipulate and deceive, whereas Austen's Emma portrays a range of characters navigating complex social relationships"
+        },
+        {
+          "type": "Claim",
+          "text": "Austen's Emma, meanwhile, portrays a range of characters navigating complex social relationships"
+        },
+        {
+          "type": "Premise",
+          "text": "Shakespeare's Othello is set against the backdrop of Venetian society in the early 16th century, whereas Dickinson's poetry reflects her own experiences as a recluse in rural New England"
+        }
+      ],
+      "questions": [
+        {
+          "question": "How did you decide to use Shakespeare's Othello as an example of historical context?",
+          "bloom_level": "understand"
+        },
+        {
+          "question": "What evidence from Dickinson's poetry do you think best supports your claim that it reflects her own experiences as a recluse in rural New England?",
+          "bloom_level": "analyse"
+        },
+        {
+          "question": "In what ways do you think the social status and class of characters in Austen's Emma connect to the rest of your essay?",
+          "bloom_level": "understand"
+        }
+      ]
+    }
+  ]
+}

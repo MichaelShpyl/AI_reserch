@@ -1,0 +1,132 @@
+{
+  "essay_id": "3108a",
+  "source": "ai",
+  "backend": "commercial:gemini:gemini-2.5-flash",
+  "n_sentences": 100,
+  "claims": [
+    {
+      "claim": "The three texts differ significantly in their respective worldviews.",
+      "source_sentences": [
+        {
+          "n": 16,
+          "text": "One of the key differences between these texts is their respective worldviews."
+        },
+        {
+          "n": 17,
+          "text": "Dickinson's poetry often explores abstract ideas about life, death, and hope, whereas Shakespeare's Othello is rooted in a more concrete historical context."
+        },
+        {
+          "n": 18,
+          "text": "In contrast, Austen's Emma reflects the social hierarchy of 19th-century England."
+        }
+      ],
+      "questions": [
+        {
+          "question": "You claim Dickinson's poetry explores \"abstract ideas about life, death, and hope.\" What specific poems or lines did you analyze to demonstrate this, and how did you argue these particular abstractions constitute her distinct worldview?",
+          "bloom_level": "analyse"
+        },
+        {
+          "question": "You state Shakespeare's Othello is \"rooted in a more concrete historical context.\" What specific historical elements did you focus on in your essay, and how did you connect these elements directly to the worldview you attributed to the play, distinguishing it from Dickinson's?",
+          "bloom_level": "remember"
+        },
+        {
+          "question": "Could you elaborate on how Austen's reflection of the \"social hierarchy of 19th-century England\" in Emma specifically functions as a worldview in your argument, and what makes this worldview significantly different from the ones you identified in Dickinson and Othello?",
+          "bloom_level": "understand"
+        }
+      ]
+    },
+    {
+      "claim": "The texts demonstrate varying uses of language to convey meaning.",
+      "source_sentences": [
+        {
+          "n": 20,
+          "text": "Furthermore, these texts demonstrate varying uses of language to convey meaning."
+        },
+        {
+          "n": 21,
+          "text": "Dickinson's poetry relies on metaphor and symbolism to evoke emotions and ideas, whereas Shakespeare's dialogue is characterized by its dramatic intensity and emotional depth."
+        },
+        {
+          "n": 22,
+          "text": "Austen's prose, meanwhile, employs a more subtle and nuanced style to explore the complexities of relationships and social class."
+        }
+      ],
+      "questions": [
+        {
+          "question": "Could you elaborate on one specific example from Dickinson's poetry, one from Shakespeare's dialogue, and one from Austen's prose that you discussed in your essay to illustrate the distinct linguistic features you identified for each author?",
+          "bloom_level": "understand"
+        },
+        {
+          "question": "You state that Dickinson uses metaphor and symbolism to evoke emotions and ideas, while Austen employs a subtle style to explore relationships. In your essay, how did you specifically argue that these distinct linguistic approaches *effectively convey meaning* in ways unique to each author, rather than just describing their styles?",
+          "bloom_level": "remember"
+        },
+        {
+          "question": "Considering your broader essay, how does your analysis of these varying uses of language in Dickinson, Shakespeare, and Austen contribute to your overall argument or thesis about literature, beyond simply stating their differences?",
+          "bloom_level": "analyse"
+        }
+      ]
+    },
+    {
+      "claim": "The texts exhibit distinct narrative structures.",
+      "source_sentences": [
+        {
+          "n": 23,
+          "text": "In addition to their differences in language use and worldviews, these texts also exhibit distinct narrative structures."
+        },
+        {
+          "n": 24,
+          "text": "Dickinson's poetry eschews traditional narrative forms in favor of fragmented and enigmatic verse."
+        },
+        {
+          "n": 25,
+          "text": "Shakespeare's Othello follows a more conventional dramatic structure, with its emphasis on character development and tragic conflict."
+        }
+      ],
+      "questions": [
+        {
+          "question": "You characterize Dickinson's poetry as eschewing 'traditional narrative forms' in favor of 'fragmented and enigmatic verse.' What specific textual features or poetic devices did you analyze in your essay to illustrate this fragmentation and enigma, and how did you define 'traditional narrative forms' in contrast to Dickinson's approach?",
+          "bloom_level": "analyse"
+        },
+        {
+          "question": "When discussing Shakespeare's Othello, you highlight its 'conventional dramatic structure' and 'emphasis on character development and tragic conflict.' Can you elaborate on which specific structural elements (e.g., act divisions, scene progression, use of soliloquies) and character arcs you focused on in your essay to demonstrate this conventionality and emphasis?",
+          "bloom_level": "remember"
+        },
+        {
+          "question": "You introduce the distinct narrative structures as an 'addition to their differences in language use and worldviews.' How does your specific analysis of these narrative structures build upon, or perhaps even challenge, the points you made earlier in your essay regarding the texts' differing language use or worldviews?",
+          "bloom_level": "analyse"
+        }
+      ]
+    },
+    {
+      "claim": "Despite their differences, all three texts share certain commonalities.",
+      "source_sentences": [
+        {
+          "n": 27,
+          "text": "Despite these differences, all three texts share certain commonalities."
+        },
+        {
+          "n": 28,
+          "text": "Each work explores themes of love, relationships, and personal growth in some way."
+        },
+        {
+          "n": 29,
+          "text": "Furthermore, they demonstrate an awareness of the world around them, whether through Shakespeare's examination of human nature or Austen's commentary on social class."
+        }
+      ],
+      "questions": [
+        {
+          "question": "You state that 'Each work explores themes of love, relationships, and personal growth in some way.' For each of the three texts you analyzed, identify a specific example (e.g., a character's journey, a particular relationship, or a key event) that you used in your essay to illustrate how it explores one of these themes. Explain why you chose that specific example for each text.",
+          "bloom_level": "understand"
+        },
+        {
+          "question": "You mention Shakespeare's examination of human nature and Austen's commentary on social class as ways the texts demonstrate 'an awareness of the world around them.' How did you argue that the *third text* you discussed also demonstrates this awareness? Provide a specific piece of evidence from that text and explain how it supports your interpretation within your essay.",
+          "bloom_level": "understand"
+        },
+        {
+          "question": "Considering your essay's overall argument, explain how the 'certain commonalities' you identified, despite the differences between the texts, contribute to your main thesis. What is the significance of highlighting these shared aspects in relation to the broader point you aimed to make about these works?",
+          "bloom_level": "understand"
+        }
+      ]
+    }
+  ]
+}

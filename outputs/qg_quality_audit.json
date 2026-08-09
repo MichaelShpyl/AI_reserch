@@ -1,0 +1,43 @@
+{
+  "source": "likeforlike_4way.json",
+  "arms": {
+    "local8b": {
+      "n_questions": 126,
+      "n_degenerate": 0,
+      "pct_degenerate": 0.0,
+      "mean_disc_all": 0.0309,
+      "mean_disc_degenerate": null,
+      "mean_disc_clean": 0.0309
+    },
+    "commercial": {
+      "n_questions": 66,
+      "n_degenerate": 0,
+      "pct_degenerate": 0.0,
+      "mean_disc_all": 0.0174,
+      "mean_disc_degenerate": null,
+      "mean_disc_clean": 0.0174
+    },
+    "base3b": {
+      "n_questions": 126,
+      "n_degenerate": 0,
+      "pct_degenerate": 0.0,
+      "mean_disc_all": 0.0414,
+      "mean_disc_degenerate": null,
+      "mean_disc_clean": 0.0414
+    },
+    "ft3b": {
+      "n_questions": 62,
+      "n_degenerate": 59,
+      "pct_degenerate": 95.2,
+      "mean_disc_all": 0.1533,
+      "mean_disc_degenerate": 0.152,
+      "mean_disc_clean": 0.1782
+    }
+  },
+  "contentless_stem": {
+    "text": "Which of the following is correct?",
+    "n_occurrences": 11,
+    "mean_discrimination": 0.4448,
+    "note": "A contentless string scoring above every model's real questions is direct evidence that the discrimination simulation can be gamed by degenerate questions."
+  }
+}

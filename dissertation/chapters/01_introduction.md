@@ -178,3 +178,45 @@ Chapter 9 discusses what the results mean, covering the answer to the research q
 methodological lesson drawn from the negative results, the case for verification over accusation,
 the limitations, and the implications for practice. Chapter 10 concludes and sets out future work,
 and the references follow.
+
+## 1.10 The code, and how to read this document beside it
+
+Everything described here was written for this project and is in one repository:
+
+**https://github.com/MichaelShpyl/AI_reserch**
+
+Every path this document prints in a monospaced font, such as `src/detection/train_detector.py` or
+`outputs/detector_metrics_clean.json`, is a live link to that exact file on GitHub. Clicking it
+opens the code or the result being discussed at that point in the text. The links are generated at
+build time from the repository's own file list rather than typed by hand, so a path that is named
+in the text but does not exist in the repository stays plain and is never dressed up as a link. If
+a path is not clickable it is because it is deliberately not published, and the reasons are set out
+below.
+
+The layout follows the pipeline. `src/data/` builds the corpus, `src/generation/` writes the
+matched AI essays, `src/detection/` trains and evaluates the detector, `src/explainability/` holds
+the attribution work, `src/argument_mining/` extracts claims and relations, `src/question_gen/`
+holds both question-generation backends, `src/bloom/` the cognitive-level classifier,
+`src/evaluation/` the discrimination simulation and the judge panel, and `src/pipeline/` the
+end-to-end run and the guide assembler. `src/webapp/` is the interactive interface described in
+Section 4.11. Tests live in `tests/`.
+
+Results are worth a note of their own. Every number quoted in this document is read from a JSON
+file in `outputs/`, and those files are published. A reader who wants to check the headline
+detection scores can open `outputs/detector_metrics_clean.json` directly; the cross-generator
+transfer results are in `outputs/m4_transfer.json`, the question-generation comparison at scale is
+in `outputs/likeforlike_scaled.json`, and the audit that retracted three of this project's own
+earlier numbers is in `outputs/qg_quality_audit.json`. Most of these files also carry a short
+`reading` field written at the time the result was produced, saying what the number means and what
+it does not. Nothing was transcribed by hand from a model's output into the text.
+
+Three things are absent from the repository on purpose. The BAWE corpus is not there, because its
+licence does not permit redistribution; what is published instead is
+`data/processed/bawe_human_sample_manifest.csv`, the list of essay identifiers and split
+assignments, which is enough to reproduce the exact sample from a licensed copy. Model checkpoints
+are not there either, since the fine-tuned weights run to several gigabytes, but every training
+script and configuration needed to rebuild them is. Finally, of the two worked examples in
+`outputs/verification_guides/`, only the one built from the AI-written essay is published. The
+guide built from the human essay quotes the student's own prose at length, and that is BAWE text
+again. The generated guide for the AI essay, `outputs/verification_guides/3108a_ai_guide.pdf`, is
+the clearest single view of what the system produces, and is discussed in Section 7.7.

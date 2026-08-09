@@ -1,0 +1,33 @@
+{
+  "n": 120,
+  "groups": {
+    "gemini": {
+      "n": 40,
+      "flag_rate_transformer": 1.0,
+      "flag_rate_hybrid": 0.65,
+      "mean_length_ratio": 0.752,
+      "matched_subset_ratio_ge_0.5": {
+        "n": 36,
+        "flag_rate_transformer": 1.0,
+        "flag_rate_hybrid": 0.6389
+      }
+    },
+    "human": {
+      "n": 40,
+      "flag_rate_transformer": 0.0,
+      "flag_rate_hybrid": 0.0
+    },
+    "openai": {
+      "n": 40,
+      "flag_rate_transformer": 1.0,
+      "flag_rate_hybrid": 1.0,
+      "mean_length_ratio": 0.45,
+      "matched_subset_ratio_ge_0.5": {
+        "n": 10,
+        "flag_rate_transformer": 1.0,
+        "flag_rate_hybrid": 1.0
+      }
+    }
+  },
+  "reading": "For the AI groups the flag rate is the detection rate on a generator the detector never saw, produced with the original corpus recipe; for the human group it is the false-positive rate on the same essays' true authors."
+}

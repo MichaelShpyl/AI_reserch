@@ -1,0 +1,25 @@
+{
+  "control": "identical config and splits to the detector of record; only change is stripping the bare token 'fnote' from both classes before training",
+  "essays_containing_fnote_before": 109,
+  "test": {
+    "accuracy": 0.995,
+    "precision": 0.9901,
+    "recall": 1.0,
+    "f1": 0.995,
+    "confusion_matrix_[hu,ai]x[pred_hu,pred_ai]": [
+      [
+        99,
+        1
+      ],
+      [
+        0,
+        100
+      ]
+    ]
+  },
+  "human_FPR_by_L1": {
+    "native": 0.02,
+    "non_native": 0.0
+  },
+  "detector_of_record_f1": 0.99
+}

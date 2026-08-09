@@ -50,9 +50,19 @@ runs/
 mlruns/
 .cache/
 
-# ---- Outputs: keep the folder, ignore generated artefacts ----
+# ---- Outputs ----
+# Ignored by default: checkpoints, training logs, unpacked Word templates, scratch renders.
+# Two exceptions, so a reader can check the write-up against the actual numbers:
+#   1. the top-level results JSON, which is what every figure in the dissertation is read from;
+#   2. the two example guides built from the AI-written essay.
+# The human-essay guide stays out. It reproduces BAWE prose and that licence does not allow
+# redistribution, so 3108a_human_* is deliberately absent rather than forgotten.
 outputs/*
 !outputs/.gitkeep
+!outputs/*.json
+!outputs/verification_guides/
+outputs/verification_guides/*
+!outputs/verification_guides/3108a_ai*
 
 # ---- Generated slide decks (regenerate with make_deck.py) ----
 dissertation/presentation/*.pptx
@@ -90,3 +100,8 @@ dissertation/presentation/PreFinal_TalkTrack.md
 
 # ---- Web app example texts: the human one is BAWE-derived, never publish it ----
 src/webapp/static/example_human.txt
+
+# ---- Editor / harness scratch ----
+.claude/
+# Throwaway Chrome profile the screenshot script creates
+dissertation/presentation/.chrome_profile/

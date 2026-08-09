@@ -179,3 +179,142 @@ jobs as detached processes, which is what finally made the overnight generation 
 other is the markup artefact itself. It shows why a strong result has to be stress-tested
 before it is believed, and because the audit is scripted, anyone can rerun it and see the same
 thing. Both points feed into how I will build and check the remaining components.
+
+## 4.11 The lecturer-facing interface
+
+Everything above is a set of scripts. A lecturer is not going to run scripts, and a component that
+only a researcher can operate has not really been shown to work for the person it was designed for.
+So the pipeline is also wrapped in an interface that a lecturer can use directly, in `src/webapp/`.
+It matters to the argument as well as to the demonstration: the case this dissertation makes is
+that a flag is only useful if a lecturer can inspect and defend it, and inspecting it is something
+you do by clicking, not by reading a log file.
+
+### What it does
+
+The interface is a local web application. `src/webapp/server.py` is a small FastAPI service and
+`src/webapp/static/index.html` is a single self-contained page. There is no build step, no
+framework and no external asset, which keeps the whole thing readable and means it will still run
+in a few years when the frameworks of 2026 have moved on.
+
+![Figure 4.1: The interface as it opens. The submission goes in the box; the three controls below set how many claims to extract, how many questions to write for each, and which backend writes them. The status light in the corner reports whether the models are loaded, so a slow first analysis is never mistaken for a hang.](../figures/fig_webapp_landing.png)
+
+Figure 4.1 shows the page as it opens. Paste a submission and press one button, and it works
+through five stages in order, each appearing as it finishes rather than after a single long wait. The stages are the pipeline itself:
+the hybrid detector's verdict, the writing-habit explanation, the position of those habits in the
+distribution of real student essays, the sentence-level occlusion marks, and finally the claims and
+the questions drawn from them.
+
+Every stage carries a plain-language panel headed "How this happens", which says what the
+computation was and what it does not license. That is a deliberate design choice rather than
+decoration. The complaint that runs through Chapter 2 about commercial detectors is that they hand
+a lecturer a number with nothing behind it, and an interface that did the same would be repeating
+the mistake with a nicer typeface.
+
+### Stage one: the verdict, with its two readers separated
+
+![Figure 4.2: The detection stage. The dial shows the fused probability; the two bars underneath are the transformer and the stylometric-plus-perplexity model reporting separately. Showing both is what lets a lecturer see whether the two readers agreed.](../figures/fig_webapp_verdict.png)
+
+The fused probability is shown as one number, but the two component scores are shown as well
+(Figure 4.2). The
+hybrid of Section 6.7 only reads high when both readers agree, and a lecturer who can see the
+components can tell the difference between a confident agreement and a fused score being carried by
+one model. The dial never reaches 1.0, and the panel says so in as many words: the model is
+confident, not certain, and an interface that displayed a round 100 percent would be making a claim
+the evidence does not support.
+
+### Stage two: the explanation that passed the faithfulness test
+
+![Figure 4.3: The writing-habit explanation. Each row is one measurement: the grey band is the middle 80 percent of real student essays, the line is the typical value, and the dot is this submission. The sentences above the chart say the same thing in words, for a reader who does not want to read a chart.](../figures/fig_webapp_habits.png)
+
+Figure 4.3 is the habit card of Section 5.7. It is worth saying plainly why the interface does not
+do the thing people expect, which is to highlight the individual words that gave the essay away. That
+explanation was built, tested against the ERASER-style ablation in Chapter 5, and failed: removing
+the top attributed tokens barely moved the detector's confidence. Offering it anyway would have
+made the interface more impressive and less honest. The habit card is what survived the test, so
+the habit card is what the interface shows.
+
+### Stage three: how unusual, not just whether unusual
+
+![Figure 4.4: Each measurement placed in the distribution of the 640 human essays. The band is the middle 80 percent; the marker is this submission. Sorted with the most unusual measurement first, and the count underneath says how many fall in the outer 5 percent.](../figures/fig_webapp_percentiles.png)
+
+The habit card answers whether a measurement is outside the normal range. The percentile view in
+Figure 4.4 answers by how far, which is the question a lecturer defending a decision will actually be asked. The panel
+also states the thing that keeps this from being over-read: one measurement in the top 5 percent
+means nothing, since by definition one essay in twenty is in the top 5 percent of any measurement.
+Several at once is the pattern worth attention. Unusual writing is not misconduct, and the
+interface says so on the same screen that reports the percentiles.
+
+### Stage four: which sentences, and what a sentence is worth
+
+![Figure 4.5: Sentence-level occlusion. Each sentence is deleted in turn and the submission re-scored, with the shading showing how much the score moved. The marks are spread across the essay rather than concentrated, which is the honest result and not a rendering fault.](../figures/fig_webapp_sentences.png)
+
+The marks themselves are shown in Figure 4.5. Clicking any marked sentence opens an evidence panel,
+and this is the part of the interface that took the most iteration, because the first version simply reported that a sentence had the largest
+effect on the score, which is true and useless. A lecturer looking at a highlighted sentence needs
+three things: what is actually known about it, why that matters, and what to do next.
+
+![Figure 4.6: The evidence panel for one sentence. It gives the rank and the share of the total signal, states in proportion what that share supports, notes the length against the submission's own median and any model-favoured phrasing, and closes with what the sentence is and is not good for.](../figures/fig_webapp_inspect.png)
+
+The panel is shown in Figure 4.6, and its wording changes with the size of the effect. Above two percent of the total signal
+it says the sentence carries a lot for one sentence; below half a percent it says outright that the
+sentence proves nothing on its own. In the example shown the top-ranked sentence accounts for 0.12
+percent of the signal, and the panel says so rather than letting the highlight imply more. Every
+panel ends the same way: the sentence is a place to begin a conversation, not a finding.
+
+### Stage five: the questions, with their provenance
+
+![Figure 4.7: One claim card. The claim, the sentence numbers it was taken from, the quoted source text, and three questions with their Bloom's levels. The quotation is looked up from the submission rather than repeated back by the model, so it cannot be invented.](../figures/fig_webapp_questions.png)
+
+Figure 4.7 shows one claim card. The claim extractor keeps the sentence numbers each claim came
+from, and the interface uses those numbers to look the quotation up from the submitted text. The model never supplies the quotation,
+which means a hallucinated quotation is not possible here by construction rather than by good
+behaviour. Each question carries a Bloom's level from the classifier of Section 7.5.
+
+### Two additions that came out of using it
+
+Two features were added after working with the interface rather than from the original design, and
+both earned their place.
+
+The first is a comparison mode: two submissions analysed side by side, through the same models, with
+their habit measurements and percentiles shown against each other. This is the check that makes the
+whole page defensible. If a submission the lecturer knows to be genuine sits at the same extremes as
+the flagged one, then the flag is describing the genre or the subject rather than the author. That is
+exactly the failure mode Chapter 6 measures across disciplines, and the interface gives a lecturer a
+way to test for it on their own module rather than trusting my numbers.
+
+The second is a counterfactual on the sentence stage. After the marks are drawn, the system removes
+the highest-ranked sentences and re-scores what is left. If the verdict survives having its
+strongest evidence deleted, the flag is a property of the whole submission rather than of a handful
+of sentences, and a lecturer can say that with a number behind it.
+
+### Making it correct, and making it fast
+
+Two requirements pull against each other here. The interface must give the same answers as the
+batch scripts the dissertation reports on, or the two would disagree and one of them would be
+wrong. It must also respond quickly enough to be worth using.
+
+Correctness is handled by wiring the interface to the same trained artefacts, not to a
+reimplementation. On the worked pair it reproduces the reported figures exactly: the AI-written
+version scores 0.9572 and is flagged, the real student essay scores 0.0234 and is not.
+
+Speed was the harder half. The batch scripts load every model on each call, which is fine for an
+overnight job and hopeless for an interface. `src/webapp/pipeline_service.py` holds one copy of
+each model in the process and reuses it across requests, behind a lock so that two requests cannot
+race into loading the same model twice. Startup pays about 27 seconds once, and a detection then
+takes roughly two seconds on the laptop. The question stage is slower, around a minute, because it
+runs a language model, and the interface says so before it starts rather than leaving the reader
+watching a spinner with no explanation.
+
+One limit is enforced rather than papered over. A submission under 120 words is refused, because
+below that the writing-habit measurements are unstable, and reporting them anyway would be exactly
+the unearned confidence this project is arguing against.
+
+### What it demonstrates
+
+The interface is not a research contribution in itself. It matters for two reasons. It shows the
+pipeline running end to end on arbitrary text rather than on a curated example, which is a claim
+this dissertation would otherwise be asking the reader to take on trust. And it holds the argument
+about local models to account: the page is served from `127.0.0.1`, every model runs inside that
+process, and the analysis still completes with the network disconnected. The case for running this
+pipeline on a laptop instead of an API rests on student submissions being personal data, and the
+interface is where that stops being an argument and becomes a property you can check.

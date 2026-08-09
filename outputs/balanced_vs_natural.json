@@ -1,0 +1,138 @@
+{
+  "design": {
+    "n_human_each": 247,
+    "natural_alloc": {
+      "AH_native": 53,
+      "AH_non-native": 10,
+      "LS_native": 45,
+      "LS_non-native": 17,
+      "PS_native": 38,
+      "PS_non-native": 15,
+      "SS_native": 39,
+      "SS_non-native": 30
+    },
+    "balanced_alloc": {
+      "AH_native": 31,
+      "AH_non-native": 31,
+      "LS_native": 31,
+      "LS_non-native": 31,
+      "PS_native": 31,
+      "PS_non-native": 31,
+      "SS_native": 31,
+      "SS_non-native": 30
+    },
+    "natural_proportions": {
+      "AH_non-native": 0.0413,
+      "AH_native": 0.2138,
+      "LS_non-native": 0.067,
+      "LS_native": 0.1804,
+      "PS_non-native": 0.0612,
+      "PS_native": 0.1547,
+      "SS_non-native": 0.1232,
+      "SS_native": 0.1583
+    }
+  },
+  "model": "microsoft/deberta-v3-base",
+  "note": "same size, same hyperparameters, same seed, same test split; only the writer distribution differs",
+  "balanced": {
+    "n_train": 494,
+    "test_overall": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "test_per_cell_f1": {
+      "AH_native": {
+        "n": 26,
+        "f1": 1.0
+      },
+      "AH_non-native": {
+        "n": 24,
+        "f1": 1.0
+      },
+      "LS_native": {
+        "n": 24,
+        "f1": 1.0
+      },
+      "LS_non-native": {
+        "n": 24,
+        "f1": 1.0
+      },
+      "PS_native": {
+        "n": 26,
+        "f1": 1.0
+      },
+      "PS_non-native": {
+        "n": 28,
+        "f1": 1.0
+      },
+      "SS_native": {
+        "n": 24,
+        "f1": 1.0
+      },
+      "SS_non-native": {
+        "n": 24,
+        "f1": 1.0
+      }
+    },
+    "test_f1_natural_weighted": 1.0,
+    "human_FPR_by_L1": {
+      "native": 0.0,
+      "non_native": 0.0
+    }
+  },
+  "natural": {
+    "n_train": 494,
+    "test_overall": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "test_per_cell_f1": {
+      "AH_native": {
+        "n": 26,
+        "f1": 1.0
+      },
+      "AH_non-native": {
+        "n": 24,
+        "f1": 1.0
+      },
+      "LS_native": {
+        "n": 24,
+        "f1": 1.0
+      },
+      "LS_non-native": {
+        "n": 24,
+        "f1": 1.0
+      },
+      "PS_native": {
+        "n": 26,
+        "f1": 1.0
+      },
+      "PS_non-native": {
+        "n": 28,
+        "f1": 1.0
+      },
+      "SS_native": {
+        "n": 24,
+        "f1": 1.0
+      },
+      "SS_non-native": {
+        "n": 24,
+        "f1": 1.0
+      }
+    },
+    "test_f1_natural_weighted": 1.0,
+    "human_FPR_by_L1": {
+      "native": 0.0,
+      "non_native": 0.0
+    }
+  },
+  "paired_mcnemar": {
+    "balanced_right_natural_wrong": 0,
+    "natural_right_balanced_wrong": 0,
+    "p": 1.0
+  }
+}

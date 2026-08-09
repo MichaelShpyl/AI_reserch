@@ -1,0 +1,59 @@
+{
+  "n_claims": 12,
+  "v2": {
+    "label": "v2 (SQuAD)",
+    "n": 12,
+    "n_degenerate": 0,
+    "pct_degenerate": 0.0,
+    "questions": [
+      {
+        "q": "What does judicial review provide a mechanism for?",
+        "degenerate": false
+      },
+      {
+        "q": "What is one reason that judicial review has been influential in shaping administrative law? \",\"What is an example of a national level case where judicial review has influenced administrative law? \"}",
+        "degenerate": false
+      },
+      {
+        "q": "What is the purpose of judicial review?",
+        "degenerate": false
+      },
+      {
+        "q": "What is one consequence of popularity on children? {\"answer\": \"self-esteem\", \"essaySentence\": \"This disparity in popularity has significant consequences for the psychological development of children, influencing their self-esteem, social skills, and overall well-being.\"} {\"answer\": \"social skills\", \"essaySentence\": \"This disparity in popularity has significant consequences for the psychological development of children, influencing their self-esteem, social skills, and overall well-being.\"} {\"answer\": \"overall well-being\", \"essaySentence\": \"This disparity in popularity has significant consequences for the psychological development of children, influencing their self-esteem, social skills, and overall well-being.\"}",
+        "degenerate": false
+      },
+      {
+        "q": "What is the likely outcome for children who are consistently popular? \",\"What is the likely outcome for children who are rejected or ostracized? \"}",
+        "degenerate": false
+      },
+      {
+        "q": "What can lead to negative social dynamics within schools?",
+        "degenerate": false
+      },
+      {
+        "q": "What is one of the key concepts in Smith's theory of motivation?",
+        "degenerate": false
+      },
+      {
+        "q": "What is the invisible hand a metaphor for?",
+        "degenerate": false
+      },
+      {
+        "q": "What does individual behavior depend on?",
+        "degenerate": false
+      },
+      {
+        "q": "What is the company that the student is using as an example? {\"answer\": \"Peugeot Motor Company Ltd.\", \"question\": \"What company does the student use as an example?\"} {\"answer\": \"Understanding the economic structure of industry\", \"question\": \"What is the student trying to understand?\"} {\"answer\": \"In examining companies like Peugeot Motor Company Ltd.\", \"question\": \"What is the purpose of understanding the economic structure of industry?\"}",
+        "degenerate": false
+      },
+      {
+        "q": "What is one reason why Peugeot is successful?",
+        "degenerate": false
+      },
+      {
+        "q": "What has Peugeot done to maintain its position as a leading manufacturer?",
+        "degenerate": false
+      }
+    ]
+  }
+}

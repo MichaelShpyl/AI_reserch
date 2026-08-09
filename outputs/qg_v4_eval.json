@@ -1,0 +1,109 @@
+{
+  "n_claims": 18,
+  "base": {
+    "label": "base 3B",
+    "n_questions": 45,
+    "pct_degenerate": 0.0,
+    "mean_discrimination": 0.0272,
+    "ci95": [
+      0.015,
+      0.0399
+    ]
+  },
+  "v2": {
+    "label": "v2 (SQuAD) 3B",
+    "n_questions": 23,
+    "pct_degenerate": 0.0,
+    "mean_discrimination": 0.1021,
+    "ci95": [
+      0.0598,
+      0.1444
+    ]
+  },
+  "v1_for_reference": {
+    "mean_discrimination": 0.154,
+    "pct_degenerate": 95.2,
+    "note": "artifact; see qg_quality_audit.json"
+  },
+  "v4": {
+    "label": "v3 (verification) 3B",
+    "n_questions": 54,
+    "n_degenerate": 0,
+    "pct_degenerate": 0.0,
+    "mean_discrimination": 0.2663,
+    "ci95": [
+      0.2355,
+      0.2964
+    ],
+    "questions": [
+      "How does your argument connect to the broader themes or arguments presented in the rest of your essay?",
+      "What specific piece of evidence or example did you rely on to support this point, and why was it more convincing than other options?",
+      "In what ways did you consider alternative explanations or interpretations, and why did you ultimately choose to focus on this one?",
+      "How does your argument connect with the broader themes or arguments presented in your essay?",
+      "What specific examples or instances did you have in mind when making this claim?",
+      "Why did you choose to focus on this particular aspect of the issue?",
+      "How does your argument connect to the broader theme or thesis statement in your essay?",
+      "What specific evidence or examples did you use to support this point, and why did you choose them over other options?",
+      "In what ways does this claim relate to the rest of your essay, and how does it contribute to the overall argument?",
+      "How did you decide which aspects of children's development to focus on when making this claim?",
+      "What specific piece of evidence from your essay supports this point, and why did you choose it over other options?",
+      "In what ways does this claim connect to the broader argument presented in your essay?",
+      "How did you decide which source to cite for this point, and why did you choose one over the other?",
+      "What specific evidence or example from your sources did you rely on to support this claim, and why was it more convincing than alternative options?",
+      "In what ways does this point connect to the broader argument or themes in your essay?",
+      "What specific evidence or example did you use to support your argument, and why was it more convincing than other options?",
+      "How does this point connect to the broader themes or arguments presented in your essay?",
+      "What alternative perspectives or counterarguments might challenge your position, and how would you respond to them?",
+      "What specific evidence or example did you use to support this point, and why was it more convincing than other options?",
+      "How does this claim connect to the broader argument presented in your essay?",
+      "In what ways did you consider alternative explanations, and why did you reject them?",
+      "How does your argument connect the concept of fellow-feeling to the broader discussion in your essay?",
+      "What specific evidence or example did you use to support this point, and why was it more convincing than alternative options?",
+      "In what ways do you think your position on this issue relates to other ideas presented in your essay?",
+      "What specific evidence or example did you use to support your position, and why was it more convincing than other alternatives?",
+      "How did you connect this point to the broader argument in your essay, and what implications does it have for policy?",
+      "What alternative perspectives or counterarguments might challenge your position, and how would you respond to them?",
+      "What specific evidence or example did you use to support this point, and why was it more relevant than other options?",
+      "How does this claim connect to the broader argument presented in your essay, and what implications does it have for your overall thesis?",
+      "If someone were to challenge your reasoning here, what would be a key piece of evidence or argument they might use against you, and how would you respond?",
+      "How does the idea presented here connect with the broader argument you're making in your essay?",
+      "What specific evidence or examples did you use to support this point, and why were those chosen over others?",
+      "If someone were to challenge your assertion, what would be a key piece of evidence or reasoning they might rely on, and how would you respond?",
+      "How did you decide which of these three strategies was most important for maintaining your position?",
+      "What specific examples from your essay support this point, and why did you choose them over others?",
+      "In what ways does this claim connect to the broader argument presented in your essay?",
+      "What specific aspects of Afro-American experiences did you focus on when making this claim?",
+      "How does your interpretation of these aspects relate to broader historical contexts?",
+      "In what ways did you rely on Patterson's arguments rather than alternative perspectives?",
+      "What specific piece of evidence did you rely on when making this point, and why was it more convincing than other options?",
+      "How does your interpretation of 'social death' differ from alternative views, and what implications does this have for our understanding of the issue?",
+      "In what ways did you integrate this idea into the broader argument of your essay, and what role does it play in supporting your overall thesis?",
+      "How does your discussion of historical context contribute to the overall argument in your essay?",
+      "What specific examples or instances did you use to support this point, and why were they chosen over others?",
+      "In what ways do you think this point connects to the broader themes or arguments presented in your essay?",
+      "What is the primary reason you believe this claim is accurate, and what evidence did you use to support it?",
+      "How does your argument connect to the broader themes discussed in your essay?",
+      "What alternative perspectives or counterarguments might weaken your position, and how would you respond to them?",
+      "What led you to conclude that organisations have expanded their influence across global supply chains?",
+      "How does your argument connect with the broader themes or arguments presented in your essay?",
+      "If you were to revise your position based on new information or perspectives, what changes would you make to this part of your essay?",
+      "How does your argument connect to the broader themes or arguments presented in your essay?",
+      "What specific evidence or examples did you use to support this point, and why did you choose them over others?",
+      "In what ways do you think this idea relates to other concepts or theories discussed in your essay?"
+    ],
+    "content_free_at_inference": {
+      "n_clean": 48,
+      "n_total": 54,
+      "clean_ratio": 0.889
+    }
+  },
+  "reference": {
+    "v3_mean": 0.0641,
+    "generic_baseline": 0.3
+  },
+  "uniqueness": {
+    "n_questions": 54,
+    "n_unique": 51,
+    "unique_ratio": 0.944
+  }
+}

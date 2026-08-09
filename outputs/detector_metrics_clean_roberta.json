@@ -1,0 +1,39 @@
+{
+  "model": "roberta-base",
+  "val": {
+    "eval_loss": 0.1236,
+    "eval_accuracy": 0.9804,
+    "eval_precision": 0.9623,
+    "eval_recall": 1.0,
+    "eval_f1": 0.9808,
+    "eval_runtime": 1.2261,
+    "eval_samples_per_second": 166.382,
+    "eval_steps_per_second": 10.603
+  },
+  "test": {
+    "accuracy": 0.995,
+    "precision": 0.9901,
+    "recall": 1.0,
+    "f1": 0.995,
+    "confusion_matrix_[hu,ai]x[pred_hu,pred_ai]": [
+      [
+        99,
+        1
+      ],
+      [
+        0,
+        100
+      ]
+    ]
+  },
+  "fairness_human_FPR_by_L1": {
+    "native": {
+      "n_human": 50,
+      "false_positive_rate": 0.02
+    },
+    "non_native": {
+      "n_human": 50,
+      "false_positive_rate": 0.0
+    }
+  }
+}

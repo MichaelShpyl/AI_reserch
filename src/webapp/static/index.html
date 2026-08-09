@@ -35,7 +35,7 @@ header{position:sticky; top:0; z-index:30; display:flex; align-items:center; gap
 .pill.ready i{background:var(--teal)}
 
 main{max-width:1240px; margin:0 auto; padding:1.3rem 1.4rem 4rem}
-.lede{max-width:70ch; color:var(--muted); margin-bottom:1.1rem}
+.lede{max-width:78ch; color:var(--muted); margin-bottom:1.1rem}
 .lede b{color:var(--ink)}
 
 .editor{background:var(--page); border:1px solid var(--line); border-radius:.6rem;
@@ -327,6 +327,79 @@ async function runCompare(a, b){
     detector is reacting to the writing or to the subject. If a piece of known-good student work
     scores close to the suspicious one, the flag is telling you very little.</p>`;
   setTime("c1", null);
+
+  // The scores alone are a dead end. Keep going into the same depth a single run gets.
+  stage("c2","Compare","Where the two differ, habit by habit");
+  const [ea, eb] = await Promise.all([post("/api/explain",{text:a}), post("/api/explain",{text:b})]);
+  renderHabitCompare(ea, eb);
+  setTime("c2", null);
+
+  stage("c3","Compare","How unusual each one is, against real student writing");
+  const [pa, pb] = await Promise.all([post("/api/percentiles",{text:a}), post("/api/percentiles",{text:b})]);
+  renderPctCompare(pa, pb);
+  setTime("c3", null);
+}
+
+function renderHabitCompare(ea, eb){
+  const byFeat = {};
+  (ea.rows||[]).forEach(r => byFeat[r.feature] = {a:r});
+  (eb.rows||[]).forEach(r => (byFeat[r.feature] = byFeat[r.feature]||{}).b = r);
+  const rows = Object.values(byFeat).filter(x=>x.a && x.b);
+  if(!rows.length){ body("c2").innerHTML = "<p>The two submissions share no comparable habits.</p>"; return; }
+
+  body("c2").innerHTML = `
+    <p class="hint">Both submissions on the same scale, so the gap is visible rather than described.
+    <b style="color:var(--rust)">A</b> and <b style="color:var(--teal)">B</b> are the two markers;
+    the grey band is the middle 80 percent of real student essays.</p>
+    ${rows.map(({a,b})=>{
+      const spread=(a.human_p90-a.human_p10)||Math.abs(a.human_median)||1;
+      const lo=a.human_p10-1.5*spread, hi=a.human_p90+1.5*spread;
+      const nx=x=>Math.max(1.5,Math.min(98.5,(x-lo)/(hi-lo)*100));
+      return `<div class="strip">
+        <div class="lab">${esc(a.label||a.feature)}</div>
+        <div class="lane">
+          <div class="bandbar" style="left:${nx(a.human_p10)}%; width:${nx(a.human_p90)-nx(a.human_p10)}%"></div>
+          <div class="med" style="left:${nx(a.human_median)}%"></div>
+          <div class="dot" style="left:calc(${nx(a.value)}% - 8px); background:var(--rust)" title="A"></div>
+          <div class="dot" style="left:calc(${nx(b.value)}% - 8px); background:var(--teal)" title="B"></div>
+        </div>
+        <div class="val num">A ${fmt(a.value)} &middot; B ${fmt(b.value)}</div>
+      </div>`;}).join("")}
+    <p class="why"><b>How to read it:</b> where the two markers sit apart, the submissions really do
+    write differently on that measure. Where they sit together, that habit is telling you nothing
+    about the difference between them, whatever the headline scores say.</p>`;
+}
+
+function renderPctCompare(pa, pb){
+  const map = {};
+  (pa.features||[]).forEach(f => map[f.feature] = {label:f.label, a:f.percentile});
+  (pb.features||[]).forEach(f => { if(map[f.feature]) map[f.feature].b = f.percentile; });
+  const rows = Object.values(map).filter(r=>r.b!=null)
+    .map(r=>({...r, gap:Math.abs(r.a-r.b)}))
+    .sort((x,y)=>y.gap-x.gap).slice(0,10);
+  const extA = (pa.features||[]).filter(f=>f.percentile<=5||f.percentile>=95).length;
+  const extB = (pb.features||[]).filter(f=>f.percentile<=5||f.percentile>=95).length;
+
+  body("c3").innerHTML = `
+    <p class="hint">Percentile within the ${pa.n_human_essays} real student essays, for each
+    submission. Sorted by the biggest disagreement between the two.</p>
+    ${rows.map(r=>`
+      <div class="pct">
+        <div class="lab">${esc(r.label)}</div>
+        <div class="pctlane"><u></u>
+          <i style="left:calc(${Math.max(0,Math.min(100,r.a))}% - 1.5px); background:var(--rust)"></i>
+          <i style="left:calc(${Math.max(0,Math.min(100,r.b))}% - 1.5px); background:var(--teal)"></i>
+        </div>
+        <div class="v">${r.a.toFixed(0)} / ${r.b.toFixed(0)}</div>
+      </div>`).join("")}
+    <p class="reads" style="margin-top:.7rem">Submission A is in the outer 5 percent of student
+    writing on <b>${extA}</b> measurement${extA===1?"":"s"}; submission B on <b>${extB}</b>.
+    ${extA===extB
+      ? "That is the same count for both, which is worth pausing on before treating either as unusual."
+      : "The one with more extremes is the more unusual piece of writing, though unusual writing is not misconduct."}</p>
+    <p class="why"><b>What this is for:</b> if a submission you know to be genuine sits at the same
+    extremes as the flagged one, the flag is describing the genre or the subject rather than the
+    author. That is the check this whole page exists to make possible.</p>`;
 }
 
 async function run(){
@@ -532,6 +605,14 @@ const HABITS = {
   }
 };
 
+/* 1st, 2nd, 3rd, 4th, and the teens that break the pattern. Writing "2th" on a page that asks a
+   lecturer to trust its numbers is a small thing that costs more than it looks. */
+function ordinal(n){
+  const i = Math.round(n), t = i % 100;
+  if(t >= 11 && t <= 13) return i + "th";
+  return i + (["th","st","nd","rd"][i % 10] || "th");
+}
+
 function renderPercentiles(p){
   const rows = (p.features||[]).slice(0, 12);
   if(!rows.length){ body("s3").innerHTML = "<p>No distribution available.</p>"; return; }
@@ -545,7 +626,7 @@ function renderPercentiles(p){
       return `<div class="pct ${ext?"extreme":""}">
         <div class="lab">${esc(r.label)}</div>
         <div class="pctlane"><u></u><i style="left:calc(${Math.max(0,Math.min(100,r.percentile))}% - 1.5px)"></i></div>
-        <div class="v">${r.percentile.toFixed(0)}th</div>
+        <div class="v">${ordinal(r.percentile)}</div>
       </div>`;}).join("")}
     <p class="reads" style="margin-top:.7rem">
       ${extreme
@@ -617,7 +698,7 @@ function inspect(i){
 
   document.getElementById("inspect").innerHTML = `
     <div class="inspect">
-      <h4>Sentence ${i+1} of ${n}</h4>
+      <h4>Sentence ${i+1}, of ${n} in this submission</h4>
       <div class="quoted">${esc(m.sentences[i])}</div>
       <div class="facts">
         <div class="fact"><div class="k">Reaction rank</div><div class="v">${d.rank||"?"} of ${n}</div></div>

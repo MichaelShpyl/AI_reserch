@@ -1,0 +1,1683 @@
+{
+  "judges": {
+    "commercial:gemini:gemini-2.5-flash": {
+      "guide": "3108a_ai",
+      "scores": {
+        "How did you determine that Dickinson's poetry represents a distinct literary genre from Shakespeare's Othello and Austen's Emma? What specific examples or features of each text led you to this conclusion?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "You mentioned that the three texts share commonalities in their exploration of universal themes and ideas. Can you identify one particular theme or idea that is explored in all three texts, and explain how you used evidence from each text to support your argument?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How do you think the fact that these three texts represent different literary genres (poetry, drama, prose fiction) affects the way they explore universal themes and ideas? What connections did you make between the genre of a particular text and its exploration of certain themes or ideas?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific examples from the texts you analyzed did you use to illustrate how language can convey meaning?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.5
+        },
+        "How does the metaphor in one of these texts contribute to evoking a sense of longing and yearning, and what makes this relevant to the human experience?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "In your essay, you mentioned that social relationships are often marked by ambiguity and uncertainty. What particular aspect of the texts' use of language led you to make this claim, and how does it relate to your broader argument about the power of language?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide to use Shakespeare's Othello as an example of a text with historical and cultural context in your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "What specific aspects of Dickinson's poetry led you to conclude that it reflects her own experiences as a recluse, and how did this relate to the rest of your argument about the three texts?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How do you think the social status of Austen's characters in Emma contributes to the overall theme of historical and cultural context that you were exploring in your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "How did you decide to use metaphor and symbolism as examples of how Dickinson's poetry conveys meaning and evokes emotions?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "What specific aspects of Shakespeare's Othello led you to choose dramatic intensity and emotional depth as the key features of his style?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "In your essay, you contrast Austen's subtle and nuanced style with the more expressive styles of Dickinson and Shakespeare. What do you think is the significance of this contrast in terms of how each author approaches their subject matter?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        }
+      },
+      "anchoring": {
+        "n_paired": 12,
+        "spearman_judgeMean_vs_sim": {
+          "rho": -0.137,
+          "p": 0.6722
+        },
+        "spearman_judgeDisc_vs_sim": {
+          "rho": -0.22,
+          "p": 0.4914
+        },
+        "reading": "Spearman rank correlation between judge ratings and the judge-free discrimination simulation for the same questions. Low agreement means the judge measures something else; report it either way."
+      }
+    },
+    "commercial:openai:gpt-4o-mini": {
+      "guide": "3108a_ai",
+      "scores": {
+        "How did you determine that Dickinson's poetry represents a distinct literary genre from Shakespeare's Othello and Austen's Emma? What specific examples or features of each text led you to this conclusion?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "You mentioned that the three texts share commonalities in their exploration of universal themes and ideas. Can you identify one particular theme or idea that is explored in all three texts, and explain how you used evidence from each text to support your argument?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How do you think the fact that these three texts represent different literary genres (poetry, drama, prose fiction) affects the way they explore universal themes and ideas? What connections did you make between the genre of a particular text and its exploration of certain themes or ideas?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific examples from the texts you analyzed did you use to illustrate how language can convey meaning?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.75
+        },
+        "How does the metaphor in one of these texts contribute to evoking a sense of longing and yearning, and what makes this relevant to the human experience?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "In your essay, you mentioned that social relationships are often marked by ambiguity and uncertainty. What particular aspect of the texts' use of language led you to make this claim, and how does it relate to your broader argument about the power of language?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide to use Shakespeare's Othello as an example of a text with historical and cultural context in your essay?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.75
+        },
+        "What specific aspects of Dickinson's poetry led you to conclude that it reflects her own experiences as a recluse, and how did this relate to the rest of your argument about the three texts?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How do you think the social status of Austen's characters in Emma contributes to the overall theme of historical and cultural context that you were exploring in your essay?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide to use metaphor and symbolism as examples of how Dickinson's poetry conveys meaning and evokes emotions?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific aspects of Shakespeare's Othello led you to choose dramatic intensity and emotional depth as the key features of his style?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "In your essay, you contrast Austen's subtle and nuanced style with the more expressive styles of Dickinson and Shakespeare. What do you think is the significance of this contrast in terms of how each author approaches their subject matter?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        }
+      },
+      "anchoring": {
+        "n_paired": 12,
+        "spearman_judgeMean_vs_sim": {
+          "rho": -0.753,
+          "p": 0.0047
+        },
+        "spearman_judgeDisc_vs_sim": {
+          "rho": NaN,
+          "p": NaN
+        },
+        "reading": "Spearman rank correlation between judge ratings and the judge-free discrimination simulation for the same questions. Low agreement means the judge measures something else; report it either way."
+      }
+    },
+    "commercial:anthropic:claude-opus-4-8": {
+      "guide": "3108a_ai",
+      "scores": {
+        "How did you determine that Dickinson's poetry represents a distinct literary genre from Shakespeare's Othello and Austen's Emma? What specific examples or features of each text led you to this conclusion?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.5
+        },
+        "You mentioned that the three texts share commonalities in their exploration of universal themes and ideas. Can you identify one particular theme or idea that is explored in all three texts, and explain how you used evidence from each text to support your argument?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.5
+        },
+        "How do you think the fact that these three texts represent different literary genres (poetry, drama, prose fiction) affects the way they explore universal themes and ideas? What connections did you make between the genre of a particular text and its exploration of certain themes or ideas?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "What specific examples from the texts you analyzed did you use to illustrate how language can convey meaning?": {
+          "relevance": 3,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 3,
+          "mean": 3.5
+        },
+        "How does the metaphor in one of these texts contribute to evoking a sense of longing and yearning, and what makes this relevant to the human experience?": {
+          "relevance": 2,
+          "specificity": 3,
+          "discrimination": 2,
+          "cognitive": 4,
+          "mean": 2.75
+        },
+        "In your essay, you mentioned that social relationships are often marked by ambiguity and uncertainty. What particular aspect of the texts' use of language led you to make this claim, and how does it relate to your broader argument about the power of language?": {
+          "relevance": 2,
+          "specificity": 3,
+          "discrimination": 2,
+          "cognitive": 3,
+          "mean": 2.5
+        },
+        "How did you decide to use Shakespeare's Othello as an example of a text with historical and cultural context in your essay?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.25
+        },
+        "What specific aspects of Dickinson's poetry led you to conclude that it reflects her own experiences as a recluse, and how did this relate to the rest of your argument about the three texts?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "How do you think the social status of Austen's characters in Emma contributes to the overall theme of historical and cultural context that you were exploring in your essay?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.5
+        },
+        "How did you decide to use metaphor and symbolism as examples of how Dickinson's poetry conveys meaning and evokes emotions?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.25
+        },
+        "What specific aspects of Shakespeare's Othello led you to choose dramatic intensity and emotional depth as the key features of his style?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "In your essay, you contrast Austen's subtle and nuanced style with the more expressive styles of Dickinson and Shakespeare. What do you think is the significance of this contrast in terms of how each author approaches their subject matter?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.5
+        }
+      },
+      "anchoring": {
+        "n_paired": 12,
+        "spearman_judgeMean_vs_sim": {
+          "rho": -0.302,
+          "p": 0.3401
+        },
+        "spearman_judgeDisc_vs_sim": {
+          "rho": -0.061,
+          "p": 0.8505
+        },
+        "reading": "Spearman rank correlation between judge ratings and the judge-free discrimination simulation for the same questions. Low agreement means the judge measures something else; report it either way."
+      }
+    },
+    "commercial:anthropic:claude-opus-4-8|scaled_20x3": {
+      "guide": "scaled_20x3",
+      "scores": {
+        "How did you determine which specific points on the growth curve corresponded to the maximum population size (M) and the stationary phase?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.75
+        },
+        "What specific forms of organisational responsibility do you think are emerging beyond traditional CSR, and how did your understanding of this concept influence the way you structured your essay?": {
+          "relevance": 3,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.25
+        },
+        "How did you decide that the partnership between EN and JNCC was instrumental in addressing emerging threats such as climate change and biodiversity loss? What specific information from your research led you to this conclusion?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "How did you justify the importance of 'prompt recognition' in your essay?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.25
+        },
+        "What specific evidence or examples from the essay support the claim that regression analysis is a fundamental tool in econometrics, and how do these examples illustrate its importance?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.25
+        },
+        "You mentioned in your essay that a lean manufacturing program would require significant investment. What trade-offs do you think A-Z Cloth UK needs to consider when weighing the costs and benefits of implementing such a program?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.25
+        },
+        "In your essay, you stated that the Wednesbury principle is a 'fundamental component' of constitutional and administrative law. What evidence or examples from your research supported this claim, and how did you determine that it is essential to these areas of law?": {
+          "relevance": 3,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 3.75
+        },
+        "You mention that a confrontational tone may 'exacerbate tensions' in cross-strait relations. How did you justify this claim, and what specific examples from your research supported this assertion?": {
+          "relevance": 4,
+          "specificity": 5,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "How did you determine that popularity has significant consequences for psychological development during childhood? What specific aspects of psychological development were you referring to?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "In your essay, how do the emergence of other European powers, such as Britain and France, relate to your argument that the expansion of European commercial ventures led to significant economic, social, and cultural changes in Asian societies?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 3.75
+        },
+        "What specific differences in tone and content between the Lyon Tablet and Tacitus' Annals 11.23-5 do you believe are most significant, and how did these differences influence your interpretation of Claudius' speech on the Gallic senators?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific experience or decision led you to emphasize the importance of flexibility in business management?": {
+          "relevance": 2,
+          "specificity": 2,
+          "discrimination": 2,
+          "cognitive": 2,
+          "mean": 2.0
+        },
+        "How does the point about judicial review's influence on administrative law connect to the rest of your essay? What other claims or arguments in your essay rely on or build upon this idea?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 3.75
+        },
+        "How did you decide to focus on the potential of phages as therapeutic agents or tools for manipulating microbial populations in your essay? What specific aspects of the research findings led you to this conclusion?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.25
+        },
+        "What specific studies or evidence from your essay support the high success rate of over 80% with MTX treatment in unruptured ectopic pregnancies, and how do you think these findings contribute to the argument that medical management is a preferred option?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "How did you decide that 'business acumen' is an essential consideration for engineering students starting a business? Could you point to specific sentences or ideas in your essay where this idea was developed?": {
+          "relevance": 3,
+          "specificity": 4,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.25
+        },
+        "What specific example or case study from your essay supported the claim that 'management' is crucial for effective outcomes in ectopic pregnancy?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 3,
+          "mean": 3.75
+        },
+        "In what ways does the understanding of community health policies developed through this study connect to broader issues of rural development or public health policy, and how do you see policymakers applying these insights in other contexts?": {
+          "relevance": 2,
+          "specificity": 2,
+          "discrimination": 2,
+          "cognitive": 3,
+          "mean": 2.25
+        },
+        "In what ways does the Lyon Tablet's image of Claudius as a just and benevolent ruler connect to its broader purpose in promoting Claudius as a generous patron who protected his subjects?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.5
+        },
+        "How did you justify the claim that the Wednesbury principle is a 'vital component' of modern constitutional and administrative law, given that it was only described as an 'essential tool' earlier in your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "Could you elaborate on the 'significant failures' within the Left that you believe contributed to the FN's rise?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "How does enhancing productivity relate to the other benefits you mentioned?": {
+          "relevance": 3,
+          "specificity": 2,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 2.75
+        },
+        "In your view, what are the potential limitations of the Wednesbury principle as mentioned in your essay? How do these limitations affect its application in modern administrative law?": {
+          "relevance": 3,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.25
+        },
+        "In your essay, you mentioned that the results from using ANSYS Fluent provide 'valuable insights' into aerodynamic behavior. Can you elaborate on what specific aerodynamic behaviors these insights are focusing on?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.25
+        },
+        "Provide an example from your essay that illustrates a situation where judicial review intervened to uphold an individual's rights. How did this intervention benefit the individual?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 3,
+          "mean": 3.75
+        },
+        "You state that relativism provides a more nuanced understanding of truth by acknowledging the diversity of truth claims. How does this perspective help in resolving conflicts or disagreements among different truth claims?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.5
+        },
+        "In your opinion, what are the key factors that contribute to an 'effective law enforcement' system? How do these factors relate to the delicate balance you discussed?": {
+          "relevance": 3,
+          "specificity": 2,
+          "discrimination": 2,
+          "cognitive": 3,
+          "mean": 2.5
+        },
+        "Explain how the recognition that 'truth is relative within specific frameworks' contributes to fostering an open-minded and tolerant approach to understanding different cultures and perspectives, as discussed in your essay.": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.5
+        },
+        "Explain the concept of 'individual freedoms' as it relates to DNA sampling and retention systems according to your essay. How does this freedom impact the balance you mentioned?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.5
+        },
+        "Could you elaborate on why you believe a balanced approach to reporting cross-strait issues is necessary?": {
+          "relevance": 3,
+          "specificity": 2,
+          "discrimination": 2,
+          "cognitive": 3,
+          "mean": 2.5
+        },
+        "In your essay, you mentioned that understanding the economic structure helps in identifying key factors that influence the company's performance. Can you provide an example from Peugeot Motor Company Ltd. that illustrates one such factor and how it affects the company's success?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "Explain how the provided evidence supports the claim that developing more targeted programs can reduce childhood obesity rates in rural areas. Use specific examples from your essay.": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "Discuss the limitations you identified in the essay regarding the potential drawbacks of relativism, and how these limitations affect the practical application of relativism in real-world situations.": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.5
+        },
+        "Explain how you connect the importance of effective time allocation and prioritization with the concept of delegating tasks and empowering team members?": {
+          "relevance": 3,
+          "specificity": 2,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.0
+        },
+        "In what ways does Patterson's work connect to broader themes or issues within the field of Afro-American studies? Provide an example from your essay to illustrate this connection.": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.5
+        },
+        "How does the concept of 'source criticism' contribute to historians gaining a deeper understanding of the complex and often contested nature of ancient Roman history, as you elaborated in your essay?": {
+          "relevance": 3,
+          "specificity": 2,
+          "discrimination": 2,
+          "cognitive": 4,
+          "mean": 2.75
+        },
+        "Could you elaborate on the methodology used in your experiment that led to the conclusion that E. coli exhibited chemotactic behavior in response to succinic acid gradients?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "Could you elaborate on how the continuous learning and improvement commitment contributes to making democratic systems more responsive? Please provide an example from your essay.": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "Explain the role of transparency and accountability in organizational cultures according to your essay. How do you think these concepts contribute to successful information management?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.5
+        },
+        "Choose one of the sentences you cited in your essay and explain why you believe it is important to include both 'transparency' and 'accountability' together. What does this combination imply about the effectiveness of information management?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "How did you decide which three areas (medical therapy, imaging modalities, and fertility preservation) were most relevant to improving treatment outcomes?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "What evidence or examples from your essay demonstrate how horticulturists must navigate changes in temperature and weather patterns to ensure sustainable agriculture?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 3,
+          "mean": 3.75
+        },
+        "What evidence or examples from your essay support the idea that these improvements have minimized complications associated with ectopic pregnancy?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.25
+        },
+        "How did you decide on the three key points (reformulation, adaptation, reconnection) as essential for addressing the FN's rise?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "How did you decide to focus on optimizing machine usage as a potential cost reduction strategy?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.25
+        },
+        "How does the energy consumption of carding machines (around 40 kWh per hour) relate to your recommendation for energy efficiency improvements?": {
+          "relevance": 4,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.5
+        },
+        "In what ways does the idea of 'climate change posing significant challenges' connect to the rest of your essay?": {
+          "relevance": 4,
+          "specificity": 2,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.0
+        },
+        "What role does the fact that MTX minimizes complications play in your argument for its effectiveness?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.5
+        },
+        "In what ways do you think the idea of 'within the bounds of the law' relates to the broader themes or arguments presented in your essay?": {
+          "relevance": 3,
+          "specificity": 2,
+          "discrimination": 2,
+          "cognitive": 3,
+          "mean": 2.5
+        },
+        "In what ways does your discussion of Adam Smith's theory connect to the rest of your essay?": {
+          "relevance": 3,
+          "specificity": 2,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 2.75
+        },
+        "In your essay, you mentioned 'risk considerations' as one of the factors affecting the choice of plan. Can you describe an example or evidence from your research that supports why risk is a critical factor in determining the acceptance sampling plan?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "What evidence or examples from your essay do you think best illustrate the impact of popularity on self-esteem, and why did you choose these particular instances?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "How did you decide which policy interventions and activities were 'effective' in addressing child obesity rates?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "In what ways do you think the ability to track and analyse data in real-time connects to the rest of your essay?": {
+          "relevance": 3,
+          "specificity": 2,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.0
+        },
+        "How did you decide to mention both industrial automation and consumer electronics as fields where LEDs-Modulo 100 can be applied?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.25
+        },
+        "How did you decide to use ANSYS Fluent as an example of advanced software packages in your essay?": {
+          "relevance": 3,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.0
+        },
+        "What examples from your essay support the idea that emotional resonance is important for Emo-tion's success?": {
+          "relevance": 4,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 3,
+          "mean": 3.25
+        },
+        "Can you describe the process you went through when deciding which aspects of the partnership's work were most relevant to addressing emerging threats?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.0
+        },
+        "What specific evidence or examples from your essay support the idea that the Wednesbury principle provides flexibility and adaptability in response to changing social and economic circumstances?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 3,
+          "mean": 3.75
+        },
+        "How did you decide to use the example of maritime trade as evidence for the development of connections between East and West?": {
+          "relevance": 3,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 3.75
+        }
+      },
+      "anchoring": {
+        "n_paired": 57,
+        "spearman_judgeMean_vs_sim": {
+          "rho": -0.337,
+          "p": 0.0104
+        },
+        "spearman_judgeDisc_vs_sim": {
+          "rho": -0.247,
+          "p": 0.0635
+        },
+        "reading": "Spearman rank correlation between judge ratings and the judge-free discrimination simulation for the same questions. Low agreement means the judge measures something else; report it either way."
+      }
+    },
+    "commercial:openai:gpt-4o-mini|scaled_20x3": {
+      "guide": "scaled_20x3",
+      "scores": {
+        "How did you determine which specific points on the growth curve corresponded to the maximum population size (M) and the stationary phase?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific forms of organisational responsibility do you think are emerging beyond traditional CSR, and how did your understanding of this concept influence the way you structured your essay?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide that the partnership between EN and JNCC was instrumental in addressing emerging threats such as climate change and biodiversity loss? What specific information from your research led you to this conclusion?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you justify the importance of 'prompt recognition' in your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "What specific evidence or examples from the essay support the claim that regression analysis is a fundamental tool in econometrics, and how do these examples illustrate its importance?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "You mentioned in your essay that a lean manufacturing program would require significant investment. What trade-offs do you think A-Z Cloth UK needs to consider when weighing the costs and benefits of implementing such a program?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "In your essay, you stated that the Wednesbury principle is a 'fundamental component' of constitutional and administrative law. What evidence or examples from your research supported this claim, and how did you determine that it is essential to these areas of law?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "You mention that a confrontational tone may 'exacerbate tensions' in cross-strait relations. How did you justify this claim, and what specific examples from your research supported this assertion?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you determine that popularity has significant consequences for psychological development during childhood? What specific aspects of psychological development were you referring to?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "In your essay, how do the emergence of other European powers, such as Britain and France, relate to your argument that the expansion of European commercial ventures led to significant economic, social, and cultural changes in Asian societies?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific differences in tone and content between the Lyon Tablet and Tacitus' Annals 11.23-5 do you believe are most significant, and how did these differences influence your interpretation of Claudius' speech on the Gallic senators?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific experience or decision led you to emphasize the importance of flexibility in business management?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How does the point about judicial review's influence on administrative law connect to the rest of your essay? What other claims or arguments in your essay rely on or build upon this idea?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide to focus on the potential of phages as therapeutic agents or tools for manipulating microbial populations in your essay? What specific aspects of the research findings led you to this conclusion?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific studies or evidence from your essay support the high success rate of over 80% with MTX treatment in unruptured ectopic pregnancies, and how do you think these findings contribute to the argument that medical management is a preferred option?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide that 'business acumen' is an essential consideration for engineering students starting a business? Could you point to specific sentences or ideas in your essay where this idea was developed?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific example or case study from your essay supported the claim that 'management' is crucial for effective outcomes in ectopic pregnancy?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.75
+        },
+        "In what ways does the understanding of community health policies developed through this study connect to broader issues of rural development or public health policy, and how do you see policymakers applying these insights in other contexts?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "In what ways does the Lyon Tablet's image of Claudius as a just and benevolent ruler connect to its broader purpose in promoting Claudius as a generous patron who protected his subjects?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you justify the claim that the Wednesbury principle is a 'vital component' of modern constitutional and administrative law, given that it was only described as an 'essential tool' earlier in your essay?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Could you elaborate on the 'significant failures' within the Left that you believe contributed to the FN's rise?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How does enhancing productivity relate to the other benefits you mentioned?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "In your view, what are the potential limitations of the Wednesbury principle as mentioned in your essay? How do these limitations affect its application in modern administrative law?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "In your essay, you mentioned that the results from using ANSYS Fluent provide 'valuable insights' into aerodynamic behavior. Can you elaborate on what specific aerodynamic behaviors these insights are focusing on?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Provide an example from your essay that illustrates a situation where judicial review intervened to uphold an individual's rights. How did this intervention benefit the individual?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "You state that relativism provides a more nuanced understanding of truth by acknowledging the diversity of truth claims. How does this perspective help in resolving conflicts or disagreements among different truth claims?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "In your opinion, what are the key factors that contribute to an 'effective law enforcement' system? How do these factors relate to the delicate balance you discussed?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "Explain how the recognition that 'truth is relative within specific frameworks' contributes to fostering an open-minded and tolerant approach to understanding different cultures and perspectives, as discussed in your essay.": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Explain the concept of 'individual freedoms' as it relates to DNA sampling and retention systems according to your essay. How does this freedom impact the balance you mentioned?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Could you elaborate on why you believe a balanced approach to reporting cross-strait issues is necessary?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "In your essay, you mentioned that understanding the economic structure helps in identifying key factors that influence the company's performance. Can you provide an example from Peugeot Motor Company Ltd. that illustrates one such factor and how it affects the company's success?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Explain how the provided evidence supports the claim that developing more targeted programs can reduce childhood obesity rates in rural areas. Use specific examples from your essay.": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Discuss the limitations you identified in the essay regarding the potential drawbacks of relativism, and how these limitations affect the practical application of relativism in real-world situations.": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Explain how you connect the importance of effective time allocation and prioritization with the concept of delegating tasks and empowering team members?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "In what ways does Patterson's work connect to broader themes or issues within the field of Afro-American studies? Provide an example from your essay to illustrate this connection.": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How does the concept of 'source criticism' contribute to historians gaining a deeper understanding of the complex and often contested nature of ancient Roman history, as you elaborated in your essay?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Could you elaborate on the methodology used in your experiment that led to the conclusion that E. coli exhibited chemotactic behavior in response to succinic acid gradients?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Could you elaborate on how the continuous learning and improvement commitment contributes to making democratic systems more responsive? Please provide an example from your essay.": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Explain the role of transparency and accountability in organizational cultures according to your essay. How do you think these concepts contribute to successful information management?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "Choose one of the sentences you cited in your essay and explain why you believe it is important to include both 'transparency' and 'accountability' together. What does this combination imply about the effectiveness of information management?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide which three areas (medical therapy, imaging modalities, and fertility preservation) were most relevant to improving treatment outcomes?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What evidence or examples from your essay demonstrate how horticulturists must navigate changes in temperature and weather patterns to ensure sustainable agriculture?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What evidence or examples from your essay support the idea that these improvements have minimized complications associated with ectopic pregnancy?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide on the three key points (reformulation, adaptation, reconnection) as essential for addressing the FN's rise?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide to focus on optimizing machine usage as a potential cost reduction strategy?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "How does the energy consumption of carding machines (around 40 kWh per hour) relate to your recommendation for energy efficiency improvements?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "In what ways does the idea of 'climate change posing significant challenges' connect to the rest of your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "What role does the fact that MTX minimizes complications play in your argument for its effectiveness?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.5
+        },
+        "In what ways do you think the idea of 'within the bounds of the law' relates to the broader themes or arguments presented in your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "In what ways does your discussion of Adam Smith's theory connect to the rest of your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "In your essay, you mentioned 'risk considerations' as one of the factors affecting the choice of plan. Can you describe an example or evidence from your research that supports why risk is a critical factor in determining the acceptance sampling plan?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What evidence or examples from your essay do you think best illustrate the impact of popularity on self-esteem, and why did you choose these particular instances?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide which policy interventions and activities were 'effective' in addressing child obesity rates?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "In what ways do you think the ability to track and analyse data in real-time connects to the rest of your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "How did you decide to mention both industrial automation and consumer electronics as fields where LEDs-Modulo 100 can be applied?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "How did you decide to use ANSYS Fluent as an example of advanced software packages in your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "What examples from your essay support the idea that emotional resonance is important for Emo-tion's success?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "Can you describe the process you went through when deciding which aspects of the partnership's work were most relevant to addressing emerging threats?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific evidence or examples from your essay support the idea that the Wednesbury principle provides flexibility and adaptability in response to changing social and economic circumstances?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide to use the example of maritime trade as evidence for the development of connections between East and West?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        }
+      },
+      "anchoring": {
+        "n_paired": 57,
+        "spearman_judgeMean_vs_sim": {
+          "rho": -0.374,
+          "p": 0.0042
+        },
+        "spearman_judgeDisc_vs_sim": {
+          "rho": -0.505,
+          "p": 0.0001
+        },
+        "reading": "Spearman rank correlation between judge ratings and the judge-free discrimination simulation for the same questions. Low agreement means the judge measures something else; report it either way."
+      }
+    },
+    "commercial:gemini:gemini-2.5-flash|scaled_20x3": {
+      "guide": "scaled_20x3",
+      "scores": {
+        "How did you determine which specific points on the growth curve corresponded to the maximum population size (M) and the stationary phase?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific forms of organisational responsibility do you think are emerging beyond traditional CSR, and how did your understanding of this concept influence the way you structured your essay?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide that the partnership between EN and JNCC was instrumental in addressing emerging threats such as climate change and biodiversity loss? What specific information from your research led you to this conclusion?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you justify the importance of 'prompt recognition' in your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "What specific evidence or examples from the essay support the claim that regression analysis is a fundamental tool in econometrics, and how do these examples illustrate its importance?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "You mentioned in your essay that a lean manufacturing program would require significant investment. What trade-offs do you think A-Z Cloth UK needs to consider when weighing the costs and benefits of implementing such a program?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "In your essay, you stated that the Wednesbury principle is a 'fundamental component' of constitutional and administrative law. What evidence or examples from your research supported this claim, and how did you determine that it is essential to these areas of law?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "You mention that a confrontational tone may 'exacerbate tensions' in cross-strait relations. How did you justify this claim, and what specific examples from your research supported this assertion?": {
+          "relevance": 4,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "How did you determine that popularity has significant consequences for psychological development during childhood? What specific aspects of psychological development were you referring to?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "In your essay, how do the emergence of other European powers, such as Britain and France, relate to your argument that the expansion of European commercial ventures led to significant economic, social, and cultural changes in Asian societies?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "What specific differences in tone and content between the Lyon Tablet and Tacitus' Annals 11.23-5 do you believe are most significant, and how did these differences influence your interpretation of Claudius' speech on the Gallic senators?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific experience or decision led you to emphasize the importance of flexibility in business management?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "How does the point about judicial review's influence on administrative law connect to the rest of your essay? What other claims or arguments in your essay rely on or build upon this idea?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide to focus on the potential of phages as therapeutic agents or tools for manipulating microbial populations in your essay? What specific aspects of the research findings led you to this conclusion?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific studies or evidence from your essay support the high success rate of over 80% with MTX treatment in unruptured ectopic pregnancies, and how do you think these findings contribute to the argument that medical management is a preferred option?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide that 'business acumen' is an essential consideration for engineering students starting a business? Could you point to specific sentences or ideas in your essay where this idea was developed?": {
+          "relevance": 4,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "What specific example or case study from your essay supported the claim that 'management' is crucial for effective outcomes in ectopic pregnancy?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.75
+        },
+        "In what ways does the understanding of community health policies developed through this study connect to broader issues of rural development or public health policy, and how do you see policymakers applying these insights in other contexts?": {
+          "relevance": 2,
+          "specificity": 2,
+          "discrimination": 2,
+          "cognitive": 4,
+          "mean": 2.5
+        },
+        "In what ways does the Lyon Tablet's image of Claudius as a just and benevolent ruler connect to its broader purpose in promoting Claudius as a generous patron who protected his subjects?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "How did you justify the claim that the Wednesbury principle is a 'vital component' of modern constitutional and administrative law, given that it was only described as an 'essential tool' earlier in your essay?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Could you elaborate on the 'significant failures' within the Left that you believe contributed to the FN's rise?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "How does enhancing productivity relate to the other benefits you mentioned?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "In your view, what are the potential limitations of the Wednesbury principle as mentioned in your essay? How do these limitations affect its application in modern administrative law?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "In your essay, you mentioned that the results from using ANSYS Fluent provide 'valuable insights' into aerodynamic behavior. Can you elaborate on what specific aerodynamic behaviors these insights are focusing on?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "Provide an example from your essay that illustrates a situation where judicial review intervened to uphold an individual's rights. How did this intervention benefit the individual?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "You state that relativism provides a more nuanced understanding of truth by acknowledging the diversity of truth claims. How does this perspective help in resolving conflicts or disagreements among different truth claims?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "In your opinion, what are the key factors that contribute to an 'effective law enforcement' system? How do these factors relate to the delicate balance you discussed?": {
+          "relevance": 3,
+          "specificity": 2,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.0
+        },
+        "Explain how the recognition that 'truth is relative within specific frameworks' contributes to fostering an open-minded and tolerant approach to understanding different cultures and perspectives, as discussed in your essay.": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.5
+        },
+        "Explain the concept of 'individual freedoms' as it relates to DNA sampling and retention systems according to your essay. How does this freedom impact the balance you mentioned?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "Could you elaborate on why you believe a balanced approach to reporting cross-strait issues is necessary?": {
+          "relevance": 5,
+          "specificity": 3,
+          "discrimination": 3,
+          "cognitive": 4,
+          "mean": 3.75
+        },
+        "In your essay, you mentioned that understanding the economic structure helps in identifying key factors that influence the company's performance. Can you provide an example from Peugeot Motor Company Ltd. that illustrates one such factor and how it affects the company's success?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "Explain how the provided evidence supports the claim that developing more targeted programs can reduce childhood obesity rates in rural areas. Use specific examples from your essay.": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Discuss the limitations you identified in the essay regarding the potential drawbacks of relativism, and how these limitations affect the practical application of relativism in real-world situations.": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Explain how you connect the importance of effective time allocation and prioritization with the concept of delegating tasks and empowering team members?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "In what ways does Patterson's work connect to broader themes or issues within the field of Afro-American studies? Provide an example from your essay to illustrate this connection.": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "How does the concept of 'source criticism' contribute to historians gaining a deeper understanding of the complex and often contested nature of ancient Roman history, as you elaborated in your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "Could you elaborate on the methodology used in your experiment that led to the conclusion that E. coli exhibited chemotactic behavior in response to succinic acid gradients?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "Could you elaborate on how the continuous learning and improvement commitment contributes to making democratic systems more responsive? Please provide an example from your essay.": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.5
+        },
+        "Explain the role of transparency and accountability in organizational cultures according to your essay. How do you think these concepts contribute to successful information management?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "Choose one of the sentences you cited in your essay and explain why you believe it is important to include both 'transparency' and 'accountability' together. What does this combination imply about the effectiveness of information management?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide which three areas (medical therapy, imaging modalities, and fertility preservation) were most relevant to improving treatment outcomes?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "What evidence or examples from your essay demonstrate how horticulturists must navigate changes in temperature and weather patterns to ensure sustainable agriculture?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.75
+        },
+        "What evidence or examples from your essay support the idea that these improvements have minimized complications associated with ectopic pregnancy?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.5
+        },
+        "How did you decide on the three key points (reformulation, adaptation, reconnection) as essential for addressing the FN's rise?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "How did you decide to focus on optimizing machine usage as a potential cost reduction strategy?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "How does the energy consumption of carding machines (around 40 kWh per hour) relate to your recommendation for energy efficiency improvements?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.25
+        },
+        "In what ways does the idea of 'climate change posing significant challenges' connect to the rest of your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "What role does the fact that MTX minimizes complications play in your argument for its effectiveness?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "In what ways do you think the idea of 'within the bounds of the law' relates to the broader themes or arguments presented in your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "In what ways does your discussion of Adam Smith's theory connect to the rest of your essay?": {
+          "relevance": 4,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.25
+        },
+        "In your essay, you mentioned 'risk considerations' as one of the factors affecting the choice of plan. Can you describe an example or evidence from your research that supports why risk is a critical factor in determining the acceptance sampling plan?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.75
+        },
+        "What evidence or examples from your essay do you think best illustrate the impact of popularity on self-esteem, and why did you choose these particular instances?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "How did you decide which policy interventions and activities were 'effective' in addressing child obesity rates?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "In what ways do you think the ability to track and analyse data in real-time connects to the rest of your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        },
+        "How did you decide to mention both industrial automation and consumer electronics as fields where LEDs-Modulo 100 can be applied?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 5,
+          "mean": 4.5
+        },
+        "How did you decide to use ANSYS Fluent as an example of advanced software packages in your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "What examples from your essay support the idea that emotional resonance is important for Emo-tion's success?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "Can you describe the process you went through when deciding which aspects of the partnership's work were most relevant to addressing emerging threats?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        },
+        "What specific evidence or examples from your essay support the idea that the Wednesbury principle provides flexibility and adaptability in response to changing social and economic circumstances?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 4,
+          "mean": 4.75
+        },
+        "How did you decide to use the example of maritime trade as evidence for the development of connections between East and West?": {
+          "relevance": 5,
+          "specificity": 5,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 5.0
+        }
+      },
+      "anchoring": {
+        "n_paired": 60,
+        "spearman_judgeMean_vs_sim": {
+          "rho": -0.077,
+          "p": 0.5577
+        },
+        "spearman_judgeDisc_vs_sim": {
+          "rho": -0.186,
+          "p": 0.1541
+        },
+        "reading": "Spearman rank correlation between judge ratings and the judge-free discrimination simulation for the same questions. Low agreement means the judge measures something else; report it either way."
+      }
+    },
+    "commercial:gemini:gemini-flash-latest|scaled_20x3": {
+      "guide": "scaled_20x3",
+      "scores": {
+        "How did you determine which specific points on the growth curve corresponded to the maximum population size (M) and the stationary phase?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 4,
+          "cognitive": 4,
+          "mean": 4.25
+        },
+        "What specific forms of organisational responsibility do you think are emerging beyond traditional CSR, and how did your understanding of this concept influence the way you structured your essay?": {
+          "relevance": 5,
+          "specificity": 4,
+          "discrimination": 5,
+          "cognitive": 5,
+          "mean": 4.75
+        }
+      }
+    }
+  },
+  "agreement": {
+    "judges": [
+      "commercial:anthropic:claude-opus-4-8",
+      "commercial:gemini:gemini-2.5-flash",
+      "commercial:openai:gpt-4o-mini"
+    ],
+    "n_questions": 12,
+    "krippendorff_alpha_interval": -0.253,
+    "pairwise_spearman": {
+      "commercial:anthropic:claude-opus-4-8 vs commercial:gemini:gemini-2.5-flash": {
+        "rho": 0.197,
+        "p": 0.5403
+      },
+      "commercial:anthropic:claude-opus-4-8 vs commercial:openai:gpt-4o-mini": {
+        "rho": 0.453,
+        "p": 0.139
+      },
+      "commercial:gemini:gemini-2.5-flash vs commercial:openai:gpt-4o-mini": {
+        "rho": 0.363,
+        "p": 0.2463
+      }
+    }
+  },
+  "agreement_scaled": {
+    "judges": [
+      "commercial:anthropic:claude-opus-4-8|scaled_20x3",
+      "commercial:gemini:gemini-2.5-flash|scaled_20x3",
+      "commercial:openai:gpt-4o-mini|scaled_20x3"
+    ],
+    "n_questions": 60,
+    "krippendorff_alpha_interval": -0.144,
+    "pairwise_spearman": {
+      "commercial:anthropic:claude-opus-4-8|scaled_20x3 vs commercial:gemini:gemini-2.5-flash|scaled_20x3": {
+        "rho": 0.418,
+        "p": 0.0009
+      },
+      "commercial:anthropic:claude-opus-4-8|scaled_20x3 vs commercial:openai:gpt-4o-mini|scaled_20x3": {
+        "rho": 0.584,
+        "p": 0.0
+      },
+      "commercial:gemini:gemini-2.5-flash|scaled_20x3 vs commercial:openai:gpt-4o-mini|scaled_20x3": {
+        "rho": 0.512,
+        "p": 0.0
+      }
+    }
+  }
+}

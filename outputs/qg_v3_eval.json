@@ -1,0 +1,83 @@
+{
+  "n_claims": 18,
+  "v3": {
+    "label": "v3 (verification) 3B",
+    "n_questions": 42,
+    "n_degenerate": 0,
+    "pct_degenerate": 0.0,
+    "mean_discrimination": 0.0641,
+    "ci95": [
+      0.0327,
+      0.0964
+    ],
+    "questions": [
+      "How did you decide to use the example of 'an individual believing that a public body has acted unfairly' as evidence for your claim?",
+      "What role does the concept of 'authority' play in your argument about judicial review, and how did you connect this idea to the rest of your essay?",
+      "In what ways do you think your discussion of judicial review relates to the broader themes or arguments presented in the rest of your essay?",
+      "How did you decide to use the example of a decision made by a public authority as evidence for the importance of judicial review?",
+      "What role does the ability of courts to challenge administrative decisions play in ensuring that power is exercised responsibly and within the bounds of the law, according to your essay?",
+      "In what ways do you think the process of judicial review contributes to the overall goal of ensuring responsible power exercise, as described in your essay?",
+      "How did you decide to use the example of 'unreasonable or biased' decisions as evidence for the importance of judicial review?",
+      "What is the significance of the phrase 'arbitrary action by public bodies' in your argument, and how does it connect to the rest of your essay?",
+      "In what ways do you think the ability of judicial review to provide a check on arbitrary action relates to its role in upholding individual rights, and how does this connect to the rest of your essay?",
+      "How did you decide which aspects of psychological development (self-esteem, social skills, etc.) were most influenced by popularity?",
+      "What is the significance of the 'disparity in popularity' mentioned in your essay, and how does it relate to the rest of your argument about its consequences on children's well-being?",
+      "In what ways do you think the consequences of popularity on children's well-being connect to other points made in your essay, such as the impact of parental involvement or peer relationships?",
+      "How did you decide to use Hartup & Stevens (1997) as evidence for children who are consistently popular experiencing higher levels of self-esteem and confidence?",
+      "What choice did you make when selecting Bukatko & Daehler (2003) as evidence for children who are rejected or ostracized struggling with low self-esteem and depression?",
+      "In what ways do you think the findings from Hartup & Stevens (1997) relate to the rest of your essay?",
+      "How did you decide to use Cillessen & Mayeux (2004) as evidence for bullying and social marginalization?",
+      "What role does Hartup & Stevens (1997) play in your discussion of conformity and its effects on creativity, individuality, and diversity?",
+      "In what ways do you think the long-term consequences of psychological development mentioned in your essay relate to the immediate concerns raised by bullying and social marginalization?",
+      "How does the idea of 'fellow-feeling' connect to your broader argument about individual behavior being shaped by a complex interplay between personal and social factors?",
+      "What specific evidence or examples from Smith (1964) did you use to support your claim about moral sentiments encompassing both personal virtues and social norms?",
+      "In what ways do you think the interplay between personal and social factors shapes individual behavior, and how does this connect to the rest of your essay?",
+      "How did you decide on these three key components - brand identity, innovative products, and commitment to R&D - as being essential to Peugeot's economic structure?",
+      "In your essay, you mentioned that Peugeot's commitment to R&D is a key component of its economic structure. Can you describe an example or evidence from the company's history that illustrates this point, and how it connects to the rest of your argument about Peugeot's economic structure?",
+      "What role does each of these three components play in shaping Peugeot's overall economic structure, according to your analysis?",
+      "How did you decide to focus on strategic partnerships, cost-saving measures, and investments in R&D as key factors in Peugeot's success?",
+      "What evidence or examples from your essay demonstrate how these factors have contributed to Peugeot's position as a leading manufacturer?",
+      "In what ways does the role of these factors connect to the rest of your essay?",
+      "What specific evidence or examples from Orlando Patterson's work did you use to support your claim?",
+      "How does the contribution of Orlando Patterson's work connect to the rest of your essay?",
+      "What choices did you make when selecting Orlando Patterson's work as an example of his impact on our understanding of Afro-American experiences, and why were these choices justified?",
+      "How did you decide to use Patterson's concept of 'social death' as a key factor in understanding the long-term effects of slavery?",
+      "What evidence or examples from your essay support the idea that enslaved individuals were stripped of their humanity and reduced to the status of mere chattel?",
+      "In what ways do you think the concept of 'social death' connects to the rest of your essay?",
+      "How did you decide to emphasize historical context as a key aspect of Patterson's argument?",
+      "What role does masculinity play in Patterson's analysis, and how did you use this concept to connect to other themes in your essay?",
+      "In what ways do you think Patterson's emphasis on community relates to his broader argument about the need for a more nuanced approach to understanding slavery and its aftermath?",
+      "How did you decide to use 'organisational development' as one of the key factors shaping the rise of management?",
+      "What role do you think technological innovation plays in your argument, and how does this connect to the rest of your essay?",
+      "In what ways do you see the benefits of increased efficiency and productivity mentioned in your conclusion being connected to the broader power dynamics at play in society?",
+      "How did you decide to focus on power dynamics, inequality, and human needs as key factors for creating effective and just organisations?",
+      "What evidence or examples from your essay demonstrate how prioritising a more nuanced understanding of these factors can lead to effective and just organisations?",
+      "In what ways does the idea of creating organisations that are both effective and just connect to the rest of your essay?"
+    ]
+  },
+  "base": {
+    "label": "base 3B",
+    "n_questions": 45,
+    "pct_degenerate": 0.0,
+    "mean_discrimination": 0.0272,
+    "ci95": [
+      0.015,
+      0.0399
+    ]
+  },
+  "v2": {
+    "label": "v2 (SQuAD) 3B",
+    "n_questions": 23,
+    "pct_degenerate": 0.0,
+    "mean_discrimination": 0.1021,
+    "ci95": [
+      0.0598,
+      0.1444
+    ]
+  },
+  "v1_for_reference": {
+    "mean_discrimination": 0.154,
+    "pct_degenerate": 95.2,
+    "note": "artifact; see qg_quality_audit.json"
+  }
+}

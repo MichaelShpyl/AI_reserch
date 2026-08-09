@@ -1,0 +1,2107 @@
+{
+  "essays": {
+    "0165a": {
+      "claims": [
+        {
+          "claim": "Judicial review provides a mechanism for challenging decisions made by public bodies to ensure that power is exercised responsibly and within the bounds of the law.",
+          "source": "By providing a mechanism for challenging decisions made by public authorities, judicial review ensures that public power is exercised responsibly and within the bounds of the law."
+        },
+        {
+          "claim": "The use of judicial review has been influential in shaping administrative law, both at a national and European level.",
+          "source": "The use of judicial review has also been influential in shaping administrative law."
+        },
+        {
+          "claim": "Judicial review plays a crucial role in upholding individual rights by providing a check on arbitrary action by public bodies.",
+          "source": "In cases where a decision appears to be unreasonable or biased, judicial review can help to ensure that the individual's rights are protected."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "How did you decide to use the phrase 'public power' in your claim, rather than a more specific term like 'executive power'? What does this choice reveal about your understanding of judicial review?",
+            "What specific evidence or examples from your essay support the idea that judicial review is necessary for ensuring public bodies exercise their power responsibly? Please explain how you used these examples to make your argument.",
+            "How does your claim about judicial review relate to the rest of your essay, particularly in terms of its connection to the broader themes of accountability and the rule of law? What specific points or arguments from earlier in your essay do you think are most relevant to this claim?"
+          ],
+          [
+            "How did you decide that judicial review has been influential in shaping administrative law? What specific points from your essay support this claim?",
+            "You mention the influence of judicial review at both a national and European level. Can you explain how you used evidence or examples to illustrate this dual influence, and what you learned from doing so?",
+            "How does the point about judicial review's influence on administrative law connect to the rest of your essay? What other claims or arguments in your essay rely on or build upon this idea?"
+          ],
+          [
+            "What specific examples or cases from your essay did you use to illustrate how judicial review can help protect individual rights?",
+            "How does the concept of 'arbitrary action by public bodies' relate to the idea of unreasonable or biased decisions that you mentioned in your essay? Please explain your reasoning.",
+            "In what ways do you think judicial review connects to the broader argument about the importance of protecting individual rights, as presented in your essay?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Explain the role of judicial review as described in your essay. How does it contribute to ensuring that public power is exercised responsibly and within the bounds of the law?",
+            "In your essay, you mentioned that judicial review 'ensures' that public power is exercised responsibly and within the bounds of the law. What specific examples or pieces of evidence did you use to support this claim? How do these examples connect to the overall argument you are making?",
+            "You stated that judicial review 'provides a mechanism for challenging decisions made by public authorities.' Could you elaborate on why you believe this mechanism is necessary and how it differs from other forms of accountability?"
+          ],
+          [
+            "Could you elaborate on the specific case studies or legal precedents within your essay that demonstrate the influence of judicial review on administrative law? How do these cases illustrate the broader impact of judicial review?",
+            "In your argument, you mention the national and European levels of influence. Could you provide more details on how judicial review has specifically impacted administrative law at these different levels? What are the key differences or similarities in the application of judicial review across these jurisdictions?",
+            "You state that judicial review has shaped administrative law. Can you explain how the principles and practices of judicial review have influenced the development of new laws or regulations? Provide an example from your essay where judicial review played a crucial role in this process."
+          ],
+          [
+            "Explain how the concept of 'unreasonable or biased' decisions relates to the protection of individual rights according to your essay.",
+            "Provide an example from your essay that illustrates a situation where judicial review intervened to uphold an individual's rights. How did this intervention benefit the individual?",
+            "Discuss the importance of judicial review in maintaining the balance between the actions of public bodies and the protection of individual rights. How does this relate to the overall structure of your argument?"
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following is correct?"
+          ],
+          [
+            "Which of the following is an example of judicial review?"
+          ],
+          [
+            "Which of the following is correct?"
+          ]
+        ],
+        "commercial": [
+          [
+            "In your essay, you state that judicial review provides a mechanism for challenging decisions. What specific examples or case studies did you use to illustrate *how* this mechanism operates in practice, and what particular aspects of those cases did you highlight to support your point?",
+            "You assert that judicial review ensures power is exercised responsibly and within the bounds of the law. Can you elaborate on the specific *grounds for review* or *legal principles* you discussed in your essay that enable judicial review to achieve this oversight, and how did you connect these to the concept of 'responsible' exercise of power?",
+            "Considering your essay's broader argument, how does your discussion of judicial review as a mechanism for challenging decisions contribute to your overall thesis? What specific point were you trying to build towards by establishing this particular function of judicial review?"
+          ],
+          [
+            "You claim judicial review has been influential in shaping administrative law. What specific national and European legal developments or cases did you present in your essay to demonstrate *how* this influence manifested, and what particular aspects of administrative law did you argue were most significantly shaped?",
+            "When discussing the influence of judicial review at both national and European levels, what was your rationale for selecting the particular examples you used for each level, and how did you connect or contrast these examples to support your overall argument about its dual impact?",
+            "Beyond simply stating its influence, what was the broader significance of judicial review's role in shaping administrative law within the context of your essay's main argument? How did this specific discussion, and the evidence you chose, contribute to or reinforce your overall thesis?"
+          ],
+          [
+            "You state that judicial review provides a check on arbitrary action. Can you elaborate on a specific instance or case you discussed in your essay where a public body's action was deemed arbitrary, and how judicial review specifically intervened to address it?",
+            "You mention that judicial review helps when a decision 'appears to be unreasonable or biased.' How did you define or illustrate 'unreasonable' or 'biased' in the context of the specific examples you presented in your essay, and what criteria did you use to determine this?",
+            "Beyond the immediate protection of rights in specific cases, how did you argue in your essay that judicial review plays a 'crucial role' more broadly, and what larger implications or connections did you draw between individual rights protection and the overall theme of your essay?"
+          ]
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            0.0423,
+            -0.047,
+            0.0045
+          ],
+          [
+            -0.0345,
+            0.059,
+            0.0009
+          ],
+          [
+            -0.0296,
+            0.0969,
+            0.0127
+          ]
+        ],
+        "commercial": [
+          [
+            0.0288,
+            -0.0358,
+            0.0655
+          ],
+          [
+            -0.0426,
+            0.0523,
+            -0.045
+          ],
+          [
+            -0.0439,
+            0.0046,
+            0.0337
+          ]
+        ],
+        "base3b": [
+          [
+            0.0347,
+            0.0464,
+            0.0504
+          ],
+          [
+            -0.0231,
+            0.1014,
+            -0.0849
+          ],
+          [
+            0.0566,
+            -0.0169,
+            -0.029
+          ]
+        ],
+        "ft3b": [
+          [
+            0.4495
+          ],
+          [
+            0.0479
+          ],
+          [
+            0.5034
+          ]
+        ]
+      }
+    },
+    "0033d": {
+      "claims": [
+        {
+          "claim": "Popularity has significant consequences for psychological development during childhood.",
+          "source": "This disparity in popularity has significant consequences for the psychological development of children, influencing their self-esteem, social skills, and overall well-being."
+        },
+        {
+          "claim": "Children who are consistently popular tend to experience higher levels of self-esteem and confidence, while those who are rejected or ostracized may struggle with low self-esteem and depression.",
+          "source": "Children who are consistently popular tend to experience higher levels of self-esteem and confidence, while those who are rejected or ostracized may struggle with low self-esteem and depression."
+        },
+        {
+          "claim": "An overemphasis on popularity can lead to negative social dynamics within schools, including bullying and social marginalization.",
+          "source": "Furthermore, an overemphasis on popularity can lead to negative social dynamics within schools, including bullying and social marginalization."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "How did you determine that popularity has significant consequences for psychological development during childhood? What specific aspects of psychological development were you referring to?",
+            "In your essay, you mentioned that the disparity in popularity influences self-esteem. Can you explain how you used evidence or examples from research or real-life scenarios to support this claim?",
+            "How does the impact of popularity on children's psychological development relate to your overall argument about childhood development? What other factors did you consider when making this connection?"
+          ],
+          [
+            "How did you decide to focus on 'consistently popular' children in your claim, rather than those who are occasionally popular or unpopular?",
+            "What specific evidence from the essay supports the idea that being rejected or ostracized can lead to low self-esteem and depression?",
+            "In what ways do you think this point about social status and mental health contributes to the overall argument of your essay?"
+          ],
+          [
+            "What specific examples from your essay supported the claim that an overemphasis on popularity can lead to bullying?",
+            "How did you justify the connection between social marginalization and the negative effects of prioritizing popularity in schools, as discussed in your essay?",
+            "In what ways do you think the phenomenon of negative social dynamics within schools, which you mentioned in your essay, relates to other themes or arguments presented throughout your paper?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Explain how the disparity in popularity affects self-esteem according to your essay.",
+            "Discuss the impact of popularity on social skills as mentioned in your essay.",
+            "How does the influence of popularity on overall well-being connect to the other aspects of psychological development you discussed?"
+          ],
+          [
+            "Explain how you support the idea that children who are consistently popular tend to have higher self-esteem and confidence. Provide at least two pieces of evidence from your essay.",
+            "Discuss the reasons why children who are rejected or ostracized might experience low self-esteem and depression. How does this align with the concept of social acceptance affecting mental health?",
+            "In your essay, you mentioned that consistent popularity leads to better mental health outcomes. Why did you choose to focus on 'consistent' rather than just 'popular' children? Explain the significance of this distinction."
+          ],
+          [
+            "Could you elaborate on why you believe an overemphasis on popularity can lead to bullying and social marginalization? What specific instances or scenarios from your experience or research support this claim?",
+            "How does the focus on popularity create conditions that facilitate bullying and social exclusion according to your argument? Can you provide more details on these mechanisms?",
+            "In your view, what are the broader implications of prioritizing popularity in school culture? How do you think this perspective affects the overall social cohesion and well-being of students?"
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following is a correct statement?"
+          ],
+          [
+            "{\"questions\":[\"Which of the following is an example of a student who was consistently popular?\",\"Which of the following is an example of a student who was rejected by his peers?\",\"Which of the following is an example of a student who was ostracized by her classmates?\"]"
+          ],
+          [
+            "Which of the following is not a negative consequence of an overemphasis on popularity?",
+            "Which of the following is not a reason why an overemphasis on popularity can lead to bullying?",
+            "Which of the following is not a reason why an overemphasis on popularity can lead to social marginalization?"
+          ]
+        ],
+        "commercial": [
+          [
+            "In your discussion of how popularity influences *social skills*, what specific research or examples did you present to illustrate this connection, and how did you elaborate on the *process* by which popularity shapes these skills?",
+            "Your essay refers to 'disparity in popularity.' How did you specifically define or categorize different levels or types of popularity within your argument, and which particular groups of children (e.g., rejected, neglected, controversial) did you primarily focus on to demonstrate the consequences for psychological development?",
+            "Among the consequences for psychological development you explored (self-esteem, social skills, overall well-being), which one did you argue held the *most significant weight* or served as a *primary driver* for other developmental outcomes, and how did this particular emphasis support your essay's overarching argument?"
+          ],
+          [
+            "In your essay, what specific studies, theories, or real-world examples did you present to illustrate the link between consistent popularity and higher self-esteem, and conversely, between rejection/ostracism and lower self-esteem or depression?",
+            "Beyond simply stating the correlation, how did you elaborate on the *mechanisms* or *processes* through which consistent popularity might foster self-esteem, or how rejection might lead to depression, as discussed in your essay?",
+            "How does your discussion of the relationship between popularity, self-esteem, and depression in children connect to your broader argument or other key themes explored elsewhere in your essay?"
+          ],
+          [
+            "You claim an 'overemphasis on popularity' is a key factor. How did you define or illustrate this 'overemphasis' in your essay, and what specific school-based behaviors or cultural elements did you present as evidence of its presence?",
+            "Beyond simply naming 'bullying and social marginalization,' what specific forms or manifestations of these negative social dynamics did you explore in your essay? Can you recall a particular example, study, or scenario you used to illustrate how an overemphasis on popularity directly contributes to these outcomes?",
+            "What was the specific causal mechanism or pathway you outlined in your essay to explain *how* an overemphasis on popularity leads to bullying and social marginalization? How does this particular point about negative social dynamics connect to your broader argument or thesis in your essay?"
+          ]
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            -0.0568,
+            -0.1057,
+            0.0221
+          ],
+          [
+            0.0875,
+            0.0286,
+            0.1252
+          ],
+          [
+            -0.0343,
+            0.0522,
+            0.0574
+          ]
+        ],
+        "commercial": [
+          [
+            -0.0638,
+            0.0344,
+            0.0818
+          ],
+          [
+            -0.0163,
+            -0.0287,
+            -0.0189
+          ],
+          [
+            0.0607,
+            -0.0138,
+            0.0251
+          ]
+        ],
+        "base3b": [
+          [
+            -0.0526,
+            -0.008,
+            0.0297
+          ],
+          [
+            -0.1174,
+            -0.0113,
+            0.0247
+          ],
+          [
+            -0.1225,
+            0.047,
+            0.0352
+          ]
+        ],
+        "ft3b": [
+          [
+            0.4509
+          ],
+          [
+            0.2555
+          ],
+          [
+            -0.0093,
+            -0.0495,
+            -0.0673
+          ]
+        ]
+      }
+    },
+    "0393b": {
+      "claims": [
+        {
+          "claim": "Adam Smith's theory of motivation cannot be reduced to a simplistic notion of self-love.",
+          "source": "In conclusion, Adam Smith's theory of motivation cannot be reduced to a simplistic notion of self-love. His concepts of fellow-feeling, sympathy, and moral sentiments all suggest a more nuanced understanding of human motivation that takes into account social context, relationships, and economic factors."
+        },
+        {
+          "claim": "The invisible hand is a metaphor for the emergent properties of social systems, and individual actions motivated by self-interest and sympathy can give rise to socially beneficial outcomes.",
+          "source": "However, this interpretation neglects the fact that the invisible hand is a metaphor for the emergent properties of social systems (Rosenberg 1995). In other words, the invisible hand refers to the ways in which individual actions, motivated by a variety of factors including self-interest and sympathy, can give rise to socially beneficial outcomes."
+        },
+        {
+          "claim": "Individual behavior is shaped not only by self-interest but also by social norms, expectations, and relationships, which have significant implications for our understanding of economic behavior.",
+          "source": "If individual behavior is shaped not only by self-interest but also by social norms, expectations, and relationships, then we must reconsider our assumptions about what drives human action. In particular, this recognition highlights the importance of considering the role of emotions and moral sentiments in shaping economic behavior."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "What specific concepts in Adam Smith's theory did you use as evidence to argue against a simplistic notion of self-love?",
+            "How do the ideas of fellow-feeling and sympathy contribute to your understanding of human motivation, according to your essay?",
+            "In what ways does the consideration of social context, relationships, and economic factors in your essay connect to the rest of your argument about Adam Smith's theory of motivation?"
+          ],
+          [
+            "How did you decide to use Rosenberg (1995) as an example of the invisible hand being a metaphor for emergent properties? What specific insights from this source do you think are relevant to your argument?",
+            "You mention that individual actions can be motivated by 'a variety of factors including self-interest and sympathy'. Can you explain why you chose to include both self-interest and sympathy as motivations, and how these two factors interact in the context of the invisible hand?",
+            "How does this interpretation of the invisible hand connect to the rest of your essay? What implications do you think it has for understanding social systems or economic behavior?"
+          ],
+          [
+            "How did you arrive at the conclusion that individual behavior is shaped by social norms, expectations, and relationships? What specific points in your essay led you to this understanding?",
+            "You mention that considering emotions and moral sentiments is crucial for understanding economic behavior. Can you explain why you chose to focus on these aspects specifically, and what evidence from your essay supports this claim?",
+            "How does the idea of social norms, expectations, and relationships influencing individual behavior connect to your broader argument about reevaluating assumptions about human action in economics? What specific connections did you make in your essay between these concepts?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Could you elaborate on how Smith's concept of 'fellow-feeling' differs from a purely selfish perspective? How does it contribute to a more complex view of human motivation?",
+            "In your essay, you mention that Smith's ideas include 'sympathy' and 'moral sentiments.' Why do you think these elements are important in understanding human behavior beyond just self-interest? Provide an example from your essay to support your explanation.",
+            "You state that Smith's theories take into account 'economic factors.' Can you identify which specific part of your argument supports this claim and how does it relate to broader economic principles as discussed in your essay?"
+          ],
+          [
+            "Explain the concept of the 'invisible hand' as a metaphor for emergent properties of social systems according to your own argument. How does this relate to the idea presented by Rosenberg (1995)?",
+            "Discuss the role of individual actions motivated by self-interest and sympathy in achieving socially beneficial outcomes. Provide an example from your essay to support your explanation.",
+            "How does the interaction between individual actions and social systems contribute to the emergence of beneficial outcomes? Use the evidence from your essay to illustrate this connection."
+          ],
+          [
+            "Explain how the inclusion of social norms, expectations, and relationships in shaping individual behavior impacts the traditional economic assumption that individuals act solely out of self-interest. Provide an example from your essay to support your explanation.",
+            "Discuss the significance of emotions and moral sentiments as highlighted in your essay. How do these elements connect to the broader topic of economic behavior according to your argument?",
+            "In your view, why is it important to consider the interplay between self-interest and social factors when analyzing economic behavior? Use specific points from your essay to illustrate your point."
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following is not an example of Adam Smith\u2019s concept of fellow-feeling?",
+            "Which of the following is not an example of Adam Smith\u2019s concept of sympathy?",
+            "Which of the following is not an example of Adam Smith\u2019s concept of moral sentiments?"
+          ],
+          [
+            "Which of the following is correct?"
+          ],
+          [
+            "Which of the following best captures the main idea of the student\u2019s essay?"
+          ]
+        ],
+        "commercial": [
+          [
+            "You state that Smith's concepts of fellow-feeling, sympathy, and moral sentiments all suggest a more nuanced understanding of human motivation. Could you elaborate on how you specifically distinguished between these three concepts in your essay, and what particular textual evidence from Smith you used to illustrate their individual contributions to this nuance?",
+            "In your essay, you argue that Smith's theory 'takes into account social context, relationships, and economic factors.' How did you demonstrate the interplay between these three factors and Smith's concepts of fellow-feeling, sympathy, or moral sentiments? Could you provide a specific example or line of reasoning from your essay that illustrates this connection?",
+            "This claim appears in your conclusion. How does your argument that Smith's theory 'cannot be reduced to a simplistic notion of self-love' connect to the broader thesis or main argument of your essay? What specific points or analyses from earlier sections of your essay were crucial in building towards this concluding statement?"
+          ],
+          [
+            "You state that 'this interpretation neglects the fact that the invisible hand is a metaphor for the emergent properties of social systems.' What specific interpretation were you referring to here, and how did your essay demonstrate that it 'neglects' this crucial aspect?",
+            "Beyond citing Rosenberg (1995), what specific examples or mechanisms did you elaborate on in your essay to illustrate how the 'emergent properties of social systems' manifest from individual actions, as you define the invisible hand?",
+            "Your essay highlights that individual actions motivated by 'self-interest and sympathy' can lead to socially beneficial outcomes. Can you elaborate on a specific instance or argument you presented in your essay where you showed how *both* self-interest *and* sympathy contributed to such an outcome, rather than just one or the other?"
+          ],
+          [
+            "You argue that individual behavior is shaped by social norms, expectations, and relationships, not solely self-interest. Can you describe one specific example or case study you presented in your essay that most effectively illustrates this interplay, and explain how it demonstrates the influence of these social factors over pure self-interest?",
+            "Your essay states that recognizing these social influences requires us to 'reconsider our assumptions about what drives human action.' Which specific traditional economic assumption did you identify as most challenged by your argument, and what alternative perspective did you propose in its place?",
+            "You highlight the importance of 'emotions and moral sentiments' in shaping economic behavior. How did you establish the link between the social norms, expectations, and relationships you discussed earlier in your essay and the emergence or influence of these emotions and moral sentiments in an economic context? Provide a brief summary of your argument for this connection."
+          ]
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            0.0491,
+            -0.0256,
+            0.1198
+          ],
+          [
+            0.1127,
+            0.0081,
+            0.0667
+          ],
+          [
+            0.0168,
+            -0.003,
+            0.0877
+          ]
+        ],
+        "commercial": [
+          [
+            -0.0304,
+            -0.0399,
+            -0.0064
+          ],
+          [
+            0.0543,
+            -0.1677,
+            0.0381
+          ],
+          [
+            0.0931,
+            0.0681,
+            -0.0787
+          ]
+        ],
+        "base3b": [
+          [
+            -0.0347,
+            0.055,
+            0.1771
+          ],
+          [
+            0.0378,
+            0.1998,
+            0.1448
+          ],
+          [
+            0.0371,
+            -0.0115,
+            0.0912
+          ]
+        ],
+        "ft3b": [
+          [
+            0.0515,
+            0.0415,
+            0.0653
+          ],
+          [
+            0.555
+          ],
+          [
+            0.3467
+          ]
+        ]
+      }
+    },
+    "0356e": {
+      "claims": [
+        {
+          "claim": "Understanding the economic structure of industry is crucial for examining companies like Peugeot Motor Company Ltd.",
+          "source": "In conclusion, understanding the economic structure of industry is essential in examining companies like Peugeot Motor Company Ltd."
+        },
+        {
+          "claim": "Peugeot's strong brand identity, innovative products, and commitment to R&D are key components of its economic structure.",
+          "source": "In conclusion, Peugeot Motor Company Ltd.'s economic structure is characterized by a strong brand identity, innovative products, and a commitment to R&D."
+        },
+        {
+          "claim": "Through strategic partnerships, cost-saving measures, and investments in R&D, Peugeot has maintained its position as one of Europe's leading automobile manufacturers.",
+          "source": "Through strategic partnerships, cost-saving measures, and investments in R&D, Peugeot has maintained its position as one of Europe's leading automobile manufacturers."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "What specific aspects of the economic structure of industry did you focus on in your analysis of Peugeot Motor Company Ltd?",
+            "How does the concept of 'economic structure' relate to your overall argument about examining companies like Peugeot Motor Company Ltd, and what evidence from your essay supports this connection?",
+            "In your conclusion, you mentioned that understanding the economic structure is essential for examining companies like Peugeot. What choices or decisions would a company like Peugeot make if they didn't understand their own economic structure, according to your analysis?"
+          ],
+          [
+            "How did you decide which three components of Peugeot's economic structure were most important to highlight in your conclusion?",
+            "What specific examples or products from Peugeot's history did you use as evidence to support the claim that its innovative products are a key component of its economic structure?",
+            "In what ways do you think Peugeot's commitment to R&D connects to the company's brand identity, and how does this connection contribute to your overall argument about the company's economic structure?"
+          ],
+          [
+            "What specific partnerships did you mention in your essay as contributing to Peugeot's success, and how do these partnerships support the company's position in Europe?",
+            "You mentioned cost-saving measures as one of the factors that have helped Peugeot maintain its position. Can you describe a particular example from your essay where such a measure was implemented, and what impact it had on the company's performance?",
+            "How does Peugeot's investment in R&D relate to its ability to remain competitive in Europe? In your essay, you mentioned specific examples of how this investment has paid off; can you elaborate on these points?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Could you elaborate on why you believe understanding the economic structure of industry is essential for analyzing Peugeot Motor Company Ltd.? What specific aspects of its economic structure did you focus on?",
+            "In your essay, you mentioned that understanding the economic structure helps in identifying key factors that influence the company's performance. Can you provide an example from Peugeot Motor Company Ltd. that illustrates one such factor and how it affects the company's success?",
+            "You stated that the economic structure analysis aids in predicting future trends for Peugeot Motor Company Ltd. How did you use the information about the industry's structure to make these predictions? Please provide more details."
+          ],
+          [
+            "Could you elaborate on how Peugeot's strong brand identity contributes to its economic structure? Please provide an example from your essay.",
+            "In your essay, you mentioned innovative products as a key component of Peugeot's economic structure. Could you explain why you believe these innovations are significant and how they impact the company's success? Include a specific example.",
+            "You stated that Peugeot's commitment to R&D is crucial for its economic structure. How does this commitment align with the other aspects you mentioned (brand identity and innovative products)? Please use your essay to support your explanation."
+          ],
+          [
+            "Could you elaborate on a specific strategic partnership that Peugeot has established and how it contributed to maintaining its leadership position? Please provide details about the company, the partner, and the impact.",
+            "In your essay, you mentioned cost-saving measures. Could you give an example of such a measure and explain why it was effective in sustaining Peugeot\u2019s competitive edge? Additionally, discuss the potential challenges faced with implementing these measures.",
+            "You highlighted investments in R&D as a key factor. Can you describe a recent R&D project undertaken by Peugeot and how it has influenced their market performance? Also, consider the financial implications of these investments."
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following is correct?"
+          ],
+          [
+            "Which of the following is not a component of Peugeot\u2019s economic structure?",
+            "Which of the following is not a reason why Peugeot is successful?",
+            "Which of the following is not a reason why Peugeot is successful?"
+          ],
+          [
+            "Which of the following is not a strategy that Peugeot has used to maintain its position as one of Europe\u2019s leading automobile manufacturers?",
+            "Which of the following is not a reason why Peugeot has been able to maintain its position as one of Europe\u2019s leading automobile manufacturers?",
+            "Which of the following is not a reason why Peugeot has been able to maintain its position as one of Europe\u2019s leading automobile manufacturers?"
+          ]
+        ],
+        "commercial": [
+          [
+            "You claim that understanding the economic structure of industry is crucial. In your essay, what specific elements of the automotive industry's economic structure did you analyze, and how did this analysis directly inform your examination of Peugeot Motor Company Ltd.?",
+            "Could you elaborate on one particular piece of evidence or an example from Peugeot Motor Company Ltd. that you presented in your essay, which you felt most strongly illustrated the impact of the industry's economic structure on the company?",
+            "How did your detailed discussion of Peugeot Motor Company Ltd. and the economic structure of its industry connect to or build upon other arguments or case studies presented elsewhere in your essay?"
+          ],
+          [
+            "You state that Peugeot's strong brand identity is a key component of its economic structure. What specific evidence or examples did you present in your essay to illustrate this brand strength, and how did you argue that it directly contributes to Peugeot's economic performance or stability?",
+            "Regarding innovative products, which specific product or product line did you analyze in your essay to exemplify this claim? Detail how you demonstrated its innovativeness and, crucially, how you connected its impact to a particular aspect of Peugeot's economic structure.",
+            "Your essay highlights Peugeot's commitment to R&D. What specific data, initiatives, or investments did you reference to support this commitment, and how did you explain the causal chain through which this commitment becomes a 'key component' of Peugeot's economic structure?"
+          ],
+          [
+            "You mention 'strategic partnerships' as a key factor. Can you name one specific partnership you discussed in your essay and explain how you argued it directly contributed to Peugeot maintaining its leading position?",
+            "In your essay, you link 'cost-saving measures' to Peugeot's sustained leadership. What specific cost-saving initiatives did you highlight, and what evidence did you provide to demonstrate their impact on the company's market standing?",
+            "How did your essay define or measure Peugeot's 'leading position' in the European automobile market, and what specific data or examples did you use to demonstrate that this position has been 'maintained' through the strategies you outlined?"
+          ]
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            0.0485,
+            0.132,
+            -0.0502
+          ],
+          [
+            0.1406,
+            -0.044,
+            0.0842
+          ],
+          [
+            -0.0362,
+            0.0242,
+            0.0292
+          ]
+        ],
+        "commercial": [
+          [
+            -0.0105,
+            0.2447,
+            0.2829
+          ],
+          [
+            0.0569,
+            -0.1032,
+            0.0949
+          ],
+          [
+            0.0607,
+            -0.1729,
+            -0.0881
+          ]
+        ],
+        "base3b": [
+          [
+            0.006,
+            0.0207,
+            -0.0592
+          ],
+          [
+            -0.058,
+            0.0255,
+            -0.0087
+          ],
+          [
+            -0.045,
+            0.0263,
+            0.1277
+          ]
+        ],
+        "ft3b": [
+          [
+            0.4111
+          ],
+          [
+            0.0989,
+            0.1425,
+            0.0792
+          ],
+          [
+            -0.0222,
+            -0.061,
+            -0.0897
+          ]
+        ]
+      }
+    },
+    "0318c": {
+      "claims": [
+        {
+          "claim": "Orlando Patterson's work has significantly contributed to our understanding of Afro-American experiences in the Americas.",
+          "source": "Orlando Patterson's work has significantly contributed to our understanding of the experiences of Afro-Americans in the Americas, particularly during the era of slavery and its aftermath."
+        },
+        {
+          "claim": "Patterson's emphasis on community, masculinity, and resistance within Afro-American cultures is essential for a nuanced understanding of slavery and its aftermath.",
+          "source": "His emphasis on the importance of community, masculinity, and resistance within Afro-American cultures has underscored the need for a more nuanced and contextualized approach to understanding slavery and its aftermath."
+        },
+        {
+          "claim": "Engaging with Patterson's ideas while acknowledging their limitations can help build a more inclusive and nuanced understanding of Afro-American experiences.",
+          "source": "By doing so, we can build upon his insights while moving towards a more inclusive and nuanced understanding of Afro-American experiences."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "How did you decide to focus on the era of slavery and its aftermath in your discussion of Orlando Patterson's contribution to understanding Afro-American experiences?",
+            "What specific evidence or examples from Orlando Patterson's work do you think best illustrate his significant contribution, and why did you choose those particular examples?",
+            "In what ways does Patterson's work on Afro-American experiences relate to the broader themes or arguments presented in your essay, and how does it help to support your overall claim?"
+          ],
+          [
+            "What specific aspects of Patterson's work led you to emphasize community, masculinity, and resistance within Afro-American cultures as crucial for understanding slavery and its aftermath?",
+            "How did you use the concept of 'community' in your analysis, and what evidence from Patterson's work supported this interpretation?",
+            "In what ways do you think Patterson's focus on these aspects of Afro-American culture contributes to a more nuanced understanding of the legacy of slavery, and how does this relate to your overall argument about the importance of contextualized approaches?"
+          ],
+          [
+            "What specific aspects of Patterson's ideas do you think are particularly valuable for building a more inclusive understanding of Afro-American experiences?",
+            "How does acknowledging the limitations of Patterson's work contribute to a more nuanced understanding, and what examples from your essay illustrate this point?",
+            "In your essay, how did you decide to 'build upon' Patterson's insights rather than simply critiquing or rejecting them? What evidence from your reading of Patterson supports this approach?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Explain how Orlando Patterson's work specifically addresses the experiences of Afro-Americans during the era of slavery and its aftermath. What key aspects does he explore?",
+            "Discuss the evidence or examples Orlando Patterson uses to support his claims about Afro-American experiences. How do these examples contribute to your understanding of his work?",
+            "In what ways does Patterson's work connect to broader themes or issues within the field of Afro-American studies? Provide an example from your essay to illustrate this connection."
+          ],
+          [
+            "How does Patterson's focus on community, masculinity, and resistance contribute to a more nuanced understanding of slavery and its effects? Please provide specific examples from your essay to support your answer.",
+            "Explain the significance of Patterson's choice to emphasize these three aspects (community, masculinity, and resistance) in the context of Afro-American cultures. How do you think these elements interact with each other to create a more comprehensive view?",
+            "In your essay, you mentioned that a contextualized approach is necessary to understand slavery and its aftermath. How does Patterson's focus on community, masculinity, and resistance help achieve this goal? Discuss the interconnections between these themes and their relevance to the broader historical narrative."
+          ],
+          [
+            "Explain how engaging with Patterson's ideas allows for a 'building upon his insights' as stated in your essay. Provide specific examples from your text that support this idea.",
+            "Discuss the limitations you identified in Patterson's work that you believe are important to acknowledge. How do these limitations contribute to the need for an 'inclusive and nuanced understanding' of Afro-American experiences?",
+            "How does the integration of Patterson's ideas alongside the recognition of his limitations enhance the overall analysis of Afro-American experiences? Explain the logical flow and importance of this connection in your argument."
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following is not a contribution of Orlando Patterson\u2019s work?"
+          ],
+          [
+            "Which of the following best describes the importance of Patterson\u2019s work?"
+          ],
+          [
+            "Which of the following is an example of building on Patterson\u2019s insights?"
+          ]
+        ],
+        "commercial": [
+          [
+            "In your essay, which specific concept or analytical framework from Orlando Patterson's work did you identify as most pivotal for understanding Afro-American experiences, and how did you apply this concept to a particular historical example or period you discussed?",
+            "You state that Patterson's work 'significantly contributed' to our understanding. How did you demonstrate this significance in your essay, specifically by contrasting his insights with, or building upon, other scholarly perspectives on Afro-American experiences that you mentioned?",
+            "Your essay highlights Patterson's contributions to understanding both the era of slavery and its aftermath. Can you explain how you structured your argument to show his distinct or interconnected insights into these two periods, referencing specific points or examples from your discussion?"
+          ],
+          [
+            "In your essay, you highlight Patterson's emphasis on community, masculinity, and resistance. Could you elaborate on one specific historical example or piece of evidence you used to illustrate how *one* of these elements, as interpreted by Patterson, contributes to a more nuanced understanding of slavery or its aftermath?",
+            "You state that Patterson's work provides a 'more nuanced and contextualized approach.' How did your essay specifically demonstrate this nuance, perhaps by contrasting it with a less nuanced perspective or by showing how it reframes a particular aspect of slavery or its aftermath that you discussed?",
+            "Considering the overall argument of your essay, how does your detailed discussion of Patterson's focus on community, masculinity, and resistance specifically build towards or support your main thesis, rather than just serving as background information?"
+          ],
+          [
+            "You state that 'acknowledging their limitations can help build a more inclusive and nuanced understanding.' What specific limitations of Patterson's ideas did you identify in your essay, and how did your discussion of these particular limitations contribute to the 'more inclusive and nuanced understanding' you aimed to achieve?",
+            "In your essay, you claim to 'build upon his insights.' Can you elaborate on one specific insight from Patterson that you engaged with, and explain how you used this particular insight as a foundation to develop a more inclusive understanding of Afro-American experiences within your argument?",
+            "To demonstrate how engaging with Patterson's ideas leads to a 'more inclusive and nuanced understanding of Afro-American experiences,' what specific historical examples or aspects of Afro-American life did you analyze in your essay, and how did your analysis of these examples illustrate this enhanced understanding?"
+          ]
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            0.0114,
+            0.0013,
+            0.1129
+          ],
+          [
+            -0.2821,
+            0.176,
+            0.0926
+          ],
+          [
+            -0.1045,
+            0.0332,
+            0.0103
+          ]
+        ],
+        "commercial": [
+          [
+            -0.0052,
+            0.0906,
+            0.0452
+          ],
+          [
+            0.0017,
+            0.0743,
+            0.0873
+          ],
+          [
+            0.0795,
+            0.0119,
+            -0.0039
+          ]
+        ],
+        "base3b": [
+          [
+            0.0714,
+            -0.0186,
+            0.0219
+          ],
+          [
+            -0.0414,
+            0.0708,
+            0.046
+          ],
+          [
+            -0.0769,
+            0.0643,
+            0.1782
+          ]
+        ],
+        "ft3b": [
+          [
+            0.072
+          ],
+          [
+            0.3677
+          ],
+          [
+            0.0826
+          ]
+        ]
+      }
+    },
+    "0208b": {
+      "claims": [
+        {
+          "claim": "The rise of management has been shaped by technological innovation, organisational growth, and societal change.",
+          "source": "In conclusion, the rise of management has been a complex and multifaceted process shaped by technological innovation, social change, and organisational development. While its emergence has brought significant benefits in terms of efficiency and productivity, it also reflects the broader power dynamics at play in society."
+        },
+        {
+          "claim": "Management's role in shaping broader societal outcomes is increasingly recognised, with organisations seen as key actors in issues such as poverty reduction, human rights, and climate change mitigation.",
+          "source": "As organisations expand their influence across global supply chains, they are increasingly seen as key actors in issues such as poverty reduction, human rights, and climate change mitigation. This has given rise to new forms of \"organisational responsibility\" that go beyond traditional notions of corporate social responsibility (CSR)."
+        },
+        {
+          "claim": "A nuanced understanding of power dynamics, inequality, and human needs is essential for developing effective, equitable, and sustainable approaches to organisational behaviour.",
+          "source": "As we continue to navigate the complexities of modern work and organisations, understanding the historical roots and ongoing evolution of management remains essential for developing more effective, equitable, and sustainable approaches to organisational behaviour. As we continue to navigate the challenges of modern work and organisations, understanding the historical roots and ongoing evolution of management remains essential for developing more effective, equitable, and sustainable approaches to organisational behaviour. By prioritising a more nuanced understanding of power dynamics, inequality, and human needs, managers can work towards creating organisations that are both effective and just."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "What specific technological innovations do you think have contributed most significantly to the rise of management, and how did you use this information in your essay?",
+            "How does the 'broader power dynamics at play in society' relate to your argument about the emergence of management, and what evidence from your essay supports this claim?",
+            "In your conclusion, you mentioned that the rise of management has brought significant benefits in terms of efficiency and productivity. What specific examples or case studies did you use to illustrate this point, and how do these connect to your broader argument about the multifaceted nature of management's development?"
+          ],
+          [
+            "What specific forms of organisational responsibility do you think are emerging beyond traditional CSR, and how did your understanding of this concept influence the way you structured your essay?",
+            "How did you decide to focus on poverty reduction, human rights, and climate change mitigation as key areas where organisations are seen as key actors? What evidence from your research led you to choose these specific issues?",
+            "In what ways do you think the recognition of management's role in shaping broader societal outcomes changes our understanding of corporate social responsibility (CSR)? How did this idea shape your argument about the evolving nature of CSR?"
+          ],
+          [
+            "What specific historical roots of management did you draw upon in your argument for developing more effective, equitable, and sustainable approaches to organisational behaviour?",
+            "How do the power dynamics, inequality, and human needs that you discussed relate to the concept of 'effective' organisational behaviour, as mentioned in your essay?",
+            "In what ways does a nuanced understanding of power dynamics, inequality, and human needs contribute to creating organisations that are both 'just' and 'sustainable', according to your argument?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Explain how the 'complex and multifaceted process' mentioned in your essay relates to the three main factors you identified as shaping the rise of management: technological innovation, social change, and organisational development? Provide specific examples from your essay to support your explanation.",
+            "Discuss the role of 'broad power dynamics at play in society' in the context of the technological innovation, social change, and organisational development you discussed. How does this concept connect to the overall argument presented in your essay?",
+            "Critically evaluate the impact of each factor (technological innovation, social change, and organisational development) on the rise of management. Why did you choose these particular factors over others? How do they interconnect within the framework of your essay?"
+          ],
+          [
+            "Explain the shift towards 'organisational responsibility' mentioned in your essay. How does this concept differ from traditional CSR? Provide an example from your essay to support your explanation.",
+            "Discuss the impact of global supply chains on the recognition of management's role in broader societal outcomes. Why do you think these chains have led to a reevaluation of organizational responsibilities?",
+            "How does the increased focus on poverty reduction, human rights, and climate change mitigation reflect the evolving understanding of management's role in society? Use specific examples from your essay to illustrate your points."
+          ],
+          [
+            "Explain how the concept of 'power dynamics, inequality, and human needs' is integral to the development of 'effective, equitable, and sustainable approaches' to organizational behavior according to your essay. Provide specific examples from your text to support your explanation.",
+            "Discuss the role of 'historical roots and ongoing evolution of management' in the context of developing 'more effective, equitable, and sustainable approaches.' How does this relate to the importance of a 'nuanced understanding' you emphasize?",
+            "In your view, what are the potential consequences if managers fail to prioritize a 'more nuanced understanding' of these factors? Use your essay as a reference to elaborate on these potential outcomes."
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following is not a factor that has contributed to the rise of management?"
+          ],
+          [
+            "Which of the following best describes the role of management in shaping broader societal outcomes?"
+          ],
+          [
+            "{\"questions\":[\"Which of the following best captures the main idea of the student\u2019s essay?\",\"Which of the following best captures the main idea of the student\u2019s essay?\",\"Which of the following best captures the main idea of the student\u2019s essay?\"]"
+          ]
+        ],
+        "commercial": [
+          [
+            "You identify technological innovation as a key factor shaping the rise of management. What specific technological innovations did you discuss in your essay, and how did you argue each one directly contributed to the emergence or evolution of particular management practices or structures?",
+            "Your essay posits that organisational growth, technological innovation, and societal change collectively shaped the rise of management. Can you explain the specific causal links or interdependencies you drew between these three factors in your analysis, rather than treating them as separate influences?",
+            "In your conclusion, you mention that the rise of management 'reflects the broader power dynamics at play in society.' How did you build this argument throughout your essay, and what specific examples or theoretical perspectives did you use to connect the shaping factors (technological innovation, organisational growth, societal change) to these broader power dynamics?"
+          ],
+          [],
+          []
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            -0.0658,
+            -0.0145,
+            -0.016
+          ],
+          [
+            0.1192,
+            0.124,
+            0.0322
+          ],
+          [
+            -0.079,
+            0.0498,
+            0.0086
+          ]
+        ],
+        "commercial": [
+          [
+            -0.0238,
+            -0.0665,
+            -0.0045
+          ],
+          [],
+          []
+        ],
+        "base3b": [
+          [
+            0.0385,
+            0.0856,
+            -0.0305
+          ],
+          [
+            0.0329,
+            0.0794,
+            0.1
+          ],
+          [
+            0.0182,
+            0.0539,
+            0.1021
+          ]
+        ],
+        "ft3b": [
+          [
+            -0.0125
+          ],
+          [
+            0.1371
+          ],
+          [
+            0.3602
+          ]
+        ]
+      }
+    },
+    "0153a": {
+      "claims": [
+        {
+          "claim": "A-Z Cloth UK's production costs can be reduced by optimizing machine usage and improving energy efficiency.",
+          "source": "However, there are opportunities for cost reduction by optimizing machine usage and improving energy efficiency."
+        },
+        {
+          "claim": "Implementing a more efficient carding process and reducing waste can help A-Z Cloth UK reduce its raw material input and lower its production costs.",
+          "source": "One area where A-Z Cloth UK can improve its production costs is by reducing the amount of raw materials used per unit produced. By implementing a more efficient carding process, the company can produce more yarn with less raw material input. This would not only reduce the total cost but also minimize waste and environmental impact."
+        },
+        {
+          "claim": "A-Z Cloth UK should implement cost-saving measures such as lean manufacturing, quality control enhancements, and energy efficiency improvements to remain competitive in the market.",
+          "source": "The implementation of a lean manufacturing program would require significant investment in training and infrastructure. Furthermore, A-Z Cloth UK should consider implementing a quality control system that minimizes waste and reduces rework. As mentioned earlier, the carding machines used by A-Z Cloth UK consume around 40 kWh of electricity per hour."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "Can you explain why you chose to focus on optimizing machine usage and improving energy efficiency as potential cost reduction strategies for A-Z Cloth UK?",
+            "What specific evidence or examples from your research did you use to support the claim that optimizing machine usage can reduce production costs, and how did you interpret this evidence in your essay?",
+            "How does the idea of reducing production costs through optimized machine usage and improved energy efficiency relate to the rest of your argument about A-Z Cloth UK's business operations?"
+          ],
+          [
+            "How did you determine that implementing a more efficient carding process would lead to reduced raw material input?",
+            "What specific example or evidence from your research on A-Z Cloth UK's production process led you to conclude that reducing waste is also crucial for lowering production costs?",
+            "In what ways do you think the reduction of raw material input and minimization of waste will impact the overall environmental footprint of A-Z Cloth UK, as mentioned in your essay?"
+          ],
+          [
+            "What specific example from your essay did you use to support the claim that A-Z Cloth UK should implement cost-saving measures? How does this example relate to the rest of your argument?",
+            "You mentioned in your essay that a lean manufacturing program would require significant investment. What trade-offs do you think A-Z Cloth UK needs to consider when weighing the costs and benefits of implementing such a program?",
+            "How does the quality control system you proposed for A-Z Cloth UK connect to the goal of remaining competitive in the market? What specific evidence from your essay supports this connection?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Could you elaborate on the specific methods or strategies you propose for optimizing machine usage? How do these methods contribute to reducing production costs?",
+            "In your essay, you mentioned improving energy efficiency as another way to reduce costs. Can you provide examples of energy-saving technologies or practices that you believe could be implemented at A-Z Cloth UK? Why do you think these measures would be effective?",
+            "You stated that these cost reduction strategies are interconnected within your overall argument. Could you explain how optimizing machine usage and improving energy efficiency are directly linked and how they complement each other in achieving the desired cost reductions?"
+          ],
+          [
+            "Explain how the more efficient carding process directly leads to reduced raw material input and lower production costs. Use specific details from your essay to support your explanation.",
+            "Why did you choose to focus on the reduction of waste as part of the improvements? How does minimizing waste connect to the overall goal of lowering production costs?",
+            "How does the improvement in the carding process affect the environmental impact of A-Z Cloth UK's production? Discuss the connection between these changes and the company's sustainability goals."
+          ],
+          [
+            "Explain why A-Z Cloth UK might face challenges in implementing a lean manufacturing program based on the information provided in your essay. How do you think these challenges could impact the overall success of the program?",
+            "Discuss the potential drawbacks of enhancing quality control at A-Z Cloth UK, as described in your essay. How do these drawbacks relate to the company's goal of remaining competitive in the market?",
+            "Refer to the information about the carding machines and their energy consumption. How does the high energy usage of these machines affect A-Z Cloth UK's ability to implement energy efficiency improvements? Provide an example from your essay to support your explanation."
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following is not an opportunity for cost reduction?"
+          ],
+          [
+            "Which of the following is not a way to reduce production costs?"
+          ],
+          [
+            "Which of the following is not an example of a cost-saving measure?",
+            "Which of the following is not an example of a quality control measure?",
+            "Which of the following is not an example of a way to improve energy efficiency?"
+          ]
+        ],
+        "commercial": [
+          [
+            "Could you elaborate on the specific strategies you proposed for optimizing machine usage at A-Z Cloth UK, detailing the particular machines or processes you focused on and the evidence from your research that supported these specific recommendations?",
+            "Regarding energy efficiency, what specific energy-consuming processes or equipment at A-Z Cloth UK did your essay identify as prime targets for improvement, and how did you quantify or estimate the potential cost savings from these particular interventions?",
+            "Your essay highlights machine usage and energy efficiency as key areas for cost reduction. How do these two specific opportunities connect to the overall financial health or operational challenges of A-Z Cloth UK as discussed elsewhere in your essay, and why did you prioritize these over other potential cost-saving measures?"
+          ],
+          [
+            "Beyond simply 'more efficient,' what specific changes or technological upgrades to A-Z Cloth UK's carding process did you identify as crucial for achieving the stated reduction in raw material input?",
+            "To support your claim that an efficient carding process would allow A-Z Cloth UK to produce 'more yarn with less raw material input,' what specific evidence, case studies, or theoretical models did you present in your essay?",
+            "You mention that this change would 'minimize waste and environmental impact.' How did you elaborate on these specific benefits for A-Z Cloth UK within your essay, and how do they connect to your broader arguments about the company's sustainability or operational strategy?"
+          ],
+          [
+            "Your essay notes that implementing a lean manufacturing program would require significant investment. How do you argue that this initial investment ultimately contributes to A-Z Cloth UK's cost savings and competitiveness, based on the specific points you raised?",
+            "You recommend a quality control system to minimize waste and reduce rework. What specific evidence or analysis from your essay led you to identify waste and rework as particularly significant cost areas for A-Z Cloth UK, and how does this connect to your broader argument for competitiveness?",
+            "Your essay highlights that A-Z Cloth UK's carding machines consume around 40 kWh of electricity per hour. How does this specific piece of data, in the context of your overall analysis, support your recommendation for energy efficiency improvements, and what specific types of improvements did you implicitly or explicitly link to this observation?"
+          ]
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            0.0073,
+            -0.3295,
+            0.0139
+          ],
+          [
+            -0.0087,
+            0.1329,
+            -0.028
+          ],
+          [
+            0.2356,
+            0.0708,
+            0.1786
+          ]
+        ],
+        "commercial": [
+          [
+            -0.0142,
+            -0.1012,
+            -0.0304
+          ],
+          [
+            -0.0395,
+            -0.1916,
+            0.0954
+          ],
+          [
+            0.076,
+            0.0321,
+            0.1057
+          ]
+        ],
+        "base3b": [
+          [
+            -0.0275,
+            0.0261,
+            0.0435
+          ],
+          [
+            0.0822,
+            0.1308,
+            0.0268
+          ],
+          [
+            0.1392,
+            0.1544,
+            0.1258
+          ]
+        ],
+        "ft3b": [
+          [
+            -0.0093
+          ],
+          [
+            -0.0337
+          ],
+          [
+            0.2452,
+            0.2089,
+            0.1211
+          ]
+        ]
+      }
+    },
+    "6131p": {
+      "claims": [
+        {
+          "claim": "English Nature (EN) and the Joint Nature Conservation Committee (JNCC) have played significant roles in shaping UK conservation policy and practice over the past few decades.",
+          "source": "In conclusion, English Nature and the Joint Nature Conservation Committee have played significant roles in shaping UK conservation policy and practice over the past few decades."
+        },
+        {
+          "claim": "The partnership between EN and the JNCC has been instrumental in addressing emerging threats such as climate change and biodiversity loss, and promoting a more integrated approach to nature conservation.",
+          "source": "The partnership between EN and the JNCC has been instrumental in shaping UK nature conservation policy. This strategic framework aims to promote a more integrated approach to nature conservation, incorporating social and economic considerations alongside ecological principles."
+        },
+        {
+          "claim": "EN's 'Green Infrastructure' initiative and the JNCC's Marine Conservation Zones (MCZs) are innovative examples of collaborative conservation in action, which have led to significant advances in our understanding of UK ecosystems and their importance for biodiversity.",
+          "source": "EN's 'Green Infrastructure' initiative provides a promising framework for achieving this goal. EN's work on peatland restoration provides an excellent example of the Green Infrastructure concept in action. By working closely with research institutions and stakeholders, the JNCC has developed a comprehensive strategy for protecting marine habitats and species."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "How did you decide which specific roles English Nature and JNCC have played in shaping UK conservation policy and practice? Can you give an example from your essay to illustrate this?",
+            "In your essay, you mentioned that these organizations have had a significant impact on conservation policy. What specific evidence or examples from the past few decades did you use to support this claim?",
+            "How does your argument about English Nature and JNCC's roles in shaping UK conservation policy connect to your broader thesis? Can you explain how this point contributes to the overall structure of your essay?"
+          ],
+          [
+            "How did you decide that the partnership between EN and JNCC was instrumental in addressing emerging threats such as climate change and biodiversity loss? What specific information from your research led you to this conclusion?",
+            "You mentioned that the partnership promotes a more integrated approach to nature conservation. How does this relate to the 'strategic framework' you described earlier, and what do you mean by incorporating social and economic considerations alongside ecological principles?",
+            "How did you connect the idea of an integrated approach to nature conservation in your essay to the broader theme of addressing emerging threats such as climate change and biodiversity loss? What specific evidence or examples from your research supported this connection?"
+          ],
+          [
+            "How did you decide to use EN's 'Green Infrastructure' initiative as an example of collaborative conservation in your essay? What specific aspects of the initiative led you to make this choice?",
+            "You mentioned that EN's work on peatland restoration is an excellent example of the Green Infrastructure concept in action. Can you explain how this particular project demonstrates the principles of green infrastructure, and what insights it provides into ecosystem functioning?",
+            "In your essay, you stated that the JNCC's MCZs have led to significant advances in our understanding of UK ecosystems and their importance for biodiversity. What specific evidence or examples from your research did you draw upon to support this claim, and how do these findings relate to the broader context of conservation efforts in the UK?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Could you elaborate on the specific actions or initiatives taken by English Nature and the Joint Nature Conservation Committee (JNCC) that demonstrate their significant roles in shaping UK conservation policy and practice? How did these actions impact the development of conservation policies and practices?",
+            "In your essay, you mentioned that EN and JNCC have influenced UK conservation. Can you provide examples of how their work has contributed to the protection and management of specific natural sites or ecosystems in the UK? What challenges did they face and how did they overcome them?",
+            "You stated that EN and JNCC have been instrumental in shaping UK conservation. Could you discuss the key decisions or agreements made by these bodies that have had a lasting impact on conservation practices in the UK? How do these decisions connect to broader trends in UK conservation efforts?"
+          ],
+          [
+            "Explain how the partnership between EN and the JNCC has contributed to the promotion of a more integrated approach to nature conservation, as mentioned in your essay. Provide specific examples from your text.",
+            "Discuss the strategic framework you mentioned in your essay. How does it incorporate social and economic considerations alongside ecological principles, according forget your text?",
+            "In your view, what are the key benefits of the partnership between EN and the JNCC in addressing emerging threats like climate change and biodiversity loss? Use textual evidence from your essay to support your answer."
+          ],
+          [
+            "Explain how EN's 'Green Infrastructure' initiative serves as a promising framework for achieving the goal of collaborative conservation. Include specific examples from your essay.",
+            "Discuss the role of research institutions and stakeholders in the JNCC's Marine Conservation Zones (MCZs) initiative. How does this collaboration contribute to the advancement of UK marine ecosystem understanding?",
+            "How does EN's peatland restoration project exemplify the Green Infrastructure concept? In what ways does this project illustrate the benefits of EN's broader 'Green Infrastructure' initiative?"
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following is correct?"
+          ],
+          [
+            "Which of the following is not an example of the partnership between EN and the JNCC?"
+          ],
+          [
+            "Which of the following is not an example of collaborative conservation?"
+          ]
+        ],
+        "commercial": [
+          [
+            "What specific policies, initiatives, or case studies did you present in your essay to illustrate the 'significant roles' of English Nature and the JNCC in shaping UK conservation policy and practice?",
+            "How did your essay differentiate between the specific types of 'significant roles' played by English Nature versus the Joint Nature Conservation Committee, and what evidence did you use to support this distinction?",
+            "Explain how the arguments and evidence you presented in earlier sections of your essay directly led to and supported your concluding statement about the impact of English Nature and the JNCC."
+          ],
+          [
+            "You claim the partnership between EN and JNCC has been instrumental in addressing emerging threats such as climate change and biodiversity loss. What specific evidence or examples did you present in your essay to demonstrate this instrumental role, and how did you argue these examples directly addressed those particular threats?",
+            "Your essay highlights the partnership's role in promoting a 'more integrated approach to nature conservation,' incorporating social and economic considerations alongside ecological principles. How did you specifically illustrate or define this integration within your essay, and what examples did you use to show the interplay of these different considerations?",
+            "You state this partnership has been instrumental in shaping UK nature conservation policy. Beyond the general aim, what specific policy outcomes or strategic frameworks did you analyze in your essay to support this claim, and how did you connect these outcomes to the partnership's influence?"
+          ],
+          [
+            "You describe EN's 'Green Infrastructure' initiative as an 'innovative example of collaborative conservation.' Beyond mentioning peatland restoration, what specific details or mechanisms did you present in your essay to demonstrate its innovativeness and the nature of the collaboration involved?",
+            "You claim these initiatives 'led to significant advances in our understanding of UK ecosystems and their importance for biodiversity.' What specific examples of these advances did you discuss in your essay, and how did you explicitly link them to the actions or outcomes of EN's Green Infrastructure and the JNCC's MCZs?",
+            "Your claim connects EN's 'Green Infrastructure' and the JNCC's Marine Conservation Zones. How did you structure your essay to compare or contrast these two distinct initiatives, and what overarching point were you making by presenting them together as examples of collaborative conservation?"
+          ]
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            -0.0179,
+            0.0719,
+            0.0834
+          ],
+          [
+            0.0439,
+            -0.0002,
+            0.0168
+          ],
+          [
+            0.0549,
+            0.0564,
+            0.1877
+          ]
+        ],
+        "commercial": [
+          [
+            0.0935,
+            -0.006,
+            0.029
+          ],
+          [
+            0.1084,
+            -0.048,
+            -0.0576
+          ],
+          [
+            -0.027,
+            0.0615,
+            0.0037
+          ]
+        ],
+        "base3b": [
+          [
+            -0.0079,
+            -0.1193,
+            0.0163
+          ],
+          [
+            0.0784,
+            0.1045,
+            0.0902
+          ],
+          [
+            0.1333,
+            0.1032,
+            0.0313
+          ]
+        ],
+        "ft3b": [
+          [
+            0.3397
+          ],
+          [
+            0.1326
+          ],
+          [
+            0.1966
+          ]
+        ]
+      }
+    },
+    "0133a": {
+      "claims": [
+        {
+          "claim": "The English legal system's approach to DNA retention has been shaped by the decision in R(S) v Chief Constable of South Yorkshire.",
+          "source": "The case of R(S) v Chief Constable of South Yorkshire [2004] 4 All ER 193 has been instrumental in shaping the English legal system's approach to the retention of biological samples by the police."
+        },
+        {
+          "claim": "The collection and retention of DNA profiles can be justified under Section 2(4) PACE, but individual retention must be subject to robust safeguards and oversight mechanisms.",
+          "source": "The Supreme Court's judgment in S. and Marper v United Kingdom has effectively outlawed the blanket retention of fingerprints and DNA samples, but R(S) v Chief Constable of South Yorkshire establishes that individual retention can be justified under Section 2(4) The collection and storage of sensitive personal information by law enforcement agencies must be subject to robust safeguards and oversight mechanisms."
+        },
+        {
+          "claim": "Any system for regulating DNA sampling and retention must strike a delicate balance between individual freedoms and the need for effective law enforcement.",
+          "source": "Ultimately, any system for regulating DNA sampling and retention must strike a delicate balance between individual freedoms and the need for effective law enforcement."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "What specific aspects of the English legal system's approach to DNA retention do you think were influenced by the decision in R(S) v Chief Constable of South Yorkshire, and how did you arrive at that conclusion?",
+            "In your essay, you mentioned the case of R(S) v Chief Constable of South Yorkshire as a key factor in shaping the English legal system's approach to DNA retention. What specific evidence or examples from this case did you use to support this claim, and why were they relevant?",
+            "How does the decision in R(S) v Chief Constable of South Yorkshire connect to your broader argument about the English legal system's approach to DNA retention? What implications do you think this case has for the balance between individual rights and law enforcement powers?"
+          ],
+          [
+            "What specific Supreme Court judgment did you refer to when arguing that individual retention can be justified under Section 2(4) PACE?",
+            "How does the case of R(S) v Chief Constable of South Yorkshire support your claim about individual retention, and what implications do you think this has for law enforcement agencies?",
+            "In your essay, you mentioned that 'the collection and storage of sensitive personal information by law enforcement agencies must be subject to robust safeguards and oversight mechanisms'. What connection did you draw between the justification for individual retention under Section 2(4) PACE and the need for these safeguards?"
+          ],
+          [
+            "How did you determine that a 'delicate balance' was necessary between individual freedoms and law enforcement needs in your proposed system?",
+            "What specific examples or cases from the existing literature or real-world scenarios did you draw upon to support the need for this balance, and how did they inform your argument?",
+            "In what ways do you think your proposed system would address potential concerns about overreach or misuse of DNA sampling and retention by law enforcement agencies, and how does this relate to your broader discussion of individual freedoms?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Could you elaborate on why the decision in R(S) v Chief Constable of South Yorkshire is considered so significant in determining the English legal system's approach to DNA retention? What aspects of this case did the author find particularly influential?",
+            "In your essay, you mention that the decision in R(S) v Chief Constable of South Yorkshire was pivotal. Could you provide an example from the case that illustrates a key aspect of the English legal system's approach to DNA retention that was established as a result of this ruling?",
+            "You state that the decision in R(S) v Chief Constable of South Yorkshire has had a profound impact on the English legal system's approach to DNA retention. How does this particular case connect to the broader themes discussed in your essay regarding the balance between crime prevention and individual privacy rights?"
+          ],
+          [
+            "Explain the context provided by the Supreme Court's judgment in S. and Marper v United Kingdom and its impact on the retention of fingerprints and DNA samples. How does this relate to the student's statement about Section 2(4) PACE?",
+            "According to the student, what is the justification for the collection and retention of DNA profiles under Section 2(4) PACE? Provide an example or piece of evidence from the essay that supports this justification.",
+            "The student mentions that individual retention must be subject to 'robust safeguards and oversight mechanisms.' Discuss the importance of these mechanisms as discussed in the essay. How do they connect to the broader argument about the collection and retention of DNA profiles?"
+          ],
+          [
+            "Explain the concept of 'individual freedoms' as it relates to DNA sampling and retention systems according to your essay. How does this freedom impact the balance you mentioned?",
+            "In your opinion, what are the key factors that contribute to an 'effective law enforcement' system? How do these factors relate to the delicate balance you discussed?",
+            "You mention that striking a balance is necessary. Can you provide an example from your essay where you discuss a specific situation or case that illustrates why such a balance is important?"
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following cases was not influential in shaping the English legal system\u2019s approach to DNA retention?"
+          ],
+          [
+            "Which of the following statements is correct?"
+          ],
+          [
+            "Which of the following is correct?"
+          ]
+        ],
+        "commercial": [
+          [
+            "In your essay, what specific legal principles or findings from R(S) v Chief Constable of South Yorkshire did you argue were most instrumental in shaping the English legal system's approach to DNA retention, and what evidence did you present to support this claim?",
+            "When discussing the impact of R(S) v Chief Constable of South Yorkshire, how did you differentiate its influence on DNA retention policy from other significant legal or legislative developments in the English legal system, and why did you choose to emphasize R(S) as particularly instrumental?",
+            "Explain how your detailed discussion of R(S) v Chief Constable of South Yorkshire and its implications for DNA retention policy directly supports or develops the main thesis you present in your overall essay."
+          ],
+          [
+            "You argue that individual retention of DNA profiles can be justified under Section 2(4) PACE. In your essay, what specific criteria or conditions within Section 2(4) PACE did you identify as crucial for this justification, and how did you argue these criteria differentiate it from the blanket retention outlawed by S. and Marper v United Kingdom?",
+            "You state that individual retention must be subject to 'robust safeguards and oversight mechanisms.' What specific examples or types of mechanisms did you propose or elaborate on in your essay, and how did you argue these particular mechanisms ensure robustness and prevent the issues raised in S. and Marper?",
+            "Considering your overall argument, explain how your discussion of R(S) v Chief Constable of South Yorkshire specifically contributed to your justification of individual DNA retention under Section 2(4) PACE. How did you reconcile its findings with the necessity for 'robust safeguards and oversight mechanisms' that you also advocate, particularly in light of the S. and Marper judgment?"
+          ],
+          []
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            0.0033,
+            -0.0322,
+            0.1068
+          ],
+          [
+            0.3461,
+            0.0409,
+            0.069
+          ],
+          [
+            0.0609,
+            0.1397,
+            0.0337
+          ]
+        ],
+        "commercial": [
+          [
+            -0.0198,
+            0.109,
+            0.0689
+          ],
+          [
+            0.0128,
+            0.032,
+            -0.0595
+          ],
+          []
+        ],
+        "base3b": [
+          [
+            0.1174,
+            0.0596,
+            0.0644
+          ],
+          [
+            0.0516,
+            0.1447,
+            0.0664
+          ],
+          [
+            -0.0742,
+            0.0629,
+            -0.0308
+          ]
+        ],
+        "ft3b": [
+          [
+            -0.0226
+          ],
+          [
+            0.5383
+          ],
+          [
+            0.4388
+          ]
+        ]
+      }
+    },
+    "6180m": {
+      "claims": [
+        {
+          "claim": "Some forms of relativism can provide a more nuanced understanding of truth by acknowledging the diversity of truth claims and engaging in dialogue between them.",
+          "source": "However, despite the challenges and criticisms, I would argue that some forms of relativism can provide a more nuanced understanding of truth by acknowledging the diversity of truth claims and engaging in dialogue between them."
+        },
+        {
+          "claim": "Relativism can foster a more open-minded and tolerant approach to understanding different cultures and perspectives, but it also has its limitations.",
+          "source": "By recognizing that truth is relative within specific frameworks, we may be less likely to impose our own cultural or personal biases on others, and instead strive for greater understanding and empathy. But, it is also worth noting that relativism has its limitations."
+        },
+        {
+          "claim": "The debate over relativism remains complex and multifaceted, with no clear resolution in sight, as philosophers continue to argue for and against the validity of relativism.",
+          "source": "In conclusion, the debate over relativism remains complex and multifaceted, with no clear resolution in sight. Ultimately, whether there exists a defensible form of epistemological relativism remains a matter of ongoing debate among philosophers."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "What specific challenges or criticisms of relativism did you consider in your argument, and how do they relate to the benefits of nuanced truth understanding?",
+            "How does the concept of 'dialogue between truth claims' that you mentioned contribute to a more nuanced understanding of truth, according to your essay? Please provide an example from your own text.",
+            "In what ways do you think acknowledging diversity in truth claims is essential for a nuanced understanding of truth, as you argued in your essay? How does this relate to the rest of your discussion on relativism?"
+          ],
+          [
+            "How did you arrive at the idea that recognizing relative truth can lead to greater understanding and empathy? What specific points in your essay support this claim?",
+            "You mention that relativism has limitations, but you don't elaborate on what these are. Can you explain why you think it's essential to acknowledge these limitations, and how they relate to your overall argument about relativism?",
+            "How does the idea of relativism influencing our approach to understanding different cultures and perspectives connect to the rest of your essay? What other points or themes do you see as being related to this concept?"
+          ],
+          [
+            "How did you decide to use the phrase 'defensible form of epistemological relativism' in your conclusion? What specific arguments or counterarguments led you to frame it this way?",
+            "You mentioned that whether there exists a defensible form of epistemological relativism is an ongoing debate among philosophers. Can you recall which philosophers or philosophical positions you were thinking of when you made this claim, and how their views relate to your overall argument against relativism?",
+            "In the conclusion, you stated that the debate over relativism remains complex and multifaceted with no clear resolution in sight. How does this point connect to your earlier discussion of the strengths and weaknesses of different forms of relativism? What implications do you see for our understanding of knowledge and truth?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Can you elaborate on why you believe that some forms of relativism offer a more nuanced understanding of truth? How does this approach address the diversity of truth claims?",
+            "In your essay, you mention engaging in dialogue between different truth claims. Could you provide an example from your research or personal experience where such a dialogue was beneficial in understanding truth better?",
+            "You state that relativism provides a more nuanced understanding of truth by acknowledging the diversity of truth claims. How does this perspective help in resolving conflicts or disagreements among different truth claims?"
+          ],
+          [
+            "Explain how the recognition that 'truth is relative within specific frameworks' contributes to fostering an open-minded and tolerant approach to understanding different cultures and perspectives, as discussed in your essay.",
+            "Provide an example from your essay that illustrates why it is important to recognize that 'truth is relative within specific frameworks' when engaging with diverse cultures and perspectives.",
+            "Discuss the limitations you identified in the essay regarding the potential drawbacks of relativism, and how these limitations affect the practical application of relativism in real-world situations."
+          ],
+          [
+            "Could you elaborate on the reasons why you believe the debate over relativism is complex and multifaceted? How does this complexity manifest in the arguments presented by both sides?",
+            "In your essay, you mention that 'whether there exists a defensible form of epistemological relativism remains a matter of ongoing debate among philosophers.' Could you provide specific examples or philosophers' names that support this statement?",
+            "You conclude that the debate over relativism 'remains a matter of ongoing debate.' How does this ongoing nature of the debate impact the philosophical community's understanding of relativism? Can you explain the significance of this ongoing discussion?"
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following is an example of relativism?"
+          ],
+          [
+            "Which of the following best describes the limitations of relativism?"
+          ],
+          [
+            "Which of the following best captures the main argument of the student\u2019s essay?"
+          ]
+        ],
+        "commercial": [
+          [],
+          [
+            "You state that recognizing \"truth is relative within specific frameworks\" can reduce the imposition of biases. Can you explain how you defined or illustrated these \"specific frameworks\" in your essay, and what specific example you used to show this reduction of bias?",
+            "You mention that relativism \"has its limitations.\" What specific limitations did you identify and elaborate on in your essay, and how did you argue these limitations impact the pursuit of understanding different cultures?",
+            "Your essay suggests relativism can foster \"greater understanding and empathy.\" What specific evidence or line of reasoning did you employ to demonstrate this outcome, and how does this particular argument about empathy connect to your essay's overall conclusion or main thesis?"
+          ],
+          []
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            0.051,
+            0.0742,
+            0.0402
+          ],
+          [
+            0.0918,
+            0.0178,
+            0.0263
+          ],
+          [
+            0.0565,
+            -0.0575,
+            -0.0001
+          ]
+        ],
+        "commercial": [
+          [],
+          [
+            0.0655,
+            0.0588,
+            0.0576
+          ],
+          []
+        ],
+        "base3b": [
+          [
+            0.0347,
+            0.0622,
+            -0.0015
+          ],
+          [
+            -0.0318,
+            0.166,
+            -0.0553
+          ],
+          [
+            0.0056,
+            0.0355,
+            0.004
+          ]
+        ],
+        "ft3b": [
+          [
+            0.0431
+          ],
+          [
+            0.0818
+          ],
+          [
+            0.2803
+          ]
+        ]
+      }
+    },
+    "6001b": {
+      "claims": [
+        {
+          "claim": "The proposed survey will provide valuable insights into how community health policies impact child obesity rates in rural areas.",
+          "source": "Childhood obesity has become a pressing problem worldwide, with alarming rates reported across various countries (WHO, 2018). In the UK, the prevalence of childhood obesity is significantly higher among children from deprived backgrounds (Harrison et al., 2020). However, there is a need for more targeted research on community health policies that address child obesity."
+        },
+        {
+          "claim": "By identifying effective policy interventions and activities, policymakers can develop targeted programs that address child obesity rates in rural areas.",
+          "source": "The survey aims to identify the most effective policy interventions and activities that can be implemented at the local level. The primary objective of this study is to develop an understanding of how community health policies can be optimized to address child obesity rates in rural areas. By identifying effective policy interventions and activities, policymakers will be better equipped to design targeted programs that cater to local needs."
+        },
+        {
+          "claim": "The study's findings will inform policy decisions at both local and national levels, contributing to reducing childhood obesity rates in rural areas.",
+          "source": "By providing insights into the effectiveness of current community health policies and identifying areas for improvement, policymakers can develop more targeted programs that address child obesity rates in rural areas. By providing insights into the effectiveness of current community health policies and identifying areas for improvement, policymakers can develop more targeted programs that address child obesity rates in rural areas. By providing insights into the impact of community health policies on child obesity rates in rural areas, policymakers can develop more effective strategies for reducing childhood obesity across the country."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "How did you decide that a survey was necessary to provide valuable insights into how community health policies impact child obesity rates in rural areas?",
+            "What specific aspect of the studies by WHO (2018) and Harrison et al. (2020) led you to conclude that there is a need for more targeted research on community health policies addressing child obesity?",
+            "How does your proposed survey relate to the existing body of research on childhood obesity, as mentioned in your essay? What do you hope to achieve with this new research that has not been addressed by previous studies?"
+          ],
+          [
+            "What specific policy interventions and activities did you identify as effective in addressing child obesity rates in rural areas, and how did you justify your selection?",
+            "How do the targeted programs that policymakers will design based on this study's findings differ from more general or one-size-fits-all approaches to addressing child obesity, and what evidence from your research supports this distinction?",
+            "In what ways does the understanding of community health policies developed through this study connect to broader issues of rural development or public health policy, and how do you see policymakers applying these insights in other contexts?"
+          ],
+          [
+            "How did you decide that policymakers at both local and national levels would be informed by this study's findings?",
+            "Which specific sentence or paragraph in your essay provided evidence for the claim that targeted programs can address child obesity rates in rural areas? What was the key point made in that section?",
+            "In what way do you think reducing childhood obesity rates in rural areas connects to the broader goal of improving community health policies, as discussed in your essay?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Explain why the student believes that the proposed survey will provide valuable insights into community health policies and child obesity rates. Use evidence from your essay to support your explanation.",
+            "How does the student's statement about the need for more targeted research relate to the existing data on childhood obesity in the UK? Provide specific examples from your essay to illustrate this connection.",
+            "Discuss the implications of the student's argument that the proposed survey can help fill a gap in understanding the effectiveness of community health policies on child obesity rates. Why is this information important according to your essay?"
+          ],
+          [
+            "Explain how the identification of effective policy interventions and activities contributes to the development of targeted programs. Use specific examples from your essay to support your explanation.",
+            "Discuss the role of community health policies in optimizing child obesity rates in rural areas. How does this relate to the goal of developing targeted programs that cater to local needs?",
+            "In your opinion, why is it important for policymakers to understand the effectiveness of different interventions before designing targeted programs? Provide evidence from your essay to justify your perspective."
+          ],
+          [
+            "Explain how the provided evidence supports the claim that developing more targeted programs can reduce childhood obesity rates in rural areas. Use specific examples from your essay.",
+            "Discuss the role of community health policies in addressing child obesity rates. How does the information you provide in your essay contribute to understanding these policies?",
+            "How do the insights into the impact of community health policies connect to the development of more effective strategies for reducing childhood obesity across the country? Provide specific examples from your essay."
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following statements best supports the student\u2019s argument?",
+            "What does the student\u2019s research question address?",
+            "Which of the following research questions would be most relevant to the student\u2019s research?"
+          ],
+          [
+            "Which of the following is not a goal of the research?",
+            "What are the most effective policy interventions and activities that can be implemented at the local level?",
+            "How can policymakers use the results of this study to develop targeted programs that address child obesity rates in rural areas?"
+          ],
+          [
+            "{\"questions\":[\"Which of the following is not a way that research findings can contribute to reducing childhood obesity rates?\",\"Which of the following is not a way that research findings can contribute to developing more effective community health policies?\",\"Which of the following is not an area where research findings can help improve child obesity rates?\"]"
+          ]
+        ],
+        "commercial": [
+          [
+            "Given your discussion of higher obesity prevalence in deprived backgrounds (Harrison et al., 2020), explain the specific rationale you provided in your essay for focusing your proposed survey exclusively on *rural* areas, rather than other types of deprived communities.",
+            "Beyond simply identifying a correlation, describe in detail how the methodology of your proposed survey is designed to uncover the *mechanisms* or *specific pathways* through which community health policies impact child obesity rates, as you argued it would provide 'valuable insights'.",
+            "You identified a 'need for more targeted research on community health policies that address child obesity.' Explain how the specific parameters and scope of *your* proposed survey directly address this identified gap, building upon or diverging from the general observations from WHO (2018) and Harrison et al. (2020)."
+          ],
+          [
+            "You refer to 'the survey' and 'this study' as aiming to identify effective interventions. Can you elaborate on the specific methodology or key findings of this survey/study *as you presented them in your essay* that informed your understanding of effective policy interventions?",
+            "Based on your analysis, what were two specific policy interventions or activities that you identified as particularly effective for rural areas, and what specific evidence or reasoning did you provide in your essay to support their effectiveness?",
+            "You emphasize designing programs that 'cater to local needs' in rural areas. What specific characteristics or challenges of rural settings did you highlight in your essay that necessitate this tailored approach, and how did you argue these characteristics influence the optimization of community health policies?"
+          ],
+          [
+            "Your essay states the study provides 'insights into the effectiveness of current community health policies.' Can you elaborate on which specific aspects of policy effectiveness your study focuses on, and how your methodology is designed to reveal these particular insights?",
+            "You mention the study will 'identify areas for improvement' in policies. Based on your discussion, what are some concrete examples or categories of improvements you anticipate or suggest, and how do these relate to the specific challenges of childhood obesity in rural areas as outlined in your essay?",
+            "Your essay concludes that the study's findings will inform policy decisions at both local and national levels. Can you explain how the specific insights generated by your study are intended to translate into 'more targeted programs' or 'more effective strategies,' and how this connection is developed elsewhere in your essay?"
+          ]
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            0.1042,
+            0.0403,
+            0.0262
+          ],
+          [
+            -0.1473,
+            0.1001,
+            0.0494
+          ],
+          [
+            -0.0855,
+            0.0062,
+            0.0447
+          ]
+        ],
+        "commercial": [
+          [
+            0.0481,
+            -0.0369,
+            0.078
+          ],
+          [
+            0.2238,
+            -0.0588,
+            -0.0658
+          ],
+          [
+            0.159,
+            0.0076,
+            0.1397
+          ]
+        ],
+        "base3b": [
+          [
+            -0.016,
+            0.0473,
+            -0.0019
+          ],
+          [
+            0.202,
+            0.076,
+            0.1822
+          ],
+          [
+            -0.0062,
+            0.0133,
+            0.1064
+          ]
+        ],
+        "ft3b": [
+          [
+            0.4466,
+            0.2939,
+            0.3013
+          ],
+          [
+            0.343,
+            0.1501,
+            0.0906
+          ],
+          [
+            0.01
+          ]
+        ]
+      }
+    },
+    "0042a": {
+      "claims": [
+        {
+          "claim": "The growth of maritime trade between Europe and Asia from the late seventeenth to early nineteenth centuries had a profound impact on both continents.",
+          "source": "The period from the late seventeenth to the early nineteenth centuries witnessed a significant expansion of commercial links between Europe and Asia. The establishment of trade routes, facilitated by European ships and Asian merchants, had a profound impact on the economic systems of both continents."
+        },
+        {
+          "claim": "The expansion of European commercial ventures in Asia led to significant economic, social, and cultural changes in Asian societies.",
+          "source": "As connections between East and West intensified, they contributed to divergence in various aspects of economy, society, and culture. The establishment of the Dutch East India Company (VOC) in 1602 marked a significant milestone in the expansion of European commercial ventures in Asia. The VOC's success led to the emergence of other European powers, including Britain, France, and Portugal, which also sought to establish their own trading companies in the region."
+        },
+        {
+          "claim": "The development of connections between East and West contributed significantly to divergence from the later eighteenth century, shaping modern global society and laying the foundations for new technologies, industries, and forms of governance.",
+          "source": "In conclusion, the development of connections between East and West contributed significantly to divergence from the later eighteenth century. The growth of maritime trade in this period facilitated an unprecedented exchange of goods, ideas, and cultures across continents, contributing to changes in economy, society, and culture on both sides of the Eurasian divide. While the effects of increased trade connections were complex and multifaceted, they had a profound impact on world history, shaping modern global society and laying the foundations for the emergence of new technologies, industries, and forms of governance."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "What specific trade routes or examples did you mention in your essay as evidence of the growth of maritime trade between Europe and Asia during this period?",
+            "How do you justify the claim that the establishment of trade routes had a profound impact on the economic systems of both continents? What particular aspects of their economies were affected?",
+            "In what ways, according to your argument, did the growth of maritime trade between Europe and Asia from the late seventeenth to early nineteenth centuries connect to other themes or points you discussed in your essay?"
+          ],
+          [
+            "What specific aspects of economy, society, and culture did you mean by 'divergence' in your claim about the impact of European commercial ventures on Asian societies?",
+            "How did the establishment of the Dutch East India Company (VOC) in 1602 contribute to the changes you described in your essay?",
+            "In your essay, how do the emergence of other European powers, such as Britain and France, relate to your argument that the expansion of European commercial ventures led to significant economic, social, and cultural changes in Asian societies?"
+          ],
+          [
+            "How did you decide to focus on the period from the later eighteenth century as a turning point in the development of connections between East and West? What specific events or trends led you to this conclusion?",
+            "In your essay, you mention that maritime trade facilitated an exchange of goods, ideas, and cultures. Can you describe one specific example from your research that illustrates how this exchange contributed to changes in economy, society, and culture on both sides of the Eurasian divide?",
+            "You argue that the effects of increased trade connections had a profound impact on world history, shaping modern global society and laying the foundations for new technologies, industries, and forms of governance. How do you see these developments as connected? What specific examples from your essay support this claim?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Explain how the 'significant expansion of commercial links' described in your essay contributed to the 'establishment of trade routes.'",
+            "Discuss the role of 'European ships and Asian merchants' in facilitating these trade routes according to your essay.",
+            "How did the 'profound impact' on the 'economic systems of both continents' manifest in your view, based on the information provided in your essay?"
+          ],
+          [
+            "Explain how the establishment of the Dutch East India Company (VOC) in 1602 by the student relates to the expansion of European commercial ventures in Asia and its impact on the economy, society, and culture in Asian societies? How did this event contribute to the divergence you mentioned?",
+            "According to the student, what was the consequence of other European powers, such as Britain, France, and Portugal, establishing their own trading companies in Asia? How did these actions further the economic, social, and cultural changes in Asian societies?",
+            "The student argues that the expansion of European commercial ventures in Asia led to significant changes. Can you identify the key reasons provided by the student for why these changes occurred? How do these reasons connect to the overall theme of your essay?"
+          ],
+          [
+            "Explain how the 'unprecedented exchange of goods, ideas, and cultures' described in your essay led to 'changes in economy, society, and culture on both sides of the Eurasian divide.'",
+            "Discuss the complexity of the effects you mentioned and provide at least one example from your essay that illustrates one of these complexities.",
+            "How did the 'emergence of new technologies, industries, and forms of governance' directly connect to the 'changes in economy, society, and culture on both sides of the Eurasian divide' as discussed in your essay?"
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following was not a result of the expansion of maritime trade between Europe and Asia?",
+            "Which of the following did not contribute to the establishment of trade routes between Europe and Asia?",
+            "Which of the following was not a consequence of the expansion of maritime trade between Europe and Asia?"
+          ],
+          [
+            "{\"questions\":[\"Which of the following was not a consequence of the expansion of European commercial ventures in Asia?\",\"Which of the following was not a consequence of the establishment of the Dutch East India Company (VOC)?\",\"Which of the following was not a consequence of the expansion of European commercial ventures in Asia?\"]"
+          ],
+          [
+            "{\"questions\":[\"Which of the following did not contribute to the divergence from the later eighteenth century?\",\"Which of the following was not a result of the development of connections between East and West?\",\"Which of the following was not a result of the development of connections between East and West?\"]"
+          ]
+        ],
+        "commercial": [
+          [
+            "You state that maritime trade had a 'profound impact on the economic systems of both continents.' Can you identify one specific economic system in Europe and one in Asia that you discussed, outlining the precise nature of the impact you attributed to trade for each, and the key evidence you presented to support these claims?",
+            "Your essay mentions the trade was 'facilitated by European ships and Asian merchants.' How did you specifically argue that the interplay or distinct contributions of these two groups were central to the 'profound impact' you described, rather than other contributing factors?",
+            "Given the vastness of 'both continents,' what criteria did you use to select the specific examples or regions you focused on to demonstrate the 'profound impact' of trade? How do these particular examples strengthen your overall argument in the essay?"
+          ],
+          [
+            "You claim that European commercial ventures led to \"significant economic, social, and cultural changes.\" What specific examples did you provide in your essay for *each* of these three types of changes, and what particular evidence or historical events did you use to illustrate them in specific Asian societies?",
+            "You state that intensified East-West connections \"contributed to divergence in various aspects of economy, society, and culture.\" How did you define or elaborate on the concept of 'divergence' within your essay, and what specific instances did you present to demonstrate this divergence as a direct result of European commercial ventures?",
+            "You identify the VOC's establishment as a \"significant milestone\" whose \"success led to the emergence of other European powers.\" In your essay, how did you characterize the *nature* of the VOC's success, and what specific causal links did you draw between this success and the subsequent establishment of trading companies by Britain, France, and Portugal?"
+          ],
+          [
+            "You state that East-West connections 'contributed significantly to divergence from the later eighteenth century.' Can you elaborate on two specific historical examples or developments from your essay that you used to illustrate this divergence, explaining how each example directly demonstrates the impact of these connections?",
+            "Your essay claims these connections laid 'the foundations for new technologies, industries, and forms of governance.' Choose one specific technology, industry, or form of governance you discussed and explain the precise causal chain you presented in your essay, linking its emergence directly to the East-West connections you analyzed.",
+            "You mention that the effects of increased trade connections were 'complex and multifaceted' and impacted 'both sides of the Eurasian divide.' Describe one specific instance from your essay where you explored a nuanced or even contradictory effect of these connections, or where you specifically contrasted the impact on an Eastern society with that on a Western society, rather than just presenting a singular, unidirectional influence."
+          ]
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            -0.0427,
+            0.0204,
+            -0.0096
+          ],
+          [
+            -0.0265,
+            0.029,
+            -0.0155
+          ],
+          [
+            -0.0205,
+            0.1008,
+            0.0237
+          ]
+        ],
+        "commercial": [
+          [
+            -0.0231,
+            -0.0262,
+            0.0452
+          ],
+          [
+            0.0216,
+            0.0728,
+            0.1454
+          ],
+          [
+            -0.0547,
+            -0.0337,
+            0.0183
+          ]
+        ],
+        "base3b": [
+          [
+            0.0352,
+            -0.0198,
+            0.2008
+          ],
+          [
+            0.0325,
+            0.0133,
+            0.3736
+          ],
+          [
+            0.0119,
+            0.2209,
+            0.0206
+          ]
+        ],
+        "ft3b": [
+          [
+            -0.0341,
+            -0.0258,
+            -0.0332
+          ],
+          [
+            -0.0819
+          ],
+          [
+            -0.0281
+          ]
+        ]
+      }
+    },
+    "0140d": {
+      "claims": [
+        {
+          "claim": "Democracy provides an essential platform for citizen participation in governance, facilitating the expression of diverse opinions and interests.",
+          "source": "Proponents of democracy argue that it provides an essential platform for citizen participation in governance, facilitating the expression of diverse opinions and interests."
+        },
+        {
+          "claim": "Democracy can be majoritarian in nature, where the interests of minorities may be sacrificed for the sake of the majority's desires.",
+          "source": "One notable critique is that democracy can be majoritarian in nature, where the interests of minorities may be sacrificed for the sake of the majority's desires (Schumpeter 1942)."
+        },
+        {
+          "claim": "Through ongoing debate and critique, democratic systems can become more responsive to the needs and concerns of citizens, but this requires a commitment to continuous learning and improvement.",
+          "source": "Through ongoing debate and critique, democratic systems can become more responsive to the needs and concerns of citizens, but this requires a commitment to continuous learning and improvement."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "How did you decide to use the phrase 'essential platform' in your claim, and what implications does this choice have for your argument?",
+            "Can you describe a specific example or evidence from your essay that illustrates how democracy facilitates the expression of diverse opinions and interests? What made you choose this particular example?",
+            "In your essay, you connect citizen participation to governance. How do you see these two concepts as being related, and what does this connection reveal about the importance of democracy in your view?"
+          ],
+          [
+            "What specific reasons did you provide in your essay to support the idea that democracy can be majoritarian in nature?",
+            "How does Schumpeter's argument (as cited in your essay) relate to your own discussion of the potential drawbacks of majoritarianism in a democratic system?",
+            "In what ways do you think the interests of minorities may be sacrificed in a majoritarian democracy, and how did you illustrate this point with evidence or examples in your essay?"
+          ],
+          [
+            "How did you decide to emphasize the importance of 'ongoing debate and critique' in making democratic systems more responsive? What specific examples or evidence from your reading or research supported this point?",
+            "You mentioned that a commitment to continuous learning and improvement is necessary for democratic systems to be responsive. Can you explain why you chose to focus on this aspect, rather than others, such as the role of institutions or leadership?",
+            "How does the idea of continuous learning and improvement connect to your broader argument about the potential of democratic systems? What implications do you see arising from this commitment in terms of policy or practice?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Could you elaborate on why you believe that the statement 'Proponents of democracy argue that it provides an essential platform for citizen participation in governance, facilitating the expression of diverse opinions and interests.' is a key argument in favor of democracy? How does this align with the broader purpose of democratic governance?",
+            "In your essay, you mention that proponents of democracy argue for citizen participation. Can you provide an example from your research or personal experience that illustrates how citizens can participate in governance according to the principles of democracy as stated in the quote?",
+            "You state that democracy facilitates the expression of diverse opinions and interests. How do you think this diversity of opinion contributes to the effectiveness of governance according to the principles outlined in your essay?"
+          ],
+          [
+            "How does Schumpeter's perspective on majoritarianism in democracy relate to the concept of minority rights? Explain the implications of Schumpeter's view on the balance between majority rule and minority protection.",
+            "In your essay, you mentioned Schumpeter's work as an example of a critique of majoritarian democracy. What specific aspects of Schumpeter's argument did you find most compelling in relation to the issue of minority interests being compromised?",
+            "Schumpeter's critique suggests that majoritarian democracy can lead to the neglect of minority interests. How does this perspective connect to broader discussions about the effectiveness of democratic systems in protecting diverse groups within society?"
+          ],
+          [
+            "Could you elaborate on how the continuous learning and improvement commitment contributes to making democratic systems more responsive? Please provide an example from your essay.",
+            "In your opinion, what are the potential drawbacks or challenges of implementing continuous learning and improvement in a democratic system according to your essay? Explain these points further.",
+            "How does the idea of ongoing debate and critique align with the necessity of continuous learning and improvement as discussed in your essay? Elaborate on the connection between these two concepts."
+          ]
+        ],
+        "ft3b": [
+          [
+            "Which of the following is not a reason why proponents of democracy argue that it provides an essential platform for citizen participation in governance?"
+          ],
+          [
+            "Which of the following is an example of a majoritarian democracy?"
+          ],
+          [
+            "Which of the following is correct?"
+          ]
+        ],
+        "commercial": [
+          [],
+          [],
+          [
+            "You state that 'ongoing debate and critique' are crucial. Can you recall a specific example or case study you discussed in your essay that illustrated how this process directly led to a democratic system becoming more responsive to citizens' needs?",
+            "Your claim emphasizes a 'commitment to continuous learning and improvement.' In your essay, how did you define or illustrate what this commitment entails for democratic institutions or actors? Can you point to a particular argument you made about *how* this commitment manifests in practice?",
+            "Considering the specific examples or theoretical frameworks you presented, how does the necessity of 'continuous learning and improvement,' as you discussed it, connect to or build upon your earlier points about 'ongoing debate and critique' within the broader structure of your essay's argument?"
+          ]
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            0.2308,
+            0.0304,
+            -0.0032
+          ],
+          [
+            0.0452,
+            0.0887,
+            0.0614
+          ],
+          [
+            0.0732,
+            0.009,
+            -0.0099
+          ]
+        ],
+        "commercial": [
+          [],
+          [],
+          [
+            0.1005,
+            0.0079,
+            0.1178
+          ]
+        ],
+        "base3b": [
+          [
+            0.0211,
+            0.1066,
+            -0.0915
+          ],
+          [
+            0.036,
+            0.0751,
+            -0.0662
+          ],
+          [
+            -0.0464,
+            -0.017,
+            0.1278
+          ]
+        ],
+        "ft3b": [
+          [
+            -0.0955
+          ],
+          [
+            -0.0328
+          ],
+          [
+            0.4321
+          ]
+        ]
+      }
+    },
+    "0315a": {
+      "claims": [
+        {
+          "claim": "The Wednesbury principle remains an essential tool for ensuring that public authorities act within their powers and in accordance with the law.",
+          "source": "Notwithstanding these limitations, the Wednesbury principle remains a vital component of modern administrative law. The Wednesbury principle remains an essential tool for ensuring that public authorities act within their powers and in accordance with the law."
+        },
+        {
+          "claim": "While there may be criticisms of its limitations, the Wednesbury principle continues to provide an essential safeguard against arbitrary decision-making by public authorities.",
+          "source": "Ultimately, while there may be concerns about the limitations of the Wednesbury principle, it remains a fundamental component of constitutional and administrative law. While there may be criticisms of its limitations, it continues to provide an essential safeguard against arbitrary decision-making by public authorities."
+        },
+        {
+          "claim": "The Wednesbury principle remains a vital component of modern constitutional and administrative law, providing flexibility and adaptability in response to changing social and economic circumstances.",
+          "source": "The Wednesbury principle remains an essential tool for ensuring that public authorities act within their powers and in accordance with the law. Ultimately, the Wednesbury principle remains a vital component of modern constitutional and administrative law."
+        }
+      ],
+      "gen": {
+        "local8b": [
+          [
+            "What specific limitations on the Wednesbury principle did you mention in your essay, and how do these relate to its continued importance?",
+            "How does the Wednesbury principle connect to other components of modern administrative law that you discussed in your essay?",
+            "In your essay, you stated that the Wednesbury principle is an essential tool for ensuring public authorities act within their powers. What specific examples or evidence from your essay support this claim?"
+          ],
+          [
+            "What specific limitations of the Wednesbury principle did you mention in your essay as potential criticisms, and how do these limitations affect its utility as a safeguard against arbitrary decision-making?",
+            "In your essay, you stated that the Wednesbury principle is a 'fundamental component' of constitutional and administrative law. What evidence or examples from your research supported this claim, and how did you determine that it is essential to these areas of law?",
+            "You argued that the Wednesbury principle continues to provide an essential safeguard against arbitrary decision-making by public authorities. How does this point connect to the rest of your essay, particularly in terms of its implications for the balance of power between the government and individual citizens?"
+          ],
+          [
+            "How did you justify the claim that the Wednesbury principle is a 'vital component' of modern constitutional and administrative law, given that it was only described as an 'essential tool' earlier in your essay?",
+            "What specific examples or evidence from your essay support the idea that the Wednesbury principle provides flexibility and adaptability in response to changing social and economic circumstances?",
+            "How does the Wednesbury principle connect to the rest of your essay, particularly in relation to its role in ensuring public authorities act within their powers and in accordance with the law?"
+          ]
+        ],
+        "base3b": [
+          [
+            "Explain the significance of the Wednesbury principle as highlighted in your essay. How does it contribute to the concept of 'public authorities acting within their powers and in accordance with the law'?",
+            "In your view, what are the potential limitations of the Wednesbury principle as mentioned in your essay? How do these limitations affect its application in modern administrative law?",
+            "Discuss the role of the Wednesbury principle in ensuring compliance with the law by public authorities. How does it connect to the broader context of administrative law as discussed in your essay?"
+          ],
+          [
+            "Explain the term 'Wednesbury principle' as you defined it in your essay. How does this principle relate to the concept of arbitrary decision-making by public authorities?",
+            "In your opinion, what are the potential limitations of the Wednesbury principle according to your essay? Despite these limitations, why do you argue that it remains a fundamental component of constitutional and administrative law?",
+            "How did you connect the idea of the Wednesbury principle being a safeguard against arbitrary decision-making to the broader context of constitutional and administrative law as discussed in your essay?"
+          ],
+          [
+            "Could you elaborate on how the Wednesbury principle ensures that public authorities act within their powers and in accordance with the law? What specific scenarios or cases have you cited to support this?",
+            "In your view, what makes the Wednesbury principle particularly adaptable to changing social and economic circumstances? Can you provide examples from your essay where this adaptability is demonstrated?",
+            "How does the Wednesbury principle contribute to the overall integrity and adaptability of modern constitutional and administrative law? Please refer to a particular part of your essay where you discuss this connection."
+          ]
+        ],
+        "ft3b": [
+          [
+            "{\"questions\":[\"Which of the following is not a characteristic of the Wednesbury principle?\",\"Which of the following is not a limitation on the Wednesbury principle?\",\"Which of the following is not a case in which the Wednesbury principle was applied?\"]"
+          ],
+          [
+            "Which of the following is correct?",
+            "Which of the following is correct?",
+            "Which of the following is correct?"
+          ],
+          [
+            "Which of the following is not a characteristic of the Wednesbury principle?",
+            "Which of the following is not a reason why the Wednesbury principle is important?",
+            "Which of the following is not a way in which the Wednesbury principle is useful?"
+          ]
+        ],
+        "commercial": [
+          [
+            "You state that 'Notwithstanding these limitations, the Wednesbury principle remains a vital component'. What specific 'limitations' did you identify and discuss in your essay, and how did you argue that the principle remains essential *despite* these particular limitations?",
+            "To support your claim that Wednesbury remains an 'essential tool', what specific examples, case law, or practical applications did you present in your essay to demonstrate its continued relevance in ensuring public authorities act within their powers?",
+            "How does your detailed discussion of the Wednesbury principle's essentiality connect to and support the broader argument or thesis you are developing in your essay about modern administrative law?"
+          ],
+          [
+            "You state there are 'criticisms of its limitations.' Which specific limitations did you identify and discuss in your essay, and what particular examples or case law did you employ to illustrate these points?",
+            "In arguing that the Wednesbury principle 'continues to provide an essential safeguard,' what specific evidence or reasoning did you present to support its ongoing utility, particularly in light of the criticisms you acknowledged?",
+            "How does your discussion of the Wednesbury principle's role as an 'essential safeguard' connect to or inform the broader arguments you make in your essay regarding the balance between judicial oversight and executive discretion?"
+          ],
+          [
+            "You state that the Wednesbury principle provides 'flexibility and adaptability in response to changing social and economic circumstances.' What specific examples or case studies did you present in your essay to illustrate this particular aspect of the principle, and how did your analysis of these demonstrate its adaptability?",
+            "Beyond simply stating that Wednesbury is a 'vital component,' what specific arguments or lines of reasoning did you develop in your essay to demonstrate its continued vitality in *modern* constitutional and administrative law, especially considering the evolution of other judicial review grounds?",
+            "How did your discussion of Wednesbury's role in ensuring public authorities act 'within their powers and in accordance with the law' connect to your overall thesis or main argument in the essay? What specific connections did you draw between this function and the broader implications you discussed?"
+          ]
+        ]
+      },
+      "score": {
+        "local8b": [
+          [
+            0.0475,
+            -0.0376,
+            -0.032
+          ],
+          [
+            0.0274,
+            -0.0682,
+            -0.0776
+          ],
+          [
+            0.081,
+            0.1214,
+            0.015
+          ]
+        ],
+        "commercial": [
+          [
+            0.1842,
+            -0.032,
+            0.0342
+          ],
+          [
+            0.2187,
+            0.0629,
+            0.0165
+          ],
+          [
+            -0.1593,
+            0.0948,
+            0.1598
+          ]
+        ],
+        "base3b": [
+          [
+            0.0033,
+            0.0295,
+            0.0181
+          ],
+          [
+            0.0109,
+            -0.0051,
+            0.0383
+          ],
+          [
+            -0.0041,
+            0.0744,
+            0.1069
+          ]
+        ],
+        "ft3b": [
+          [
+            -0.1005
+          ],
+          [
+            0.4278,
+            0.3972,
+            0.4003
+          ],
+          [
+            -0.0255,
+            -0.0604,
+            -0.0397
+          ]
+        ]
+      }
+    }
+  },
+  "result": {
+    "essays": [
+      "0165a",
+      "0033d",
+      "0393b",
+      "0356e",
+      "0318c",
+      "0208b",
+      "0153a",
+      "6131p",
+      "0133a",
+      "6180m",
+      "6001b",
+      "0042a",
+      "0140d",
+      "0315a"
+    ],
+    "n_essays": 14,
+    "arms": {
+      "local8b": {
+        "n_questions": 126,
+        "n_essays_covered": 14,
+        "pooled_mean": 0.0309,
+        "pooled_ci95": [
+          0.0161,
+          0.0452
+        ]
+      },
+      "commercial": {
+        "n_questions": 105,
+        "n_essays_covered": 14,
+        "pooled_mean": 0.0242,
+        "pooled_ci95": [
+          0.0084,
+          0.0405
+        ]
+      },
+      "base3b": {
+        "n_questions": 126,
+        "n_essays_covered": 14,
+        "pooled_mean": 0.0414,
+        "pooled_ci95": [
+          0.028,
+          0.055
+        ]
+      },
+      "ft3b": {
+        "n_questions": 62,
+        "n_essays_covered": 14,
+        "pooled_mean": 0.1533,
+        "pooled_ci95": [
+          0.1048,
+          0.2022
+        ]
+      }
+    },
+    "paired": {
+      "ft3b_vs_commercial": {
+        "n_essays": 14,
+        "mean_diff_b_minus_a": 0.1383,
+        "diff_ci95": [
+          0.0847,
+          0.1924
+        ],
+        "t_p": 0.0003,
+        "wilcoxon_p": 0.0006,
+        "b_higher_in": 13
+      },
+      "ft3b_vs_base3b": {
+        "n_essays": 14,
+        "mean_diff_b_minus_a": 0.1227,
+        "diff_ci95": [
+          0.0677,
+          0.1741
+        ],
+        "t_p": 0.0008,
+        "wilcoxon_p": 0.0052,
+        "b_higher_in": 13
+      },
+      "commercial_vs_local8b": {
+        "n_essays": 14,
+        "mean_diff_b_minus_a": -0.0052,
+        "diff_ci95": [
+          -0.0245,
+          0.0139
+        ],
+        "t_p": 0.6249,
+        "wilcoxon_p": 0.6698,
+        "b_higher_in": 7
+      },
+      "ft3b_vs_local8b": {
+        "n_essays": 14,
+        "mean_diff_b_minus_a": 0.1332,
+        "diff_ci95": [
+          0.0871,
+          0.1807
+        ],
+        "t_p": 0.0001,
+        "wilcoxon_p": 0.0006,
+        "b_higher_in": 13
+      }
+    }
+  }
+}

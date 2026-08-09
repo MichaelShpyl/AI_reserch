@@ -1,0 +1,221 @@
+{
+  "design": "30 test AI essays; remove the top-3 occlusion sentences versus 3 random sentences (5 draws averaged), paired",
+  "mean_drop_top3": 0.0113,
+  "mean_drop_random3": -0.0008,
+  "ratio": -14.51,
+  "wilcoxon_p": 5e-06,
+  "top3_higher_in": 27,
+  "n": 30,
+  "per_essay": [
+    {
+      "id": "0300a",
+      "logodds_full": 7.88,
+      "n_sentences": 107,
+      "drop_top3": 0.0073,
+      "drop_random3_mean": -0.003
+    },
+    {
+      "id": "0388a",
+      "logodds_full": 7.857,
+      "n_sentences": 115,
+      "drop_top3": 0.0007,
+      "drop_random3_mean": -0.0035
+    },
+    {
+      "id": "0362c",
+      "logodds_full": 7.872,
+      "n_sentences": 30,
+      "drop_top3": 0.0042,
+      "drop_random3_mean": -0.0006
+    },
+    {
+      "id": "0036b",
+      "logodds_full": 7.834,
+      "n_sentences": 126,
+      "drop_top3": 0.018,
+      "drop_random3_mean": 0.0037
+    },
+    {
+      "id": "6052e",
+      "logodds_full": 7.894,
+      "n_sentences": 130,
+      "drop_top3": 0.0091,
+      "drop_random3_mean": 0.0034
+    },
+    {
+      "id": "6052c",
+      "logodds_full": 7.897,
+      "n_sentences": 228,
+      "drop_top3": 0.0072,
+      "drop_random3_mean": 0.0
+    },
+    {
+      "id": "3012b",
+      "logodds_full": 7.914,
+      "n_sentences": 185,
+      "drop_top3": 0.0286,
+      "drop_random3_mean": 0.0
+    },
+    {
+      "id": "3066c",
+      "logodds_full": 7.889,
+      "n_sentences": 109,
+      "drop_top3": 0.0101,
+      "drop_random3_mean": 0.0021
+    },
+    {
+      "id": "6204b",
+      "logodds_full": 7.881,
+      "n_sentences": 199,
+      "drop_top3": 0.0,
+      "drop_random3_mean": 0.0
+    },
+    {
+      "id": "3108a",
+      "logodds_full": 7.846,
+      "n_sentences": 103,
+      "drop_top3": 0.0156,
+      "drop_random3_mean": -0.0042
+    },
+    {
+      "id": "6028d",
+      "logodds_full": 7.913,
+      "n_sentences": 227,
+      "drop_top3": 0.0123,
+      "drop_random3_mean": 0.0001
+    },
+    {
+      "id": "3130a",
+      "logodds_full": 7.889,
+      "n_sentences": 168,
+      "drop_top3": 0.0129,
+      "drop_random3_mean": 0.0017
+    },
+    {
+      "id": "0362a",
+      "logodds_full": 7.808,
+      "n_sentences": 86,
+      "drop_top3": 0.0336,
+      "drop_random3_mean": -0.0014
+    },
+    {
+      "id": "0190b",
+      "logodds_full": 7.91,
+      "n_sentences": 171,
+      "drop_top3": 0.0109,
+      "drop_random3_mean": -0.0012
+    },
+    {
+      "id": "0079d",
+      "logodds_full": 7.839,
+      "n_sentences": 200,
+      "drop_top3": 0.0213,
+      "drop_random3_mean": 0.0
+    },
+    {
+      "id": "0061h",
+      "logodds_full": 7.894,
+      "n_sentences": 183,
+      "drop_top3": 0.019,
+      "drop_random3_mean": -0.0001
+    },
+    {
+      "id": "0137d",
+      "logodds_full": 7.881,
+      "n_sentences": 77,
+      "drop_top3": 0.0138,
+      "drop_random3_mean": 0.0017
+    },
+    {
+      "id": "0255b",
+      "logodds_full": 7.892,
+      "n_sentences": 339,
+      "drop_top3": 0.0172,
+      "drop_random3_mean": 0.0
+    },
+    {
+      "id": "6998c",
+      "logodds_full": 7.823,
+      "n_sentences": 159,
+      "drop_top3": -0.0032,
+      "drop_random3_mean": -0.0006
+    },
+    {
+      "id": "6084c",
+      "logodds_full": 7.872,
+      "n_sentences": 130,
+      "drop_top3": 0.0001,
+      "drop_random3_mean": -0.0008
+    },
+    {
+      "id": "0311b",
+      "logodds_full": 7.836,
+      "n_sentences": 191,
+      "drop_top3": 0.0,
+      "drop_random3_mean": -0.0036
+    },
+    {
+      "id": "3043a",
+      "logodds_full": 7.908,
+      "n_sentences": 367,
+      "drop_top3": 0.014,
+      "drop_random3_mean": 0.0
+    },
+    {
+      "id": "0238e",
+      "logodds_full": 7.904,
+      "n_sentences": 70,
+      "drop_top3": 0.0189,
+      "drop_random3_mean": -0.0019
+    },
+    {
+      "id": "6052d",
+      "logodds_full": 7.913,
+      "n_sentences": 234,
+      "drop_top3": 0.0,
+      "drop_random3_mean": 0.0
+    },
+    {
+      "id": "0049a",
+      "logodds_full": 7.876,
+      "n_sentences": 597,
+      "drop_top3": 0.0269,
+      "drop_random3_mean": -0.0011
+    },
+    {
+      "id": "6028c",
+      "logodds_full": 7.9,
+      "n_sentences": 120,
+      "drop_top3": 0.0099,
+      "drop_random3_mean": -0.0001
+    },
+    {
+      "id": "6008m",
+      "logodds_full": 7.799,
+      "n_sentences": 52,
+      "drop_top3": -0.0009,
+      "drop_random3_mean": -0.0074
+    },
+    {
+      "id": "0079c",
+      "logodds_full": 7.893,
+      "n_sentences": 356,
+      "drop_top3": 0.0084,
+      "drop_random3_mean": 0.0
+    },
+    {
+      "id": "6120a",
+      "logodds_full": 7.894,
+      "n_sentences": 200,
+      "drop_top3": 0.0186,
+      "drop_random3_mean": -0.0014
+    },
+    {
+      "id": "0358g",
+      "logodds_full": 7.844,
+      "n_sentences": 118,
+      "drop_top3": 0.0036,
+      "drop_random3_mean": -0.0051
+    }
+  ]
+}

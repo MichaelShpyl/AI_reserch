@@ -1,0 +1,81 @@
+{
+  "note": "identical cross-domain sample as m4_transfer Pass B; the two models differ only in the human-writer distribution of their training data",
+  "n_texts": 3000,
+  "seed": 42,
+  "balanced": {
+    "overall_accuracy": 0.8013,
+    "overall_f1": 0.8017,
+    "human_fpr_overall": 0.2007,
+    "per_domain": {
+      "arxiv": {
+        "accuracy": 0.6567,
+        "human_false_positive_rate": 0.4,
+        "machine_detection_rate": 0.7133
+      },
+      "peerread": {
+        "accuracy": 0.8633,
+        "human_false_positive_rate": 0.12,
+        "machine_detection_rate": 0.8467
+      },
+      "reddit": {
+        "accuracy": 0.9233,
+        "human_false_positive_rate": 0.04,
+        "machine_detection_rate": 0.8867
+      },
+      "wikihow": {
+        "accuracy": 0.72,
+        "human_false_positive_rate": 0.3167,
+        "machine_detection_rate": 0.7567
+      },
+      "wikipedia": {
+        "accuracy": 0.8433,
+        "human_false_positive_rate": 0.1267,
+        "machine_detection_rate": 0.8133
+      }
+    }
+  },
+  "natural": {
+    "overall_accuracy": 0.8003,
+    "overall_f1": 0.7935,
+    "human_fpr_overall": 0.1667,
+    "per_domain": {
+      "arxiv": {
+        "accuracy": 0.6667,
+        "human_false_positive_rate": 0.4433,
+        "machine_detection_rate": 0.7767
+      },
+      "peerread": {
+        "accuracy": 0.87,
+        "human_false_positive_rate": 0.1167,
+        "machine_detection_rate": 0.8567
+      },
+      "reddit": {
+        "accuracy": 0.8633,
+        "human_false_positive_rate": 0.0233,
+        "machine_detection_rate": 0.75
+      },
+      "wikihow": {
+        "accuracy": 0.78,
+        "human_false_positive_rate": 0.2,
+        "machine_detection_rate": 0.76
+      },
+      "wikipedia": {
+        "accuracy": 0.8217,
+        "human_false_positive_rate": 0.05,
+        "machine_detection_rate": 0.6933
+      }
+    }
+  },
+  "paired": {
+    "human_fpr_mcnemar": {
+      "balanced_only_wrong": 78,
+      "natural_only_wrong": 27,
+      "p": 0.0
+    },
+    "accuracy_mcnemar": {
+      "balanced_only_right": 118,
+      "natural_only_right": 115,
+      "p": 0.8958
+    }
+  }
+}

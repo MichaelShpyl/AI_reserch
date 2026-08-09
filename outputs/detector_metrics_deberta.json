@@ -1,0 +1,39 @@
+{
+  "model": "microsoft/deberta-v3-base",
+  "val": {
+    "eval_loss": 0.0254,
+    "eval_accuracy": 0.9951,
+    "eval_precision": 0.9903,
+    "eval_recall": 1.0,
+    "eval_f1": 0.9951,
+    "eval_runtime": 4.0902,
+    "eval_samples_per_second": 49.875,
+    "eval_steps_per_second": 3.178
+  },
+  "test": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "confusion_matrix_[hu,ai]x[pred_hu,pred_ai]": [
+      [
+        100,
+        0
+      ],
+      [
+        0,
+        100
+      ]
+    ]
+  },
+  "fairness_human_FPR_by_L1": {
+    "native": {
+      "n_human": 50,
+      "false_positive_rate": 0.0
+    },
+    "non_native": {
+      "n_human": 50,
+      "false_positive_rate": 0.0
+    }
+  }
+}
