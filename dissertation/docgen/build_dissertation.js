@@ -72,9 +72,13 @@ function repoLink(pathText) {
 function inlineRuns(text, base = {}) {
   const runs = [];
   let i = 0, buf = "", bold = false, code = false;
+  // Consolas runs wide, and a long unbreakable path in a justified paragraph stretches the line it
+  // sits on. Setting code a point smaller than the body narrows the paths without making them hard
+  // to read, and keeps the justification from opening up rivers of white space.
   const mk = (t, isCode, link) => new TextRun({
     text: t, bold: bold || base.bold, italics: base.italics,
-    font: isCode ? "Consolas" : ARIAL, size: base.size || 24,
+    font: isCode ? "Consolas" : ARIAL,
+    size: isCode ? Math.round((base.size || 24) * 0.9) : (base.size || 24),
     color: link ? "1F4E5F" : (base.color || INK),
     underline: link ? {} : undefined,
   });

@@ -2163,3 +2163,43 @@ evaluation programme.
 - Raw feature names were leaking into the percentile view (pos_PART, pos_PROPN). All part-of-speech
   features now have plain names, so the most unusual measurement on the worked essay reads
   "particles (to, not), 99th" rather than a column heading from a parquet file.
+
+### The dissertation now links to the code, line by line (10 August 2026)
+
+The problem this fixes: the write-up names about ninety files, and until today naming them was all
+it did. An examiner reading a claim about the detector had no way to get from the claim to the code
+without cloning the repository and going looking. So every file path the chapters print in a
+monospaced font is now a hyperlink into GitHub, and Section 1.10 explains the arrangement and gives
+the repository address.
+
+The links are generated from `git ls-files` at build time rather than typed. That was the point I
+spent longest on, because a link that 404s is worse than no link at all. Anything the text names
+that is not actually published stays plain text. The build prints what it skipped, which is
+currently four model checkpoint folders, so a genuine typo would show up in that list rather than
+sitting silently in the document. 99 links across 87 paths.
+
+That only works if the evidence is in the repository, and most of it was not. `outputs/*.json` is
+where every number in this document comes from, and none of it was committed. I checked all 44
+files for corpus text first, by taking every string over fifty characters and looking for it in the
+640 human essays; the only hits were the name of an organisation, which is not BAWE prose being
+redistributed. They are published now, under a million bytes in total, so any figure in the
+write-up can be checked against the file it came from. The worked verification guide for the AI
+essay goes in too. The one built from the human essay does not, because it quotes the student at
+length, and the `.gitignore` says so at the point where it excludes it rather than leaving the
+absence to look like an oversight.
+
+Section 4.11 is new: the web app, which has existed for three days and was written up nowhere. It
+covers what each stage shows and why, the two features that came out of using the thing rather than
+designing it (the side-by-side comparison and the counterfactual), and the correctness and speed
+problem, which pull in opposite directions. The seven screenshots are produced by
+`dissertation/presentation/make_webapp_figures.py`, which drives a headless Chrome through the real
+page over the DevTools protocol: load, click, wait for each stage to settle, capture. Scripting it
+took longer than taking screenshots by hand would have, and it means the figures cannot quietly go
+stale the next time the layout changes.
+
+Two small things the screenshots caught, which is the argument for looking at your own interface in
+print. The percentile column was writing "2th". And the sentence panel was headed "Sentence 2 of
+103" directly above a reaction rank of "1 of 103", which is two different denominators of 103 in
+adjacent lines and reads as a contradiction.
+
+The document is 111 pages and about 34,000 words, and the consistency audit is clean.

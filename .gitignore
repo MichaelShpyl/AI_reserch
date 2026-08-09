@@ -103,5 +103,5 @@ src/webapp/static/example_human.txt
 
 # ---- Editor / harness scratch ----
 .claude/
-# Throwaway Chrome profile the screenshot script creates
-dissertation/presentation/.chrome_profile/
+# Throwaway Chrome profiles the screenshot script creates
+dissertation/presentation/.chrome_*/

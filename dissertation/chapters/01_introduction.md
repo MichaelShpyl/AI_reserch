@@ -185,12 +185,12 @@ Everything described here was written for this project and is in one repository:
 
 **https://github.com/MichaelShpyl/AI_reserch**
 
-Every path this document prints in a monospaced font, such as `src/detection/train_detector.py` or
-`outputs/detector_metrics_clean.json`, is a live link to that exact file on GitHub. Clicking it
-opens the code or the result being discussed at that point in the text. The links are generated at
-build time from the repository's own file list rather than typed by hand, so a path that is named
-in the text but does not exist in the repository stays plain and is never dressed up as a link. If
-a path is not clickable it is because it is deliberately not published, and the reasons are set out
+Every path this document prints in a monospaced font is a live link to that exact file on GitHub.
+Clicking one opens the code or the result being discussed at that point in the text, so a claim and
+the evidence behind it are never more than a click apart. The links are generated at build time
+from the repository's own file list rather than typed by hand, which means a path that is named in
+the text but does not exist in the repository stays plain and is never dressed up as a link. If a
+path is not clickable it is because it is deliberately not published, and the reasons are set out
 below.
 
 The layout follows the pipeline. `src/data/` builds the corpus, `src/generation/` writes the
