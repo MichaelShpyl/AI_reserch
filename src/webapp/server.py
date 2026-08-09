@@ -95,6 +95,12 @@ def api_counterfactual(sub: Submission):
     return ps.counterfactual(_check(sub.text))
 
 
+@app.post("/api/percentiles")
+def api_percentiles(sub: Submission):
+    """Where this text sits in the distribution of the 640 real student essays, feature by feature."""
+    return ps.percentiles(_check(sub.text))
+
+
 @app.post("/api/questions")
 def api_questions(req: QuestionRequest):
     try:

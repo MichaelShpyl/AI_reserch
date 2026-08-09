@@ -2140,3 +2140,26 @@ evaluation programme.
   certainty that probability has no room left. Cutting the three most incriminating sentences does
   not rescue the submission, which is the clearest demonstration in the app that style is spread
   across a text rather than sitting in a few lines.
+
+### Compare, percentiles and question controls (9 August 2026)
+
+- The "bundled example is missing" error had the same cause as the earlier "server not reachable":
+  the page had been opened straight from disk, where fetch resolves against file:/// and every
+  request fails. Both files serve correctly over HTTP. The page now detects the file protocol on
+  load and says so in a banner rather than leaving the reader to guess that the server is broken.
+- Side-by-side comparison. Two submissions, the same models, verdicts and both component scores
+  next to each other. This exists because a score alone is hard to judge: running work you trust
+  beside work you are unsure about is the cheapest check on whether the detector is reacting to
+  the writing or to the subject. On the worked pair it reads 0.9572 flagged against 0.0234 not
+  flagged.
+- Percentiles against the 640 human essays, sorted most unusual first, with the middle 80 percent
+  shaded. This answers what the band could not: not whether the text is outside the normal range
+  but by how far. It also makes an honest point the summary hides, because the real student essay
+  is itself extreme on a couple of measures. The panel says plainly that one extreme measurement
+  means nothing, since one essay in twenty is in the top 5 percent of anything by definition, and
+  that several together are what the detector is responding to.
+- Question controls: number of claims, questions per claim, and which backend writes them, so the
+  local and commercial comparison from Chapter 8 can be run live rather than described.
+- Raw feature names were leaking into the percentile view (pos_PART, pos_PROPN). All part-of-speech
+  features now have plain names, so the most unusual measurement on the worked essay reads
+  "particles (to, not), 99th" rather than a column heading from a parquet file.

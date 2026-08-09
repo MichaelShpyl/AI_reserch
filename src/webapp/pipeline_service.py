@@ -23,6 +23,24 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 HYBRID = REPO / "models" / "hybrid"
 DETECTOR = REPO / "models" / "detector"
+FEATS_PATH = REPO / "data" / "processed" / "stylometric_features.parquet"
+
+# Feature names as a lecturer would say them, for the percentile view.
+PLAIN_LABELS = {
+    "mean_sent_len": "average sentence length", "std_sent_len": "sentence variation",
+    "sent_len_cv": "sentence length spread", "burstiness": "burstiness",
+    "ttr": "vocabulary richness", "root_ttr": "vocabulary richness (root)",
+    "hapax_ratio": "rare words", "mean_word_len": "average word length",
+    "punct_ratio": "punctuation density", "pos_NOUN": "nouns", "pos_VERB": "verbs",
+    "pos_ADJ": "adjectives", "pos_AUX": "auxiliary verbs", "pos_ADV": "adverbs",
+    "gpt2_ppl": "predictability", "n_words": "length in words", "n_sents": "number of sentences",
+    "pos_PART": "particles (to, not)", "pos_PROPN": "proper nouns (names)",
+    "pos_NUM": "numbers", "pos_PRON": "pronouns", "pos_DET": "determiners (the, a)",
+    "pos_ADP": "prepositions", "pos_CCONJ": "joining words (and, but)",
+    "pos_SCONJ": "linking words (because, although)", "pos_INTJ": "interjections",
+    "pos_SYM": "symbols", "pos_X": "other tokens", "pos_PUNCT": "punctuation",
+    "pos_SPACE": "spacing",
+}
 
 for sub in ("detection", "explainability", "question_gen"):
     p = str(REPO / "src" / sub)
@@ -209,6 +227,40 @@ def sentence_marks(text: str, top_k: int = 3) -> dict:
             "phrase_counts": counts,
             "detail": detail,
             "top": [{"index": int(i), "drop": round(float(drops[i]), 4)} for i in order[:top_k]]}
+
+
+def percentiles(text: str) -> dict:
+    """Where this submission sits in the real student distribution, feature by feature.
+
+    The habit card already shows the middle 80 percent as a band, which answers "inside or
+    outside". A percentile answers the sharper question a lecturer actually asks: outside by how
+    much? Computed against the 640 human essays only, because "typical student writing" is the
+    comparison that means anything here.
+    """
+    _ensure()
+    import pandas as pd
+    if "human_feats" not in _M:
+        df = pd.read_parquet(FEATS_PATH)
+        _M["human_feats"] = df[df["label"] == 0] if "label" in df.columns else df
+    human = _M["human_feats"]
+
+    norm = _M["normalize"](text)
+    feats = _M["stylometric_features"](norm, _M["nlp"])
+    out = []
+    for name, value in feats.items():
+        if name not in human.columns:
+            continue
+        col = human[name].dropna()
+        if col.empty:
+            continue
+        pct = float((col < value).mean() * 100)
+        out.append({"feature": name, "label": PLAIN_LABELS.get(name, name),
+                    "value": round(float(value), 4),
+                    "percentile": round(pct, 1),
+                    "human_median": round(float(col.median()), 4),
+                    "n_human": int(len(col))})
+    out.sort(key=lambda r: min(r["percentile"], 100 - r["percentile"]))
+    return {"features": out, "n_human_essays": int(len(human))}
 
 
 def counterfactual(text: str, k: int = 3) -> dict:
