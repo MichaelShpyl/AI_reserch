@@ -9,11 +9,14 @@
   --paper:#fbfaf8; --page:#fff; --ink:#20262d; --muted:#5b6770;
   --teal:#2b6777; --teal-soft:#dce9ec; --rust:#a63d2e; --amber:#d98e3b;
   --band:#e6e9ea; --line:#d8dcdf;
+  /* text that sits ON a teal fill: it has to flip with the theme, because the teal itself does */
+  --on-teal:#ffffff;
   --shadow:0 1px 2px rgba(32,38,45,.07), 0 8px 26px rgba(32,38,45,.08);
 }
 @media (prefers-color-scheme: dark){
   :root{ --paper:#151a20; --page:#1d232b; --ink:#e8e6e1; --muted:#9aa4ad; --teal:#7db4c2;
     --teal-soft:#23343b; --rust:#d98873; --amber:#e0a663; --band:#2a323b; --line:#333c46;
+    --on-teal:#12181d;
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 26px rgba(0,0,0,.35); }
 }
 *{box-sizing:border-box; margin:0}
@@ -44,7 +47,7 @@ textarea:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px colo
 .row{display:flex; align-items:center; gap:.7rem; margin-top:.7rem; flex-wrap:wrap}
 .btn{border:1.5px solid var(--line); border-radius:.45rem; padding:.5rem 1.1rem; font-weight:600;
   background:var(--page); transition:background .2s, border-color .2s}
-.btn.primary{background:var(--teal); border-color:var(--teal); color:#fff}
+.btn.primary{background:var(--teal); border-color:var(--teal); color:var(--on-teal); font-weight:700}
 .btn:disabled{opacity:.5; cursor:not-allowed}
 .btn.ghost{font-size:.85rem; padding:.4rem .8rem; color:var(--muted)}
 .count{font-size:.8rem; color:var(--muted); margin-left:auto}
@@ -56,7 +59,9 @@ textarea:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px colo
 .stages{display:grid; gap:1rem; margin-top:1.2rem}
 .stage{background:var(--page); border:1px solid var(--line); border-radius:.6rem;
   box-shadow:var(--shadow); overflow:hidden; opacity:0; transform:translateY(8px);
-  transition:opacity .4s, transform .4s}
+  transition:opacity .4s, transform .4s;
+  /* the header is sticky, so scrolling to a stage must leave room for it or the heading hides */
+  scroll-margin-top:4.6rem}
 .stage.on{opacity:1; transform:none}
 .stage h2{font-size:.98rem; font-weight:650; padding:.75rem 1.1rem; border-bottom:1px solid var(--line);
   display:flex; align-items:center; gap:.6rem}
@@ -114,6 +119,13 @@ textarea:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px colo
   background:var(--teal-soft); color:var(--teal); vertical-align:.08em}
 .notflag{border-left:3px solid var(--teal); background:var(--teal-soft); padding:.7rem .9rem;
   border-radius:.4rem; font-size:.9rem}
+
+/* Someone who has asked their system to reduce motion still needs every result, so nothing here
+   is hidden behind an animation: the stages appear at once and the bars sit at their final width. */
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important; animation:none !important}
+  .stage{opacity:1; transform:none}
+}
 </style>
 </head>
 <body>
@@ -292,9 +304,12 @@ function renderHabits(ex){
            ${esc(s)}</div>`).join("")}</div>`
     : "";
   body("s2").innerHTML = said + rows.map(r=>{
-    const lo=Math.min(r.human_p10,r.value), hi=Math.max(r.human_p90,r.value);
-    const pad=(hi-lo)*0.12 || Math.abs(hi)*0.12 || 1, a=lo-pad, b=hi+pad;
-    const nx=x=>((x-a)/(b-a)*100);
+    // Anchor the scale to the STUDENT distribution, not to this text. Scaling each row to its own
+    // min and max put every dot at the same spot whenever the value was the extreme, which is the
+    // usual case for a flagged essay and told the reader nothing about how far outside it sat.
+    const spread = (r.human_p90 - r.human_p10) || Math.abs(r.human_median) || 1;
+    const a = r.human_p10 - 1.5*spread, b = r.human_p90 + 1.5*spread;
+    const nx = x => Math.max(1.5, Math.min(98.5, (x - a)/(b - a)*100));
     return `<div class="strip">
       <div class="lab">${esc(r.label||r.feature)}</div>
       <div class="lane">

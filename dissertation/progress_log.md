@@ -2103,3 +2103,14 @@ evaluation programme.
 - The AI example ships with the repo since it is machine-written. The human one is BAWE and is
   gitignored, because that corpus is licensed for research and must not be redistributed. The app
   says so when the file is absent rather than failing.
+- Reviewed the app in a browser rather than only through the DOM, which found three things reading
+  the code had not. The habit chart was the real one: every dot sat at exactly 9.68 percent. That
+  was not a rendering fault but a scaling flaw, because each row was normalised to its own minimum
+  and maximum, and on a flagged essay the submission is always the minimum, so every dot pinned to
+  the same spot and the chart said nothing about how far outside the band each habit fell. The
+  scale is now anchored to the student distribution instead, so the band sits in the same place on
+  every row and the dots spread out properly: rare words is visibly the furthest outside.
+- In dark mode the primary button was white text on light teal, which reads as disabled. Added an
+  on-teal token that flips with the theme. Also added a reduced-motion rule, since results were
+  being revealed by a fade that a reader asking for less motion would never see complete, and a
+  scroll-margin so the sticky header stops covering a stage heading when the page scrolls to it.
