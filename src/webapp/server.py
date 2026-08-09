@@ -89,6 +89,12 @@ def api_marks(sub: Submission):
     return ps.sentence_marks(_check(sub.text))
 
 
+@app.post("/api/counterfactual")
+def api_counterfactual(sub: Submission):
+    """Delete the most-reacted-to sentences and re-score, against a random-removal control."""
+    return ps.counterfactual(_check(sub.text))
+
+
 @app.post("/api/questions")
 def api_questions(req: QuestionRequest):
     try:

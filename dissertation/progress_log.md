@@ -2114,3 +2114,29 @@ evaluation programme.
   on-teal token that flips with the theme. Also added a reduced-motion rule, since results were
   being revealed by a fade that a reader asking for less motion would never see complete, and a
   scroll-margin so the sticky header stops covering a stage heading when the page scrolls to it.
+
+### The app explains itself properly now (7 August 2026)
+
+- The privacy line said "Nothing is uploaded", which is a claim a reader cannot check on a page
+  that looks like a website. It now says the text never leaves the computer and then shows why: the
+  page is served from 127.0.0.1, every model is loaded in that same process, and the analysis still
+  runs with the network cable out. A claim about privacy should be verifiable, not asserted.
+- The sentence highlights were close to useless: hovering said only that removing the sentence
+  moved the score. Clicking one now opens an evidence panel with its reaction rank out of all
+  sentences, its percentile, its share of the total signal, its length against the submission's own
+  median, and every over-used phrase it contains with the count across the whole text. The reading
+  is scaled to the evidence, so a sentence worth 0.12 percent of the signal is described as proving
+  nothing on its own, and each panel ends with what to actually do: use it to choose where to start
+  the conversation, never quote it as proof.
+- Each writing habit now opens too, with four notes: what it measures, how it is computed, why it
+  is not proof, and what to ask. The predictability note says plainly that this is the feature most
+  likely to misfire on a second-language writer, which is the documented bias the whole project is
+  built around.
+- Added a counterfactual: delete the three sentences the detector reacted to most, re-score, and
+  compare against deleting three at random with a fixed seed. On the worked essay the log-odds fall
+  by a small amount, more than random but nowhere near enough to change anything, and all three
+  probabilities round to the same four decimals. Rather than hide that, the panel leads with
+  log-odds and says why probability cannot show the movement: the detector is far enough into
+  certainty that probability has no room left. Cutting the three most incriminating sentences does
+  not rescue the submission, which is the clearest demonstration in the app that style is spread
+  across a text rather than sitting in a few lines.

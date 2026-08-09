@@ -140,40 +140,117 @@ def explain(text: str, top_k: int = 5) -> dict:
 
 # ----------------------------------------------------------------- sentence evidence
 
+# Phrases a large model over-uses relative to student writing. Counted, never assumed: the app
+# reports how often each appears in THIS text so the reader can judge the evidence.
+TELL_PHRASES = [
+    "meanwhile", "furthermore", "moreover", "in contrast", "in conclusion", "additionally",
+    "highlights the", "showcases", "underscores", "delves", "it is important to note",
+    "plays a significant role", "a testament to", "quintessential", "nuanced",
+    "multidimensional", "rich tapestry", "thought-provoking", "respectively", "overall",
+]
+
+
+def _logodds_batch(texts: list[str]):
+    import numpy as np
+    torch = _M["torch"]
+    out = []
+    for i in range(0, len(texts), 8):
+        enc = _M["tok"](texts[i:i + 8], truncation=True, max_length=MAXLEN,
+                        padding=True, return_tensors="pt")
+        with torch.no_grad():
+            lg = _M["deberta"](**enc).logits
+        out.extend((lg[:, 1] - lg[:, 0]).tolist())
+    return np.array(out)
+
+
 def sentence_marks(text: str, top_k: int = 3) -> dict:
     """Which sentences the detector reacts to, by deleting each one and watching the score move.
 
     Reported in log-odds because the in-domain detector saturates near probability 1.0, where
-    single-sentence removals vanish below rounding (Section 5.8).
+    single-sentence removals vanish below rounding (Section 5.8). Each sentence also carries the
+    evidence a reader needs to judge the mark for themselves: its length against the essay's own
+    median, and any over-used phrases it contains, counted across the whole submission.
     """
     _ensure()
+    import re
     import numpy as np
-    torch = _M["torch"]
+    import statistics
     from sentence_occlusion import split_sentences
 
     norm = _M["normalize"](text)
     sents = split_sentences(norm)
     if len(sents) < 2:
-        return {"sentences": sents, "drops": [0.0] * len(sents), "top": []}
+        return {"sentences": sents, "drops": [0.0] * len(sents), "top": [], "detail": []}
 
-    def logodds(batch):
-        out = []
-        for i in range(0, len(batch), 8):
-            enc = _M["tok"](batch[i:i + 8], truncation=True, max_length=MAXLEN,
-                            padding=True, return_tensors="pt")
-            with torch.no_grad():
-                lg = _M["deberta"](**enc).logits
-            out.extend((lg[:, 1] - lg[:, 0]).tolist())
-        return np.array(out)
-
-    full = float(logodds([norm])[0])
+    full = float(_logodds_batch([norm])[0])
     variants = [" ".join(sents[:i] + sents[i + 1:]) for i in range(len(sents))]
-    drops = full - logodds(variants)
-    order = list(np.argsort(drops)[::-1][:top_k])
+    drops = full - _logodds_batch(variants)
+    order = list(np.argsort(drops)[::-1])
+    rank = {int(idx): r + 1 for r, idx in enumerate(order)}
+
+    words = [len(re.findall(r"[A-Za-z']+", s)) for s in sents]
+    median_len = statistics.median(words) if words else 0
+    whole = norm.lower()
+    counts = {p: len(re.findall(r"\b" + p.replace(" ", r"\s+") + r"\b", whole)) for p in TELL_PHRASES}
+    counts = {p: c for p, c in counts.items() if c}
+
+    detail = []
+    for i, s in enumerate(sents):
+        low = s.lower()
+        hits = [{"phrase": p, "in_text": counts[p]} for p in counts
+                if re.search(r"\b" + p.replace(" ", r"\s+") + r"\b", low)]
+        detail.append({"index": i, "rank": rank[i], "drop": round(float(drops[i]), 4),
+                       "words": words[i], "phrases": hits})
+
     return {"sentences": sents,
             "drops": [round(float(d), 4) for d in drops],
             "full_logodds": round(full, 3),
-            "top": [{"index": int(i), "drop": round(float(drops[i]), 4)} for i in order]}
+            "median_words": median_len,
+            "phrase_counts": counts,
+            "detail": detail,
+            "top": [{"index": int(i), "drop": round(float(drops[i]), 4)} for i in order[:top_k]]}
+
+
+def counterfactual(text: str, k: int = 3) -> dict:
+    """What actually happens to the verdict if the most-reacted-to sentences are deleted.
+
+    This is the question a lecturer asks next, and the answer is usually not the one they expect:
+    on the essays measured for this project the score barely moves, because the machine-likeness is
+    spread across the whole submission rather than sitting in a few sentences. Running it live on
+    the submission in front of them is more convincing than being told.
+    """
+    _ensure()
+    import numpy as np
+    from sentence_occlusion import split_sentences
+
+    norm = _M["normalize"](text)
+    sents = split_sentences(norm)
+    if len(sents) <= k + 1:
+        return {"available": False}
+
+    full = float(_logodds_batch([norm])[0])
+    variants = [" ".join(sents[:i] + sents[i + 1:]) for i in range(len(sents))]
+    drops = full - _logodds_batch(variants)
+    top = list(np.argsort(drops)[::-1][:k])
+
+    without_top = " ".join(s for i, s in enumerate(sents) if i not in top)
+    lo_top = float(_logodds_batch([without_top])[0])
+
+    rng = np.random.default_rng(42)          # fixed seed: the comparison must be reproducible
+    rand_los = []
+    for _ in range(5):
+        idx = set(rng.choice(len(sents), size=k, replace=False).tolist())
+        rand_los.append(float(_logodds_batch([" ".join(s for i, s in enumerate(sents) if i not in idx)])[0]))
+
+    sig = lambda z: 1 / (1 + np.exp(-z))
+    return {"available": True, "k": k,
+            "full_logodds": round(full, 3),
+            "after_top_logodds": round(lo_top, 3),
+            "after_random_logodds": round(float(np.mean(rand_los)), 3),
+            "prob_before": round(float(sig(full)), 4),
+            "prob_after_top": round(float(sig(lo_top)), 4),
+            "prob_after_random": round(float(sig(np.mean(rand_los))), 4),
+            "removed": [int(i) + 1 for i in top]}
 
 
 # ----------------------------------------------------------------- claims and questions

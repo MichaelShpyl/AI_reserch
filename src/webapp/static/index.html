@@ -103,9 +103,42 @@ textarea:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px colo
 .doc{font-family:Cambria,Georgia,serif; font-size:.88rem; line-height:1.75; max-height:340px;
   overflow-y:auto; padding:.4rem .2rem}
 .doc s5{display:inline; border-radius:2px}
-.h3{background:color-mix(in srgb,var(--rust) 25%,transparent); cursor:help}
-.h2{background:color-mix(in srgb,var(--rust) 14%,transparent); cursor:help}
-.h1{background:color-mix(in srgb,var(--rust) 7%,transparent); cursor:help}
+.h3{background:color-mix(in srgb,var(--rust) 25%,transparent); cursor:pointer}
+.h2{background:color-mix(in srgb,var(--rust) 14%,transparent); cursor:pointer}
+.h1{background:color-mix(in srgb,var(--rust) 7%,transparent); cursor:pointer}
+.doc s5.sel{outline:2px solid var(--rust); outline-offset:1px}
+
+/* the evidence panel that opens when a sentence is clicked */
+.inspect{border:1.5px solid var(--rust); border-radius:.5rem; padding:.85rem 1rem; margin-top:.9rem;
+  background:color-mix(in srgb,var(--rust) 4%,transparent)}
+.inspect h4{font-size:.8rem; text-transform:uppercase; letter-spacing:.07em; color:var(--rust);
+  margin-bottom:.5rem}
+.inspect .quoted{font-family:Cambria,Georgia,serif; font-size:.9rem; line-height:1.6;
+  border-left:2.5px solid var(--rust); padding-left:.75rem; margin-bottom:.7rem}
+.facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:.6rem; margin-bottom:.7rem}
+.fact{background:var(--page); border:1px solid var(--line); border-radius:.4rem; padding:.5rem .6rem}
+.fact .k{font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:700}
+.fact .v{font-family:Consolas,monospace; font-size:1.05rem; font-weight:700; margin-top:.15rem}
+.reads{font-size:.86rem; line-height:1.6}
+.reads b{color:var(--ink)}
+.ask{margin-top:.6rem; padding:.55rem .7rem; border-left:3px solid var(--teal);
+  background:var(--teal-soft); border-radius:.35rem; font-size:.85rem}
+.ask b{color:var(--teal)}
+.hint{font-size:.78rem; color:var(--muted); margin-bottom:.6rem}
+
+/* expandable habit detail */
+.strip.clickable{cursor:pointer; border-radius:.35rem}
+.strip.clickable:hover{background:color-mix(in srgb,var(--teal) 5%,transparent)}
+.habdet{grid-column:1/-1; font-size:.84rem; line-height:1.6; color:var(--ink);
+  border-left:3px solid var(--teal-soft); padding:.5rem .8rem; margin:.1rem 0 .5rem}
+.habdet .lbl{font-weight:700; color:var(--teal); font-size:.72rem; text-transform:uppercase;
+  letter-spacing:.06em; display:block; margin-top:.4rem}
+
+/* counterfactual */
+.cf{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:.8rem; margin:.6rem 0}
+.cfbox{border:1px solid var(--line); border-radius:.45rem; padding:.7rem .8rem; background:var(--page)}
+.cfbox .k{font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:700}
+.cfbox .v{font-family:Consolas,monospace; font-size:1.5rem; font-weight:700; margin-top:.2rem}
 
 /* claims */
 .claim{border:1.5px solid var(--line); border-radius:.5rem; padding:.75rem .9rem; margin-bottom:.7rem}
@@ -138,8 +171,13 @@ textarea:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px colo
 <main>
   <p class="lede">Paste a student submission and the system will score it, explain the score in
   named writing habits, mark the sentences it reacted to, and draw verification questions from the
-  student's own claims. <b>Nothing is uploaded.</b> Every model runs in this process, which is the
-  point: a submission is personal data.</p>
+  student's own claims.</p>
+  <p class="lede"><b>Your text never leaves this computer.</b> This looks like a website, so that
+  claim is worth checking rather than taking on trust. The page is served from
+  <span class="num">127.0.0.1</span>, which is this machine talking to itself, and every model is
+  loaded inside that same process. You can pull out the network cable and the analysis below still
+  runs. That matters because a student submission is personal data, and the argument for building
+  this pipeline on a laptop rather than an API rests on exactly this property.</p>
 
   <div class="editor">
     <textarea id="text" placeholder="Paste the submission here, or press Load an example."></textarea>
@@ -310,7 +348,7 @@ function renderHabits(ex){
     const spread = (r.human_p90 - r.human_p10) || Math.abs(r.human_median) || 1;
     const a = r.human_p10 - 1.5*spread, b = r.human_p90 + 1.5*spread;
     const nx = x => Math.max(1.5, Math.min(98.5, (x - a)/(b - a)*100));
-    return `<div class="strip">
+    return `<div class="strip clickable" data-h="${esc(r.label||r.feature)}">
       <div class="lab">${esc(r.label||r.feature)}</div>
       <div class="lane">
         <div class="bandbar" style="left:${nx(r.human_p10)}%; width:${nx(r.human_p90)-nx(r.human_p10)}%"></div>
@@ -330,25 +368,180 @@ function renderHabits(ex){
     highlighting people usually expect did not.</p>`;
   requestAnimationFrame(()=>document.querySelectorAll("#s2-b .dot")
     .forEach(d=>d.style.left=`calc(${d.dataset.x}% - 8px)`));
+
+  // Each habit opens up: what it measures, how it is computed, and what to say about it.
+  document.querySelectorAll("#s2-b .strip.clickable").forEach(st=>{
+    st.addEventListener("click", ()=>{
+      const open = st.nextElementSibling && st.nextElementSibling.classList.contains("habdet");
+      document.querySelectorAll("#s2-b .habdet").forEach(d=>d.remove());
+      if(open) return;
+      const h = HABITS[st.dataset.h] || HABITS._default;
+      const d = document.createElement("div");
+      d.className = "habdet";
+      d.innerHTML = `<span class="lbl">What it measures</span>${h.what}
+        <span class="lbl">How it is computed</span>${h.how}
+        <span class="lbl">Why it is not proof</span>${h.limit}
+        <span class="lbl">What to ask</span>${h.ask}`;
+      st.after(d);
+    });
+  });
 }
 
+// Plain-language notes per habit. These are the words a lecturer can actually repeat to a student,
+// which is the whole reason the explanation is at feature level rather than highlighted words.
+const HABITS = {
+  "predictability": {
+    what: "How surprising the wording is. A separate language model reads the text and measures how well it could have guessed each next word.",
+    how: "GPT-2 perplexity over the whole submission. A lower number means the text was easier to predict.",
+    limit: "Careful, plain writing is predictable too. This is the feature most likely to misfire on a second-language writer, whose vocabulary may be deliberately restrained, and that is a documented source of bias in detectors.",
+    ask: "Ask the student to explain one paragraph in different words. Someone who understands their own argument rephrases it easily."
+  },
+  "vocabulary richness": {
+    what: "How much the vocabulary varies rather than reusing the same words.",
+    how: "Type-token ratio, the count of distinct words against total words, computed on the cleaned text.",
+    limit: "A tightly focused essay on one narrow topic will naturally repeat its key terms. Low variety is not misconduct.",
+    ask: "Ask what alternatives they considered for a key term, and why they settled on the one they used."
+  },
+  "sentence variation": {
+    what: "Whether sentence lengths rise and fall the way human writing usually does.",
+    how: "Standard deviation of sentence length in words. Human writing tends to be uneven; generated text is often smooth.",
+    limit: "Heavily edited or template-following writing can also be even. Some disciplines teach a uniform style.",
+    ask: "Ask them to read a paragraph aloud. Writers usually hear their own rhythm and can say why a sentence is long or short."
+  },
+  "auxiliary verbs": {
+    what: "How often small helper verbs appear: is, has, can, will.",
+    how: "Counted by part-of-speech tagging and expressed as a share of all words.",
+    limit: "This is a subtle grammatical habit, not a meaningful one. It carries weight only alongside the others.",
+    ask: "Nothing directly. Use this one as supporting detail, never as the point you raise."
+  },
+  "rare words": {
+    what: "How often unusual, one-off words appear.",
+    how: "The share of words used only once that fall outside common English frequency lists.",
+    limit: "Subject-specific terminology can look either way depending on the field.",
+    ask: "Pick an unusual term from the text and ask what it means and why it was the right word."
+  },
+  _default: {
+    what: "A measurable property of the writing, independent of the topic.",
+    how: "Computed directly from the text and compared with the same measurement taken on hundreds of real student essays.",
+    limit: "No single habit decides anything. The verdict comes from several together, and each can have an innocent explanation.",
+    ask: "Ask the student to talk through the passage in their own words."
+  }
+};
+
+let MARKS = null;
+
 function renderMarks(m){
-  const s=m.sentences||[], d=m.drops||[];
-  const order=[...d.keys()].sort((a,b)=>d[b]-d[a]);
-  const rank=new Array(d.length); order.forEach((idx,r)=>rank[idx]=r+1);
-  const n=s.length;
+  MARKS = m;
+  const s=m.sentences||[], n=s.length;
+  const det = m.detail||[];
   const cls=r=> r<=Math.max(1,Math.round(n*0.03))?"h3"
             : r<=Math.max(3,Math.round(n*0.10))?"h2"
             : r<=Math.max(6,Math.round(n*0.25))?"h1":"";
-  body("s3").innerHTML = `<div class="doc">${s.map((t,i)=>{
-      const c=cls(rank[i]);
-      const tip=c?` title="Removing this sentence moves the score more than most. Reaction rank ${rank[i]} of ${n}."`:"";
-      return `<s5 class="${c}"${tip}>${esc(t)} </s5>`;}).join("")}</div>
-    <p class="why"><b>How this happens:</b> the system deletes one sentence at a time and watches
-    the score move, so the shading marks what the detector itself reacted to rather than what looks
-    suspicious to a person. Expect the marks to be spread out. On the essays measured for this
-    project, removing even the strongest sentence moved the score by about a tenth of a percent,
-    which is why the guide never claims a single guilty sentence.</p>`;
+  body("s3").innerHTML = `
+    <p class="hint">Shaded sentences are the ones the detector reacted to most.
+    <b>Click any of them</b> to see exactly what is known about it and what it is worth asking.</p>
+    <div class="doc" id="doc3">${s.map((t,i)=>{
+      const c = cls((det[i]||{}).rank || n);
+      return `<s5 class="${c}" data-i="${i}">${esc(t)} </s5>`;}).join("")}</div>
+    <div id="inspect"></div>
+    <div id="cfbox"></div>
+    <p class="why"><b>How this happens:</b> the system deletes one sentence at a time and re-scores
+    the whole submission, so the shading marks what the detector itself reacted to rather than what
+    looks suspicious to a person. The change is measured in log-odds, not probability, because the
+    detector sits so close to certainty on a flagged essay that probability rounds the movement
+    away. Expect the marks to be spread out rather than concentrated.</p>`;
+
+  document.querySelectorAll("#doc3 s5").forEach(el=>{
+    el.addEventListener("click", ()=>inspect(+el.dataset.i));
+  });
+  loadCounterfactual();
+}
+
+function inspect(i){
+  const m = MARKS; if(!m) return;
+  const d = (m.detail||[])[i] || {};
+  const n = m.sentences.length;
+  const pct = ((d.rank||n)/n*100);
+  const share = m.full_logodds ? (d.drop/m.full_logodds*100) : 0;
+  const lenDiff = d.words - (m.median_words||0);
+
+  document.querySelectorAll("#doc3 s5").forEach(el=>el.classList.remove("sel"));
+  const el = document.querySelector(`#doc3 s5[data-i="${i}"]`);
+  if(el) el.classList.add("sel");
+
+  // What the evidence actually supports, stated in proportion to its size.
+  let reads;
+  if(share >= 2)      reads = `Removing this one sentence takes away <b>${share.toFixed(1)}%</b> of the total signal, which is a lot for a single sentence.`;
+  else if(share >= 0.5) reads = `Removing it takes away <b>${share.toFixed(1)}%</b> of the total signal. Noticeable, but the verdict does not depend on it.`;
+  else                reads = `Removing it changes the score by <b>${share.toFixed(2)}%</b> of the total. On its own this sentence proves nothing, which is the honest reading.`;
+
+  const phraseBits = (d.phrases||[]).map(p =>
+    `<li>Uses <b>"${esc(p.phrase)}"</b>, which appears <b>${p.in_text}</b> time${p.in_text===1?"":"s"} across this submission. Large models lean on this phrasing more than students do, but a single use means little; a repeated one is worth noticing.</li>`).join("");
+
+  const lenBit = Math.abs(lenDiff) <= 2
+    ? `<li>At ${d.words} words it sits almost exactly on this submission's median of ${m.median_words}. Uniform sentence length is itself one of the flagged habits, so a sentence being unremarkable in length is part of the pattern rather than an exception to it.</li>`
+    : `<li>At ${d.words} words it is ${Math.abs(lenDiff)} ${lenDiff>0?"longer":"shorter"} than this submission's median of ${m.median_words}.</li>`;
+
+  document.getElementById("inspect").innerHTML = `
+    <div class="inspect">
+      <h4>Sentence ${i+1} of ${n}</h4>
+      <div class="quoted">${esc(m.sentences[i])}</div>
+      <div class="facts">
+        <div class="fact"><div class="k">Reaction rank</div><div class="v">${d.rank||"?"} of ${n}</div></div>
+        <div class="fact"><div class="k">Top percentile</div><div class="v">${pct.toFixed(0)}%</div></div>
+        <div class="fact"><div class="k">Share of signal</div><div class="v">${share.toFixed(2)}%</div></div>
+        <div class="fact"><div class="k">Length</div><div class="v">${d.words} words</div></div>
+      </div>
+      <div class="reads"><b>What this means.</b> ${reads}
+        <ul style="margin:.5rem 0 0 1.1rem; padding:0">${lenBit}${phraseBits}</ul>
+      </div>
+      <div class="ask"><b>What to do with this.</b> Do not read it out as proof. Use it to choose
+      where to start the conversation: ask the student to talk you through the point this sentence
+      makes, in their own words, and to say what evidence sat behind it. A student who wrote it can
+      do that immediately. The sentence is a place to begin, not a finding.</div>
+    </div>`;
+  document.getElementById("inspect").scrollIntoView({block:"nearest", behavior:"smooth"});
+}
+
+async function loadCounterfactual(){
+  const box = document.getElementById("cfbox");
+  if(!box) return;
+  box.innerHTML = `<p class="hint" style="margin-top:.9rem">Testing what happens if the strongest
+    sentences are deleted... <span class="spin"></span></p>`;
+  try{
+    const cf = await post("/api/counterfactual", {text: $("#text").value.trim()});
+    if(!cf.available){ box.innerHTML=""; return; }
+    const dTop = cf.full_logodds - cf.after_top_logodds;
+    const dRnd = cf.full_logodds - cf.after_random_logodds;
+    const ratio = dRnd ? (dTop/dRnd) : 0;
+    const sameProb = cf.prob_before.toFixed(3) === cf.prob_after_top.toFixed(3);
+    box.innerHTML = `
+      <div style="margin-top:1rem">
+        <div style="font-weight:650; font-size:.92rem; margin-bottom:.3rem">
+          So what happens if you delete the ${cf.k} strongest sentences?</div>
+        <p class="hint">Measured in log-odds, the detector's own scale. The probability is shown
+        underneath, and the gap between the two is itself the point.</p>
+        <div class="cf">
+          <div class="cfbox"><div class="k">Original</div><div class="v">${cf.full_logodds.toFixed(2)}</div>
+            <div class="k" style="margin-top:.2rem">p = ${cf.prob_before.toFixed(4)}</div></div>
+          <div class="cfbox"><div class="k">Without the top ${cf.k}</div>
+            <div class="v" style="color:var(--rust)">${cf.after_top_logodds.toFixed(2)}</div>
+            <div class="k" style="margin-top:.2rem">p = ${cf.prob_after_top.toFixed(4)}</div></div>
+          <div class="cfbox"><div class="k">Without ${cf.k} at random</div>
+            <div class="v" style="color:var(--muted)">${cf.after_random_logodds.toFixed(2)}</div>
+            <div class="k" style="margin-top:.2rem">p = ${cf.prob_after_random.toFixed(4)}</div></div>
+        </div>
+        <p class="reads">Deleting sentences ${cf.removed.join(", ")}, the ones the detector reacted
+        to most, costs <b>${dTop.toFixed(3)}</b> log-odds out of ${cf.full_logodds.toFixed(2)}.
+        Deleting ${cf.k} at random costs ${dRnd.toFixed(3)}${ratio>1.2?`, so the targeted removal does about ${ratio.toFixed(1)} times more than chance and the ranking is real`:``}.
+        ${sameProb?`In probability both land at <b>${cf.prob_after_top.toFixed(4)}</b>, unchanged from the original to four decimal places. That is not a bug in this panel: the detector is so far into certainty that probability has no room left to move, which is exactly why the ranking above is computed in log-odds instead.`:``}
+        </p>
+        <p class="reads" style="margin-top:.5rem">The lesson is the one worth taking away from this
+        page: cutting the three most incriminating sentences <b>does not rescue the submission</b>.
+        The machine-likeness is spread across the whole text, which is what a writing style is, and
+        it is why no sentence here should ever be quoted to a student as proof.</p>
+      </div>`;
+  }catch(e){ box.innerHTML = ""; }
 }
 
 function renderClaims(qs, det){
