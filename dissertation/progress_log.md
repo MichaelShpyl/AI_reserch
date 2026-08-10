@@ -2293,3 +2293,46 @@ better slide anyway: the document produced when nothing is wrong is the more imp
 
 The stale "three to eight times" also survived in the slide title for the hybrid, where I had fixed
 the script and the chapter but not the heading. Now three to five everywhere in the live sources.
+
+### Rehearsed, and measured rather than estimated (10 August 2026, evening)
+
+Every timing in the talk track up to now was words divided by an assumed speaking rate. That is a
+reasonable estimate and it is still an estimate. It treats a slide of short declarative sentences
+the same as a slide of one long clause, when the first takes noticeably longer to deliver because
+of where you breathe.
+
+So I rehearsed it properly. `dissertation/presentation/rehearse.py` speaks all sixty-eight scripts
+with the Windows speech engine, measures the audio, and reports the real duration against the
+allotted one. The engine is not a person, so its absolute rate is calibrated: the whole core path is
+scaled to 135 words a minute and what the measurement contributes is the per-slide distribution.
+Punctuation, sentence length and paragraph breaks all move that distribution and none of them show
+up in a word count.
+
+The first pass found the core path within nine seconds of its estimate, which was reassuring, and
+seven slides more than eight seconds out. Applying the measured durations everywhere brought all
+sixty-eight to within a couple of seconds of what they claim. Core 19 minutes 06 allotted, 18
+minutes 53 spoken, 67 seconds of slack against the hard twenty.
+
+Three things the method taught me about itself, which are in the tool now.
+
+Stage cues in square brackets were being spoken and timed. They are instructions to the presenter,
+not words to say, so they are stripped before synthesis. That also has to be true of the word count
+used for calibration, or the two disagree and every slide reads long. Getting that wrong once cost
+me twenty seconds of phantom overrun across the core path before I spotted the inconsistency.
+
+The first file in the batch was truncated, because the engine's start-up ran into it. A priming
+utterance fixes it, and until it was fixed the title slide measured seven seconds shorter than it
+is.
+
+And the engine mispronounces my surname badly enough to pause over it, which makes the title slide
+measure 1.76 times what its word count implies. Rather than let that mistime a slide, the tool now
+flags any slide where the measurement and the word count disagree by more than about a quarter, and
+says to trust the word count there. It flags exactly one, and it is that slide.
+
+Two rehearsal aids came out of the same data. `Rehearsal_core.mp3` is the core path spoken at the
+target pace with a gap at each slide change, for the first pass when you want to hear where the
+sentences breathe. `Rehearsal_Prompter.html` is a teleprompter built from the deck's own speaker
+notes: one script at a time in large type, the target for that slide, a bar that turns rust when
+you overrun, and a running clock against twenty minutes. Space, arrows, pause, restart, and a key
+to switch between the core path and all three tiers. Both are generated, so neither can go stale
+against the slides, and neither is committed.

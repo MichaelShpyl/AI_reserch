@@ -102,6 +102,9 @@ dissertation/presentation/Demo_Video_Scenario.md
 dissertation/presentation/PreFinal_Flow.md
 # Recorded demo (large binary, regenerate with make_demo_video.py)
 dissertation/presentation/Demo_Video_*.mp4
+# Rehearsal aids: regenerate with rehearse.py and make_prompter.py
+dissertation/presentation/Rehearsal_*.mp3
+dissertation/presentation/Rehearsal_Prompter.html
 dissertation/presentation/.demo_frames/
 
 # ---- Web app example texts: the human one is BAWE-derived, never publish it ----
