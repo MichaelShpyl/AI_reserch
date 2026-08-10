@@ -57,7 +57,7 @@ Target machine: Windows 11, RTX 4060 laptop GPU, Python 3.11.
     src/             pipeline source, one subpackage per component
     notebooks/       exploration only, not core logic
     outputs/         generated guides, figures, results
-    tests/           tests
+    tests/           24 tests, no GPU or corpus needed: `python -m pytest tests/ -q`
     dissertation/    the written document, drafted alongside the code
 
 ## Data

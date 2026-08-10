@@ -329,3 +329,37 @@ about local models to account: the page is served from `127.0.0.1`, every model 
 process, and the analysis still completes with the network disconnected. The case for running this
 pipeline on a laptop instead of an API rests on student submissions being personal data, and the
 interface is where that stops being an argument and becomes a property you can check.
+
+## 4.12 Testing the claims, not just the code
+
+A project whose argument is that a score is only worth the checks behind it should be able to say
+what checks its own claims. The suite in `tests/` is small on purpose and every test corresponds to
+a sentence somewhere in this document.
+
+Four of them are about provenance, because "an invented quotation is impossible by construction" is
+a strong thing to write down. A stand-in backend returns whatever the test wants, including a
+fabricated quotation and a citation to a sentence that does not exist. The tests assert that quoted
+text is always the submission's own sentence, that anything the model supplies as text is ignored,
+and that an out-of-range citation loses the claim rather than being clamped to the nearest real
+sentence. Clamping is the interesting failure: it would attach genuine student text to a claim it
+never came from, and it would look completely normal in the output.
+
+Two are about the corpus not being gameable. One reads the feature model's own source and fails if
+essay length ever re-enters the trained feature set, which is the single shortcut Section 4.6
+exists to close. The other recomputes the feature count from the code and fails if it drifts from
+what Appendix C claims, which is how the write-up's assertion of twenty-five features was caught.
+
+Three check the sample manifest, which is committed: that no student appears in two splits, that
+there are 640 essays with unique identifiers, and that all eight stratification cells are
+populated. An empty cell would not crash anything; it would quietly make the fairness breakdown in
+Section 6.2 meaningless.
+
+Four check the cleaning step that removed the markup artefact, including one that a naive tag
+pattern does not eat mathematical comparisons. That test is written around a string containing both
+a less-than and a greater-than sign, because a version with only the first would pass under a broken
+pattern too: there would be nothing to close the match on.
+
+The last point generalises. I checked these tests by breaking each claim on purpose and confirming
+the suite noticed, and one of them did not: the comparison test as first written could not fail for
+the reason it stated. A test that has never been seen to fail is not evidence that anything holds.
+It is the same argument this dissertation makes about detector scores, applied to my own work.

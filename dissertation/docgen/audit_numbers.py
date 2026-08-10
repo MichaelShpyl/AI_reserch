@@ -143,8 +143,6 @@ def claims_from_chapters(include_lit=False):
     """(source, line number, number, context) for every number in the prose."""
     out = []
     for f in sorted(CHAPTERS.glob("*.md")):
-        # Chapter 2 quotes other people's results by design, so none of its numbers should be in
-        # this project's output files and listing them all is noise.
         # Chapter 2 quotes other people's results by design and chapter 11 is the bibliography,
         # where every arXiv identifier and page range would be flagged. Neither belongs here.
         if f.name.startswith("11_"):

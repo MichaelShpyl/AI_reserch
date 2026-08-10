@@ -199,7 +199,7 @@ the attribution work, `src/argument_mining/` extracts claims and relations, `src
 holds both question-generation backends, `src/bloom/` the cognitive-level classifier,
 `src/evaluation/` the discrimination simulation and the judge panel, and `src/pipeline/` the
 end-to-end run and the guide assembler. `src/webapp/` is the interactive interface described in
-Section 4.11. Tests live in `tests/`.
+Section 4.11. `tests/` holds twenty-four tests that run without a GPU, a corpus or a network, so a reader who clones the repository can run them in under a second. They are not incidental coverage: each one encodes a claim this document makes, and Section 4.12 explains which.
 
 Results are worth a note of their own. Every number quoted in this document is read from a JSON
 file in `outputs/`, and those files are published. A reader who wants to check the headline

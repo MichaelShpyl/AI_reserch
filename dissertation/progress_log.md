@@ -2416,3 +2416,46 @@ reference deliberately to see the audit fail, it reported ALL CLEAN, and for a m
 like a bug in the check. It was not: I had edited a string that did not exist in the file I edited,
 so the test never happened. Injecting a break that was really there produced the failure. A test
 that cannot fail is not evidence, and neither is one that never ran.
+
+### Tests for the claims, not just the code (10 August 2026, last entry)
+
+`tests/` had eleven tests covering the two gates and the Krippendorff implementation. Good tests,
+but they cover components. Nothing tested the promises the document actually makes, which is an odd
+gap in a project whose argument is that a score is only worth the checks behind it.
+
+Thirteen more, in `tests/test_invariants.py`, each corresponding to a sentence somebody could ask
+me to back up. All of them run on committed artefacts: no weights, no corpus, no GPU, no network,
+under a tenth of a second, so anyone who clones the repository can run them.
+
+Four are about provenance, because "an invented quotation is impossible by construction" is a
+strong thing to have written down. A stand-in backend hands the extractor a fabricated quotation
+and a citation to a sentence that does not exist. The tests assert that quoted text is always the
+submission's own sentence, that text the model supplies is ignored, and that an out-of-range
+citation loses the claim rather than being clamped to the nearest real sentence. Clamping is the
+interesting failure: it would attach genuine student text to a claim it never came from, and it
+would look entirely normal in the output.
+
+Two read the feature model's own source. One fails if essay length ever re-enters the trained
+feature set, which is the single shortcut the corpus design exists to close. The other recomputes
+the feature count from the code and fails if it drifts from what Appendix C claims. That one would
+have caught this week's 25-against-23 error on its own.
+
+Three check the committed sample manifest: no student in two splits, 640 essays with unique ids,
+all eight stratification cells populated. An empty cell would not crash anything, it would quietly
+make the fairness breakdown meaningless.
+
+Four check the cleaning step that removed the markup artefact.
+
+Then I mutation-tested the lot, breaking each claim on purpose to watch the suite notice. Three of
+four caught it. The fourth did not, and the reason is worth keeping. The test asserting that a tag
+pattern does not eat "p < 0.05" was written around a string containing only a less-than sign. A
+greedy pattern matches from a "<" to the next ">", and with no ">" in the string there is nothing
+to close the match, so the test passed under a deliberately broken pattern. It could not fail for
+the reason it claimed. Rewritten around a string spanning both characters, it fails correctly.
+
+That is the same argument this dissertation makes about detector scores, turned on my own work. A
+test that has never been seen to fail is not evidence that anything holds. Section 4.12 says so in
+the write-up, because it is a methodological point rather than a housekeeping note.
+
+The document is 113 pages. Consistency audit clean, numeric audit at 390 of 408 numbers traceable
+with the remaining 18 all explainable, cross-references all resolving, 24 tests passing.
