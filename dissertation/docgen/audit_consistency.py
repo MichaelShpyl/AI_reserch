@@ -192,6 +192,41 @@ def check_figures() -> int:
     return bad
 
 
+def check_crossrefs() -> int:
+    """Every "Section 4.11" and "Appendix C" in the prose has to point at something that exists.
+
+    Sections get renumbered when a chapter grows. A reference that used to resolve and quietly
+    stopped is the kind of thing a reader finds and an author never does, because the author knows
+    where they meant to send you."""
+    bad = 0
+    sections, appendices = set(), set()
+    for f in sorted(CH.glob("*.md")):
+        for line in f.read_text(encoding="utf8").split(chr(10)):
+            m = re.match(r"^#{2,3}\s+(\d+(?:\.\d+)+)\s", line)
+            if m:
+                sections.add(m.group(1))
+            m = re.match(r"^##\s+Appendix\s+([A-Z]):", line)
+            if m:
+                appendices.add(m.group(1))
+
+    for f in sorted(CH.glob("*.md")):
+        for ln, line in enumerate(f.read_text(encoding="utf8").split(chr(10)), 1):
+            for m in re.finditer(r"Section\s+(\d+\.\d+(?:\.\d+)?)", line):
+                if m.group(1) not in sections:
+                    print(f"  [FAIL] {f.name}:{ln}: Section {m.group(1)} does not exist")
+                    bad += 1
+            if f.name.startswith("12_"):
+                continue
+            for m in re.finditer(r"Appendix\s+([A-Z])", line):
+                if m.group(1) not in appendices:
+                    print(f"  [FAIL] {f.name}:{ln}: Appendix {m.group(1)} does not exist")
+                    bad += 1
+    if not bad:
+        print(f"  {len(sections)} sections and {len(appendices)} appendices defined; "
+              "every cross-reference resolves")
+    return bad
+
+
 def main() -> int:
     print("== numbers vs result files ==")
     b1 = check_numbers()
@@ -199,7 +234,9 @@ def main() -> int:
     b2 = check_citations()
     print("== figures ==")
     b3 = check_figures()
-    total = b1 + b2 + b3
+    print("== cross-references ==")
+    b4 = check_crossrefs()
+    total = b1 + b2 + b3 + b4
     print(f"\n{'ALL CLEAN' if total == 0 else f'{total} problems'}")
     return 0 if total == 0 else 1
 

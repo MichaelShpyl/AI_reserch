@@ -148,7 +148,7 @@ validation split so the test set stays untouched, then applied zero-shot out of 
 In-domain, everything sits at the ceiling. Adding perplexity lifts the feature model from 0.985 to
 1.000 on the 200-essay test split, and the hybrid scores the same. Two essays' worth of movement
 separates all the arms, so these differences should not be over-read. One detail is worth keeping.
-Perplexity enters the feature model as its strongest single feature, first of twenty-five by mean
+Perplexity enters the feature model as its strongest single feature, first of twenty-four by mean
 absolute SHAP. That matches the literature's regard for it, and it completes the feature set the
 scope specified.
 

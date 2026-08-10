@@ -2378,3 +2378,41 @@ chapter, and so do the ranges quoted beside them. The 901 questions in the headl
 
 Section 4.10 now describes the audit, because a project arguing that a score is only worth the
 checks behind it should say what it checks its own write-up with.
+
+### The feature set, and a count that was wrong in three places (10 August 2026, later still)
+
+The numeric audit took me back into `src/detection/stylometric.py`, and reading the code against
+the write-up found something the audit itself could not: a claim about how many features there are.
+
+The extractor produces 25 columns. Two of them, `n_words` and `n_sents`, are dropped before
+training, deliberately, because a detector allowed to read essay length would learn the one
+shortcut the whole corpus design exists to close. That leaves 23 stylometric features, and GPT-2
+perplexity is added as a twenty-fourth input when the fused style model is built in Section 6.7.
+
+The document said 25 in two places and the talk said "twenty-five stylometric features plus GPT-2
+perplexity", which is wrong twice over: wrong count, and it implies perplexity is extra to 25 rather
+than one of 24. Chapter 6's claim that perplexity ranks "first of twenty-five by mean absolute
+SHAP" is now first of twenty-four, which is what `hybrid_fusion.py` actually computes over
+`feat_cols + ["gpt2_ppl"]`. An examiner can check that arithmetic now that the code and the results
+are public, which is exactly why it was worth finding.
+
+Two of the 23 features are worth a note. The SHAP analysis in Chapter 5 runs over the 23 without
+perplexity, which is why its top feature is word length rather than perplexity; the two SHAP runs
+answer different questions and it is easy to conflate them.
+
+The appendices never listed the features at all. Every explanation a lecturer reads is built on
+them, so a reader who asked what they were had nowhere to look. Appendix C now lists all 23 with
+what each one measures, and says plainly what is absent: essay length, dropped on purpose, and any
+topic feature, since the set contains no word identities at all. That absence is what lets Section
+3.6 argue that separating on these features is separating on style. The old Appendix C and D became
+D and E, and the repository map picked up `src/webapp/`, which it had never mentioned.
+
+I also folded a cross-reference check into `audit_consistency.py`. Sections get renumbered when a
+chapter grows, and a reference that used to resolve and quietly stopped is the sort of thing a
+reader finds and an author never does. 88 sections, 5 appendices, every reference resolves.
+
+Worth recording how that check was verified, because the first attempt proved nothing. I broke a
+reference deliberately to see the audit fail, it reported ALL CLEAN, and for a moment that looked
+like a bug in the check. It was not: I had edited a string that did not exist in the file I edited,
+so the test never happened. Injecting a break that was really there produced the failure. A test
+that cannot fail is not evidence, and neither is one that never ran.

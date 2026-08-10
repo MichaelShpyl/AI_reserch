@@ -41,7 +41,7 @@ Table: Model and training configuration for every trained component, with the se
 |---|---|---|
 | Detector (transformer) | DeBERTa-v3-base | 3 epochs, lr 2e-5, batch 4 x accum 4, max 512 tokens, fp16, seed 42, student-level splits |
 | Detector (comparison) | RoBERTa-base | identical settings |
-| Stylometric model | Gradient boosting | 25 features incl. GPT-2 perplexity; seed 42 |
+| Stylometric model | Gradient boosting | 23 stylometric features plus GPT-2 perplexity, 24 inputs; essay length excluded on purpose; seed 42 |
 | Hybrid fuser | Logistic regression | over the two model probabilities, fitted on the validation split |
 | Claim extractor | DeBERTa-v3-base, BIO | paragraph sequences, max 256 subwords, official 322/80 split, strict span scoring |
 | Relation classifier | DeBERTa-v3-base, pairs | within-paragraph ordered pairs, class-weighted loss, 3 epochs |
@@ -53,7 +53,43 @@ Table: Model and training configuration for every trained component, with the se
 Each experiment writes its full result to a JSON file under `outputs/`. All the numbers quoted in
 this document trace back to one of those files.
 
-## Appendix C: repository map
+## Appendix C: the stylometric feature set
+
+Every explanation a lecturer reads is built on these, so they are listed in full rather than
+summarised. They are computed by `src/detection/stylometric.py` using spaCy, and all of them are
+plain arithmetic over the text: nothing here needs a GPU or a trained model to reproduce.
+
+Table: The 23 stylometric features, with what each one measures and why it is in the set.
+
+| Feature | What it measures |
+|---|---|
+| `mean_sent_len` | Average sentence length in words |
+| `std_sent_len` | Spread of sentence length. Human writing varies more |
+| `sent_len_cv` | That spread relative to the mean, so it does not scale with length |
+| `burstiness` | (sigma - mu) / (sigma + mu). Negative means unusually regular |
+| `ttr` | Type-token ratio: distinct words over total words |
+| `root_ttr` | The same, divided by the square root of length, which removes most of the length dependence |
+| `hapax_ratio` | Share of words used exactly once. One-off vocabulary |
+| `mean_word_len` | Average word length in characters |
+| `punct_ratio` | Punctuation as a share of tokens |
+| `pos_NOUN`, `pos_VERB`, `pos_ADJ`, `pos_ADV` | Content-word densities |
+| `pos_PRON`, `pos_PROPN` | Pronoun and proper-noun density |
+| `pos_ADP`, `pos_DET`, `pos_AUX` | Prepositions, determiners, auxiliaries: the function-word core |
+| `pos_CCONJ`, `pos_SCONJ` | Coordinating and subordinating conjunctions, so sentence joining |
+| `pos_NUM`, `pos_PART`, `pos_PUNCT` | Numerals, particles, punctuation tags |
+
+Two things are deliberately absent. Essay length, as `n_words` and `n_sents`, is computed but
+dropped before training, because a detector allowed to read length would learn the one shortcut
+Section 4.6 exists to close. And there is no topic feature of any kind: the set contains no word
+identities, which is what lets Section 3.6 argue that separation on these features is separation on
+style.
+
+GPT-2 perplexity is added as a twenty-fourth input to the fused style model in Section 6.7, where
+it ranks first by mean absolute SHAP. It is kept separate here because it is the only feature that
+needs a language model to compute, and therefore the only one a reader cannot reproduce with a
+text file and a scripting language.
+
+## Appendix D: repository map
 
 Listing: Layout of the source tree, showing where each pipeline stage is implemented.
 
@@ -68,13 +104,14 @@ src/
   bloom/           Bloom's-level classifier
   evaluation/      discrimination simulation, comparisons, judges, quality audit
   pipeline/        the output assembler (Verification Interview Guide)
+  webapp/          the lecturer-facing interface of Section 4.11 (FastAPI, one page)
 outputs/           result JSONs, verification guides (generated)
 dissertation/      chapters, figures, decks, meeting records, this document's builder
 data/              raw and processed corpora (not committed; licences respected)
 models/            trained checkpoints and adapters (not committed)
 ```
 
-## Appendix D: the worked Verification Interview Guide
+## Appendix E: the worked Verification Interview Guide
 
 The complete guide for the worked submission (essay 3108a, AI-generated variant) is included with
 the electronic submission as `outputs/verification_guides/3108a_ai_guide.pdf`. It is the file the

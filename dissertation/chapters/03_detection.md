@@ -34,7 +34,8 @@ and the confusion matrix, plus a separate false-positive rate for native and non
 English writers, because wrongly flagging a non-native student as AI is the failure mode I
 most want to avoid. The second half of the hybrid, a stylometric feature model (perplexity,
 burstiness, vocabulary richness, part-of-speech mix), is built in Chapter 5, and the two
-halves are fused in Section 6.7. This chapter covers the transformer half on its own.
+halves are fused in Section 6.7. Appendix C lists all twenty-three features with what each one
+measures. This chapter covers the transformer half on its own.
 
 ## 3.4 The first result and why it needed checking
 
