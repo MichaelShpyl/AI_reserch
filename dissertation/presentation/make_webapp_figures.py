@@ -166,6 +166,54 @@ class Chrome:
             self.proc.terminate()
 
 
+def contact_sheet():
+    """One figure showing the four analysis stages at once, for the presentation.
+
+    The dissertation gets a figure per stage, because a reader can turn pages. A slide cannot, so
+    the deck needs the whole shape of the interface in a single image."""
+    from PIL import Image, ImageDraw, ImageFont
+
+    tiles = [("fig_webapp_verdict", "1. Is this likely AI-written?"),
+             ("fig_webapp_habits", "2. Why, in named writing habits"),
+             ("fig_webapp_percentiles", "3. How unusual, against 640 real essays"),
+             ("fig_webapp_questions", "4. Claims, and questions to ask")]
+    PAPER, TEAL, LINE = (250, 249, 246), (31, 78, 95), (214, 214, 208)
+    CELL_W, PAD, LABEL_H, GAP = 1500, 30, 52, 26
+
+    def fnt(size):
+        for n in ("calibrib.ttf", "calibri.ttf"):
+            try:
+                return ImageFont.truetype(n, size)
+            except OSError:
+                pass
+        return ImageFont.load_default()
+
+    cells = []
+    for name, label in tiles:
+        im = Image.open(FIGS / f"{name}.png").convert("RGB")
+        # Tall screenshots are cropped from the top rather than squashed, so the text stays legible.
+        im = im.resize((CELL_W, round(im.height * CELL_W / im.width)), Image.LANCZOS)
+        im = im.crop((0, 0, CELL_W, min(im.height, round(CELL_W * 0.45))))
+        cell = Image.new("RGB", (CELL_W, im.height + LABEL_H), PAPER)
+        d = ImageDraw.Draw(cell)
+        d.text((2, 4), label.upper(), font=fnt(30), fill=TEAL)
+        cell.paste(im, (0, LABEL_H))
+        d.rectangle([0, LABEL_H, CELL_W - 1, LABEL_H + im.height - 1], outline=LINE, width=3)
+        cells.append(cell)
+
+    rh = [max(cells[0].height, cells[1].height), max(cells[2].height, cells[3].height)]
+    W = PAD * 2 + CELL_W * 2 + GAP
+    H = PAD * 2 + rh[0] + rh[1] + GAP
+    out = Image.new("RGB", (W, H), PAPER)
+    for i, c in enumerate(cells):
+        x = PAD + (i % 2) * (CELL_W + GAP)
+        y = PAD + (0 if i < 2 else rh[0] + GAP)
+        out.paste(c, (x, y))
+    dest = FIGS / "fig_webapp_stages.png"
+    out.save(dest, optimize=True)
+    print(f"  wrote {dest.name}  {out.width}x{out.height}  ratio {out.height / out.width:.2f}")
+
+
 def app_is_up() -> bool:
     with socket.socket() as s:
         s.settimeout(1.0)

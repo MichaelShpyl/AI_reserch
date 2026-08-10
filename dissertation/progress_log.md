@@ -2203,3 +2203,49 @@ print. The percentile column was writing "2th". And the sentence panel was heade
 adjacent lines and reads as a contradiction.
 
 The document is 111 pages and about 34,000 words, and the consistency audit is clean.
+
+### The presentation is now a talk, not a slide deck (10 August 2026)
+
+The repository went public today, so the ninety-nine in-text links in the dissertation resolve for
+anyone. I checked five of them anonymously rather than assuming.
+
+Then I audited the deck properly and found the thing that would have cost me the most on the day.
+The core path was timed at 19 minutes 5 seconds, but the speaker scripts behind it added up to
+1,699 words. That is 89 words a minute. Nobody presents that slowly, so about seven minutes of a
+hard-limited, recorded talk was unwritten and would have been improvised in front of a camera. I
+rewrote every core script to fill its slot at about 135 words a minute. The core path is now 21
+slides, 18 minutes 47 seconds, 2,541 words, and every slide sits between 105 and 148 words a
+minute except the title, which is deliberately slow while people settle.
+
+Structural changes that came out of the same audit. The opening now plants the rule that runs
+through the project ("never trust a score you cannot explain, and never trust one you have not
+tried to break, and it caught three results I had written down as wins") at about one minute
+instead of leaving it to the closing slide, so the three retractions land as a promise being paid
+rather than three unrelated confessions. Two slides moved off the core path: the guide slide
+repeated the five habit numbers that slide 31 had shown ninety seconds earlier, and the v4 slide
+spent 42 seconds arguing against the headline result two slides after making it. The generic
+baseline that v4 slide existed to explain is now named and resolved in one sentence on the headline
+slide itself, which is where the dashed line is actually visible.
+
+Three new slides. The interface, which existed for three days and was in the deck only as a text
+cue written before it was built, is now four real screenshots. The evidence panel behind a marked
+sentence gets its own detail slide. And a reproducibility slide showing the dissertation page
+beside the GitHub file one of its links opens.
+
+Two defects worth recording. The v4 chart drew its annotation at y = 0.30, which is exactly where
+the generic-baseline line runs, so the dashed line struck the text out; that figure now has a
+generator that reads its numbers from `outputs/qg_v4_eval.json` and puts the annotation under the
+title. And the demoted slides kept their core styling, because the demotion was applied in the
+speaker-note function which runs after the corner marker is drawn. A slide the talk track says to
+skip that does not look skippable is worse than no marker at all.
+
+One number was wrong and it was mine. The write-up said the hybrid cuts false accusations of human
+writers "by a factor of three to eight". Dividing the per-domain rates in `outputs/hybrid_fusion.json`
+gives 3.3, 3.4, 3.9 and 4.9, so the top of that range does not exist. Corrected to three to five in
+Chapter 6, in the figure caption, in the cross-reference in Section 6.9, and in the talk. Publishing
+the results files two days ago is what made this findable, which is the argument for publishing them.
+
+Also written: a question-preparation crib with the ten questions most likely to come and the slide
+to jump to for each, and a shot-by-shot recording scenario for the demonstration video with the
+real stage timings measured on this laptop (verdict 2.4s, marks 30s, counterfactual 55s, questions
+95s from the button press).

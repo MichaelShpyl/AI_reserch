@@ -160,12 +160,12 @@ precision 0.82 at recall 0.72. The fusion balances the two (precision 0.80, reca
 accuracy from 0.753 to 0.794. The larger effect is on the human false-positive rate, which falls
 in every domain: from 0.79 to 0.61 on arXiv abstracts, 0.30 to 0.09 on peer reviews, 0.23 to 0.05
 on reddit, 0.41 to 0.10 on wikihow and 0.40 to 0.12 on wikipedia. In four of the five domains
-false accusations drop by a factor of three to eight. arXiv remains the hard case, better but not
-fixed. The style features drive the improvement, because hand-crafted features generalise across
+false accusations drop by a factor of between three and five. arXiv remains the hard case, better
+but not fixed. The style features drive the improvement, because hand-crafted features generalise across
 registers while the transformer's learned representation of "human" stays anchored to student
 essays.
 
-![Figure 6.6: The hybrid detector. In-domain (left) every arm is at the ceiling and the differences are within noise. Out of domain (right) the fusion barely moves F1 but changes the error mix. The human false-positive rate, the failure described in Section 6.3, falls in every domain, by three to eight times in four of the five.](../figures/fig_hybrid_fusion.png)
+![Figure 6.6: The hybrid detector. In-domain (left) every arm is at the ceiling and the differences are within noise. Out of domain (right) the fusion barely moves F1 but changes the error mix. The human false-positive rate, the failure described in Section 6.3, falls in every domain, by a factor of between three and five in four of the five.](../figures/fig_hybrid_fusion.png)
 
 This connects back to the mitigation plan in Section 6.4. Fusion does not solve domain shift, and
 the headline F1 barely moves, so it is not a robustness cure. It redistributes the remaining
@@ -216,8 +216,8 @@ reasonably matched subset (length ratio at least 0.5). The two agree
 The transformer of record generalises perfectly here. It flags 100 percent of both unseen
 generators' essays and none of the forty human sources. The hybrid behaves differently. It catches
 all of GPT-4o-mini but only 65 percent of Gemini's essays (64 percent on the length-matched subset
-of thirty-six). The style half, the same component that cut false accusations of humans by three
-to eight times in Section 6.7, reads over a third of Gemini's essays as human-like enough to pull
+of thirty-six). The style half, the same component that cut false accusations of humans by a
+factor of three to five in Section 6.7, reads over a third of Gemini's essays as human-like enough to pull
 the fused score under the threshold. This is the expected cost of a fusion built to err toward not
 accusing, now measured on its other side. A detector tuned to protect unusual human writing will
 extend some of that protection to a generator whose style drifts toward human. For deployment the

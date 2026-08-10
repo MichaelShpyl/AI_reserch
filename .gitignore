@@ -97,6 +97,8 @@ dissertation/presentation/final_demo/demo_sent_meta.json
 # ---- Personal talk guides / cribs (never published; kept local only) ----
 dissertation/presentation/*TalkGuide.md
 dissertation/presentation/PreFinal_TalkTrack.md
+dissertation/presentation/PreFinal_QA_Crib.md
+dissertation/presentation/Demo_Video_Scenario.md
 
 # ---- Web app example texts: the human one is BAWE-derived, never publish it ----
 src/webapp/static/example_human.txt
