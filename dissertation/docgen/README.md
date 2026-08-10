@@ -26,3 +26,27 @@ the source of truth is the markdown chapters plus this script).
   to populate the page numbers.
 - This is a working-draft generator. The chapter prose is to be rewritten in the author's own
   words before final submission, per the project writing rules.
+
+## Checking the document against the results
+
+Two audits, both run from the repository root.
+
+```bash
+python dissertation/docgen/audit_consistency.py
+python dissertation/docgen/audit_numbers.py --deck
+```
+
+`audit_consistency.py` checks a named list of headline figures, the citation set and its
+alphabetical order, and the figure numbering and cross-references. It is precise about the things
+it knows about.
+
+`audit_numbers.py` is the opposite. It pulls every number out of the chapters and, with `--deck`,
+the slides, pulls every value out of `outputs/`, and lists the numbers the text asserts that no
+results file supports. It cannot know what a number means, so the output is a list to read rather
+than a list of defects: sample sizes, values quoted from other people's papers and figures derived
+by addition all show up and are all fine. Known constants live in `CONSTANTS` at the top of the
+file, with a note saying what each one is, so the list stays short enough to actually read.
+
+The point of the second one is that the first only checks what somebody remembered to add to it. A
+summary claim about the hybrid detector was wrong in three places for weeks and no hand-kept list
+would ever have caught it.

@@ -180,6 +180,17 @@ other is the markup artefact itself. It shows why a strong result has to be stre
 before it is believed, and because the audit is scripted, anyone can rerun it and see the same
 thing. Both points feed into how I will build and check the remaining components.
 
+A third belongs here because it caught something. The write-up quotes several hundred numbers, and
+a hand-kept list of the important ones only contains the numbers somebody remembered to add to it,
+which is the wrong property for a safety net. So `dissertation/docgen/audit_numbers.py` works the
+other way round: it pulls every number out of the chapters and the slides, pulls every value out of
+the results files, and reports the ones the text asserts that no file supports. It cannot know what
+a number means, so the output is a list to read rather than a list of defects, and most of what it
+flags is legitimate: sample sizes, figures quoted from other people's papers, values derived by
+addition. What it does guarantee is that a mistyped or invented number cannot hide in thirty-four
+thousand words. Two of the corrections in this document came from it, including a summary claim
+about the hybrid detector that had been wrong in three places for several weeks.
+
 ## 4.11 The lecturer-facing interface
 
 Everything above is a set of scripts. A lecturer is not going to run scripts, and a component that

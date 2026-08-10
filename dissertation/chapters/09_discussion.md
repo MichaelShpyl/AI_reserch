@@ -91,8 +91,9 @@ kind of internal check described here.
 ## 9.3 Fairness and verification
 
 The fairness evidence influenced the design more than any other single result. Liang et al. (2023)
-found that detectors flag non-native English writers at wildly disproportionate rates, 61.3 percent
-against 5.1 percent for native writers, and my own robustness tests reproduced the mechanism behind
+found that detectors flag non-native English writers at wildly disproportionate rates, an average
+false-positive rate of 61.22 percent on TOEFL essays while the same detectors handled US
+eighth-grade essays almost perfectly, and my own robustness tests reproduced the mechanism behind
 that pattern at domain level. Human arXiv abstracts were falsely flagged 79 percent of the time,
 because dense academic prose looks, to these features, like machine text. The trigger in both cases
 is the same. Text that is fluent but low in variation reads as machine-written, whether it comes

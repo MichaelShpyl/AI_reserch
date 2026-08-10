@@ -2336,3 +2336,45 @@ notes: one script at a time in large type, the target for that slide, a bar that
 you overrun, and a running clock against twenty minutes. Space, arrows, pause, restart, and a key
 to switch between the core path and all three tiers. Both are generated, so neither can go stale
 against the slides, and neither is committed.
+
+### An audit that works the other way round (10 August 2026, late)
+
+The consistency audit checks a named list of headline figures. That list only contains numbers I
+remembered to put in it, which is precisely the wrong property for a safety net. The claim that the
+hybrid cuts false accusations "by a factor of three to eight" sat in three places for weeks and was
+wrong, and nothing caught it because nobody had thought to check it.
+
+So `dissertation/docgen/audit_numbers.py` works the other way round. It pulls every number out of
+the chapters and, with `--deck`, the slides. It pulls every value out of `outputs/`, recorded at
+several precisions because prose rounds and because a proportion in a file is often a percentage in
+a sentence. Then it lists the numbers the text asserts that no results file supports.
+
+It cannot know what a number means, so the output is a list to read rather than a list of defects.
+Getting it down to something readable took four passes. Thousands separators had to be part of the
+token, or "1,280 essays" was read as the number 280. Citation years had to be recognised by the
+company they keep. Trailing zeros had to be normalised, because a file holding 1.0 and 0.99 is
+quoted in prose as 1.00 and 0.990. Negative values had to be findable by magnitude, since the
+pattern does not capture a leading minus and every correlation in Chapter 8 is negative. The
+verification guides count as results and live in a subfolder. Design constants that no file holds,
+like the 640 essays and the seed, are listed at the top of the script with a note saying what each
+one is.
+
+From 643 raw hits down to 18, and all eighteen are legitimate: split sizes, figures quoted from
+other people's papers, the GPU model, two judge means computed from per-question scores, and the
+worked example's detection scores, which live in the guide rather than in a JSON. The deck comes
+back with none.
+
+It found one real defect. Chapter 2 cites Liang and colleagues at an average false-positive rate of
+61.22 percent, verified against the paper. Chapter 9 said 61.3 percent for the same finding, and
+added "against 5.1 percent for native writers", which Chapter 2 does not support: the paper's own
+framing is that the detectors handled the US essays almost perfectly. Chapter 9 now uses the
+verified figure and the framing Chapter 2 stands behind, and the same correction went into the
+opening of the talk, which had carried the unverifiable native-writer rate for a week.
+
+While checking, I recomputed the six judge means from `outputs/llm_judge.json` rather than trusting
+them: 4.81, 4.94, 3.67 on twelve questions and 4.63, 4.87, 3.56 on sixty. All six match the
+chapter, and so do the ranges quoted beside them. The 901 questions in the headline comparison is
+270 plus 204 plus 243 plus 184, which also checks out.
+
+Section 4.10 now describes the audit, because a project arguing that a score is only worth the
+checks behind it should say what it checks its own write-up with.
