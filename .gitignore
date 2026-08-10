@@ -99,6 +99,10 @@ dissertation/presentation/*TalkGuide.md
 dissertation/presentation/PreFinal_TalkTrack.md
 dissertation/presentation/PreFinal_QA_Crib.md
 dissertation/presentation/Demo_Video_Scenario.md
+dissertation/presentation/PreFinal_Flow.md
+# Recorded demo (large binary, regenerate with make_demo_video.py)
+dissertation/presentation/Demo_Video_*.mp4
+dissertation/presentation/.demo_frames/
 
 # ---- Web app example texts: the human one is BAWE-derived, never publish it ----
 src/webapp/static/example_human.txt

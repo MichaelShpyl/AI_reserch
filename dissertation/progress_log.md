@@ -2249,3 +2249,47 @@ Also written: a question-preparation crib with the ten questions most likely to 
 to jump to for each, and a shot-by-shot recording scenario for the demonstration video with the
 real stage timings measured on this laptop (verdict 2.4s, marks 30s, counterfactual 55s, questions
 95s from the button press).
+
+### A recorded demo, and three routes through one deck (10 August 2026, later)
+
+The demonstration video is recorded, and it is recorded by a script rather than by hand.
+`dissertation/presentation/make_demo_video.py` drives a headless Chrome through the real interface
+on 127.0.0.1, presses the button, and captures about eight frames a second while the pipeline runs.
+Every frame is what the page actually showed. Stretches where nothing moves are compressed to a
+short hold and each phase gets a floor on how long it stays up so its caption can be read. One
+minute fifty-six, three megabytes: the repository, the five stages on the AI-written essay, the
+evidence panel behind a marked sentence, the counterfactual, the questions with their provenance,
+the same pipeline on the real student's essay coming back not flagged, and the guide.
+
+The first take had the caption "0.0234, not flagged" over a verdict of 0.96. That was my script,
+not the app. It waited for the textarea to be non-empty before pressing Analyse, and the box
+already held the AI essay, so the wait returned before the fetch did and the AI essay was scored
+again while the human text arrived underneath it. It now waits for the text to change. I checked
+the app itself through the API first rather than assuming, and it was right all along.
+
+Then the deck. Michael asked for fifty minutes of material he can skip rather than twenty he can
+run out of, so it is now three tiers in one file, marked in the corner so the tier is obvious on
+screen and in a handout. Core, twenty-one slides, 18 minutes 47. Detail, thirty-three more, taking
+it to 40 minutes 27. Appendix, fourteen new slides after the close, 54 minutes 05.
+
+The detail scripts had the same defect the core scripts had: 71 words a minute, which is a note to
+self rather than something you can say. They are written out properly now. The appendix is new: how
+the whole thing fits in 8 GB with the fit-probe numbers, how the AI half of the corpus was written,
+why the split is by student, where the generalisation gap actually is, the balanced-against-natural
+control in full, every version of the question generator, the flagged and not-flagged guides side
+by side, the interface as a lecturer first meets it, the three checks the judge panel failed, where
+this sits in the literature, threats to validity, what six more months would buy, and a list of
+every results file with what it holds.
+
+Every script across all three tiers now sits between about 100 and 155 words a minute. That is
+measured, not estimated: the builder counts the words against the seconds and the checks are run
+after each build.
+
+Two errors caught while writing the appendix, both mine and both about describing a figure I had
+not looked at closely enough. `fig4_student_clustering` is a histogram of essays per student, not a
+style scatter, and it makes the case for splitting by writer rather than by essay. `fig_guide_pages`
+is the flagged and not-flagged guides side by side, not four pages of one guide. The second is the
+better slide anyway: the document produced when nothing is wrong is the more important half.
+
+The stale "three to eight times" also survived in the slide title for the hybrid, where I had fixed
+the script and the chapter but not the heading. Now three to five everywhere in the live sources.
