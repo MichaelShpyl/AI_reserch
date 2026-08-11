@@ -2496,3 +2496,57 @@ contradicting each other, which is worse than either version on its own.
 Final state for the pre-final presentation: 68 slides on three tiers, core 19 minutes 06 allotted
 against 18 minutes 55 measured, 64 seconds of slack. Dissertation 113 pages, 102 repository links.
 Consistency audit, numeric audit, cross-reference check and 24 tests all clean.
+
+### Chapter 9 rebuilt, and a third untraceable number (11 August 2026)
+
+The presentation moved to Thursday, which freed a day, so I took the weakest chapter. Chapter 9 was
+1,849 words interpreting Chapter 8's 5,719. Nothing in it was wrong, but a discussion chapter that
+short next to that much results is the one structural imbalance an examiner would notice. It is now
+3,737 words and in proportion with Chapters 2 and 7.
+
+Two sections are new and both are things the chapter genuinely lacked.
+
+**9.2, how these results sit against the published work.** The old chapter cited the literature in
+passing but never put a number of mine beside a number of theirs. Four now sit side by side, and I
+have written the comparison so it is most useful where it is least flattering. In-domain F1 of 0.990
+is not the contribution, because near-perfect in-domain scores are the norm in this field; the
+interesting figure is that Binoculars reports a false-positive rate of 0.01 percent while my hybrid
+sits at 61 percent on unfamiliar academic prose. My cross-domain drop from 0.990 to 0.790 looks mild
+beside Krishna's paraphraser collapsing DetectGPT from 70.3 percent to 4.6, and it flatters me for
+the wrong reason: I never tested against an adversary, only against distribution shift, and the
+second is strictly easier. The claim extractor's strict span-F1 of 0.63 sits below Stab and
+Gurevych's 0.867 for component identification, which is a different and easier measurement, so the
+honest reading is the direction of the ceiling rather than a deficit. And the judge result, which
+looks like an outlier against Zheng's 80 percent human agreement, is the same phenomenon Feuer and
+Norman document at much larger scale.
+
+**9.7, what I would do differently.** Four things: build the audit first, test against an
+adversarial paraphraser from the start, count the available labels before choosing a classifier, and
+fix the claim set from the first comparison rather than the third. The last one is the honest
+version of a good result. That most of the commercial advantage turned out to be claim selection is
+a finding, but it arrived by accident after two designs that measured something other than what I
+intended.
+
+The limitations section is now sorted by what each limitation threatens, because a sample-size worry
+and a construct worry do not have the same remedy. Two absences are named rather than left implied:
+the detector has never seen an adversarial paraphrase, and nobody but me has ever run the pipeline,
+so every usability claim rests on design argument rather than observation. Section 9.4 also gained
+the fairness question this project cannot answer, which is that an interview format advantages
+students fluent in spoken English, the same group the detector already treats unfairly. Moving the
+evidential weight from a detector to a conversation removes one bias and may introduce another.
+
+Checking the new chapter turned up a third number of the same kind as the previous two. Attack
+relations were described as "0.7 percent of pairs" in three places, and the results file gives 42 of
+4,922 test pairs, which is 0.85 percent. I could not trace 0.7 to anything, so all three now state
+the count the file supports. Every other new claim was checked against a results file before it went
+in: the abstain band moving accuracy from 0.79 to 0.88 while the false-accusation rate holds around
+0.18, the in-domain fairness split of 0 of 50 against 2 of 50, the hybrid's per-domain reduction
+factors of 3.3 to 4.9, and the stylometric model returning an identical F1 across five seeds.
+
+One error the automatic checks could not catch. I wrote a forward reference to Section 9.6 for the
+adversarial-paraphrase point when the section is 9.7. The cross-reference audit passed it, correctly,
+because 9.6 exists. An audit that verifies a target exists cannot verify it is the right target, and
+that is worth remembering before trusting a clean run too far.
+
+The document is 118 pages. All four checks clean: consistency, numbers, cross-references and 24
+tests.

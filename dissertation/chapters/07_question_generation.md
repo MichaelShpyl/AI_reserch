@@ -170,7 +170,8 @@ or no direct link, trained with class weights on the official split. The results
 data's imbalance (Figure 7.3). Supports-links are learned well, F1 0.75 with recall 0.80, which
 sits where the corpus literature puts link identification when component boundaries are given.
 Unlinked pairs score 0.95. Attacks are not learned at all (F1 0.0), and the cause is the label
-supply: attack relations are 0.7 percent of candidate pairs, about the same starvation that capped
+supply: attack relations are 42 of the 4,922 test pairs, under one percent, about the same
+starvation that capped
 the Bloom classifier's smallest classes. The macro-F1 of 0.57 against a 0.30 majority baseline is
 therefore fairly computed but slightly misleading in both directions, pulled down by a class with
 almost no training signal and pulled up by an easy one. The supports-F1 is the informative number. For the guide, the
@@ -178,7 +179,7 @@ practical use is ordering. Knowing which premises support which claim tells the 
 evidence to probe first. The question generator itself only needs the claims, so this completes the
 scope's argument-mining specification without changing the pipeline's behaviour.
 
-![Figure 7.3: Relation classification on the official Persuasive Essays test split, per class. Supports-links reach F1 0.75 with gold components; attack relations, 0.7 percent of pairs, are unlearnable from this corpus, the same label-starvation pattern as the Bloom classifier's smallest classes.](../figures/fig_relation_classifier.png)
+![Figure 7.3: Relation classification on the official Persuasive Essays test split, per class. Supports-links reach F1 0.75 with gold components; attack relations, 42 of 4,922 pairs, are unlearnable from this corpus, the same label-starvation pattern as the Bloom classifier's smallest classes.](../figures/fig_relation_classifier.png)
 
 ## 7.7 The assembled guide
 
