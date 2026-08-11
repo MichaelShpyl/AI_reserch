@@ -227,9 +227,10 @@ rather than trusted on its own.
 
 Fairness was one of the motivations for this project. Liang et al. (2023) tested seven widely used
 GPT detectors on 91 human-written TOEFL essays and 88 US eighth-grade essays. The detectors handled
-the US essays almost perfectly but misclassified more than half the TOEFL essays as AI-generated, an
-average false-positive rate of 61.22 percent, with 18 of the 91 flagged unanimously by all seven and
-97.8 percent flagged by at least one. Two details of that study matter for the design here. The
+the US essays almost perfectly, at an average false-positive rate of about 5 percent, but
+misclassified more than half the TOEFL essays as AI-generated, an average false-positive rate of
+61.22 percent, with 18 of the 91 flagged unanimously by all seven and 97.8 percent flagged by at
+least one. Two details of that study matter for the design here. The
 unanimously flagged essays had significantly lower perplexity, and prompting a model to enrich the
 word choice of those same essays cut the average false-positive rate from 61.22 percent to 11.77
 percent. So the detectors were not recognising machine authorship at all. They were responding to

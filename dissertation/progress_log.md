@@ -2459,3 +2459,40 @@ the write-up, because it is a methodological point rather than a housekeeping no
 
 The document is 113 pages. Consistency audit clean, numeric audit at 390 of 408 numbers traceable
 with the remaining 18 all explainable, cross-references all resolving, 24 tests passing.
+
+### A visual pass over all 68 slides (10 August 2026, final entry)
+
+I had never actually looked at every slide rendered. The audit workflow's legibility pass died on a
+spend limit weeks ago and I had been checking slides in ones and twos ever since. So: all 68, as
+contact sheets first and then individually wherever something looked off.
+
+The finding was uniform rather than dramatic. The figure box in the deck builder was set to 3.9 by
+10.6 inches on a 13.33 by 7.5 slide, which left roughly a third of every chart slide empty. Nine
+slides also carried their own smaller overrides from earlier tuning, including the headline result,
+so the single most important figure in the talk was one of the smallest on screen. Raising the
+default to 4.4 by 11.6 and removing the nine overrides makes every figure about thirteen percent
+larger, and the geometry check says the lowest edge on any slide is now 6.82 inches of 7.5. Nothing
+crowds an edge and nothing overflows.
+
+Two figures stay small because they are portrait: the discipline-imbalance chart, whose labels are
+genuinely too small to read from a seat, and the confusion matrix, whose four numbers are large
+enough anyway. Both are detail slides where the caption carries the point and I am speaking over
+them.
+
+The pass also caught something no text audit could. The problem slide's figure shows bars at 61
+percent and 5 percent, and earlier this session I had removed "about 5 percent for native writers"
+from Chapter 9 and from the talk as unverifiable. That left the slide asserting a number the prose
+no longer supported. Checking `dissertation/litreview_sources.md`, which records what was verified
+against the papers, both figures are there: 61.3 percent for TOEFL essays and about 5.1 percent for
+native writers. My correction had over-reached. The native rate now appears once, in Chapter 2,
+where the study is described, and Chapter 9 and the talk carry the comparison again. Chapter 2's
+more precise 61.22 stands as the TOEFL figure.
+
+Worth recording as a lesson rather than a fix. Deleting an unsourced number felt like the careful
+move and it was the wrong one, because the source existed and I had not looked hard enough for it.
+Being too quick to delete is its own kind of error, and it left the slides and the prose
+contradicting each other, which is worse than either version on its own.
+
+Final state for the pre-final presentation: 68 slides on three tiers, core 19 minutes 06 allotted
+against 18 minutes 55 measured, 64 seconds of slack. Dissertation 113 pages, 102 repository links.
+Consistency audit, numeric audit, cross-reference check and 24 tests all clean.
