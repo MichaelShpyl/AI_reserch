@@ -100,6 +100,7 @@ dissertation/presentation/PreFinal_TalkTrack.md
 dissertation/presentation/PreFinal_QA_Crib.md
 dissertation/presentation/Demo_Video_Scenario.md
 dissertation/presentation/PreFinal_Flow.md
+dissertation/presentation/Presentation_Day_Brief.md
 # Recorded demo (large binary, regenerate with make_demo_video.py)
 dissertation/presentation/Demo_Video_*.mp4
 # Rehearsal aids: regenerate with rehearse.py and make_prompter.py
