@@ -17,7 +17,8 @@ guide. The guide's first page frames what follows as evidence for a conversation
 not an accusation, and the rest of the design takes the same position.
 
 Every stage was evaluated, and the evaluations are what make this answer credible. In domain the
-detection is excellent, an F1 of 0.990 with a bootstrap interval of roughly [0.97, 1.00]. The
+detector reaches F1 0.990, with a bootstrap interval of roughly [0.97, 1.00]. Section 9.2 explains
+why that figure is the least interesting one here. The
 detector also transfers across unseen generators at 0.97. Across text domains it degrades to 0.79,
 and it degrades in the direction that matters most, by falsely flagging human academic writing. A
 detector that holds up in the setting it was trained on and falls away outside it is the pattern the
@@ -109,29 +110,37 @@ occasions on which that measurement contradicted a result I had already written 
 
 ## 9.3 What the internal checks caught
 
-The project's thesis is that unexplained scores cannot be trusted. Three of my own scores
-demonstrated the point, and the checks that caught them are among the most useful results in the
-dissertation.
+The project's thesis is that unexplained scores cannot be trusted. Three of my own headline
+numbers demonstrated the point, and the checks that caught them are among the most useful results
+in the dissertation.
 
-The first case was the fine-tune artifact. The v1 adapter posted a discrimination score four times
+The first was the detector that scored a perfect 100 percent, covered in Section 3.4. A rule using
+nothing but leftover corpus markup reached 92.5 percent on the same text, which located the score
+in how the corpus had been exported rather than in how the essays were written. Cleaning both
+classes and retraining put the honest figure at 0.990.
+
+The second was the fine-tune artifact. The v1 adapter posted a discrimination score four times
 its base model, with non-overlapping confidence intervals, and for about an hour it looked like the
 headline result of the project. Reading the actual output showed 95 percent degenerate
 multiple-choice stems. The audit then showed that those stems win the metric, because a contentless
 question makes the source-aware and source-blind answers diverge at random.
 
-The second case was the judge panel. Three commercial judges, the validation the scope called for,
+The third was the judge panel. Three commercial judges, the validation the scope called for,
 produced ratings that neither agree with each other (Krippendorff's alpha of -0.25) nor track the
 objective measure. That LLM judges carry position, verbosity and self-enhancement biases is
 documented (Zheng et al., 2023); what this study adds is a case where the panel agrees with itself
 and still points away from the measured truth, which is the harder failure to notice. Rerunning the
 panel at sixty questions made the verdict firmer. At sixty all three judges agree with each other in
 rank, none correlates positively with the simulation, and the two funded ones anti-correlate
-significantly. Rubric ratings measure how good a question looks. The panel study stands as a
+significantly. What a rubric measures is how a question reads, and this project needed to know
+whether it works, which turns out to be a different property. The panel study stands as a
 replicated negative result.
 
-The third case was quieter but had the same shape. Ranking the fine-tunes by raw discrimination
-would have picked v2, whose terse factual one-liners are not verification questions at all, over v3,
-whose output is what the product needs.
+A fourth case was quieter and had the same shape. Ranking the fine-tunes by raw discrimination
+alone would have picked v2, whose terse factual one-liners are not verification questions at all,
+over v3, whose output is what the pipeline needs. I count three rather than four because that one
+was caught before anything had been written down, which is the difference between a near miss and a
+retraction.
 
 One methodological posture covers all three cases, and it is built into the pipeline now rather than
 left as advice. Every automatic score is anchored to something it cannot game. The judges are
@@ -179,9 +188,10 @@ by a label in a corpus, and the arXiv result is the same mechanism showing up wh
 no fairness label at all.
 
 The discrimination simulation made clear what such questions have to look like. Its central finding
-is that content-naming questions are answerable from general knowledge. Good verification questions
-instead force the student to reconstruct their own reasoning, name their own evidence, and show how
-their own argument fits together. That finding held in every later experiment. I rewrote the
+is that content-naming questions are answerable from general knowledge. A good verification question does the
+opposite. It asks why one example was chosen over another, what a phrase in the third paragraph was
+doing, or how an objection raised in the middle connects to the conclusion. None of that is
+answerable from general knowledge, because none of it is general. That finding held in every later experiment. I rewrote the
 generation prompt around it and built the v3 training data on it, and it explains why v2 and v3 rank
 the way they do on the raw metric. It also sets a limit on what the simulation can measure. The
 context-blind model is a much stronger stand-in than a student who submitted work they do not
@@ -250,10 +260,11 @@ is in what the lecturer is asked to defend. Defending a percentage means defendi
 defending a question drawn from the student's own third paragraph means asking the student about
 their own third paragraph, which is something a lecturer is already qualified to do.
 
-**For an institution**, three of the results carry direct consequences. Detectors, including good
-ones, must not be pointed at text from domains they were not trained on, and any deployment needs
+**For an institution**, three of the results carry direct consequences. First, detectors,
+including good ones, must not be pointed at text from domains they were not trained on, and any deployment needs
 domain checks, calibrated thresholds and an abstain band, because the failure mode is false
-accusation and it lands unevenly. The local-versus-commercial result removes a dependency: models
+accusation and it lands unevenly. Second, the local-versus-commercial result removes a
+dependency: models
 that run on a single consumer laptop matched and then beat a commercial tier on the fixed task, and
 the pipeline was built entirely under that constraint. The constraint turned out to be an advantage,
 because it means verification can run without sending student work to a third party, and submissions
@@ -269,9 +280,9 @@ their own sentences and asks them to explain their own reasoning does not remove
 changes it from proving a negative to demonstrating something they should be able to demonstrate. If
 the pipeline has a claim on being fairer, that is where it sits.
 
-**For policy**, the finding with the widest reach is the least technical. Every component in this
-pipeline was measured against something it could not influence, and on three occasions that
-measurement contradicted a number I had already accepted. Institutional policy that treats a
+**For policy**, the finding with the widest reach is the least technical, and Section 9.2 has
+already stated it: the checks built into this project overturned three of its own results.
+Institutional policy that treats a
 detector's percentage as a threshold for action has no equivalent check anywhere in it. The
 practical recommendation is not a better detector. It is that no automated score should trigger a
 consequence without a human step in which the student can account for their own work.
@@ -280,23 +291,23 @@ consequence without a human step in which the student can account for their own 
 
 Four things, in the order I would change them.
 
-I would build the audit first. The markup artefact cost a week of work built on a detector that was
+The audit should have come first. The markup artefact cost a week of work built on a detector that was
 reading formatting, and the audit that found it took an afternoon to write. Every subsequent
 component was checked before it was believed, and the only reason the first one was not is that I
 had not yet learned to.
 
-I would test against an adversarial paraphraser from the start. Domain shift is the failure I
+Testing against an adversarial paraphraser belonged in the plan from the start. Domain shift is the failure I
 measured because it is the failure I thought of; paraphrase attack is the one the literature treats
 as decisive, and by the time that was clear the evaluation design was fixed. It is the first thing I
 would add with more time.
 
-I would collect Bloom's labels before choosing the classifier. Two components in this pipeline are
+Counting the available Bloom's labels should have preceded choosing a classifier. Two components in this pipeline are
 capped by label supply rather than by architecture, and both caps were discovered after the models
 were trained. An hour spent counting available labels for the smallest classes would have redirected
 the effort.
 
-And I would keep the question-generation comparison at fixed claims from the first run rather than
-the third. The finding that most of the commercial advantage was claim selection is a good result,
+Last, the question-generation comparison should have used fixed claims from the first run rather
+than the third. The finding that most of the commercial advantage was claim selection is a good result,
 but it arrived by accident after two designs that measured something other than what I intended.
 Deciding what has to be held constant, before running anything, is the cheapest methodological
 improvement available and it is the one I most consistently skipped.

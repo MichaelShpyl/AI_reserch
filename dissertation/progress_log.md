@@ -2550,3 +2550,51 @@ that is worth remembering before trusting a clean run too far.
 
 The document is 118 pages. All four checks clean: consistency, numbers, cross-references and 24
 tests.
+
+### Chapters 9 and 10, and a fourth number of the same kind (11 August 2026)
+
+Chapter 10 rebuilt: 1,056 to 2,265 words. It had become a catalogue of eight contributions that
+largely restated Chapter 1 and Chapter 9. It now opens by answering the research question in three
+paragraphs, closes the loop on the six objectives from Section 1.6 in a table, groups the
+contributions into four with the evidence and the limit around each, prioritises future work with
+the reasons for the order, and separates open questions from caveats.
+
+The objectives table is the part I would defend. An MSc conclusions chapter is expected to say what
+happened to each objective and mine did not. Five were met and the Bloom classifier was met with a
+qualification, which is worth stating plainly rather than leaving a reader to infer from a macro-F1
+of 0.31 in Chapter 7. The robustness and fairness work also had no home in the contributions list
+even though Chapter 1 promised it, and it produced no headline number while changing the shape of
+the system more than any result that did.
+
+I ran an adversarial review of both chapters across four lenses. Two of the four completed before
+the run hit a spend limit and every verification agent died, so I checked the sixteen findings
+myself rather than acting on unverified output. Four factual ones held up.
+
+The most important is the fourth instance of an error class this document has now produced four
+times. Chapter 10 said the pipeline is defensible because a detector that falsely flags 79 percent
+of arXiv abstracts cannot end a disciplinary process. 79 percent is the transformer alone. The
+hybrid the pipeline actually ships flags 61 percent. Both numbers are in Chapter 6 and the
+conclusions attributed the wrong one to the shipped system. It now names both.
+
+The second: Chapters 9 and 10 both claimed three self-caught retractions and named different sets.
+Chapter 9 had the fine-tune, the judges and a fine-tune ranking near-miss; Chapter 10 had the
+detector, the fine-tune and the judges. The canonical three are the detector, the fine-tune and the
+judges, which is what the deck and the abstract say. Chapter 9 now names the same three and treats
+the ranking case as a fourth that was caught before it was written down.
+
+Third, Chapter 10 said the test side spans seven generators. The benchmark has six, plus two
+commercial families. Seven matched nothing.
+
+The style findings were the uncomfortable ones and all of them were right. The closing paragraph of
+the dissertation ran three consecutive sentences on one template, a tricolon with anaphora, in the
+passage an examiner rereads. Four contribution paragraphs ended with the same three words. Four
+paragraphs in 9.7 opened with the same two. Section 9.4 stated the central design principle as a
+three-part list with the same possessive in every limb. A dissertation arguing that machine text
+betrays itself through uniform sentence construction should not be closing on three sentences built
+from one mould, and it was. All are rewritten.
+
+Two smaller ones: 9.1 called the in-domain F1 excellent forty lines before 9.2 deflates it, and the
+same sentence about measuring against something a model cannot influence appeared twice in one
+chapter.
+
+The document is 121 pages and 36,652 words of chapter text. All four checks clean.
