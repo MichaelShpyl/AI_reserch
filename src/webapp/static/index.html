@@ -802,6 +802,69 @@ async function loadExample(which){
 }
 $("#ex-ai").addEventListener("click", ()=>loadExample("ai"));
 $("#ex-human").addEventListener("click", ()=>loadExample("human"));
+
+/* ---------- presentation mode ----------
+   Open the page with ?demo=ai, ?demo=human or ?demo=compare and it loads the example and starts
+   the analysis on its own, so nothing has to be clicked in front of an audience. Without the
+   parameter the page behaves exactly as before. It waits for the models to report ready first,
+   because a run fired before they finish loading just fails and looks like a broken demo. */
+async function fetchExample(which){
+  const r = await fetch(`/static/example_${which}.txt`);
+  if(!r.ok) throw new Error(`example_${which}.txt is missing`);
+  return (await r.text()).trim();
+}
+
+async function modelsReady(timeoutMs = 120000){
+  const started = performance.now();
+  while(performance.now() - started < timeoutMs){
+    try{
+      const s = await (await fetch(API+"/api/status")).json();
+      if(s.ready) return true;
+    }catch{ /* server still starting; keep waiting */ }
+    await new Promise(r => setTimeout(r, 1000));
+  }
+  return false;
+}
+
+async function autoDemo(mode){
+  const banner = document.createElement("div");
+  banner.className = "hint";
+  banner.style.cssText = "margin:.6rem 0 0";
+  banner.textContent = "Presentation mode: waiting for the models, then starting on its own.";
+  $("#err").after(banner);
+
+  if(!await modelsReady()){
+    banner.remove();
+    $("#err").innerHTML = `<div class="err">The models did not come up, so presentation mode did
+      not start. Everything still works by hand: load an example and press Analyse.</div>`;
+    return;
+  }
+
+  try{
+    if(mode === "compare"){
+      if(!COMPARE) $("#cmp").click();
+      const [human, ai] = await Promise.all([fetchExample("human"), fetchExample("ai")]);
+      $("#text").value  = human;   // A is always the student essay
+      $("#text2").value = ai;      // B is always the machine essay
+    }else{
+      $("#text").value = await fetchExample(mode === "human" ? "human" : "ai");
+    }
+    updateCount();
+  }catch(e){
+    banner.remove();
+    $("#err").innerHTML = `<div class="err">${esc(e.message)}. Paste an essay instead.</div>`;
+    return;
+  }
+
+  banner.textContent = "Presentation mode: running.";
+  $("#run").click();
+  setTimeout(()=>banner.remove(), 4000);
+}
+
+const DEMO_MODE = new URLSearchParams(location.search).get("demo");
+if(DEMO_MODE && ["ai","human","compare"].includes(DEMO_MODE)){
+  window.addEventListener("load", ()=>autoDemo(DEMO_MODE));
+}
 </script>
 </body>
 </html>
