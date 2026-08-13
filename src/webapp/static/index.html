@@ -161,7 +161,17 @@ textarea:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px colo
 .cmpcol{border:1px solid var(--line); border-radius:.5rem; padding:.85rem .95rem; background:var(--page)}
 .cmpcol h3{font-size:.85rem; font-weight:700; margin-bottom:.5rem}
 .cmpscore{font-family:Consolas,monospace; font-size:2.1rem; font-weight:700}
-.cmpscore.flag{color:var(--rust)} .cmpscore.ok{color:var(--teal)}
+/* Colour means "which submission", not "which verdict". It has to survive scrolling from one
+   panel to the next, and the verdict already has words for it. */
+.cmpscore.a{color:var(--teal)} .cmpscore.b{color:var(--rust)}
+.cmpcol h3{display:flex; align-items:center; gap:.45rem}
+.who{display:inline-flex; align-items:center; justify-content:center; width:1.25rem; height:1.25rem;
+  border-radius:50%; font-size:.72rem; font-weight:700; color:var(--page); flex:none}
+.who.a{background:var(--teal)} .who.b{background:var(--rust)}
+.verdictpill{display:inline-block; font-size:.78rem; font-weight:700; letter-spacing:.03em;
+  padding:.14rem .6rem; border-radius:.8rem; margin-bottom:.55rem}
+.verdictpill.flag{background:color-mix(in srgb,var(--rust) 16%,transparent); color:var(--rust)}
+.verdictpill.ok{background:color-mix(in srgb,var(--teal) 16%,transparent); color:var(--teal)}
 
 /* claims */
 .claim{border:1.5px solid var(--line); border-radius:.5rem; padding:.75rem .9rem; margin-bottom:.7rem}
@@ -306,18 +316,17 @@ $("#cmp").addEventListener("click", ()=>{
 async function runCompare(a, b){
   stage("c1","Compare","Two submissions, the same models, side by side");
   const [da, db] = await Promise.all([post("/api/detect",{text:a}), post("/api/detect",{text:b})]);
-  const col = (name, d) => `
+  const col = (name, d, side) => `
     <div class="cmpcol">
-      <h3>${name}</h3>
-      <div class="cmpscore ${d.flagged?"flag":"ok"}">${d.prob_ai.toFixed(4)}</div>
-      <div style="font-weight:650; color:${d.flagged?"var(--rust)":"var(--teal)"}; margin-bottom:.5rem">
-        ${d.flagged?"Flagged":"Not flagged"}</div>
+      <h3><span class="who ${side}">${side.toUpperCase()}</span>${name}</h3>
+      <div class="cmpscore ${side}">${d.prob_ai.toFixed(4)}</div>
+      <div class="verdictpill ${d.flagged?"flag":"ok"}">${d.flagged?"Flagged":"Not flagged"}</div>
       <div style="font-size:.8rem; color:var(--muted)">
         word-pattern reader <span class="num">${(d.components.transformer??0).toFixed(4)}</span><br>
         writing-style reader <span class="num">${(d.components.style_plus_perplexity??0).toFixed(4)}</span></div>
     </div>`;
   const gap = Math.abs(da.prob_ai - db.prob_ai);
-  body("c1").innerHTML = `<div class="cmpgrid">${col("Submission A", da)}${col("Submission B", db)}</div>
+  body("c1").innerHTML = `<div class="cmpgrid">${col("Submission A", da, "a")}${col("Submission B", db, "b")}</div>
     <p class="reads" style="margin-top:.8rem">The two scores differ by
     <b>${gap.toFixed(4)}</b>.${da.flagged!==db.flagged
       ? " One is flagged and the other is not, on the same models and the same thresholds."
@@ -349,7 +358,7 @@ function renderHabitCompare(ea, eb){
 
   body("c2").innerHTML = `
     <p class="hint">Both submissions on the same scale, so the gap is visible rather than described.
-    <b style="color:var(--rust)">A</b> and <b style="color:var(--teal)">B</b> are the two markers;
+    <b style="color:var(--teal)">A</b> and <b style="color:var(--rust)">B</b> are the two markers;
     the grey band is the middle 80 percent of real student essays.</p>
     ${rows.map(({a,b})=>{
       const spread=(a.human_p90-a.human_p10)||Math.abs(a.human_median)||1;
@@ -360,8 +369,8 @@ function renderHabitCompare(ea, eb){
         <div class="lane">
           <div class="bandbar" style="left:${nx(a.human_p10)}%; width:${nx(a.human_p90)-nx(a.human_p10)}%"></div>
           <div class="med" style="left:${nx(a.human_median)}%"></div>
-          <div class="dot" style="left:calc(${nx(a.value)}% - 8px); background:var(--rust)" title="A"></div>
-          <div class="dot" style="left:calc(${nx(b.value)}% - 8px); background:var(--teal)" title="B"></div>
+          <div class="dot" style="left:calc(${nx(a.value)}% - 8px); background:var(--teal)" title="Submission A"></div>
+          <div class="dot" style="left:calc(${nx(b.value)}% - 8px); background:var(--rust)" title="Submission B"></div>
         </div>
         <div class="val num">A ${fmt(a.value)} &middot; B ${fmt(b.value)}</div>
       </div>`;}).join("")}
@@ -382,15 +391,16 @@ function renderPctCompare(pa, pb){
 
   body("c3").innerHTML = `
     <p class="hint">Percentile within the ${pa.n_human_essays} real student essays, for each
-    submission. Sorted by the biggest disagreement between the two.</p>
+    submission. <b style="color:var(--teal)">A</b> and <b style="color:var(--rust)">B</b> keep the
+    same colours as above. Sorted by the biggest disagreement between the two.</p>
     ${rows.map(r=>`
       <div class="pct">
         <div class="lab">${esc(r.label)}</div>
         <div class="pctlane"><u></u>
-          <i style="left:calc(${Math.max(0,Math.min(100,r.a))}% - 1.5px); background:var(--rust)"></i>
-          <i style="left:calc(${Math.max(0,Math.min(100,r.b))}% - 1.5px); background:var(--teal)"></i>
+          <i style="left:calc(${Math.max(0,Math.min(100,r.a))}% - 1.5px); background:var(--teal)"></i>
+          <i style="left:calc(${Math.max(0,Math.min(100,r.b))}% - 1.5px); background:var(--rust)"></i>
         </div>
-        <div class="v">${r.a.toFixed(0)} / ${r.b.toFixed(0)}</div>
+        <div class="v">${ordinal(r.a)} / ${ordinal(r.b)}</div>
       </div>`).join("")}
     <p class="reads" style="margin-top:.7rem">Submission A is in the outer 5 percent of student
     writing on <b>${extA}</b> measurement${extA===1?"":"s"}; submission B on <b>${extB}</b>.
