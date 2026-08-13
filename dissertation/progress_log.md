@@ -2691,3 +2691,34 @@ slide shifts 66 of them, and the first pass at rewriting the printed references 
 "slide N, then M" pair and missed every bare number in a table column. One of those errors told the
 reader to cut the limitations slide and then go straight to the limitations. Every reference is now
 checked against the slide title it actually lands on rather than against the arithmetic.
+
+## 13 August 2026, evening: the deck and clip for the recorded submission video
+
+Recording is not presenting, and two assumptions had to be undone.
+
+The talk is 22 of the deck's 69 slides, and standing in a room you pick them out by a corner marker.
+PowerPoint's Create a Video has no such judgement: it exports every slide that is not hidden, so
+recording from the presentation deck would have produced a 52-minute file with every appendix slide
+in it. There is now a recording copy with the 47 non-core slides hidden. It takes the core list from
+the generated talk track rather than a hard-coded list, so it cannot drift from the deck.
+
+The demo was the harder half, and I nearly got it wrong. The plan was to alt-tab to the running
+website during the recording. PowerPoint records the slides and the voice and nothing else, so that
+would have exported as a still slide with talking over it, and I would not have found out until
+watching the export. The interface slide now carries an 85-second clip instead, rebuilt from the
+frames the demo-video run had already cached, so the browser did not have to be driven again.
+
+It is silent and caption-free on purpose. The existing 1 minute 55 film has burned-in captions, which
+are right for something emailed to a supervisor and wrong for a talk, because they compete with the
+speaker. And it is 85 seconds because that is the slot slide 49 already had, so the measured 19:05
+does not move.
+
+One thing worth recording because it cost time. Autoplay cannot be set from python-pptx. I edited the
+start condition in the slide XML from delay="indefinite" to delay="0", it looked correct, and
+PowerPoint still reported PlayOnEntry = 0 when asked through COM. The setting is now made through
+PowerPoint itself, in a script that has to be re-run after every rebuild. Checking the change in the
+tool that consumes it, rather than in the file I wrote, is the only reason I caught it.
+
+Also assembled a submission checklist with everything verified by running it, and corrected the
+HANDOFF deliverables block, which still described the dissertation as 48 pages and 8 chapters when it
+is 123 pages and 10.
