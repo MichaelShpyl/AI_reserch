@@ -103,6 +103,11 @@ dissertation/presentation/PreFinal_Flow.md
 dissertation/presentation/Presentation_Day_Brief.md
 # Recorded demo (large binary, regenerate with make_demo_video.py)
 dissertation/presentation/Demo_Video_*.mp4
+# The caption-free clip embedded in the recording deck. Same rule as the film above:
+# generated output, rebuildable from .demo_frames, too big to be worth versioning.
+dissertation/presentation/Demo_Clip_Narration.mp4
+# The recording copy of the deck, built by make_recording_deck.py from the deck above.
+dissertation/presentation/Recording_Deck_*.pptx
 # Rehearsal aids: regenerate with rehearse.py and make_prompter.py
 dissertation/presentation/Rehearsal_*.mp3
 dissertation/presentation/Rehearsal_Prompter.html
