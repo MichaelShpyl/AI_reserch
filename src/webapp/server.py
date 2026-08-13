@@ -49,7 +49,11 @@ class QuestionRequest(Submission):
 def _check(text: str) -> str:
     t = text.strip()
     if len(t) > MAX_CHARS:
-        raise HTTPException(413, f"Submission is longer than {MAX_CHARS} characters.")
+        raise HTTPException(
+            413,
+            f"That submission is {len(t):,} characters, over the {MAX_CHARS:,}-character limit. "
+            f"Analyse one chapter or section at a time. The per-sentence evidence is easier to act "
+            f"on at that size anyway.")
     if len(t.split()) < MIN_WORDS:
         raise HTTPException(
             422,

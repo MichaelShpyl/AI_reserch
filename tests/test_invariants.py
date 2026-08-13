@@ -209,3 +209,61 @@ def test_mathematical_comparisons_are_not_eaten_as_tags():
     assert "p < 0.05" in out
     assert "n > 30" in out
     assert "the sample was" in out, "a greedy tag match would have swallowed the words between"
+
+
+# ------------------------------------------------------------------- licensing
+# The claim: the human essays are BAWE, licensed CC BY-NC-SA 3.0 for research, and the public
+# repository does not redistribute them (Sections 3.2 and 8.3, and the ethics statement). That is
+# currently enforced by .gitignore, which is a rule about what git adds, not a check on what is
+# already tracked. A stray "git add -f", a rename, or a helpful copy into a new folder would all
+# defeat it silently. This test looks at what is actually tracked and fails if BAWE prose is in it.
+#
+# It needs the corpus, so it skips on a fresh clone rather than failing there. That keeps the
+# module's promise that a cloner can run the suite with no corpus present.
+
+def test_no_bawe_prose_is_tracked_in_the_repository():
+    import subprocess
+
+    corpus = REPO / "data" / "processed" / "detection_corpus_clean.parquet"
+    if not corpus.exists():
+        import pytest
+        pytest.skip("corpus not present, nothing to leak")
+
+    import pandas as pd
+    human = pd.read_parquet(corpus).query("label == 0").text
+
+    # A distinctive run of words from each essay. Long enough that no two texts share one by
+    # chance, taken from the middle so that shared boilerplate openings ("Introduction") do not
+    # produce false alarms.
+    needles = {}
+    for essay in human:
+        words = essay.split()
+        if len(words) < 200:
+            continue
+        needles[" ".join(words[100:112])] = True
+
+    tracked = subprocess.run(
+        ["git", "ls-files"], cwd=REPO, capture_output=True, text=True, check=True
+    ).stdout.split("\n")
+
+    leaked = []
+    for rel in tracked:
+        if not rel.strip():
+            continue
+        path = REPO / rel
+        if not path.is_file() or path.stat().st_size > 8_000_000:
+            continue
+        try:
+            body = path.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        body = " ".join(body.split())
+        for needle in needles:
+            if needle in body:
+                leaked.append((rel, needle[:60]))
+                break
+
+    assert not leaked, (
+        "BAWE essay prose is tracked in the repository, which the licence does not permit:\n"
+        + "\n".join(f"  {rel}: ...{frag}..." for rel, frag in leaked)
+    )
