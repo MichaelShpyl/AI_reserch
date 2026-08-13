@@ -495,7 +495,7 @@ function renderDetect(d){
           stroke-linecap="round" transform="rotate(-90 60 60)"
           style="stroke:${p>=.5?"var(--rust)":"var(--teal)"}; stroke-dasharray:${C}; stroke-dashoffset:${C}"/>
         <text x="60" y="58" text-anchor="middle" font-size="21" font-weight="700">${p.toFixed(2)}</text>
-        <text x="60" y="74" text-anchor="middle" font-size="7.4" fill="var(--muted)">probability of AI</text>
+        <text x="60" y="74" text-anchor="middle" font-size="7.4" fill="var(--muted)">combined score</text>
       </svg>
       <div>
         <div class="vlabel ${p>=.5?"flag":"ok"}">${p>=.5?"Flagged as likely AI-generated":"Not flagged"}</div>
@@ -508,9 +508,11 @@ function renderDetect(d){
     </div>
     <p class="why"><b>How this happens:</b> two independent readers score the text. One is a
     language model fine-tuned on matched human and AI essays; the other measures writing habits with
-    formulas anyone can re-run. A small combiner turns the pair into one probability, and it only
-    reads high when both agree. There is no score of 1.0 on this scale: the model is never certain,
-    only confident.</p>`;
+    formulas anyone can re-run. A small combiner turns the pair into one score, and it only reads
+    high when both agree. That score cannot leave the range <b>0.02 to 0.96</b>, because both inputs
+    are probabilities and the combiner is bounded by its own weights. So 0.96 is the top of this
+    scale rather than a 96 percent chance. Read it as how firmly the two readers agree, and read
+    their separate numbers above for whether they agreed at all.</p>`;
   requestAnimationFrame(()=>{
     $("#arc").style.strokeDashoffset = C*(1-p);
     document.querySelectorAll("#s1-b .cbar i").forEach(i=>i.style.width=i.dataset.w+"%");

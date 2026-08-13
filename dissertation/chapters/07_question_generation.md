@@ -282,9 +282,14 @@ are written by the v3 fine-tuned local backend, filtered through the well-formed
 nothing degenerate reaches the page (the guide records how many, if any, were dropped), and tagged
 with the trained Bloom classifier, with the levels the classifier is weak on marked advisory. The
 detector at the top of the guide is the hybrid of Section 6.7, and it reports its component views.
-On the worked submission it scores 0.957, noticeably calmer than the transformer's own 0.9996,
-because the style half pulls the over-confident transformer back. A lecturer facing a possible
-false positive would want that behaviour.
+On the worked submission it scores 0.957 where the transformer alone says 0.9996. It would be easy
+to read that gap as the style half restraining an over-confident transformer, and an earlier draft
+of this section did. It is not. On this essay the style half agrees, at 0.9985. The gap is the
+ceiling described in Section 6.7: the fuser cannot report above 0.957 whatever it is shown, so a
+flagged essay lands there almost by construction. The case where the style half genuinely pulls the
+transformer back exists and Section 6.7 gives it, two real student essays the transformer alone
+would have flagged and the fusion does not. That is the behaviour a lecturer facing a possible false
+positive would want, and it is worth being exact about where it actually happens.
 
 The document itself is organised for its reader, a lecturer with no time to prepare
 (Figure 7.5). It opens with the framing the fairness results of Chapter 6 called for, that the

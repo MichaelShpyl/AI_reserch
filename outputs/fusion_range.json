@@ -1,0 +1,47 @@
+{
+  "worked_submission": {
+    "id": "3108a",
+    "transformer": 0.9996088147163391,
+    "style": 0.9985097712092638,
+    "fused": 0.9571934414268242
+  },
+  "fuser": {
+    "w_transformer": 3.3336117439098825,
+    "w_style": 3.515931036133599,
+    "intercept": -3.7356850028914343,
+    "ceiling": 0.9574607592967799,
+    "floor": 0.023300937133208723,
+    "note": "Both inputs are probabilities in [0,1], so the logit is bounded by [b, w1+w2+b] and the reported score can never leave [floor, ceiling]."
+  },
+  "n_test": 200,
+  "ai": {
+    "n": 100,
+    "transformer_min": 0.9995900988578796,
+    "transformer_max": 0.9996405839920044,
+    "style_min": 0.9343727432448561,
+    "style_max": 0.9997492745060492,
+    "fused_min": 0.9469405604103098,
+    "fused_max": 0.9573743358189494
+  },
+  "human": {
+    "n": 100,
+    "fused_min": 0.023345951936568143,
+    "fused_max": 0.3984667555450632
+  },
+  "range_used_pct": 41.272871072978354,
+  "rescued_by_fusion": [
+    {
+      "id": "6097i",
+      "transformer": 0.9968816041946411,
+      "style": 0.00017379393623072144,
+      "fused": 0.3984667555450632
+    },
+    {
+      "id": "0300a",
+      "transformer": 0.6876274943351746,
+      "style": 0.13228507856696792,
+      "fused": 0.2732298865180691
+    }
+  ],
+  "lost_by_fusion": []
+}

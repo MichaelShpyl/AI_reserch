@@ -2630,3 +2630,36 @@ governs what git adds, not what is already tracked, so a forced add or a rename 
 it silently. There is now an invariant that reads git ls-files and fails if BAWE prose appears in
 anything tracked. It was confirmed by planting a leak and watching it fail, rather than trusting a
 passing test. It skips when the corpus is absent so a fresh clone still runs the suite. 25 tests.
+
+## 13 August 2026, later: why every flagged essay scores 0.957
+
+Asked why the AI essays all cluster at 0.957, and the answer turned out to be arithmetic rather than
+anything about the essays.
+
+The fuser is a logistic regression over two probabilities. Both inputs are confined to zero and one,
+so the logit is confined to the interval between the intercept and the sum of the weights, and the
+reported score can never leave [0.023, 0.957]. Those two values are properties of the combiner. No
+submission can escape them however it is written. In domain the bound is reached nearly every time
+because both halves saturate: the transformer returns 0.9996 for all 100 test AI essays, identical
+to four decimal places. The two classes together use 41 percent of the range available.
+
+So the number is not a confidence level, and it should not be read as a percentage. That is now
+stated in Section 6.7, and the interface says it too, where it previously offered only the vague
+"the model is never certain, only confident".
+
+The uncomfortable part is that Section 7.4 had explained the drop from 0.9996 to 0.957 as the style
+half restraining an over-confident transformer. It is not. On that submission the style half agrees
+at 0.9985. The drop is the ceiling. The section now says so and names the real instance of that
+behaviour instead: two human essays the transformer alone would flag, at 0.9969 and 0.6876, that the
+fusion does not, with no AI essay lost in exchange.
+
+Checking those two turned up something better than the correction. They are the same two essays that
+Section 3.6 reports as the transformer's only in-domain false positives, both by native speakers,
+and they are what makes that section's 4 percent native false-positive rate. The fusion removes
+both. The in-domain fairness gap reported for the transformer therefore does not survive into the
+detector that actually ships, and two results written chapters apart turn out to be one finding seen
+twice. That connection was there for weeks and I had not noticed it.
+
+New script `src/detection/fusion_range.py` derives the bound and measures the saturation across all
+200 held-out essays, writing `outputs/fusion_range.json`, so every number above traces to a results
+file. 123 pages, 105 repository links, all four checks clean, 25 tests.

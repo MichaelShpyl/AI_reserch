@@ -152,6 +152,42 @@ Perplexity enters the feature model as its strongest single feature, first of tw
 absolute SHAP. That matches the literature's regard for it, and it completes the feature set the
 scope specified.
 
+One property of the fuser needs stating plainly, because the number it reports invites a
+misreading. Both of its inputs are probabilities, so each is confined to zero and one, and that
+bounds what the combination can produce. With the fitted weights (3.33 on the transformer, 3.52 on
+the style model, intercept -3.74) the reported score cannot rise above 0.957 or fall below 0.023.
+Those two values are properties of the combiner rather than findings, and no submission can escape
+them however it is written.
+
+In domain the bound is reached almost every time, because both halves saturate. The transformer
+returns 0.9996 for all 100 AI essays in the test split, identical to four decimal places, and the
+style model stays above 0.93. Every fused AI score therefore lands within about one point of the
+ceiling, and the two classes together occupy only 41 percent of the range the combiner could in
+principle use (`src/detection/fusion_range.py`, `outputs/fusion_range.json`).
+
+The consequence is a reporting one. A score of 0.957 is not a claim that an essay is 95.7 percent
+likely to have been machine written, and it should not be read as a percentage. It is what the
+combiner emits when both readers agree and neither has doubt left to express. I would rather report
+a bounded score than a false precision, and there is something to be said for a detector that
+structurally cannot print 0.99 at a student. The number still needs the sentence that goes with it,
+which is why the interface shows both component views beside the fused score rather than the fused
+score alone.
+
+Where fusion changes an in-domain decision is the disagreement case, and it is rare. On the 100
+human test essays the transformer alone would flag two: essay 6097i at 0.9969 and essay 0300a at
+0.6876. The style model reads both as clearly human, at 0.0002 and 0.1323, so the fused scores fall
+to 0.3985 and 0.2732 and neither is flagged. No AI essay is lost in exchange.
+
+Those two essays are not new. They are the same two that Section 3.6 counts as the transformer's
+only in-domain false positives, both written by native speakers, which is the pair the fairness
+analysis reports as a 4 percent false-positive rate on native writers against zero on non-native
+(`outputs/confidence_intervals.json`). The fusion removes both. So the in-domain fairness gap that
+Section 3.6 reports for the transformer does not survive into the detector the pipeline actually
+ships, and the two results are the same finding seen twice. Two prevented false accusations in a
+hundred is a small effect and I will not inflate it, but it is the in-domain form of the protection
+Figure 6.6 measures out of domain, and it is why the hybrid rather than the transformer is the
+detector the pipeline ships.
+
 Out of domain the fusion matters (Figure 6.6). On the same cross-domain sample as Section 6.3, the
 three arms have almost identical F1 (transformer 0.790, hybrid 0.791), but they make completely
 different errors. The transformer over-flags humans, with recall 0.93 at precision 0.69, the
