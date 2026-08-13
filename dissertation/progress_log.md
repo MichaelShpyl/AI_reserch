@@ -2598,3 +2598,35 @@ same sentence about measuring against something a model cannot influence appeare
 chapter.
 
 The document is 121 pages and 36,652 words of chapter text. All four checks clean.
+
+## 13 August 2026: demo material, and a licence rule made enforceable
+
+Prepared spare essays for the live demo, and two fixes fell out of doing it honestly.
+
+Scored all 200 held-out test essays through the running server to choose examples on evidence rather
+than by guessing which ones looked interesting. That turned up the useful edges: the highest-scoring
+human essay in the whole held-out set reaches 0.399 and is still correctly not flagged, the second
+reaches 0.273, and every AI essay sits between 0.954 and 0.957. Eight matched pairs were exported,
+covering all four disciplinary groups.
+
+The pairs matter more than the individual essays. Because each AI essay was generated to match its
+human source on topic and length, a pair is a controlled demonstration: pair 1 is 1,250 words against
+1,252 on the same subject, scoring 0.023 and 0.957. The two standard objections to any detector, that
+it is reading length or reading topic, can now be answered by showing rather than asserting.
+
+Eighteen of the 200 requests failed, which I first read as timeouts on long essays. They were not.
+The server enforces a 40,000-character cap and refuses instantly. The refusal message stated the
+limit and stopped there, unlike the minimum-length message beside it, which explains its reasoning.
+It now says what to do instead. Checked in the browser, not just against the API: the message
+renders and the page recovers.
+
+The first version of that message reported the length in words and then quoted the limit in words
+too, using a different conversion, so it could tell a user their 5,616-word submission exceeded a
+6,000-word limit. Rewritten to report the quantity the rule actually measures.
+
+The licence position was the more serious finding. The human essays are BAWE, licensed for research
+without redistribution, and the public repository excluded them through .gitignore alone. That
+governs what git adds, not what is already tracked, so a forced add or a rename would have defeated
+it silently. There is now an invariant that reads git ls-files and fails if BAWE prose appears in
+anything tracked. It was confirmed by planting a leak and watching it fail, rather than trusting a
+passing test. It skips when the corpus is absent so a fresh clone still runs the suite. 25 tests.
