@@ -2663,3 +2663,31 @@ twice. That connection was there for weeks and I had not noticed it.
 New script `src/detection/fusion_range.py` derives the bound and measures the saturation across all
 200 held-out essays, writing `outputs/fusion_range.json`, so every number above traces to a results
 file. 123 pages, 105 repository links, all four checks clean, 25 tests.
+
+## 13 August 2026, later still: a literature slide at the front of the talk
+
+Added a short "where the field is now" slide as slide 3, between the problem and the research
+question. The order is the point: an examiner who has just seen the problem will ask what everyone
+else already does about it, and answering that before the research question makes the gap the reason
+for the question rather than a claim made after it.
+
+Four strands, each with what it achieves and where it stops. Detection is strong and improving but
+returns a score rather than a reason, and a paraphraser drops DetectGPT from 70.3 to 4.6 percent.
+Explainability has established methods and, more usefully, established ways to test faithfulness,
+which are rarely run on detectors. Argument mining recovers claims with provenance. Question
+generation is maturing and Bloom's grades the cognitive level. Then one line in rust: none of them
+joins up. Every citation on the slide is from the verified list.
+
+The constraint was the twenty minutes, which is hard for the final. Four other slides paid for it.
+The problem slide loses its repetitions, the research question stops reading out five objectives the
+slide already prints, the pipeline slide stops narrating a diagram the audience can see, and the
+reproducibility slide is tightened. Measured with the speech engine, the core path is 19 minutes 05
+against 19 minutes 06 before, so the literature slide is effectively free and there are still 55
+seconds of slack.
+
+Two things fell out of the rebuild. The reproducibility script still said ninety-nine repository
+links when the count is now 105. And renumbering was more dangerous than it looked: inserting one
+slide shifts 66 of them, and the first pass at rewriting the printed references double-shifted every
+"slide N, then M" pair and missed every bare number in a table column. One of those errors told the
+reader to cut the limitations slide and then go straight to the limitations. Every reference is now
+checked against the slide title it actually lands on rather than against the arithmetic.
