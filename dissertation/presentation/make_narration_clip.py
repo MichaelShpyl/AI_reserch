@@ -11,11 +11,16 @@ the same capture, cut differently for a different job.
 Two changes from the film. No caption bar, because the presenter is the caption. And shorter phase
 minimums, because a phase only has to be seen rather than read.
 
-    python dissertation/presentation/make_narration_clip.py
+The live deck's slide 49 has an 85-second slot; the 10-minute submission video cannot afford that,
+so the length is an argument rather than a constant and each length writes its own file.
+
+    python dissertation/presentation/make_narration_clip.py            85s, for the live deck
+    python dissertation/presentation/make_narration_clip.py --seconds 55 --out Demo_Clip_Submission.mp4
 """
 
 from __future__ import annotations
 
+import argparse
 import re
 import subprocess
 import sys
@@ -26,7 +31,6 @@ from PIL import Image
 
 HERE = Path(__file__).resolve().parent
 CACHE = HERE / ".demo_frames"
-OUT = HERE / "Demo_Clip_Narration.mp4"
 
 FPS = 24
 CAPTURE_HZ = 8
@@ -39,7 +43,7 @@ KEEP = ["open", "loaded", "s1", "s2", "s3", "s4", "inspect", "s5", "contrast"]
 # Sized so the clip lands on 85 seconds, which is what slide 49 already had. Matching the slot
 # means the talk's measured 19:05 does not move, and the narration written for that slide still
 # fits over the top of it.
-MIN_SECONDS = {
+WEIGHTS = {
     "open": 4, "loaded": 4, "s1": 10, "s2": 10, "s3": 10,
     "s4": 10, "inspect": 10, "s5": 17, "contrast": 10,
 }
@@ -55,6 +59,15 @@ def changed(a: Image.Image, b: Image.Image) -> float:
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--seconds", type=float, default=85.0, help="target clip length")
+    ap.add_argument("--out", default="Demo_Clip_Narration.mp4")
+    args = ap.parse_args()
+    OUT = HERE / args.out
+    scale = args.seconds / sum(WEIGHTS.values())
+    MIN_SECONDS = {k: v * scale for k, v in WEIGHTS.items()}
+    print(f"target {args.seconds:.0f}s -> phase scale {scale:.3f}")
+
     if not CACHE.exists():
         sys.exit(f"No cached frames at {CACHE}. Run make_demo_video.py first.")
 

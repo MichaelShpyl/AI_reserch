@@ -2722,3 +2722,40 @@ tool that consumes it, rather than in the file I wrote, is the only reason I cau
 Also assembled a submission checklist with everything verified by running it, and corrected the
 HANDOFF deliverables block, which still described the dissertation as 48 pages and 8 chapters when it
 is 123 pages and 10.
+
+## 16 August 2026: the submission requirements, and a talk built to the wrong length
+
+The coordinator's email arrived with the submission dates, and it linked the department's guidance
+video. I downloaded the video and read the whole transcript rather than skimming it, which was
+worth doing, because the single most important requirement is not in the email.
+
+**The submission video is ten minutes, not twenty. Examiners are instructed to stop reviewing at
+10:00.** The talk built and rehearsed for the live presentation runs 19:05. Submitted as it stands,
+roughly half of it would never be watched, and the half that falls off the end contains the headline
+result, the judge failure, the interface and the close. That is the kind of mistake that costs a
+grade for no good reason.
+
+Other requirements the video adds to the email: it is worth ten percent of the dissertation grade on
+its own; without it the whole dissertation is marked not present, which is a fail; the core must be
+a recorded PowerPoint exported to MP4; every slide needs a voiceover; and the presenter's face has
+to be visible for at least part of it so the examiners can confirm who recorded it. The face
+requirement is the one I would have missed, because the recording deck I built two days ago records
+slides and voice only.
+
+So there are now two presentations rather than one, which is the honest way to handle it. The
+twenty-minute talk stands for the room. A separate ten-minute deck was built for the submission, and
+it is not the long one with slides deleted. The guidance asks for a different shape, and two of its
+sections have no equivalent in the live deck at all: the challenges met along the way, and an
+evaluation of the student's own performance. Both are now slides, and the challenges slide is the
+strongest one in the deck, because three of the four entries are results I had to retract.
+
+The guidance also names the most common failing: students explain how they did the work and not why
+they made each decision. Every slide is now written around a why. That was cheap to do here, because
+those decisions were made deliberately at the time and written down: why BAWE and why length
+matched, why two classes and not three, why 3B and not 8B, why a judge-free measure, why the hybrid
+ships instead of the transformer.
+
+Timing was measured, not estimated. The first draft came out at 11:43 against a hard 10:00, which is
+the sort of overrun that is invisible until it is measured. Every script was compressed and the
+screencast rebuilt at 55 seconds instead of 85. The deck now measures 9:30, with every slide within
+four seconds of its stated time.
