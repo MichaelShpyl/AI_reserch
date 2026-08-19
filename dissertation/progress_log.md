@@ -2804,3 +2804,44 @@ ten are 34,267. On a project whose argument is that every number should trace to
 a supervisor a wrong word count would have been a poor way to start.
 
 The document is now 125 pages.
+
+## 19 August 2026, later: auditing the artifact rather than the document
+
+Went through the repository the way an examiner would, which means running what the README says
+rather than trusting that it still describes the project.
+
+The worst finding was dependencies. Four packages were imported and never declared: scipy in ten
+files, including the significance tests behind numbers the results chapters quote, seqeval for the
+span-level tagger metrics, python-docx for the Word version of the guide, and pydantic, which FastAPI
+installs anyway but which server.py imports directly. Anyone following the setup steps would have hit
+an ImportError on the first thing they ran. All four are now pinned to the versions this machine has,
+and an import audit across all 102 tracked Python files now reports nothing undeclared.
+
+The README also claimed a config/ directory holding paths, model names and hyperparameters, and a
+notebooks/ directory. Both held nothing but a .gitkeep. Settings really do live as constants at the
+top of each experiment script, which is worth stating rather than hiding: a result in outputs/ traces
+to the exact file that produced it, without working out which version of a shared config was live at
+the time. Four of its numbers were stale as well, including 92 pages for a 125-page document.
+
+The interface was not mentioned in the README at all, which is strange given it is the part of this
+someone can actually try. Cold-starting it to write that section found the gap worth documenting: the
+question stage needs Ollama, and without it the first four stages still run and the page says exactly
+what is missing. Verified end to end from cold: 25 seconds to load, verdict at 2.7, sentence evidence
+at 28, four claims with three questions each at 50.
+
+I also scanned the whole repository for signs of machine authorship, since the project argues that
+machine text betrays itself and it would be embarrassing to be caught by my own thesis. 15,802 lines
+of Python and 11,912 of everything else: no emoji, no restating comments, no assistant phrasing, no
+em dashes outside the AI-written example essay where one belongs. The structural evidence is stronger
+than the lexical: 18 percent of functions carry a docstring rather than the near-total coverage
+generated code tends to have, none use Args/Returns boilerplate, and their opening words vary. There
+is no leftover debris either, no TODOs, no commented-out code, no debuggers, no debug prints.
+
+The public history is clean: 146 commits under one author across June to August, with no AI
+attribution in any message. The working repository has no remote configured, so the 44 local commits
+that do carry trailers have never left this machine.
+
+One thing fell out of that check. The submission video deck had [STUDENT NUMBER] as a placeholder
+because I would not invent one, and the repository's own git identity is L00179131@atu.ie, which is
+the identifier ATU uses as the student number. It is filled in now and flagged for him to check
+against his student card.

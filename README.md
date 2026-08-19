@@ -50,15 +50,20 @@ Target machine: Windows 11, RTX 4060 laptop GPU, Python 3.11.
 
 ## Repository layout
 
-    config/          configuration (paths, model names, hyperparameters)
     data/raw/        downloaded datasets, never edited
     data/interim/    intermediate processing
     data/processed/  final corpora ready for training
     src/             pipeline source, one subpackage per component
-    notebooks/       exploration only, not core logic
     outputs/         generated guides, figures, results
-    tests/           24 tests, no GPU or corpus needed: `python -m pytest tests/ -q`
+    tests/           25 tests, no GPU or corpus needed: `python -m pytest tests/ -q`
     dissertation/    the written document, drafted alongside the code
+
+There is no central configuration module. Each experiment script carries its own settings as
+constants at the top of the file: the seed, the paths it reads and writes, the model name and the
+hyperparameters. That is deliberate. A script and the settings that produced its results stay in one
+file, so a result in `outputs/` can be traced to the exact configuration that generated it without
+reconstructing which version of a shared config was live at the time. The one exception is API keys,
+which come from a gitignored `.env`; see `.env.example`.
 
 ## Data
 
@@ -80,10 +85,42 @@ second scores the submission with the hybrid detector, builds the per-submission
 tags questions with the trained Bloom classifier, and renders Markdown, Word and PDF into
 `outputs/verification_guides/`.
 
-Every experiment writes its result to a JSON under `outputs/`, and the pre-submission consistency
-audit checks the written chapters against those files:
+### The interface
 
-    python dissertation/docgen/audit_consistency.py
+The same pipeline behind a page, which is the quickest way to see what it does:
+
+    python src/webapp/server.py
+
+Then open `http://127.0.0.1:8000`. Two buttons load a bundled example, and "Compare two
+submissions" runs a real student essay against a machine-written one side by side. Every model is
+loaded inside that one process, so it works with the network cable out.
+
+The first four stages need nothing else. The question stage calls a local Llama 3.1 8B through
+Ollama, so start that first if you want to see it:
+
+    ollama serve
+    ollama pull llama3.1:8b
+
+Without it the first four stages still run and the page says exactly what is missing rather than
+failing silently. Measured on the target laptop: startup about 25 seconds, then the verdict in
+under 3, the sentence-level evidence by 30, and the questions by around 50.
+
+### Checking the write-up against the results
+
+Every experiment writes its result to a JSON under `outputs/`, and three audits check the written
+chapters against those files:
+
+    python dissertation/docgen/audit_consistency.py   # claims, cross-references, figure numbering
+    python dissertation/docgen/audit_numbers.py       # every number against the results files
+    python -m pytest tests/ -q                        # the properties the chapters claim
+
+The document itself is built with:
+
+    python dissertation/docgen/build_final.py
+
+That runs the build twice, because the table of contents needs page numbers that only exist once the
+document has been rendered, and it verifies the printed page numbers against the finished PDF rather
+than assuming they are right.
 
 ## Results at a glance
 
@@ -129,8 +166,8 @@ VS Code so `pandoc` and `dot` are on PATH:
 ## Status
 
 All six locked-scope components are built and trained, the pipeline runs end to end on an 8 GB
-laptop, and the evaluation programme is complete. The dissertation draft (92 pages, twelve
-chapters, 41 verified references) lives in `dissertation/`, with a per-session progress log in
+laptop, and the evaluation programme is complete. The dissertation (125 pages, twelve chapters,
+62 references) lives in `dissertation/`, with a per-session progress log in
 `dissertation/progress_log.md` and the August validation-study protocol in
-`dissertation/study_protocol.md`. Remaining work is the validation study, writing polish, and the
-submission process.
+`dissertation/study_protocol.md`. Remaining work is the classroom validation study, which is designed and
+protocolled but needs participants, and the submission itself.

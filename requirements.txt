@@ -23,6 +23,7 @@ bitsandbytes==0.45.0    # QLoRA 4-bit; Windows wheels ship from 0.43 onward
 
 # ---- Classical ML and stylometric features ----
 scikit-learn==1.6.0
+scipy==1.14.1           # McNemar, Wilcoxon and the bootstrap intervals the results chapters quote
 spacy==3.8.3            # POS distribution; model fetched separately, see note 2
 
 # ---- Sentence embeddings ----
@@ -32,11 +33,15 @@ sentence-transformers==3.3.1
 captum==0.7.0
 shap==0.46.0
 
+# ---- Argument mining ----
+seqeval==1.2.2          # span-level P/R/F1 for the BIO tagger; sklearn's metrics are token-level
+
 # ---- Data handling and IO ----
 pandas==2.2.3
 numpy==1.26.4           # 1.x for broad compatibility across the whole stack
 openpyxl==3.1.5         # read .xlsx spreadsheets
 xlrd==2.0.1             # read the legacy .xls format; BAWE ships metadata as BAWE.xls (openpyxl cannot read .xls)
+python-docx==1.1.2      # writes the Word version of the Verification Interview Guide
 
 # ---- Visualisation ----
 matplotlib==3.9.3
@@ -52,3 +57,5 @@ anthropic>=0.40         # only needed for the self-funded Claude backend; Gemini
 # Interactive local web app (src/webapp)
 fastapi>=0.115
 uvicorn>=0.34
+pydantic>=2.9           # FastAPI installs it anyway, but server.py imports it directly, so it is
+                        # named here rather than relied on as somebody else's transitive dependency
