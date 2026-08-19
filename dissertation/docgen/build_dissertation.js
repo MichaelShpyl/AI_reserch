@@ -305,7 +305,7 @@ const titlePage1 = [
   center([t("M.Sc. in Artificial Intelligence and Big Data Analytics, 2026", { size: 24 })], { spacing: { after: 400 } }),
   logo,
   center([t("Department of Computing, ATU Donegal, Port Road, Letterkenny, Co. Donegal, Ireland.", { size: 22, color: "52616B" })], { spacing: { after: 300 } }),
-  center([t("Working draft for supervisor review, June 2026", { italics: true, size: 22, color: "52616B" })]),
+  center([t("August 2026", { size: 22, color: "52616B" })]),
 ];
 
 const titlePage2 = [
@@ -396,13 +396,64 @@ const abstract = [
   body("Question quality is measured without a judge: a question works if a model that has read the essay answers it far better than one that has not. Across thirty essays and 901 questions, a QLoRA fine-tune of a 3B model on one 8 GB laptop beat the free commercial tier on 24 of 29 shared essays (p = 0.0003). Three of this project's own headline numbers were retracted by its own checks."),
 ];
 
-const toc = [
-  h1("Table of Contents"),
-  new Paragraph({ spacing: { after: 120 },
-    children: [t("Update this field in Word (select all, then press F9) to populate page numbers.",
-      { italics: true, size: 20, color: "52616B" })] }),
-  new TableOfContents("Contents", { hyperlink: true, headingStyleRange: "1-3" }),
+// The chapter files, in document order. Named once so the contents list and the document body
+// cannot fall out of step with each other.
+const CHAPTER_FILES = [
+  "01_introduction.md", "02_literature_review.md", "03_detection.md", "04_implementation.md",
+  "05_explainability.md", "06_robustness.md", "07_question_generation.md",
+  "08_evaluation_questions.md", "09_discussion.md", "10_conclusions.md",
+  "11_references.md", "12_appendices.md",
 ];
+
+// ---- Table of contents ----
+// A Word TableOfContents field only fills in when someone opens the file and presses F9. Nobody
+// presses F9 on a PDF, so the submitted document showed a contents page containing the instruction
+// to generate a contents page. This builds a real one instead: the entries are read from the same
+// chapter headings the document is built from, and the page numbers come from a first pass over
+// the rendered PDF (docgen/toc_pages.json, written by build_toc_pages.py).
+//
+// The two passes stay in step because the entry text is identical in both and the page number sits
+// on a right-aligned tab at the margin, so a number changing width cannot re-wrap a line and move
+// the pagination underneath it.
+function tocEntries() {
+  // The front-matter sections are Heading 1 in the document, so a Word contents field
+  // would list them. Listing them here keeps the literal version faithful to that.
+  const out = ["Declaration", "Acknowledgements", "Abstract", "Acronyms",
+               "Table of Figures", "Table of Tables", "Table of Code Listings"]
+    .map((text) => ({ level: 1, text }));
+  for (const f of CHAPTER_FILES) {
+    const src = fs.readFileSync(path.join(CH, f), "utf8");
+    for (const line of src.split(/\r?\n/)) {
+      if (line.startsWith("## ")) out.push({ level: 2, text: line.slice(3).trim() });
+      else if (line.startsWith("# ")) out.push({ level: 1, text: line.slice(2).trim() });
+    }
+  }
+  return out;
+}
+
+let TOC_PAGES = {};
+try {
+  TOC_PAGES = JSON.parse(fs.readFileSync(path.join(__dirname, "toc_pages.json"), "utf8"));
+} catch { /* first pass: no page numbers yet */ }
+
+const TOC_TAB = 9000;   // twips, just inside the right margin
+function tocLine(e) {
+  const page = TOC_PAGES[e.text];
+  return new Paragraph({
+    spacing: { after: e.level === 1 ? 60 : 20, before: e.level === 1 ? 120 : 0 },
+    indent: { left: e.level === 1 ? 0 : 340 },
+    tabStops: [{ type: "right", position: TOC_TAB, leader: "dot" }],
+    children: [
+      t(e.text, { bold: e.level === 1, size: e.level === 1 ? 24 : 22,
+                  color: e.level === 1 ? INK : "3A4750" }),
+      new TextRun({ text: "\t" + (page === undefined ? "0" : String(page)),
+                    font: ARIAL, size: e.level === 1 ? 24 : 22,
+                    bold: e.level === 1, color: e.level === 1 ? INK : "3A4750" }),
+    ],
+  });
+}
+
+const toc = [h1("Table of Contents"), ...tocEntries().map(tocLine)];
 
 const ch1 = readChapter("01_introduction.md");
 const ch2 = readChapter("02_literature_review.md");

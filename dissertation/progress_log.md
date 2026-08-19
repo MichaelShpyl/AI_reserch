@@ -2759,3 +2759,48 @@ Timing was measured, not estimated. The first draft came out at 11:43 against a 
 the sort of overrun that is invisible until it is measured. Every script was compressed and the
 screencast rebuilt at 55 seconds instead of 85. The deck now measures 9:30, with every slide within
 four seconds of its stated time.
+
+## 19 August 2026: finalising the document for the 28 August submission
+
+Went through the dissertation and the repository against the ATU template rather than against my own
+memory of it, and found two defects that would have been visible to an examiner in the first ten
+seconds of opening the PDF.
+
+The contents page was the bad one. The build emitted a Word TableOfContents field, which only fills
+in when a person opens the file and presses F9. Nobody presses F9 on a PDF, so page seven of the
+submitted document consisted of the sentence "Update this field in Word (select all, then press F9)
+to populate page numbers" and nothing else. It had been that way through every build.
+
+The fix is a literal contents list built from the same chapter headings the document is built from,
+which needs real page numbers, which only exist once the document has been rendered. So the build
+runs twice: the first pass writes placeholders and records where each heading landed, the second
+rewrites the list with those numbers. The passes stay in step because the entry text is identical in
+both and the number sits on a right-aligned tab at the margin, so changing its width cannot re-wrap a
+line and shift the pagination underneath it. `docgen/build_final.py` does both passes and then
+verifies the result by reading the printed numbers back off the rendered PDF and comparing them
+against the document's own outline. 118 entries, no mismatches.
+
+The verifier itself was wrong first time round and reported three good entries as missing, because
+its regex expected the page number to touch the dot leader and some lines have a space there. A check
+that invents faults is worse than no check, so that is fixed too.
+
+The second defect was the cover page, which still read "Working draft for supervisor review, June
+2026". It now reads August 2026.
+
+The rest of the audit came back clean, which was reassuring rather than surprising. All 39 figures
+are both embedded and referenced, with no orphans in either direction. References are Harvard and
+alphabetical. No em dashes, no placeholder text, and five instances of the AI-marker words on the
+project's own banned list, all of which turned out to be legitimate (a paper title, a technical
+compound, and one deliberate use in scare quotes). Repeated sentence openings are within normal range
+for 34,000 words. The repository has no tracked secrets, `.env` is ignored, and the working notes are
+correctly absent from the public mirror.
+
+Two things were added. `NOTICE.md` records copyright, states that no open-source licence is granted
+so the default of all rights reserved applies, and documents the licence position of every dataset
+and base model, which separates what is absent for licensing reasons from what is absent for size
+reasons. And a correction: the email drafted for Vini said the dissertation is "about 37,200 words
+across the chapters", when 37,217 is the total including references and appendices. Chapters one to
+ten are 34,267. On a project whose argument is that every number should trace to its source, sending
+a supervisor a wrong word count would have been a poor way to start.
+
+The document is now 125 pages.
